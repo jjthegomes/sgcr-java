@@ -6,9 +6,9 @@ package modelo;
  *
  * @author RAJ
  */
-public class UsuarioComum extends Usuario{
+public abstract class UsuarioComum extends Usuario{
 
-    private String nomeComepleto;
+    private String nome;
     private String dataNascimento;
     private boolean sexo;
     private String cpf;
@@ -18,13 +18,13 @@ public class UsuarioComum extends Usuario{
     private String complemento;
     private String numero;
     private String cidade;
-    private boolean statusAtivo;
+    private String estado;
     private String telefone;
     private String celular;
 
-    public UsuarioComum(String nomeComepleto, String dataNascimento, boolean sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, boolean statusAtivo, String telefone, String celular, int id, String email, String senha) {
+    public UsuarioComum(String nome, String dataNascimento, boolean sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
         super(id, email, senha);
-        this.nomeComepleto = nomeComepleto;
+        this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cpf = cpf;
@@ -34,18 +34,17 @@ public class UsuarioComum extends Usuario{
         this.complemento = complemento;
         this.numero = numero;
         this.cidade = cidade;
-        this.statusAtivo = statusAtivo;
+        this.estado = estado;
         this.telefone = telefone;
         this.celular = celular;
     }
 
-    
-    public String getNomeComepleto() {
-        return nomeComepleto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeComepleto(String nomeComepleto) {
-        this.nomeComepleto = nomeComepleto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDataNascimento() {
@@ -120,12 +119,12 @@ public class UsuarioComum extends Usuario{
         this.cidade = cidade;
     }
 
-    public boolean isStatusAtivo() {
-        return statusAtivo;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setStatusAtivo(boolean statusAtivo) {
-        this.statusAtivo = statusAtivo;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getTelefone() {
@@ -136,7 +135,7 @@ public class UsuarioComum extends Usuario{
         this.telefone = telefone;
     }
 
-    public String getCeulular() {
+    public String getCelular() {
         return celular;
     }
 
@@ -144,12 +143,5 @@ public class UsuarioComum extends Usuario{
         this.celular = celular;
     }
 
-    /*
-    public boolean cadastrar(){
-    public boolean 
-    public boolean 
-    public boolean 
-    public boolean 
-    
-     */
+ 
 }

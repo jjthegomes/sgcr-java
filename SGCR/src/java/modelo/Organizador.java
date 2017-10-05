@@ -7,13 +7,11 @@ package modelo;
  */
 public class Organizador extends UsuarioComum{
 
-    public Organizador(String nomeComepleto, String dataNascimento, boolean sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, boolean statusAtivo, String telefone, String celular, int id, String email, String senha) {
-        super(nomeComepleto, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, statusAtivo, telefone, celular, id, email, senha);
+    public Organizador(String nome, String dataNascimento, boolean sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
+        super(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);
     }
 
-
-   
-    
+  
     void gerarDados(){
     }
     void gerarRelatorios(){

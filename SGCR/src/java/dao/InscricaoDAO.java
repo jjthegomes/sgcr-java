@@ -22,7 +22,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from inscricao");
+            ResultSet rs = comando.executeQuery("select * from inscricoes");
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
