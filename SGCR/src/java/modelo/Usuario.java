@@ -5,7 +5,7 @@ package modelo;
  *
  * @author RAJ
  */
-public class Usuario {
+public abstract class Usuario {
     private int id;
     private String email;
     private String senha;

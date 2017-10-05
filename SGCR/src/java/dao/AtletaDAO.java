@@ -36,7 +36,7 @@ public class AtletaDAO {
                         rs.getString("complemento"),
                         rs.getString("numero"),
                         rs.getString("cidade"),
-                        rs.getBoolean("statusAtivo"),
+                        rs.getString("estado"),
                         rs.getString("telefone"),
                         rs.getString("celular"),
                         rs.getInt("id"),

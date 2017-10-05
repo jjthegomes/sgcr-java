@@ -22,7 +22,7 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from ingresso");
+            ResultSet rs = comando.executeQuery("select * from ingressos");
             while (rs.next()) {
                 Ingresso ingresso = new Ingresso(
                         rs.getInt("id"),

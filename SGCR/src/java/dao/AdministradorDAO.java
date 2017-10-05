@@ -24,7 +24,8 @@ public class AdministradorDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select * from administrador");
             while (rs.next()) {
-                Administrador administrador = new Administrador(rs.getInt("id"),
+                Administrador administrador = new Administrador(
+                        rs.getInt("id"),
                         rs.getString("email"),
                         rs.getString("senha"));
                 administradores.add(administrador);
