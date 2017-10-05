@@ -26,6 +26,7 @@ public class Corrida {
     private int organizadoresId;
 
     public Corrida() {
+        
     }
 
     public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String cep, String rua, String bairro, String numero, String cidade, String descricao, String regulamento, int organizadoresId) {
