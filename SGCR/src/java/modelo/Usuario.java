@@ -1,4 +1,3 @@
-
 package modelo;
 
 /**
@@ -6,6 +5,7 @@ package modelo;
  * @author RAJ
  */
 public abstract class Usuario {
+
     private int id;
     private String email;
     private String senha;
@@ -15,5 +15,8 @@ public abstract class Usuario {
         this.email = email;
         this.senha = senha;
     }
-    
+
+    public void login(String email, String senha) {
+        System.out.println("Logado");
+    }
 }
