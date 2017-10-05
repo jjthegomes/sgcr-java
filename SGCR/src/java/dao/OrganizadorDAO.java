@@ -30,7 +30,7 @@ public class OrganizadorDAO {
             ResultSet rs = comando.executeQuery("select * from organizadores");
             while (rs.next()) {
                 Organizador organizador = new Organizador(
-                        rs.getString("nomeComepleto"),
+                        rs.getString("nome"),
                         rs.getString("dataNascimento"),
                         rs.getBoolean("sexo"),
                         rs.getString("cpf"),
@@ -46,7 +46,6 @@ public class OrganizadorDAO {
                         rs.getInt("id"),
                         rs.getString("email"),
                         rs.getString("senha"));
-
                 organizadores.add(organizador);
             }
         } catch (SQLException e) {
