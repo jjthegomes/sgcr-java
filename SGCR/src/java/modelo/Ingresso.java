@@ -16,14 +16,14 @@ public class Ingresso {
 
     private int corridasId;
 
-    public Ingresso(int id, String tipo, float preco, String dataInicio, String dataFinal, int quantidade, int corridaId) {
+    public Ingresso(int id, String tipo, float preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
         this.id = id;
         this.tipo = tipo;
         this.preco = preco;
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
         this.quantidade = quantidade;
-        this.corridasId = corridaId;
+        this.corrida = corrida;
     }
 
     public int getId() {

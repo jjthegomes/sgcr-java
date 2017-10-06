@@ -31,8 +31,8 @@ public class IngressoDAO {
                         rs.getString("dataInicio"),
                         rs.getString("dataFinal"),
                         rs.getInt("quantidade"),
-                        0);
-                ingresso.setCorridaId(rs.getInt("corridasId"));
+                        null);
+                ingresso.setCorridasId(rs.getInt("corridasId"));
                 ingressos.add(ingresso);
             }
         } catch (SQLException e) {
