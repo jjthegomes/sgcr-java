@@ -31,7 +31,7 @@ public class PontuacaoDAO {
                 Pontuacao pontuacao = new Pontuacao(
                         rs.getInt("id"), 
                         rs.getInt("pontuacao"), 
-                        0);
+                        null);
                 pontuacao.setCorridasId(rs.getInt("corridasId"));
                 pontuacoes.add(pontuacao);
             }
