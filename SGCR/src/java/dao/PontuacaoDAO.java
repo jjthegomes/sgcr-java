@@ -11,47 +11,36 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Corrida;
+import modelo.Pontuacao;
 
 /**
  *
  * @author RAJ
  */
-public class CorridaDAO {
-    public static List<Corrida> obterCorrida() throws ClassNotFoundException {
+public class PontuacaoDAO {
+    public static List<Pontuacao> obterPontuacao() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Corrida> corridas = new ArrayList<Corrida>();
+        List<Pontuacao> pontuacoes = new ArrayList<Pontuacao>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from corridas");
+            ResultSet rs = comando.executeQuery("select * from pontuacao");
             
             while (rs.next()) {
-                Corrida corrida = new Corrida(
-                        rs.getInt("id"),
-                        rs.getString("nomeCorrida"),
-                        rs.getInt("maxPessoa"),
-                        rs.getString("horarioInicio"),
-                        rs.getString("horarioFinal"),
-                        rs.getString("banner"),
-                        rs.getString("rua"),
-                        rs.getString("cep"),
-                        rs.getString("cidade"),
-                        rs.getString("estado"),
-                        rs.getString("bairro"),
-                        rs.getString("descricao"),
-                        rs.getString("regulamento"),
+                Pontuacao pontuacao = new Pontuacao(
+                        rs.getInt("id"), 
+                        rs.getInt("pontuacao"), 
                         0);
-                corrida.setOrganizadoresId(rs.getInt("organizadoresId"));
-                corridas.add(corrida);
+                pontuacao.setCorridasId(rs.getInt("corridasId"));
+                pontuacoes.add(pontuacao);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return corridas;
+        return pontuacoes;
     }
     
     public static void fecharConexao(Connection conexao, Statement comando) {

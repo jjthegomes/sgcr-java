@@ -16,31 +16,32 @@ public class Corrida {
     private String horarioInicio;
     private String horarioFinal;
     private String banner;
-    private String cep;
     private String rua;
-    private String bairro;
-    private String numero;
+    private String cep;
     private String cidade;
+    private String estado;
+    private String bairro;
     private String descricao;
     private String regulamento;
+    private Organizador organizador;
     private int organizadoresId;
 
     public Corrida() {
         
     }
 
-    public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String cep, String rua, String bairro, String numero, String cidade, String descricao, String regulamento, int organizadoresId) {
+    public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String rua, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, int organizadoresId) {
         this.id = id;
         this.nomeCorrida = nomeCorrida;
         this.maxPessoas = maxPessoas;
         this.horarioInicio = horarioInicio;
         this.horarioFinal = horarioFinal;
         this.banner = banner;
-        this.cep = cep;
         this.rua = rua;
-        this.bairro = bairro;
-        this.numero = numero;
+        this.cep = cep;
         this.cidade = cidade;
+        this.estado = estado;
+        this.bairro = bairro;
         this.descricao = descricao;
         this.regulamento = regulamento;
         this.organizadoresId = organizadoresId;
@@ -94,14 +95,6 @@ public class Corrida {
         this.banner = banner;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     public String getRua() {
         return rua;
     }
@@ -110,20 +103,12 @@ public class Corrida {
         this.rua = rua;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getCep() {
+        return cep;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getCidade() {
@@ -132,6 +117,22 @@ public class Corrida {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getDescricao() {
@@ -157,5 +158,4 @@ public class Corrida {
     public void setOrganizadoresId(int organizadoresId) {
         this.organizadoresId = organizadoresId;
     } 
-    
 }

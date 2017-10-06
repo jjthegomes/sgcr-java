@@ -7,15 +7,19 @@ package modelo;
  */
 public class Kit {
     private int id;
-    private int quantidade;
-    private String  imagemKit;
+    private String imagemKit;
     private String tipoChip;
+    private Corrida corrida;
+    private int corridasId;
 
-    public Kit(int id, int quantidade, String imagemKit, String tipoChip) {
+    public Kit() {
+    }
+
+    public Kit(int id, String imagemKit, String tipoChip, int corridasId) {
         this.id = id;
-        this.quantidade = quantidade;
         this.imagemKit = imagemKit;
         this.tipoChip = tipoChip;
+        this.corridasId = corridasId;
     }
 
     public int getId() {
@@ -24,14 +28,6 @@ public class Kit {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public String getImagemKit() {
@@ -49,5 +45,20 @@ public class Kit {
     public void setTipoChip(String tipoChip) {
         this.tipoChip = tipoChip;
     }
-    
+
+    public Corrida getCorrida() {
+        return corrida;
+    }
+
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
+    }
+
+    public int getCorridasId() {
+        return corridasId;
+    }
+
+    public void setCorridasId(int corridasId) {
+        this.corridasId = corridasId;
+    }
 }

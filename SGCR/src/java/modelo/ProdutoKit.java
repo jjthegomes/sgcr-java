@@ -6,13 +6,35 @@ package modelo;
  * @author RAJ
  */
 public class ProdutoKit {
-    private Double valor;
-    private int integer;
+    private int id;
     private String nomeProduto;
+    private Double valor;
+    private Kit kits;
+    private int kitsId;
 
-    public ProdutoKit(Double valor, int integer, String nomeProduto) {
+    public ProdutoKit() {
+    }
+
+    public ProdutoKit(int id, String nomeProduto, Double valor, int kitsId) {
+        this.id = id;
+        this.nomeProduto = nomeProduto;
         this.valor = valor;
-        this.integer = integer;
+        this.kitsId = kitsId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
     }
 
@@ -24,21 +46,19 @@ public class ProdutoKit {
         this.valor = valor;
     }
 
-    public int getInteger() {
-        return integer;
+    public Kit getKits() {
+        return kits;
     }
 
-    public void setInteger(int integer) {
-        this.integer = integer;
+    public void setKits(Kit kits) {
+        this.kits = kits;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public int getKitsId() {
+        return kitsId;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setKitsId(int kitsId) {
+        this.kitsId = kitsId;
     }
-    
-    
 }

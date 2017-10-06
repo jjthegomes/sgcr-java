@@ -11,47 +11,37 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Corrida;
+import modelo.Kit;
 
 /**
  *
  * @author RAJ
  */
-public class CorridaDAO {
-    public static List<Corrida> obterCorrida() throws ClassNotFoundException {
+public class KitDAO {
+    public static List<Kit> obterKit() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Corrida> corridas = new ArrayList<Corrida>();
+        List<Kit> kits = new ArrayList<Kit>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from corridas");
+            ResultSet rs = comando.executeQuery("select * from kits");
             
             while (rs.next()) {
-                Corrida corrida = new Corrida(
-                        rs.getInt("id"),
-                        rs.getString("nomeCorrida"),
-                        rs.getInt("maxPessoa"),
-                        rs.getString("horarioInicio"),
-                        rs.getString("horarioFinal"),
-                        rs.getString("banner"),
-                        rs.getString("rua"),
-                        rs.getString("cep"),
-                        rs.getString("cidade"),
-                        rs.getString("estado"),
-                        rs.getString("bairro"),
-                        rs.getString("descricao"),
-                        rs.getString("regulamento"),
+                Kit kit = new Kit(
+                        rs.getInt("id"), 
+                        rs.getString("imagemKit"), 
+                        rs.getString("tipoChip"), 
                         0);
-                corrida.setOrganizadoresId(rs.getInt("organizadoresId"));
-                corridas.add(corrida);
+                kit.setCorridasId(rs.getInt("corridasId"));
+                kits.add(kit);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return corridas;
+        return kits;
     }
     
     public static void fecharConexao(Connection conexao, Statement comando) {
