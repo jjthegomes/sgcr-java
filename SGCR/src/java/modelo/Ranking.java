@@ -10,6 +10,8 @@ public class Ranking {
     private String nomeRanking;
     private String intervaloFaxaEtaria;
     private Administrador administrador;
+    
+    private int administradorId;
 
     public Ranking(int id, String nomeRanking, String intervaloFaxaEtaria, Administrador administrador) {
         this.id = id;
@@ -53,4 +55,13 @@ public class Ranking {
     public void cadastrarRanking(){
         
     }
+
+    public int getAdministradorId() {
+        return administradorId;
+    }
+
+    public void setAdministradorId(int administradorId) {
+        this.administradorId = administradorId;
+    }
+
 }
