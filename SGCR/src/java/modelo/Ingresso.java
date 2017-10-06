@@ -14,7 +14,7 @@ public class Ingresso {
     private int quantidade;
     private Corrida corrida;
 
-    private int corridaId;
+    private int corridasId;
 
     public Ingresso(int id, String tipo, float preco, String dataInicio, String dataFinal, int quantidade, int corridaId) {
         this.id = id;
@@ -23,7 +23,7 @@ public class Ingresso {
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
         this.quantidade = quantidade;
-        this.corridaId = corridaId;
+        this.corridasId = corridaId;
     }
 
     public int getId() {
@@ -87,11 +87,11 @@ public class Ingresso {
         
     }
      */
-    public int getCorridaId() {
-        return corridaId;
+    public int getCorridasId() {
+        return corridasId;
     }
 
-    public void setCorridaId(int corridaId) {
-        this.corridaId = corridaId;
+    public void setCorridasId(int corridasId) {
+        this.corridasId = corridasId;
     }
 }
