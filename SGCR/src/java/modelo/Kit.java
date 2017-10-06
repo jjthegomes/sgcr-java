@@ -10,16 +10,17 @@ public class Kit {
     private String imagemKit;
     private String tipoChip;
     private Corrida corrida;
+    
     private int corridasId;
 
     public Kit() {
     }
 
-    public Kit(int id, String imagemKit, String tipoChip, int corridasId) {
+    public Kit(int id, String imagemKit, String tipoChip, Corrida corrida) {
         this.id = id;
         this.imagemKit = imagemKit;
         this.tipoChip = tipoChip;
-        this.corridasId = corridasId;
+        this.corrida = corrida;
     }
 
     public int getId() {
@@ -53,7 +54,7 @@ public class Kit {
     public void setCorrida(Corrida corrida) {
         this.corrida = corrida;
     }
-
+    
     public int getCorridasId() {
         return corridasId;
     }

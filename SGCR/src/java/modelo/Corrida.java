@@ -24,13 +24,14 @@ public class Corrida {
     private String descricao;
     private String regulamento;
     private Organizador organizador;
+    
     private int organizadoresId;
 
     public Corrida() {
         
     }
 
-    public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String rua, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, int organizadoresId) {
+    public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String rua, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
         this.id = id;
         this.nomeCorrida = nomeCorrida;
         this.maxPessoas = maxPessoas;
@@ -44,7 +45,7 @@ public class Corrida {
         this.bairro = bairro;
         this.descricao = descricao;
         this.regulamento = regulamento;
-        this.organizadoresId = organizadoresId;
+        this.organizador = organizador;
     }
 
     public int getId() {
@@ -150,6 +151,15 @@ public class Corrida {
     public void setRegulamento(String regulamento) {
         this.regulamento = regulamento;
     }
+
+    public Organizador getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Organizador organizador) {
+        this.organizador = organizador;
+    }
+      
 
     public int getOrganizadoresId() {
         return organizadoresId;

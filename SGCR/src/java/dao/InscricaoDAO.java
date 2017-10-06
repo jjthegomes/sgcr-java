@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.Connection;
@@ -14,7 +13,8 @@ import modelo.Inscricao;
  * @author RAJ
  */
 public class InscricaoDAO {
-     public static List<Inscricao> obterInscricao() throws ClassNotFoundException {
+
+    public static List<Inscricao> obterInscricao() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Inscricao> inscricoes = new ArrayList<Inscricao>();
@@ -29,12 +29,14 @@ public class InscricaoDAO {
                         rs.getInt("id"),
                         rs.getString("dataCompra"),
                         rs.getString("numeroPeito"),
-                        rs.getString("posicao"),
+                        rs.getBoolean("pago"),
                         rs.getBoolean("formaPagamento"),
-                        rs.getString("tempoPercorrido"),
-                        0);
-                
-                inscricao.setAtletaId(rs.getInt("atletaId"));
+                        rs.getDouble("tempoPercorrido"),
+                        null,
+                        null);
+
+                inscricao.setAtletasId(rs.getInt("atletasId"));
+                inscricao.setCorridasId(rs.getInt("corridasId"));
                 inscricoes.add(inscricao);
             }
         } catch (SQLException e) {

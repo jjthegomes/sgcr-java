@@ -9,22 +9,24 @@ public class Inscricao {
     private int id;
     private String dataCompra;
     private String numeroPeito;
-    private String posicao;
+    private boolean pago;
     private boolean formaPagamento;
-    private String tempoPercorrido;
+    private Double tempoPercorrido;
     private Atleta atleta;
+    private Corrida corrida;
     
-    private int atletaId;
+    private int atletasId;
+    private int corridasId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, String posicao, boolean formaPagamento, 
-            String tempoPercorrido, int atletaId) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean formaPagamento, Double tempoPercorrido, Atleta atleta, Corrida corrida) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
-        this.posicao = posicao;
+        this.pago = pago;
         this.formaPagamento = formaPagamento;
         this.tempoPercorrido = tempoPercorrido;
-        this.atletaId = atletaId;
+        this.atleta = atleta;
+        this.corrida = corrida;
     }
 
     public int getId() {
@@ -51,12 +53,12 @@ public class Inscricao {
         this.numeroPeito = numeroPeito;
     }
 
-    public String getPosicao() {
-        return posicao;
+    public boolean isPago() {
+        return pago;
     }
 
-    public void setPosicao(String posicao) {
-        this.posicao = posicao;
+    public void setPago(boolean pago) {
+        this.pago = pago;
     }
 
     public boolean isFormaPagamento() {
@@ -67,11 +69,11 @@ public class Inscricao {
         this.formaPagamento = formaPagamento;
     }
 
-    public String getTempoPercorrido() {
+    public Double getTempoPercorrido() {
         return tempoPercorrido;
     }
 
-    public void setTempoPercorrido(String tempoPercorrido) {
+    public void setTempoPercorrido(Double tempoPercorrido) {
         this.tempoPercorrido = tempoPercorrido;
     }
 
@@ -83,13 +85,29 @@ public class Inscricao {
         this.atleta = atleta;
     }
 
-    public int getAtletaId() {
-        return atletaId;
+    public Corrida getCorrida() {
+        return corrida;
     }
 
-    public void setAtletaId(int atletaId) {
-        this.atletaId = atletaId;
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
     }
 
-    
+    public int getAtletasId() {
+        return atletasId;
+    }
+
+    public void setAtletasId(int atletasId) {
+        this.atletasId = atletasId;
+    }
+
+    public int getCorridasId() {
+        return corridasId;
+    }
+
+    public void setCorridasId(int corridasId) {
+        this.corridasId = corridasId;
+    }
+
+
 }

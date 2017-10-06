@@ -32,7 +32,7 @@ public class PercursoDAO {
                         rs.getInt("id"),
                         rs.getString("imagemPercurso"),
                         rs.getDouble("quilometragem"),
-                        0);
+                        null);
                 percurso.setCorridasId(rs.getInt("corridasId"));
                 percursos.add(percurso);
             }

@@ -10,17 +10,20 @@ package modelo;
  * @author RAJ
  */
 public class Percurso {
+
     private int id;
     private String imagemPercurso;
     private Double quilometragem;
+    private Corrida corrida;
+
     private int corridasId;
 
-    public Percurso(int id, String imagemPercurso, Double quilometragem, int corridasId) {
+    public Percurso(int id, String imagemPercurso, Double quilometragem, Corrida corrida) {
         this.id = id;
         this.imagemPercurso = imagemPercurso;
         this.quilometragem = quilometragem;
-        this.corridasId = corridasId;
-    }
+        this.corrida = corrida;
+    } 
 
     public int getId() {
         return id;
@@ -46,12 +49,20 @@ public class Percurso {
         this.quilometragem = quilometragem;
     }
 
+    public Corrida getCorrida() {
+        return corrida;
+    }
+
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
+    }        
+
     public int getCorridasId() {
         return corridasId;
     }
 
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
-    } 
-    
+    }
+
 }

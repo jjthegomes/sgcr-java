@@ -42,7 +42,7 @@ public class CorridaDAO {
                         rs.getString("bairro"),
                         rs.getString("descricao"),
                         rs.getString("regulamento"),
-                        0);
+                        null);
                 corrida.setOrganizadoresId(rs.getInt("organizadoresId"));
                 corridas.add(corrida);
             }

@@ -32,7 +32,7 @@ public class KitDAO {
                         rs.getInt("id"), 
                         rs.getString("imagemKit"), 
                         rs.getString("tipoChip"), 
-                        0);
+                        null);
                 kit.setCorridasId(rs.getInt("corridasId"));
                 kits.add(kit);
             }
