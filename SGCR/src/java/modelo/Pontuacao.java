@@ -12,12 +12,13 @@ package modelo;
 public class Pontuacao {
     private int id;
     private int pontuacao;
+    private Corrida corrida;
     private int corridasId;
 
-    public Pontuacao(int id, int pontuacao, int corridasId) {
+    public Pontuacao(int id, int pontuacao, Corrida corrida) {
         this.id = id;
         this.pontuacao = pontuacao;
-        this.corridasId = corridasId;
+        this.corrida = corrida;
     }
 
     public int getId() {
@@ -42,7 +43,5 @@ public class Pontuacao {
 
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
-    }
-    
-    
+    }  
 }
