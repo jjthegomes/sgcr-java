@@ -43,7 +43,8 @@ public class AtletaDAO {
                         rs.getString("email"),
                         rs.getString("senha"));
 
-                atleta.setTamanhoCamisa(rs.getString("tamanho_camisa_id"));
+//                select tamanho from tamanhos_camisas where id = rs.getInt("id")
+                atleta.setTamanhoCamisa(rs.getString("tamanhosCamisasId"));
                 atletas.add(atleta);
             }
         } catch (SQLException e) {
