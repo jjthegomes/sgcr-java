@@ -14,7 +14,7 @@ import modelo.Atleta;
  */
 public class AtletaDAO {
 
-    public static List<Atleta> obterAtleta() throws ClassNotFoundException {
+    public static List<Atleta> obterAtletas() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Atleta> atletas = new ArrayList<Atleta>();
@@ -22,7 +22,7 @@ public class AtletaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from atleta");
+            ResultSet rs = comando.executeQuery("select * from atletas");
             while (rs.next()) {
                 Atleta atleta = new Atleta(rs.getString("apelido"),
                         null,

@@ -1,6 +1,9 @@
 
 package modelo;
 
+import dao.AtletaDAO;
+import java.util.List;
+
 
 /**
  *
@@ -16,10 +19,7 @@ public class Atleta extends UsuarioComum{
         this.tamanhoCamisa = tamanhoCamisa;
     }
 
-  
-
-
-    public String getApelido() {
+      public String getApelido() {
         return apelido;
     }
 
@@ -34,5 +34,10 @@ public class Atleta extends UsuarioComum{
     public void setTamanhoCamisa(String tamanhoCamisa) {
         this.tamanhoCamisa = tamanhoCamisa;
     }
-            
+       
+       
+    public static List<Atleta> obterAtletas() throws ClassNotFoundException{
+        return AtletaDAO.obterAtletas();
+    }
+      
 }
