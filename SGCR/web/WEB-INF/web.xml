@@ -4,30 +4,34 @@
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <servlet-class>controller.PesquisaAdministradorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaAtletaController</servlet-name>
+        <servlet-class>controller.PesquisaAtletaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaCorridaController</servlet-name>
+        <servlet-class>controller.PesquisaCorridaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaIngressoController</servlet-name>
+        <servlet-class>controller.PesquisaIngressoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
     </servlet-mapping>
-    
-     <servlet>
-        <servlet-name>PesquisaAtletaController</servlet-name>
-        <servlet-class>controller.PesquisaAtletaController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAtletaController</servlet-name>
         <url-pattern>/PesquisaAtletaController</url-pattern>
     </servlet-mapping>
-    
-      <servlet>
-        <servlet-name>PesquisaInscricaoController</servlet-name>
-        <servlet-class>controller.PesquisaInscricaoController</servlet-class>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>PesquisaInscricaoController</servlet-name>
-        <url-pattern>/PesquisaInscricaoController</url-pattern>
+        <servlet-name>PesquisaCorridaController</servlet-name>
+        <url-pattern>/PesquisaCorridaController</url-pattern>
     </servlet-mapping>
-    
-    
+    <servlet-mapping>
+        <servlet-name>PesquisaIngressoController</servlet-name>
+        <url-pattern>/PesquisaIngressoController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

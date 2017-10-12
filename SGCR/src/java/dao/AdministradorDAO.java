@@ -14,7 +14,7 @@ import modelo.Administrador;
  */
 public class AdministradorDAO {
 
-    public static List<Administrador> obterAdministrador() throws ClassNotFoundException {
+    public static List<Administrador> obterAdministradores() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Administrador> administradores = new ArrayList<Administrador>();

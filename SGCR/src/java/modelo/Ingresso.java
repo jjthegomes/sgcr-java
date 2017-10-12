@@ -1,5 +1,8 @@
 package modelo;
 
+import dao.IngressoDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -82,11 +85,6 @@ public class Ingresso {
         this.corrida = corrida;
     }
 
-    /*
-    public void cadastrarIngresso(quantidade){
-        
-    }
-     */
     public int getCorridasId() {
         return corridasId;
     }
@@ -94,4 +92,9 @@ public class Ingresso {
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
     }
+    
+    public static List<Ingresso> obterIngressos() throws ClassNotFoundException{
+        return IngressoDAO.obterIngressos();
+    }
+    
 }

@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import java.util.List;
+import dao.AdministradorDAO;
+
 /**
  *
  * @author RAJ
@@ -15,8 +18,10 @@ public class Administrador extends Usuario {
         super(id, email, senha);
     }
     
-    public void gerarRelatorio(){
-        
+    
+    
+    public static List<Administrador> obterAdministradores() throws ClassNotFoundException{
+        return AdministradorDAO.obterAdministradores();
     }
         
 }

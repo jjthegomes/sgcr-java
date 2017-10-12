@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import dao.CorridaDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -168,4 +171,8 @@ public class Corrida {
     public void setOrganizadoresId(int organizadoresId) {
         this.organizadoresId = organizadoresId;
     } 
+    
+        public static List<Corrida> obterCorridas() throws ClassNotFoundException{
+        return CorridaDAO.obterCorridas();
+    }
 }

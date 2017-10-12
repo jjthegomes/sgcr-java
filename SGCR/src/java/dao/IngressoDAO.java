@@ -14,7 +14,7 @@ import modelo.Ingresso;
  */
 public class IngressoDAO {
 
-    public static List<Ingresso> obterIngresso() throws ClassNotFoundException {
+    public static List<Ingresso> obterIngressos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Ingresso> ingressos = new ArrayList<Ingresso>();

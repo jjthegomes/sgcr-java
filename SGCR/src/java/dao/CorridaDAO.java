@@ -18,7 +18,7 @@ import modelo.Corrida;
  * @author RAJ
  */
 public class CorridaDAO {
-    public static List<Corrida> obterCorrida() throws ClassNotFoundException {
+    public static List<Corrida> obterCorridas() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Corrida> corridas = new ArrayList<Corrida>();
@@ -31,7 +31,7 @@ public class CorridaDAO {
                 Corrida corrida = new Corrida(
                         rs.getInt("id"),
                         rs.getString("nomeCorrida"),
-                        rs.getInt("maxPessoa"),
+                        rs.getInt("maxPessoas"),
                         rs.getString("horarioInicio"),
                         rs.getString("horarioFinal"),
                         rs.getString("banner"),
