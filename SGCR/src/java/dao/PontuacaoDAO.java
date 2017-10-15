@@ -18,14 +18,14 @@ import modelo.Pontuacao;
  * @author RAJ
  */
 public class PontuacaoDAO {
-    public static List<Pontuacao> obterPontuacao() throws ClassNotFoundException {
+    public static List<Pontuacao> obterPontuacoes() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Pontuacao> pontuacoes = new ArrayList<Pontuacao>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from pontuacao");
+            ResultSet rs = comando.executeQuery("select * from pontuacoes");
             
             while (rs.next()) {
                 Pontuacao pontuacao = new Pontuacao(

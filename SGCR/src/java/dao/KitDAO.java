@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Administrador;
 import modelo.Kit;
 
 /**
@@ -30,6 +31,7 @@ public class KitDAO {
             while (rs.next()) {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
+                        rs.getString("nomeKit"),
                         rs.getString("imagemKit"), 
                         rs.getString("tipoChip"), 
                         null);

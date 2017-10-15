@@ -1,7 +1,7 @@
 <%-- 
     Document   : pesquisaAdministrador
     Created on : 10/10/2017, 08:49:47
-    Author     : straby
+    Author     : ariel
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

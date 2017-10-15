@@ -12,6 +12,10 @@
         <a href="PesquisaCorridaController">Manter Corrida</a>
         <br>
         <a href="PesquisaIngressoController">Manter Ingresso</a>
+        <br>
+        <a href="PesquisaKitController">Manter Kit</a>
+        <br>
+        <a href="PesquisaPontuacaoController">Manter Pontuação</a>
 
     </body>
 </html>

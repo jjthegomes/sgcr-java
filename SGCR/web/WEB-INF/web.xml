@@ -16,6 +16,14 @@
         <servlet-name>PesquisaIngressoController</servlet-name>
         <servlet-class>controller.PesquisaIngressoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaKitController</servlet-name>
+        <servlet-class>controller.PesquisaKitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaPontuacaoController</servlet-name>
+        <servlet-class>controller.PesquisaPontuacaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>PesquisaIngressoController</servlet-name>
         <url-pattern>/PesquisaIngressoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaKitController</servlet-name>
+        <url-pattern>/PesquisaKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaPontuacaoController</servlet-name>
+        <url-pattern>/PesquisaPontuacaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

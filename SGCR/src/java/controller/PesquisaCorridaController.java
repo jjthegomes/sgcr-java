@@ -15,7 +15,7 @@ import modelo.Corrida;
 
 /**
  *
- * @author straby
+ * @author ariel
  */
 public class PesquisaCorridaController extends HttpServlet {
 

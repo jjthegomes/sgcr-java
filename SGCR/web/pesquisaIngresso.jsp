@@ -1,7 +1,7 @@
 <%-- 
     Document   : pesquisaIngresso
     Created on : 12/10/2017, 00:57:43
-    Author     : straby
+    Author     : ariel
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pesquisa de Ingressos</title>
+        <title>Pesquisa de Ingresso</title>
     </head>
     <body>
         <h1>Pesquisa Ingresso</h1>

@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import dao.PontuacaoDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -44,4 +47,8 @@ public class Pontuacao {
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
     }  
+    
+    public static List<Pontuacao> obterPontuacoes() throws ClassNotFoundException{
+        return PontuacaoDAO.obterPontuacoes();
+    }
 }

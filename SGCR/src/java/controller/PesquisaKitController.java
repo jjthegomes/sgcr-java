@@ -6,18 +6,19 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Ingresso;
+import modelo.Kit;
 
 /**
  *
  * @author ariel
  */
-public class PesquisaIngressoController extends HttpServlet {
+public class PesquisaKitController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,15 +32,17 @@ public class PesquisaIngressoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setAttribute("ingressos", Ingresso.obterIngressos());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaIngresso.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-
+        try  {
+            request.setAttribute("kits", Kit.obterKits());
+                RequestDispatcher view = request.getRequestDispatcher("/pesquisaKit.jsp");
+                view.forward(request, response);
+            }
+        catch (ClassNotFoundException ex){
+            
         }
     }
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
