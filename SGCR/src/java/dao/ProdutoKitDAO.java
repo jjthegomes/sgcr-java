@@ -18,7 +18,7 @@ import modelo.ProdutoKit;
  * @author RAJ
  */
 public class ProdutoKitDAO {
-    public static List<ProdutoKit> obterProdutoKit() throws ClassNotFoundException {
+    public static List<ProdutoKit> obterProdutos_Kit() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<ProdutoKit> produtosKit = new ArrayList<ProdutoKit>();
@@ -30,7 +30,7 @@ public class ProdutoKitDAO {
             while (rs.next()) {
                 ProdutoKit produtoKit = new ProdutoKit(
                         rs.getInt("id"), 
-                        rs.getString("nomeProduto"), 
+                        rs.getString("nome"), 
                         rs.getDouble("valor"), 
                         0);
                 produtoKit.setKitsId(rs.getInt("kitsId"));

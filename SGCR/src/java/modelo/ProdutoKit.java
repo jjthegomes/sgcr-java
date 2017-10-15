@@ -1,13 +1,16 @@
 
 package modelo;
 
+import dao.ProdutoKitDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
  */
 public class ProdutoKit {
     private int id;
-    private String nomeProduto;
+    private String nome;
     private Double valor;
     private Kit kits;
     private int kitsId;
@@ -15,9 +18,9 @@ public class ProdutoKit {
     public ProdutoKit() {
     }
 
-    public ProdutoKit(int id, String nomeProduto, Double valor, int kitsId) {
+    public ProdutoKit(int id, String nome, Double valor, int kitsId) {
         this.id = id;
-        this.nomeProduto = nomeProduto;
+        this.nome = nome;
         this.valor = valor;
         this.kitsId = kitsId;
     }
@@ -30,12 +33,12 @@ public class ProdutoKit {
         this.id = id;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setNome(String nomeProduto) {
+        this.nome = nome;
     }
 
     public Double getValor() {
@@ -60,5 +63,9 @@ public class ProdutoKit {
 
     public void setKitsId(int kitsId) {
         this.kitsId = kitsId;
+    }
+    
+     public static List<ProdutoKit> obterProdutos_Kit() throws ClassNotFoundException{
+        return ProdutoKitDAO.obterProdutos_Kit();
     }
 }

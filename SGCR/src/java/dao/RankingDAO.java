@@ -18,7 +18,7 @@ import modelo.Ranking;
  * @author ariel
  */
 public class RankingDAO {
-    public static List<Ranking> obteRanking() throws ClassNotFoundException {
+    public static List<Ranking> obterRankings() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Ranking> rankings = new ArrayList<Ranking>();
@@ -31,7 +31,7 @@ public class RankingDAO {
                 Ranking ranking = new Ranking (
                         rs.getInt("id"),
                         rs.getString("nomeRanking"),
-                        rs.getString("intervaloFaxaEtaria"),
+                        rs.getInt("intervaloFaixaEtaria"),
                         null);
                 ranking.setAdministradorId(rs.getInt("administradorId"));
                 rankings.add(ranking);

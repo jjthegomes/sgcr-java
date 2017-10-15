@@ -24,6 +24,14 @@
         <servlet-name>PesquisaPontuacaoController</servlet-name>
         <servlet-class>controller.PesquisaPontuacaoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaProdutoKitController</servlet-name>
+        <servlet-class>controller.PesquisaProdutoKitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaRankingController</servlet-name>
+        <servlet-class>controller.PesquisaRankingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>PesquisaPontuacaoController</servlet-name>
         <url-pattern>/PesquisaPontuacaoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaProdutoKitController</servlet-name>
+        <url-pattern>/PesquisaProdutoKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaRankingController</servlet-name>
+        <url-pattern>/PesquisaRankingController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

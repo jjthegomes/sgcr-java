@@ -1,6 +1,9 @@
 
 package modelo;
 
+import dao.RankingDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -8,15 +11,15 @@ package modelo;
 public class Ranking {
     private int id;
     private String nomeRanking;
-    private String intervaloFaxaEtaria;
+    private int intervaloFaixaEtaria;
     private Administrador administrador;
     
     private int administradorId;
 
-    public Ranking(int id, String nomeRanking, String intervaloFaxaEtaria, Administrador administrador) {
+    public Ranking(int id, String nomeRanking, int intervaloFaixaEtaria, Administrador administrador) {
         this.id = id;
         this.nomeRanking = nomeRanking;
-        this.intervaloFaxaEtaria = intervaloFaxaEtaria;
+        this.intervaloFaixaEtaria = intervaloFaixaEtaria;
         this.administrador = administrador;
     }
 
@@ -36,12 +39,12 @@ public class Ranking {
         this.nomeRanking = nomeRanking;
     }
 
-    public String getIntervaloFaxaEtaria() {
-        return intervaloFaxaEtaria;
+    public int getIntervaloFaixaEtaria() {
+        return intervaloFaixaEtaria;
     }
 
-    public void setIntervaloFaxaEtaria(String intervaloFaxaEtaria) {
-        this.intervaloFaxaEtaria = intervaloFaxaEtaria;
+    public void setIntervaloFaixaEtaria(int intervaloFaxaEtaria) {
+        this.intervaloFaixaEtaria = intervaloFaxaEtaria;
     }
 
     public Administrador getAdministrador() {
@@ -62,6 +65,10 @@ public class Ranking {
 
     public void setAdministradorId(int administradorId) {
         this.administradorId = administradorId;
+    }
+    
+    public static List<Ranking> obterRankings() throws ClassNotFoundException{
+        return RankingDAO.obterRankings();
     }
 
 }

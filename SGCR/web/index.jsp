@@ -16,6 +16,10 @@
         <a href="PesquisaKitController">Manter Kit</a>
         <br>
         <a href="PesquisaPontuacaoController">Manter Pontuação</a>
+        <br>
+        <a href="PesquisaProdutoKitController">Manter Produto Kit</a>
+        <br>
+        <a href="PesquisaRankingController">Manter Ranking</a>
 
     </body>
 </html>
