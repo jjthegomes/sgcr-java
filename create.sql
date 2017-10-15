@@ -1,3 +1,4 @@
+-- DROP DATABASE sgcr;
 CREATE DATABASE IF NOT EXISTS `sgcr`;
 
 -- -----------------------------------------------------
@@ -9,7 +10,7 @@ USE `sgcr` ;
 -- Table `sgcr`.`tamanhos_camisas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`tamanhos_camisas` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `tamanho` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -19,7 +20,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`atletas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`atletas` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `apelido` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -51,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`organizadores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`organizadores` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
@@ -75,18 +76,18 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`corridas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`corridas` (
-  `id` INT NOT NULL,
-  `nomeCorrida` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nomeCorrida` VARCHAR(90) NOT NULL,
   `maxPessoas` INT NOT NULL,
-  `horarioInicio` VARCHAR(5) NOT NULL,
-  `horarioFinal` VARCHAR(5) NOT NULL,
+  `horarioInicio` VARCHAR(19) NOT NULL,
+  `horarioFinal` VARCHAR(19) NOT NULL,
   `banner` VARCHAR(255) NULL,
   `rua` VARCHAR(45) NOT NULL,
   `cep` VARCHAR(8) NOT NULL,
   `cidade` VARCHAR(45) NULL,
   `estado` VARCHAR(45) NULL,
   `bairro` VARCHAR(45) NOT NULL,
-  `descricao` VARCHAR(45) NULL,
+  `descricao` VARCHAR(512) NULL,
   `regulamento` VARCHAR(255) NULL,
   `organizadoresId` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -103,7 +104,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`ingressos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`ingressos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NOT NULL,
   `preco` DOUBLE NOT NULL,
   `dataInicio` VARCHAR(19) NOT NULL,
@@ -124,7 +125,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`percursos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`percursos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `imagemPercurso` VARCHAR(255) NOT NULL,
   `quilometragem` DOUBLE NOT NULL,
   `corridasId` INT NOT NULL,
@@ -142,7 +143,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`inscricoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `dataCompra` VARCHAR(10) NOT NULL,
   `numeroPeito` INT NOT NULL,
   `tempoPercorrido` TIME NULL,
@@ -170,7 +171,8 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`kits`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`kits` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nomeKit` VARCHAR(90) NOT NULL,
   `quantidade` VARCHAR(45) NOT NULL,
   `imagemKit` VARCHAR(255) NULL,
   `tipoChip` VARCHAR(45) NULL,
@@ -186,22 +188,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- TABELA DESNECESSÁRIA
+-- -----------------------------------------------------
 -- Table `sgcr`.`produto_kit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sgcr`.`produto_kit` (
-  `id` INT NOT NULL,
-  `produto` VARCHAR(45) NULL,
-  `preco` FLOAT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+-- CREATE TABLE IF NOT EXISTS `sgcr`.`produto_kit` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `produto` VARCHAR(45) NULL,
+--   `preco` FLOAT NULL,
+--   PRIMARY KEY (`id`))
+-- ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `sgcr`.`produtos_kit`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`produtos_kit` (
-  `id` INT NOT NULL,
-  `nome` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nomeProduto` VARCHAR(45) NOT NULL,
   `valor` VARCHAR(45) NOT NULL,
   `kitsId` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -218,7 +222,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`pontuacoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`pontuacoes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `pontuacao` INT NULL,
   `corridasId` INT NOT NULL,
   PRIMARY KEY (`id`, `corridasId`),
@@ -235,7 +239,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`administrador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`administrador` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -246,7 +250,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`rankings`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`rankings` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nomeRanking` VARCHAR(45) NOT NULL,
   `administradorId` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -263,7 +267,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`corridas_ranking`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`corridas_ranking` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `corridasId` INT NOT NULL,
   `rankingsId` INT NOT NULL,
   PRIMARY KEY (`id`),
