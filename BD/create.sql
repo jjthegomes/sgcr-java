@@ -1,4 +1,4 @@
--- DROP DATABASE sgcr;
+DROP DATABASE sgcr;
 CREATE DATABASE IF NOT EXISTS `sgcr`;
 
 -- -----------------------------------------------------
@@ -140,40 +140,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sgcr`.`inscricoes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `dataCompra` VARCHAR(10) NOT NULL,
-  `numeroPeito` INT NOT NULL,
-  `tempoPercorrido` TIME NULL,
-  `formaPagamento` TINYINT(1) NOT NULL,
-  `pago` TINYINT(1) NULL,
-  `corridasId` INT NOT NULL,
-  `atletaId` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_inscricao_corridas1_idx` (`corridasId` ASC),
-  INDEX `fk_inscricao_atleta1_idx` (`atletaId` ASC),
-  CONSTRAINT `fk_inscricao_corridas1`
-    FOREIGN KEY (`corridasId`)
-    REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscricao_atleta1`
-    FOREIGN KEY (`atletaId`)
-    REFERENCES `sgcr`.`atletas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `sgcr`.`kits`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`kits` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nomeKit` VARCHAR(90) NOT NULL,
-  `quantidade` VARCHAR(45) NOT NULL,
   `imagemKit` VARCHAR(255) NULL,
   `tipoChip` VARCHAR(45) NULL,
   `corridasId` INT NOT NULL,
@@ -185,6 +156,42 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`kits` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sgcr`.`inscricoes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `dataCompra` VARCHAR(19) NOT NULL,
+  `numeroPeito` INT NOT NULL,
+  `tempoPercorrido` TIME NULL,
+  `formaPagamento` TINYINT(1) NOT NULL,
+  `pago` TINYINT(1) NULL,
+  `corridasId` INT NOT NULL,
+  `atletasId` INT NOT NULL,
+  `kitsId` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_inscricao_corridas1_idx` (`corridasId` ASC),
+  INDEX `fk_inscricao_atletas1_idx` (`atletasId` ASC),
+  INDEX `fk_inscricao_kits1_idx` (`kitsId` ASC),
+  CONSTRAINT `fk_inscricao_corridas1`
+    FOREIGN KEY (`corridasId`)
+    REFERENCES `sgcr`.`corridas` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_inscricao_atletas1`
+    FOREIGN KEY (`atletasId`)
+    REFERENCES `sgcr`.`atletas` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_inscricao_kits1`
+    FOREIGN KEY (`kitsId`)
+    REFERENCES `sgcr`.`kits` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -205,8 +212,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`produtos_kit` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nomeProduto` VARCHAR(45) NOT NULL,
-  `valor` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `valor` DOUBLE(5,2) NOT NULL,
   `kitsId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_produtos_kit_kits1_idx` (`kitsId` ASC),
@@ -222,7 +229,7 @@ ENGINE = InnoDB;
 -- Table `sgcr`.`pontuacoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`pontuacoes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `pontuacao` INT NULL,
   `corridasId` INT NOT NULL,
   PRIMARY KEY (`id`, `corridasId`),
@@ -252,6 +259,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sgcr`.`rankings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nomeRanking` VARCHAR(45) NOT NULL,
+  `intervaloFaixaEtaria` INT(2) NULL,
   `administradorId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_rankings_administrador1_idx` (`administradorId` ASC),
