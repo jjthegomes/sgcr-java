@@ -14,10 +14,10 @@ import modelo.Inscricao;
  */
 public class InscricaoDAO {
 
-    public static List<Inscricao> obterInscricao() throws ClassNotFoundException {
+    public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Inscricao> inscricoes = new ArrayList<Inscricao>();
+        List<Inscricao> inscricoes = new ArrayList<>();
 
         try {
             conexao = BD.getConexao();
@@ -31,12 +31,14 @@ public class InscricaoDAO {
                         rs.getString("numeroPeito"),
                         rs.getBoolean("pago"),
                         rs.getBoolean("formaPagamento"),
-                        rs.getDouble("tempoPercorrido"),
+                        rs.getString("tempoPercorrido"),
+                        null,
                         null,
                         null);
 
                 inscricao.setAtletasId(rs.getInt("atletasId"));
                 inscricao.setCorridasId(rs.getInt("corridasId"));
+                inscricao.setKitsId(rs.getInt("kitsId"));
                 inscricoes.add(inscricao);
             }
         } catch (SQLException e) {

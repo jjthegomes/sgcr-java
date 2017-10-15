@@ -32,6 +32,18 @@
         <servlet-name>PesquisaRankingController</servlet-name>
         <servlet-class>controller.PesquisaRankingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaOrganizadorController</servlet-name>
+        <servlet-class>controller.PesquisaOrganizadorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaPercursoController</servlet-name>
+        <servlet-class>controller.PesquisaPercursoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaInscricaoController</servlet-name>
+        <servlet-class>controller.PesquisaInscricaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>PesquisaRankingController</servlet-name>
         <url-pattern>/PesquisaRankingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaOrganizadorController</servlet-name>
+        <url-pattern>/PesquisaOrganizadorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaPercursoController</servlet-name>
+        <url-pattern>/PesquisaPercursoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaInscricaoController</servlet-name>
+        <url-pattern>/PesquisaInscricaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

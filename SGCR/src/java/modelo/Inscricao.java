@@ -1,6 +1,9 @@
 
 package modelo;
 
+import dao.InscricaoDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -11,14 +14,16 @@ public class Inscricao {
     private String numeroPeito;
     private boolean pago;
     private boolean formaPagamento;
-    private Double tempoPercorrido;
+    private String tempoPercorrido;
     private Atleta atleta;
     private Corrida corrida;
+    private Kit kit;
     
     private int atletasId;
     private int corridasId;
+    private int kitsId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean formaPagamento, Double tempoPercorrido, Atleta atleta, Corrida corrida) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean formaPagamento, String tempoPercorrido, Atleta atleta, Corrida corrida, Kit kit) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
@@ -27,6 +32,7 @@ public class Inscricao {
         this.tempoPercorrido = tempoPercorrido;
         this.atleta = atleta;
         this.corrida = corrida;
+        this.kit = kit;
     }
 
     public int getId() {
@@ -69,11 +75,11 @@ public class Inscricao {
         this.formaPagamento = formaPagamento;
     }
 
-    public Double getTempoPercorrido() {
+    public String getTempoPercorrido() {
         return tempoPercorrido;
     }
 
-    public void setTempoPercorrido(Double tempoPercorrido) {
+    public void setTempoPercorrido(String tempoPercorrido) {
         this.tempoPercorrido = tempoPercorrido;
     }
 
@@ -109,5 +115,24 @@ public class Inscricao {
         this.corridasId = corridasId;
     }
 
+    public Kit getKit() {
+        return kit;
+    }
+
+    public void setKit(Kit kit) {
+        this.kit = kit;
+    }
+
+    public int getKitsId() {
+        return kitsId;
+    }
+
+    public void setKitsId(int kitsId) {
+        this.kitsId = kitsId;
+    }
+    
+    public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricoes();
+    }
 
 }

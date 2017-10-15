@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import dao.PercursoDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -63,6 +66,10 @@ public class Percurso {
 
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
+    }
+    
+    public static List<Percurso> obterPercursos() throws ClassNotFoundException {
+        return PercursoDAO.obterPercursos();
     }
 
 }

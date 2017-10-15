@@ -1,6 +1,9 @@
 
 package modelo;
 
+import dao.OrganizadorDAO;
+import java.util.List;
+
 /**
  *
  * @author RAJ
@@ -15,5 +18,9 @@ public class Organizador extends UsuarioComum{
     void gerarDados(){
     }
     void gerarRelatorios(){
+    }
+    
+    public static List<Organizador> obterOrganizadores() throws ClassNotFoundException{
+        return OrganizadorDAO.obterOrganizadores();
     }
 }

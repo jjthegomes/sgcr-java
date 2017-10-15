@@ -18,10 +18,10 @@ import modelo.Percurso;
  * @author RAJ
  */
 public class PercursoDAO {
-    public static List<Percurso> obtePercurso() throws ClassNotFoundException {
+    public static List<Percurso> obterPercursos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Percurso> percursos = new ArrayList<Percurso>();
+        List<Percurso> percursos = new ArrayList<>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();

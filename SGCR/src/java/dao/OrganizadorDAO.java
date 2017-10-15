@@ -19,10 +19,10 @@ import modelo.Organizador;
  */
 public class OrganizadorDAO {
 
-    public static List<Organizador> obterOrganizador() throws ClassNotFoundException, SQLException {
+    public static List<Organizador> obterOrganizadores() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Organizador> organizadores = new ArrayList<Organizador>();
+        List<Organizador> organizadores = new ArrayList<>();
 
         try {
             conexao = BD.getConexao();
