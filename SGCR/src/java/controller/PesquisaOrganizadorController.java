@@ -16,7 +16,7 @@ import modelo.Organizador;
 
 /**
  *
- * @author rafael
+ * @author RAJ
  */
 public class PesquisaOrganizadorController extends HttpServlet {
 

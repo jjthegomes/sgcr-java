@@ -16,7 +16,7 @@ import modelo.Percurso;
 
 /**
  *
- * @author rafael
+ * @author RAJ
  */
 public class PesquisaPercursoController extends HttpServlet {
 

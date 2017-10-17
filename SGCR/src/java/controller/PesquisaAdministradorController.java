@@ -16,7 +16,7 @@ import modelo.Administrador;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class PesquisaAdministradorController extends HttpServlet {
 

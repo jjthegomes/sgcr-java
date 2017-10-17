@@ -16,7 +16,7 @@ import modelo.Ranking;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class PesquisaRankingController extends HttpServlet {
 

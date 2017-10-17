@@ -16,7 +16,7 @@ import modelo.Pontuacao;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class PesquisaPontuacaoController extends HttpServlet {
 

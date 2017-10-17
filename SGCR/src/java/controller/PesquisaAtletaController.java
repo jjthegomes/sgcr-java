@@ -16,7 +16,7 @@ import modelo.Atleta;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class PesquisaAtletaController extends HttpServlet {
 
