@@ -44,6 +44,10 @@
         <servlet-name>PesquisaInscricaoController</servlet-name>
         <servlet-class>controller.PesquisaInscricaoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>manterAdministrador</servlet-name>
+        <servlet-class>manterAdministrador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaInscricaoController</servlet-name>
         <url-pattern>/PesquisaInscricaoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>manterAdministrador</servlet-name>
+        <url-pattern>/manterAdministrador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

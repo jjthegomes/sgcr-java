@@ -10,7 +10,7 @@ public abstract class UsuarioComum extends Usuario{
 
     private String nome;
     private String dataNascimento;
-    private boolean sexo;
+    private String sexo;
     private String cpf;
     private String cep;
     private String rua;
@@ -22,7 +22,7 @@ public abstract class UsuarioComum extends Usuario{
     private String telefone;
     private String celular;
 
-    public UsuarioComum(String nome, String dataNascimento, boolean sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
+    public UsuarioComum(String nome, String dataNascimento, String sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
         super(id, email, senha);
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -55,12 +55,17 @@ public abstract class UsuarioComum extends Usuario{
         this.dataNascimento = dataNascimento;
     }
 
-    public boolean isSexo() {
+    public String getSexo() {
         return sexo;
     }
 
     public void setSexo(boolean sexo) {
-        this.sexo = sexo;
+        if(sexo == true){
+            this.sexo = "M";
+        }else{
+            this.sexo = "F";
+        }
+        
     }
 
     public String getCpf() {

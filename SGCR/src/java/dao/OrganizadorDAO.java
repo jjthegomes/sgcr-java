@@ -32,7 +32,7 @@ public class OrganizadorDAO {
                 Organizador organizador = new Organizador(
                         rs.getString("nome"),
                         rs.getString("dataNascimento"),
-                        rs.getBoolean("sexo"),
+                        rs.getString("sexo"),
                         rs.getString("cpf"),
                         rs.getString("cep"),
                         rs.getString("rua"),

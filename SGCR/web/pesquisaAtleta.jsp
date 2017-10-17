@@ -37,19 +37,19 @@
                 <td><c:out value="${atleta.id}" /> </td>
                 <td><c:out value="${atleta.nome}" /> </td>
                 <td><c:out value="${atleta.email}" /> </td>
-                <td><c:out value="${atleta.sexo}" /> </td>
+                <td><c:out value="${atleta.sexo}" /> </td>            
                 <td><c:out value="${atleta.dataNascimento}" /> </td>
-                <td><c:out value="${atleta.cpf}" /> </td>
-                <td><c:out value="${atleta.cep}" /> </td>
-                <td><c:out value="${atleta.rua}" /> </td>
-                <td><c:out value="${atleta.bairro}" /> </td>
-                <td><a href="ManterAtletaController?acao=prepararEditar&id=<c:out value="${atleta.id}"/>">Editar</a> </td>
-                <td><a href="ManterAtletaController?acao=prepararExcluir&id=<c:out value="${atleta.id}"/>">Excluir</a> </td>
-            </tr>
-        </c:forEach>
-    </table>
+            <td><c:out value="${atleta.cpf}" /> </td>
+            <td><c:out value="${atleta.cep}" /> </td>
+            <td><c:out value="${atleta.rua}" /> </td>
+            <td><c:out value="${atleta.bairro}" /> </td>
+            <td><a href="ManterAtletaController?acao=prepararEditar&id=<c:out value="${atleta.id}"/>">Editar</a> </td>
+            <td><a href="ManterAtletaController?acao=prepararExcluir&id=<c:out value="${atleta.id}"/>">Excluir</a> </td>
+        </tr>
+    </c:forEach>
+</table>
 
-    <form action="ManterAtletaController?acao=prepararIncluir" method="post">
-        <input type="submit" name="btnIncluir" value="Incluir">
-    </form>
+<form action="ManterAtletaController?acao=prepararIncluir" method="post">
+    <input type="submit" name="btnIncluir" value="Incluir">
+</form>
 </html>
