@@ -1,7 +1,7 @@
 <%-- 
     Document   : manterInscricao
     Created on : Oct 17, 2017, 5:11:41 PM
-    Author     : rafael
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

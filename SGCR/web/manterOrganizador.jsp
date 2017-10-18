@@ -1,8 +1,7 @@
 <%-- 
     Document   : manterOrganizador
     Created on : Oct 17, 2017, 10:14:45 AM
-    Author     : rafael
---%>
+    Author     : RAJ
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -20,7 +19,7 @@
         <form action="ManterOrganizadorController?acao=confirmar${operacao}" method="post" name="frmManterOrganizador">
             <table>
                 <tr>
-                    <td>CÃ³digo do Organizador:</td> 
+                    <td>Código do Organizador:</td> 
                     <td><input type="text" name="txtIdOrganizador" value="${organizador.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
@@ -64,7 +63,7 @@
                     <td><input type="text" name="txtComplementoOrganizador" value="${organizador.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>NÃºmero:</td> 
+                    <td>Número:</td> 
                     <td><input type="text" name="txtNumeroOrganizador" value="${organizador.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>

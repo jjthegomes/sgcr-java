@@ -1,7 +1,7 @@
 <%-- 
     Document   : pesquisaPontuacao
     Created on : 15/10/2017, 02:11:50
-    Author     : ariel
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

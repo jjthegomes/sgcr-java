@@ -1,7 +1,7 @@
 <%-- 
     Document   : pesquisaAdministrador
     Created on : 12/10/2017, 00:55:23
-    Author     : ariel
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

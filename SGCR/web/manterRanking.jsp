@@ -1,7 +1,7 @@
 <%-- 
     Document   : manterRanking
     Created on : 17/10/2017, 09:31:01
-    Author     : ariel
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
