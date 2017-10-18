@@ -17,11 +17,11 @@
         <h1>Pesquisas Kit</h1>
         <table border="1">
             <tr>
-                <th>Id Kit</th>
+                <th>Código Kit</th>
                 <th>Nome Kit</th>
                 <th>Imagem</th>
-                <th> Tipo Quit</th>
-                <th>Id Corrida</th>
+                <th>Tipo Chip</th>
+                <th>Código Corrida</th>
                 <th colspan="2">Ação</th>
             </tr>
             
