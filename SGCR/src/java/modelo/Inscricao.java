@@ -2,6 +2,7 @@
 package modelo;
 
 import dao.InscricaoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Inscricao {
     private String dataCompra;
     private String numeroPeito;
     private boolean pago;
-    private boolean formaPagamento;
+    private String formaPagamento;
     private String tempoPercorrido;
     private Atleta atleta;
     private Corrida corrida;
@@ -23,7 +24,7 @@ public class Inscricao {
     private int corridasId;
     private int kitsId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean formaPagamento, String tempoPercorrido, Atleta atleta, Corrida corrida, Kit kit) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, String formaPagamento, String tempoPercorrido, Atleta atleta, Corrida corrida, Kit kit) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
@@ -67,11 +68,11 @@ public class Inscricao {
         this.pago = pago;
     }
 
-    public boolean isFormaPagamento() {
+    public String getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(boolean formaPagamento) {
+    public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
@@ -133,6 +134,22 @@ public class Inscricao {
     
     public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes();
+    }
+    
+    public void gravar() throws SQLException, ClassNotFoundException {
+        InscricaoDAO.gravar(this);
+    }
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+        InscricaoDAO.alterar(this);
+    }
+    
+    public void excluir() throws SQLException, ClassNotFoundException {
+        InscricaoDAO.excluir(this);
+    }
+    
+    public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricao(id);
     }
 
 }

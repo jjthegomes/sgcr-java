@@ -6,6 +6,7 @@
 package modelo;
 
 import dao.PercursoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -71,5 +72,20 @@ public class Percurso {
     public static List<Percurso> obterPercursos() throws ClassNotFoundException {
         return PercursoDAO.obterPercursos();
     }
+    
+    public void gravar() throws SQLException, ClassNotFoundException {
+        PercursoDAO.gravar(this);
+    }
 
+    public void alterar() throws SQLException, ClassNotFoundException {
+        PercursoDAO.alterar(this);
+    }
+    
+    public void excluir() throws SQLException, ClassNotFoundException {
+        PercursoDAO.excluir(this);
+    }
+    
+    public static Percurso obterPercurso(int id) throws ClassNotFoundException {
+        return PercursoDAO.obterPercurso(id);
+    }
 }
