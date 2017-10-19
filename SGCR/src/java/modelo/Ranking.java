@@ -2,6 +2,7 @@
 package modelo;
 
 import dao.RankingDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -26,7 +27,22 @@ public class Ranking {
     public int getId() {
         return id;
     }
-
+    public void gravar() throws SQLException,
+        ClassNotFoundException{
+        RankingDAO.gravar(this);
+    }
+    public void alterar() throws SQLException, ClassNotFoundException{
+        RankingDAO.alterar(this);
+    }
+    
+    public void excluir() throws SQLException, ClassNotFoundException{
+        RankingDAO.excluir(this);
+    }
+    
+    public Ranking obterRanking(int id) throws ClassNotFoundException{
+        return RankingDAO.obterRanking(id);
+    }
+    
     public void setId(int id) {
         this.id = id;
     }

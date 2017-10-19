@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,84 @@ import modelo.Pontuacao;
  * @author RAJ
  */
 public class PontuacaoDAO {
+    
+    public static void gravar (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+        Connection conexao = null;
+        try{
+            conexao = BD.getConexao();
+            String sql= "insert into pontuacoes (id,pontoacao, corridasId)values(?,?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1,pontuacao.getId());
+            comando.setInt(2,pontuacao.getPontuacao());
+            comando.setInt(3,pontuacao.getCorridasId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            throw e;
+        }
+    }
+    
+    public static void alterar (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+        Connection conexao =null;
+        try{
+            conexao = BD.getConexao();
+            String sql= "upgrade pontuacoes set pontuacao=?, corridasId=? "
+              +"where id =?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1,pontuacao.getPontuacao());
+            comando.setInt(2,pontuacao.getCorrida().getId());
+            comando.setInt(3,pontuacao.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            throw e;
+        }
+    }
+    
+    public static void excluir (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+        Connection conexao = null;
+        Statement comando = null;
+        String stringSQL;
+        try{
+          conexao =BD.getConexao();
+          comando= conexao.createStatement();
+          stringSQL = "delete from pontuacoes where id = "+pontuacao.getId();
+                  comando.execute(stringSQL);
+        }catch(SQLException e){
+            throw e;
+        }finally{
+            fecharConexao(conexao,comando);
+        }
+    }
+    
+    public static Pontuacao obterPontuacao (int id)throws ClassNotFoundException{
+        Connection conexao =null;
+        Statement comando = null;
+        Pontuacao pontuacao =null;
+        try{
+          conexao =BD.getConexao();
+          comando= conexao.createStatement();
+          ResultSet rs =  comando.executeQuery("select +from rankins where id = "+ id);
+          rs.first();
+            pontuacao = new Pontuacao(rs.getInt("id"),
+            rs.getInt("pontuacao"),
+            null);
+            pontuacao.setCorridasId(rs.getInt("corridasId"));
+        }catch(SQLException e){
+             e.printStackTrace();
+        }finally{
+            fecharConexao(conexao,comando);
+        }
+        return pontuacao;
+    }
+    
     public static List<Pontuacao> obterPontuacoes() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

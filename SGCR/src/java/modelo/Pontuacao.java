@@ -6,6 +6,7 @@
 package modelo;
 
 import dao.PontuacaoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -43,7 +44,32 @@ public class Pontuacao {
     public int getCorridasId() {
         return corridasId;
     }
+    
+    public void gravar() throws SQLException,
+        ClassNotFoundException{
+        PontuacaoDAO.gravar(this);
+    }
+    public void alterar () throws SQLException, ClassNotFoundException{
+        PontuacaoDAO.alterar(this);
+    }
+    
+    public void excluir () throws SQLException, ClassNotFoundException{
+        PontuacaoDAO.excluir(this);
+    }
+    
+    public Pontuacao obterPontuacao(int id) throws ClassNotFoundException{
+        return PontuacaoDAO.obterPontuacao(id);
+    }
 
+    public Corrida getCorrida() {
+        return corrida;
+    }
+
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
+    }
+    
+    
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
     }  

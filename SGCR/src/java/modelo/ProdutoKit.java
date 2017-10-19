@@ -2,6 +2,7 @@
 package modelo;
 
 import dao.ProdutoKitDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -47,6 +48,22 @@ public class ProdutoKit {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+    
+    public void gravar() throws SQLException,
+        ClassNotFoundException{
+        ProdutoKitDAO.gravar(this);
+    }
+    public void alterar() throws SQLException, ClassNotFoundException{
+        ProdutoKitDAO.alterar(this);
+    }
+    
+    public void excluir() throws SQLException, ClassNotFoundException{
+        ProdutoKitDAO.excluir(this);
+    }
+    
+    public ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException{
+        return ProdutoKitDAO.obterProdutoKit(id);
     }
 
     public Kit getKits() {
