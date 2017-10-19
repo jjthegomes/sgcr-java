@@ -15,7 +15,7 @@ import modelo.Organizador;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class OrganizadorDAO {
 

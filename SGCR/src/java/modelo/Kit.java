@@ -1,7 +1,5 @@
-
 package modelo;
 
-import dao.AdministradorDAO;
 import dao.KitDAO;
 import java.util.List;
 
@@ -16,15 +14,15 @@ public class Kit {
     private String imagemKit;
     private String tipoChip;
     private Corrida corrida;
-    
+
     private int corridasId;
 
     public Kit() {
     }
 
-    public Kit(int id,String nomeKit, String imagemKit, String tipoChip, Corrida corrida) {
+    public Kit(int id, String nomeKit, String imagemKit, String tipoChip, Corrida corrida) {
         this.id = id;
-         this.nomeKit = nomeKit;
+        this.nomeKit = nomeKit;
         this.imagemKit = imagemKit;
         this.tipoChip = tipoChip;
         this.corrida = corrida;
@@ -61,7 +59,7 @@ public class Kit {
     public void setCorrida(Corrida corrida) {
         this.corrida = corrida;
     }
-    
+
     public int getCorridasId() {
         return corridasId;
     }
@@ -77,9 +75,8 @@ public class Kit {
     public void setNomeKit(String nomeKit) {
         this.nomeKit = nomeKit;
     }
-    
-    
-    public static List<Kit> obterKits() throws ClassNotFoundException{
+
+    public static List<Kit> obterKits() throws ClassNotFoundException {
         return KitDAO.obterKit();
     }
 }

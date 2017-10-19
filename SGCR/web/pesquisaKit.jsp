@@ -1,7 +1,7 @@
 <%-- 
     Document   : pesquisaKit
     Created on : 14/10/2017, 17:10:36
-    Author     : ariel
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,11 +17,11 @@
         <h1>Pesquisas Kit</h1>
         <table border="1">
             <tr>
-                <th>Id Kit</th>
+                <th>Código Kit</th>
                 <th>Nome Kit</th>
                 <th>Imagem</th>
-                <th> Tipo Quit</th>
-                <th>Id Corrida</th>
+                <th>Tipo Chip</th>
+                <th>Código Corrida</th>
                 <th colspan="2">Ação</th>
             </tr>
             

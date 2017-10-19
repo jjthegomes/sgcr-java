@@ -15,7 +15,7 @@ import modelo.Ranking;
 
 /**
  *
- * @author ariel
+ * @author RAJ
  */
 public class RankingDAO {
     public static List<Ranking> obterRankings() throws ClassNotFoundException {

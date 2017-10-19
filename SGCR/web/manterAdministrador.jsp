@@ -1,7 +1,7 @@
 <%-- 
     Document   : manterAdministrador
     Created on : 17/10/2017, 09:29:26
-    Author     : raj
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

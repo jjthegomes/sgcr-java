@@ -1,7 +1,7 @@
 <%-- 
     Document   : PesquisaOrganizador
     Created on : Oct 15, 2017, 3:08:36 PM
-    Author     : rafael
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
