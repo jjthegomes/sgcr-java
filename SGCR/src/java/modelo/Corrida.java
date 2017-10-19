@@ -6,6 +6,7 @@
 package modelo;
 
 import dao.CorridaDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
  * @author RAJ
  */
 public class Corrida {
+
     private int id;
     private String nomeCorrida;
     private int maxPessoas;
@@ -27,11 +29,11 @@ public class Corrida {
     private String descricao;
     private String regulamento;
     private Organizador organizador;
-    
+
     private int organizadoresId;
 
     public Corrida() {
-        
+
     }
 
     public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String rua, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
@@ -162,7 +164,6 @@ public class Corrida {
     public void setOrganizador(Organizador organizador) {
         this.organizador = organizador;
     }
-      
 
     public int getOrganizadoresId() {
         return organizadoresId;
@@ -170,9 +171,26 @@ public class Corrida {
 
     public void setOrganizadoresId(int organizadoresId) {
         this.organizadoresId = organizadoresId;
-    } 
-    
-        public static List<Corrida> obterCorridas() throws ClassNotFoundException{
+    }
+
+    public static List<Corrida> obterCorridas() throws ClassNotFoundException {
         return CorridaDAO.obterCorridas();
     }
+
+    public void gravar() throws ClassNotFoundException, SQLException {
+        CorridaDAO.gravar(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+        CorridaDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        CorridaDAO.alterar(this);
+    }
+
+    public static Corrida obterCorrida(int id) throws ClassNotFoundException {
+        return CorridaDAO.obterCorrida(id);
+    }
+
 }
