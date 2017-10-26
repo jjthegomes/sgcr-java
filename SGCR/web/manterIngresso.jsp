@@ -48,13 +48,13 @@
                         <td>Corrida</td>
                         <td>
                             <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${ingresso.corrida.id== null}"> selected</c:if>> </option>  
+                            <option value="0" <c:if test="${ingresso.corrida.id== null}"> selected</c:if>>Selecione uma Corrida </option>  
                             <c:forEach items="${corridas}" var="corrida">
                                 <option value="${corrida.id}" <c:if test="${ingresso.corrida.id == corrida.id}"> selected </c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>
-                    <!-- ATENÇAO AO SELECT DAS CHAVES PRIMARIAS!! -->
+                    <!-- ATENÇAO AO SELECT DAS CHAVES Estrangeira!! -->
                 </tr>
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
