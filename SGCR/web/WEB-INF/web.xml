@@ -48,6 +48,22 @@
         <servlet-name>manterAdministrador</servlet-name>
         <servlet-class>manterAdministrador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterKitController</servlet-name>
+        <servlet-class>controller.ManterKitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterOrganizadorController</servlet-name>
+        <servlet-class>controller.ManterOrganizadorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterPercursoController</servlet-name>
+        <servlet-class>controller.ManterPercursoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterInscricaoController</servlet-name>
+        <servlet-class>controller.ManterInscricaoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -95,6 +111,22 @@
     <servlet-mapping>
         <servlet-name>manterAdministrador</servlet-name>
         <url-pattern>/manterAdministrador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterKitController</servlet-name>
+        <url-pattern>/ManterKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterOrganizadorController</servlet-name>
+        <url-pattern>/ManterOrganizadorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterPercursoController</servlet-name>
+        <url-pattern>/ManterPercursoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterInscricaoController</servlet-name>
+        <url-pattern>/ManterInscricaoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -46,7 +46,7 @@
                         <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${kit.corrida.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${kit.corrida.id == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
+                                <option value="${corrida.id}" <c:if test="${kit.corrida.id == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>

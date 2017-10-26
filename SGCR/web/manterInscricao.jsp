@@ -70,7 +70,7 @@
                         <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${inscricao.corrida.id == null}"> selected</c:if>> Selecione uma corrida</option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${inscricao.corrida.id == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
+                                <option value="${corrida.id}" <c:if test="${inscricao.corrida.id == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>
@@ -80,8 +80,8 @@
                     <td>
                         <select name="optKit" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
-                            <c:forEach items="${kits}" var="kits">
-                                <option value="${kits.id}" <c:if test="${inscricao.kit.id == kit.id}"> selected</c:if>>${kit.nome}</option>  
+                            <c:forEach items="${kits}" var="kit">
+                                <option value="${kit.id}" <c:if test="${inscricao.kit.id == kit.id}"> selected</c:if>>${kit.nomeKit}</option>  
                             </c:forEach>
                         </select>
                     </td>
