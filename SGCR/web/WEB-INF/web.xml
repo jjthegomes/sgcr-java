@@ -63,8 +63,6 @@
     <servlet>
         <servlet-name>ManterInscricaoController</servlet-name>
         <servlet-class>controller.ManterInscricaoController</servlet-class>
-        <servlet-name>ManterAdministradorController</servlet-name>
-        <servlet-class>controller.ManterAdministradorController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManterAtletaController</servlet-name>
@@ -141,8 +139,6 @@
     <servlet-mapping>
         <servlet-name>ManterInscricaoController</servlet-name>
         <url-pattern>/ManterInscricaoController</url-pattern>
-        <servlet-name>ManterAdministradorController</servlet-name>
-        <url-pattern>/ManterAdministradorController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterAtletaController</servlet-name>
