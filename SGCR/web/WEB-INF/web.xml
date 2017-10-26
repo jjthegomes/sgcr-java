@@ -48,6 +48,22 @@
         <servlet-name>manterAdministrador</servlet-name>
         <servlet-class>manterAdministrador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterAdministradorController</servlet-name>
+        <servlet-class>controller.ManterAdministradorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterAtletaController</servlet-name>
+        <servlet-class>controller.ManterAtletaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterCorridaController</servlet-name>
+        <servlet-class>controller.ManterCorridaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterIngressoController</servlet-name>
+        <servlet-class>controller.ManterIngressoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -95,6 +111,22 @@
     <servlet-mapping>
         <servlet-name>manterAdministrador</servlet-name>
         <url-pattern>/manterAdministrador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterAdministradorController</servlet-name>
+        <url-pattern>/ManterAdministradorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterAtletaController</servlet-name>
+        <url-pattern>/ManterAtletaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterCorridaController</servlet-name>
+        <url-pattern>/ManterCorridaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterIngressoController</servlet-name>
+        <url-pattern>/ManterIngressoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
