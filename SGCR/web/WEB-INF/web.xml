@@ -80,6 +80,14 @@
         <servlet-name>ManterRankingController</servlet-name>
         <servlet-class>controller.ManterRankingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterPontuacaoController</servlet-name>
+        <servlet-class>controller.ManterPontuacaoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterProdutoKitController</servlet-name>
+        <servlet-class>controller.ManterProdutoKitController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>ManterRankingController</servlet-name>
         <url-pattern>/ManterRankingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterPontuacaoController</servlet-name>
+        <url-pattern>/ManterPontuacaoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterProdutoKitController</servlet-name>
+        <url-pattern>/ManterProdutoKitController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
