@@ -76,7 +76,7 @@
                     <td>Organizador</td>
                     <td>
                         <select name="optOrganizador" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>> </option>  
+                            <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  
                             <c:forEach items="${organizadores}" var="organizador">
                                 <option value="${organizador.id}" <c:if test="${corrida.organizador.id == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
                             </c:forEach>
