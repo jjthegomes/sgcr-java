@@ -76,6 +76,10 @@
         <servlet-name>ManterAdministradorController</servlet-name>
         <servlet-class>controller.ManterAdministradorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterRankingController</servlet-name>
+        <servlet-class>controller.ManterRankingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>ManterAdministradorController</servlet-name>
         <url-pattern>/ManterAdministradorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterRankingController</servlet-name>
+        <url-pattern>/ManterRankingController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
