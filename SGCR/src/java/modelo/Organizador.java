@@ -28,4 +28,8 @@ public class Organizador extends UsuarioComum{
     public void gravar() throws SQLException, ClassNotFoundException {
         OrganizadorDAO.gravar(this);
     }
+    
+    public static Organizador obterOrganizador(int id) throws ClassNotFoundException {
+        return OrganizadorDAO.obterOrganizador(id);
+    }
 }
