@@ -6,13 +6,14 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Corrida;
+import modelo.Kit;
 
 /**
  *
@@ -35,6 +36,10 @@ public class ManterKitController extends HttpServlet {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
+        } else {
+            if(acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     
@@ -91,5 +96,25 @@ public class ManterKitController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdKit"));
+        String nome = request.getParameter("txtNomeKit");
+        String imagem = request.getParameter("fileImagemKit");
+        String tipoChip = request.getParameter("optTipoChip");
+        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        try {
+            Corrida corrida = null;
+            corrida = Corrida.obterCorrida(corridaId);
+            Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
+            kit.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
 
 }

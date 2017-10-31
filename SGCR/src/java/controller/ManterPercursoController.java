@@ -6,13 +6,14 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Corrida;
+import modelo.Percurso;
 
 /**
  *
@@ -35,6 +36,10 @@ public class ManterPercursoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
+        } else {
+            if(acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     
@@ -91,5 +96,24 @@ public class ManterPercursoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
+        String imagem = request.getParameter("fileImagemPercurso");
+        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragem"));
+        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        try {
+            Corrida corrida = null;
+            corrida = Corrida.obterCorrida(corridaId);
+            Percurso percurso = new Percurso(id, imagem, numQuilometragem, corrida);
+            percurso.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
 
 }

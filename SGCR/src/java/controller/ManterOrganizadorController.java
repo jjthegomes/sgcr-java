@@ -7,11 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Organizador;
 
 /**
  *
@@ -32,20 +34,24 @@ public class ManterOrganizadorController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")) {
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
+        } else {
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
+            }
         }
     }
-    
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
             RequestDispatcher view = request.getRequestDispatcher("/manterOrganizador.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
-            
+
         } catch (IOException ex) {
-            
+
         }
     }
 
@@ -87,5 +93,34 @@ public class ManterOrganizadorController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
+        String nome = request.getParameter("txtNomeOrganizador");
+        String dataNascimento = request.getParameter("txtDataNascimentoOrganizador");
+        String sexo = request.getParameter("optSexo");
+        String cpf = request.getParameter("txtCpfOrganizador");
+        String cep = request.getParameter("txtCepOrganizador");
+        String rua = request.getParameter("txtRuaOrganizador");
+        String bairro = request.getParameter("txtBairroOrganizador");
+        String complemento = request.getParameter("txtComplementoOrganizador");
+        String numero = request.getParameter("txtNumeroOrganizador");
+        String cidade = request.getParameter("txtCidadeOrganizador");
+        String estado = request.getParameter("txtEstadoOrganizador");
+        String telefone = request.getParameter("txtTelefoneOrganizador");
+        String celular = request.getParameter("txtCelularOrganizador");
+        
+        try {
+            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+            organizador.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+
+    }
 
 }

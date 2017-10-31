@@ -6,7 +6,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Atleta;
 import modelo.Corrida;
+import modelo.Inscricao;
 import modelo.Kit;
 
 /**
@@ -37,6 +38,10 @@ public class ManterInscricaoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if(acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
+        } else {
+            if(acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     
@@ -95,5 +100,33 @@ public class ManterInscricaoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
+        String dataCompra = request.getParameter("txtDataCompraInscricao");
+        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
+        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
+        String formaPagamento = request.getParameter("optFormaPagamento");
+        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
+        int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
+        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        int kitId = Integer.parseInt(request.getParameter("optKit"));
+        try {
+            Atleta atleta = null;
+            atleta = Atleta.obterAtleta(atletaId);
+            Corrida corrida = null;
+            corrida = Corrida.obterCorrida(corridaId);
+            Kit kit = null;
+            kit = Kit.obterKit(kitId);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, corrida, kit);
+            inscricao.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
 
 }
