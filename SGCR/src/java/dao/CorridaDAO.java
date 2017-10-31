@@ -61,7 +61,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO atletas (id, nomeCorrida, maxPessoas, horaInicio, horarioFinal, banner, "
+            String sql = "INSERT INTO corridas (id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal, banner, "
                     + "rua, cep, cidade, estado, bairro, descricao, regulamento, organizadoresId) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
