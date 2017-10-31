@@ -43,7 +43,7 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO administradores (id, email, senha) VALUES (?,?,?)";
+            String sql = "INSERT INTO administrador (id, email, senha) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, administrador.getId());
             comando.setString(2, administrador.getEmail());

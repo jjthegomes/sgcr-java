@@ -7,11 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Administrador;
 
 /**
  *
@@ -30,24 +32,53 @@ public class ManterAdministradorController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      String acao = request.getParameter("acao");
-      if(acao.equals("prepararIncluir")){
-          prepararIncluir(request, response);
-      }
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else {
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
+            }
+        }
     }
-    
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
             request.setAttribute("operacao", "Incluir");
             //Para chave estrangeira
             //request.setAttribute("administradores", Administrador.obterAdministradores());
-            RequestDispatcher view 
+            RequestDispatcher view
                     = request.getRequestDispatcher("/manterAdministrador.jsp");
             view.forward(request, response);
-        } catch (ServletException ex){
-        } catch(IOException ex){
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
         }
         //catch(ClassNotFoundException ex){ }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdAdministrador"));
+        String email = request.getParameter("txtEmailAdministrador");
+        String senha = request.getParameter("txtSenhaAdministrador");
+        //int coordenador = Integer.parseInt(request.getParameter("optCoordenador"));
+        try {
+            /*            
+            Chave Estrangeira
+            Professor professor = null;
+            if(coordenador != 0){
+                professor = Professor.obterProfessor(coordenador);
+            }            
+             */
+            Administrador administrador = new Administrador(id, email, senha);
+            administrador.gravar();
+            RequestDispatcher view
+                    = request.getRequestDispatcher("PesquisaAdministradorController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -6,16 +6,18 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Corrida;
 import modelo.Organizador;
 
 /**
  *
- * @author straby
+ * @author RAJ
  */
 public class ManterCorridaController extends HttpServlet {
 
@@ -30,26 +32,63 @@ public class ManterCorridaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String acao = request.getParameter("acao");
-      if(acao.equals("prepararIncluir")){
-          prepararIncluir(request, response);
-      }
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else {
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
+            }
+        }
     }
 
-      public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
             request.setAttribute("operacao", "Incluir");
             //Para chave estrangeira
             request.setAttribute("organizadores", Organizador.obterOrganizadores());
-            RequestDispatcher view 
+            RequestDispatcher view
                     = request.getRequestDispatcher("/manterCorrida.jsp");
             view.forward(request, response);
-        } catch (ServletException ex){
-        } catch(IOException ex){
-        } catch (ClassNotFoundException ex){
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
         //catch(ClassNotFoundException ex){ }
     }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
+        String nomeCorrida = request.getParameter("txtNomeCorrida");
+        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
+        String horarioInicio = request.getParameter("txtHorarioInicioCorrida");
+        String horarioFinal = request.getParameter("txtHorarioFinalCorrida");
+        String banner = request.getParameter("txtBannerCorrida");
+        String rua = request.getParameter("txtRuaCorrida");
+        String cep = request.getParameter("txtCepCorrida");
+        String cidade = request.getParameter("txtCidadeCorrida");
+        String estado = request.getParameter("txtEstadoCorrida");
+        String bairro = request.getParameter("txtBairroCorrida");
+        String descricao = request.getParameter("txtDescricaoCorrida");
+        String regulamento = request.getParameter("txtRegulamentoCorrida");
+        int organizadoresId = Integer.parseInt(request.getParameter("optOrganizador"));
+
+        try {
+            Organizador organizador = Organizador.obterOrganizador(organizadoresId);
+
+            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
+                    banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
+            corrida.gravar();
+            RequestDispatcher view
+                    = request.getRequestDispatcher("PesquisaCorridaController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

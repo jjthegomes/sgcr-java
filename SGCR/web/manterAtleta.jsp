@@ -92,7 +92,7 @@
                     <tr>
                         <td>Tamanho Camisa do Atleta</td> 
                         <td>
-                            <select name="optTanahoCamisa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <select name="optTamanhoCamisa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="P" <c:if test="${curso.tipoCurso == 'P'}"> selected</c:if>>P</option>
                             <option value="M" <c:if test="${curso.tipoCurso == 'M'}"> selected</c:if>>M</option>
                             <option value="G" <c:if test="${curso.tipoCurso == 'G'}"> selected</c:if>>G</option>
