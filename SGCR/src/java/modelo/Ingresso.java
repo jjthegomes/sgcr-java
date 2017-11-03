@@ -1,6 +1,8 @@
 package modelo;
 
+import dao.CorridaDAO;
 import dao.IngressoDAO;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ public class Ingresso {
 
     private int id;
     private String tipo;
-    private float preco;
+    private double preco;
     private String dataInicio;
     private String dataFinal;
     private int quantidade;
@@ -19,7 +21,7 @@ public class Ingresso {
 
     private int corridasId;
 
-    public Ingresso(int id, String tipo, float preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
+    public Ingresso(int id, String tipo, double preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
         this.id = id;
         this.tipo = tipo;
         this.preco = preco;
@@ -45,11 +47,11 @@ public class Ingresso {
         this.tipo = tipo;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -92,9 +94,25 @@ public class Ingresso {
     public void setCorridasId(int corridasId) {
         this.corridasId = corridasId;
     }
-    
-    public static List<Ingresso> obterIngressos() throws ClassNotFoundException{
+
+    public static List<Ingresso> obterIngressos() throws ClassNotFoundException {
         return IngressoDAO.obterIngressos();
     }
-    
+
+    public void gravar() throws ClassNotFoundException, SQLException {
+        IngressoDAO.gravar(this);
+    }
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+        IngressoDAO.alterar(this);
+    }
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+        IngressoDAO.alterar(this);
+    }
+
+    public static Ingresso obterIngresso(int id) throws ClassNotFoundException {
+        return IngressoDAO.obterIngresso(id);
+    }
+
 }

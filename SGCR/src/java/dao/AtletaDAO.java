@@ -26,7 +26,7 @@ public class AtletaDAO {
             ResultSet rs = comando.executeQuery("select * from atletas");
             while (rs.next()) {
                 Atleta atleta = new Atleta(rs.getString("apelido"),
-                        null,
+                        rs.getString("tamanhoCamisa"),
                         rs.getString("nome"),
                         rs.getString("dataNascimento"),
                         rs.getString("sexo"),
@@ -44,8 +44,6 @@ public class AtletaDAO {
                         rs.getString("email"),
                         rs.getString("senha"));
 
-//                select tamanho from tamanhos_camisas where id = rs.getInt("id")
-                atleta.setTamanhoCamisa(rs.getString("tamanhosCamisasId"));
                 atletas.add(atleta);
             }
         } catch (SQLException e) {
@@ -60,27 +58,28 @@ public class AtletaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO atletas (id, nome, apelido, email, senha, dataNascimento, "
-                    + "cpf, cep, cidade, estado, rua, bairro, numero, complemento, telefone, celular"
-                    + "tamanhoCamisasId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO atletas (id, nome, apelido, email, senha, sexo, dataNascimento, "
+                    + "cpf, cep, cidade, estado, rua, bairro, numero, complemento, telefone, celular,"
+                    + "tamanhoCamisa) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, atleta.getId());
             comando.setString(2, atleta.getNome());
             comando.setString(3, atleta.getApelido());
             comando.setString(4, atleta.getEmail());
             comando.setString(5, atleta.getSenha());
-            comando.setString(6, atleta.getDataNascimento());
-            comando.setString(7, atleta.getCpf());
-            comando.setString(8, atleta.getCep());
-            comando.setString(9, atleta.getCidade());
-            comando.setString(10, atleta.getEstado());
-            comando.setString(11, atleta.getRua());
-            comando.setString(12, atleta.getBairro());
-            comando.setString(13, atleta.getNumero());
-            comando.setString(14, atleta.getComplemento());
-            comando.setString(15, atleta.getTelefone());
-            comando.setString(16, atleta.getCelular());
-            comando.setString(17, atleta.getTamanhoCamisa());
+            comando.setString(6, atleta.getSexo());
+            comando.setString(7, atleta.getDataNascimento());
+            comando.setString(8, atleta.getCpf());
+            comando.setString(9, atleta.getCep());
+            comando.setString(10, atleta.getCidade());
+            comando.setString(11, atleta.getEstado());
+            comando.setString(12, atleta.getRua());
+            comando.setString(13, atleta.getBairro());
+            comando.setString(14, atleta.getNumero());
+            comando.setString(15, atleta.getComplemento());
+            comando.setString(16, atleta.getTelefone());
+            comando.setString(17, atleta.getCelular());
+            comando.setString(18, atleta.getTamanhoCamisa());
 
             comando.execute();
             comando.close();
@@ -97,7 +96,7 @@ public class AtletaDAO {
             conexao = BD.getConexao();
             String sql = "UPDATE atletas SET nome = ?, apelido = ?, email = ?, senha = ?, "
                     + "dataNascimento = ?, cpf = ?, cep = ?, cidade = ?, estado = ? , rua = ?, "
-                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanhoCamisasId = ?, "
+                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanhoCamisa = ?, "
                     + " WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, atleta.getNome());
@@ -150,7 +149,7 @@ public class AtletaDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM atletas WHERE id = " + id);
             rs.first();
             atleta = new Atleta(rs.getString("apelido"),
-                    null,
+                    rs.getString("tamanhoCamisa"),
                     rs.getString("nome"),
                     rs.getString("dataNascimento"),
                     rs.getString("sexo"),
@@ -166,10 +165,7 @@ public class AtletaDAO {
                     rs.getString("celular"),
                     rs.getInt("id"),
                     rs.getString("email"),
-                    rs.getString("senha"));
-
-//                select tamanho from tamanhos_camisas where id = rs.getInt("id")
-            atleta.setTamanhoCamisa(rs.getString("tamanhosCamisasId"));
+                    rs.getString("senha"));            
 
         } catch (SQLException e) {
             e.printStackTrace();

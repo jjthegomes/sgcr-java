@@ -6,12 +6,14 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Corrida;
+import modelo.Ingresso;
 
 /**
  *
@@ -30,23 +32,51 @@ public class ManterIngressoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String acao = request.getParameter("acao");
-      if(acao.equals("prepararIncluir")){
-          prepararIncluir(request, response);
-      }
-    }    
-    
-     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
+            prepararIncluir(request, response);
+        } else {
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
+            }
+        }
+    }
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdIngresso"));
+        String tipo = request.getParameter("txtTipoIngresso");
+        double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
+        String dataInicio = request.getParameter("txtDataInicioIngresso");
+        String dataFinal = request.getParameter("txtDataFinalIngresso");
+        int quantdade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
+
+        try {
+            Corrida corrida = Corrida.obterCorrida(corridasId);
+            Ingresso ingresso = new Ingresso(id, tipo, preco, dataInicio, dataFinal, quantdade, corrida);
+            ingresso.gravar();
+
+            RequestDispatcher view
+                    = request.getRequestDispatcher("PesquisaIngressoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
             request.setAttribute("operacao", "Incluir");
             //Para chave estrangeira
             request.setAttribute("corridas", Corrida.obterCorridas());
-            RequestDispatcher view 
+            RequestDispatcher view
                     = request.getRequestDispatcher("/manterIngresso.jsp");
             view.forward(request, response);
-        } catch (ServletException ex){
-        } catch(IOException ex){
-        } catch (ClassNotFoundException ex){
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
         //catch(ClassNotFoundException ex){ }
     }

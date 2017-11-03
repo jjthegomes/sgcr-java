@@ -26,23 +26,23 @@
                     </tr>
                     <tr>
                         <td>Tipo do Ingresso</td> 
-                        <td><input type="text" name="txtIdIngresso" value="${ingresso.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtTipoIngresso" value="${ingresso.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Preço do Ingresso</td> 
-                        <td><input type="text" name="txtIdIngresso" value="${ingresso.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtPrecoIngresso" value="${ingresso.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data Inicio do Ingresso</td> 
-                        <td><input type="text" name="txtIdIngresso" value="${ingresso.dataInicioIngresso}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataInicioIngresso" value="${ingresso.dataInicioIngresso}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data Final do Ingresso</td> 
-                        <td><input type="text" name="txtIdIngresso" value="${ingresso.dataFinalIngresso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataFinalIngresso" value="${ingresso.dataFinalIngresso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Quauntidade do Ingresso</td> 
-                        <td><input type="text" name="txtIdIngresso" value="${ingresso.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Quantidade do Ingresso</td> 
+                        <td><input type="text" name="txtQuantidadeIngresso" value="${ingresso.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Corrida</td>

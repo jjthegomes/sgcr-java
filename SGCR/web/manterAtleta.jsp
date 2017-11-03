@@ -39,10 +39,10 @@
                     </tr>
                     <tr>
                         <td>Sexo do Atleta</td> 
-                        <td><input type="radio" name="txtSexoAtleta" value="${atleta.sexoAtleta}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                               <c:if test="${atleta.sexoAtleta == 1}"> checked</c:if>>Masculino</td>
-                    <td><input type="radio" name="txtSexoAtleta" value="${atleta.sexoAtleta}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                               <c:if test="${atleta.sexoAtleta == 0}"> checked</c:if>>Feminino</td>
+                        <td><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                               <c:if test="${atleta.sexoAtleta == 'M'}"> checked</c:if>>Masculino</td>
+                    <td><input type="radio" name="txtSexoAtleta" value="F"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                               <c:if test="${atleta.sexoAtleta == 'F'}"> checked</c:if>>Feminino</td>
                     </tr>
                     <!-- ALTERAR PARA SELECT DIA MES ANO -->
                     <tr>
@@ -93,9 +93,9 @@
                         <td>Tamanho Camisa do Atleta</td> 
                         <td>
                             <select name="optTamanhoCamisa" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="P" <c:if test="${curso.tipoCurso == 'P'}"> selected</c:if>>P</option>
-                            <option value="M" <c:if test="${curso.tipoCurso == 'M'}"> selected</c:if>>M</option>
-                            <option value="G" <c:if test="${curso.tipoCurso == 'G'}"> selected</c:if>>G</option>
+                            <option value="P" <c:if test="${atleta.tamanhoCamisa == 'P'}"> selected</c:if>>P</option>
+                            <option value="M" <c:if test="${atleta.tamanhoCamisa == 'M'}"> selected</c:if>>M</option>
+                            <option value="G" <c:if test="${atleta.tamanhoCamisa == 'G'}"> selected</c:if>>G</option>
                         </select>
                     </td>
                 </tr>
