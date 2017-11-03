@@ -7,12 +7,14 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Kit;
+import modelo.ProdutoKit;
 
 /**
  *
@@ -30,10 +32,14 @@ public class ManterProdutoKitController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         String acao= request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
             prepararIncluir(request, response);
+        }else{
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
@@ -47,6 +53,26 @@ public class ManterProdutoKitController extends HttpServlet {
         }catch(IOException ex){
         }catch (ClassNotFoundException ex){
         }
+    }
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
+       int id = Integer.parseInt(request.getParameter("txtIdProduto"));
+       String nome =  request.getParameter("txtNomeProduto");
+       double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
+       int kitProduto = Integer.parseInt(request.getParameter("optKit"));
+       try {
+           Kit kit = null;
+           
+               kit = Kit.obterKit(kitProduto);
+        
+           ProdutoKit produtoKit = new ProdutoKit(id,nome,valor,kit); 
+       produtoKit.gravar();
+       RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoKitController");
+       view.forward(request,response);  
+    }catch (IOException ex){
+    }catch(SQLException ex){
+    }catch(ClassNotFoundException ex){
+    }catch (ServletException ex){
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

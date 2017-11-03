@@ -19,11 +19,11 @@ public class ProdutoKit {
     public ProdutoKit() {
     }
 
-    public ProdutoKit(int id, String nome, Double valor, int kitsId) {
+    public ProdutoKit(int id, String nome, Double valor, Kit kits) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
-        this.kitsId = kitsId;
+        this.kits = kits;
     }
 
     public int getId() {

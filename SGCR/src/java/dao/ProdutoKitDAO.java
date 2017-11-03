@@ -25,7 +25,7 @@ public class ProdutoKitDAO {
         Connection conexao =null;
         try{
             conexao = BD.getConexao();
-            String sql= "insert into produtos_kit (id, nome, valor, kisId)values(?,?,?,?)";
+            String sql= "insert into produtos_kit (id, nome, valor, kitsId) values (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,produtoKit.getId());
             comando.setString(2,produtoKit.getNome());
@@ -90,7 +90,7 @@ public class ProdutoKitDAO {
             produtoKit= new ProdutoKit(rs.getInt("id"),
             rs.getString("nome"),
             rs.getDouble("valor"),
-            0);
+            null);
             produtoKit.setKitsId(rs.getInt("kitsId"));
         }catch(SQLException e){
              e.printStackTrace();
@@ -114,7 +114,7 @@ public class ProdutoKitDAO {
                         rs.getInt("id"), 
                         rs.getString("nome"), 
                         rs.getDouble("valor"), 
-                        0);
+                        null);
                 produtoKit.setKitsId(rs.getInt("kitsId"));
                 produtosKit.add(produtoKit);
             }

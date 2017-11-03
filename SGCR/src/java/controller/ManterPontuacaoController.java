@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Corrida;
 import modelo.Kit;
+import modelo.Pontuacao;
 
 /**
  *
@@ -35,6 +37,10 @@ public class ManterPontuacaoController extends HttpServlet {
         String acao= request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
             prepararIncluir(request, response);
+        }else{
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     
@@ -49,6 +55,26 @@ public class ManterPontuacaoController extends HttpServlet {
         }catch(IOException ex){
         }catch (ClassNotFoundException ex){
         }
+    }
+    
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+       int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
+       int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
+       int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+       try {
+           Corrida corrida = null;
+           
+               corrida = Corrida.obterCorrida(corridaId);
+        
+           Pontuacao pontuacao = new Pontuacao(id,valorPontuacao,corrida); 
+       pontuacao.gravar();
+       RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
+       view.forward(request,response);  
+    }catch (IOException ex){
+    }catch(SQLException ex){
+    }catch(ClassNotFoundException ex){
+    }catch (ServletException ex){
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,5 +115,7 @@ public class ManterPontuacaoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }

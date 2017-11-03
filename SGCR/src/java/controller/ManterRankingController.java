@@ -7,12 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Administrador;
+import modelo.Ranking;
 
 /**
  *
@@ -30,10 +34,14 @@ public class ManterRankingController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         String acao= request.getParameter("acao");
         if(acao.equals("prepararIncluir")){
             prepararIncluir(request, response);
+        }else{
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request,response);
+            }
         }
     }
     
@@ -49,6 +57,26 @@ public class ManterRankingController extends HttpServlet {
         }catch (ClassNotFoundException ex){
         }
     }
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
+       int id = Integer.parseInt(request.getParameter("txtIdRanking"));
+       String nomeRanking = request.getParameter("txtNomeRanking");
+       int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+       int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+       try {
+           Administrador administrador = null;
+           
+               administrador = Administrador.obterAdministrador(administradorRanking);
+        
+           Ranking ranking = new Ranking(id,nomeRanking,intervaloFaixaEtaria,administrador); 
+       ranking.gravar();
+       RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
+       view.forward(request,response);  
+    }catch (IOException ex){
+    }catch(SQLException ex){
+    }catch(ClassNotFoundException ex){
+    }catch (ServletException ex){
+    }       
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,7 +90,13 @@ public class ManterRankingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,7 +110,13 @@ public class ManterRankingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -88,5 +128,7 @@ public class ManterRankingController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }

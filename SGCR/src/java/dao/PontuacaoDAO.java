@@ -25,11 +25,11 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "insert into pontuacoes (id,pontoacao, corridasId)values(?,?,?)";
+            String sql= "insert into pontuacoes (id,pontuacao, corridasId)values(?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getId());
             comando.setInt(2,pontuacao.getPontuacao());
-            comando.setInt(3,pontuacao.getCorridasId());
+            comando.setInt(3,pontuacao.getCorrida().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -41,7 +41,7 @@ public class PontuacaoDAO {
     
     public static void alterar (Pontuacao pontuacao)throws SQLException,
             ClassNotFoundException{
-        Connection conexao =null;
+        Connection conexao = null;
         try{
             conexao = BD.getConexao();
             String sql= "upgrade pontuacoes set pontuacao=?, corridasId=? "
@@ -77,9 +77,9 @@ public class PontuacaoDAO {
     }
     
     public static Pontuacao obterPontuacao (int id)throws ClassNotFoundException{
-        Connection conexao =null;
+        Connection conexao = null;
         Statement comando = null;
-        Pontuacao pontuacao =null;
+        Pontuacao pontuacao = null;
         try{
           conexao =BD.getConexao();
           comando= conexao.createStatement();

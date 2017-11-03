@@ -29,10 +29,10 @@
                 <tr>
                     <td>Corridas:</td>
                     <td>
-                        <select name="optPontuacao" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${pontuacao.corrida.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${pontuacoes}" var="pontuacao">
-                                <option value="${pontuacao.id}" <c:if test="${pontuacao.corrida.id == pontucao.id}"> selected</c:if>>${pontuacao.id}</option>  
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <option value="0" <c:if test="${pontuacao.corridas.corridasId == null}"> selected</c:if>> </option>  
+                            <c:forEach items="${corridas}" var="corrida">
+                                <option value="${corrida.id}" <c:if test="${pontuacao.corrida.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>
