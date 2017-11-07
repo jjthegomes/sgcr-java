@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,6 +38,22 @@ public class ManterOrganizadorController extends HttpServlet {
         } else {
             if (acao.equals("confirmarIncluir")) {
                 confirmarIncluir(request, response);
+            } else {
+                if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else {
+                    if (acao.equals("confirmarExcluir")) {
+                        confirmarExcluir(request, response);
+                    } else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        } else {
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -109,7 +124,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String estado = request.getParameter("txtEstadoOrganizador");
         String telefone = request.getParameter("txtTelefoneOrganizador");
         String celular = request.getParameter("txtCelularOrganizador");
-        
+
         try {
             Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
             organizador.gravar();
@@ -121,6 +136,96 @@ public class ManterOrganizadorController extends HttpServlet {
         } catch (ServletException ex) {
         }
 
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            int idOrganizador = Integer.parseInt(request.getParameter("id"));
+            Organizador organizador = Organizador.obterOrganizador(idOrganizador);
+            request.setAttribute("organizador", organizador);
+            RequestDispatcher view = request.getRequestDispatcher("/manterOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+    
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
+        String nome = request.getParameter("txtNomeOrganizador");
+        String dataNascimento = request.getParameter("txtDataNascimentoOrganizador");
+        String sexo = request.getParameter("optSexo");
+        String cpf = request.getParameter("txtCpfOrganizador");
+        String cep = request.getParameter("txtCepOrganizador");
+        String rua = request.getParameter("txtRuaOrganizador");
+        String bairro = request.getParameter("txtBairroOrganizador");
+        String complemento = request.getParameter("txtComplementoOrganizador");
+        String numero = request.getParameter("txtNumeroOrganizador");
+        String cidade = request.getParameter("txtCidadeOrganizador");
+        String estado = request.getParameter("txtEstadoOrganizador");
+        String telefone = request.getParameter("txtTelefoneOrganizador");
+        String celular = request.getParameter("txtCelularOrganizador");
+        Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+        
+        try {
+            organizador.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            int idOrganizador = Integer.parseInt(request.getParameter("id"));
+            Organizador organizador = Organizador.obterOrganizador(idOrganizador);
+            request.setAttribute("organizador", organizador);
+            RequestDispatcher view = request.getRequestDispatcher("/manterOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
+        String nome = request.getParameter("txtNomeOrganizador");
+        String dataNascimento = request.getParameter("txtDataNascimentoOrganizador");
+        String sexo = request.getParameter("optSexo");
+        String cpf = request.getParameter("txtCpfOrganizador");
+        String cep = request.getParameter("txtCepOrganizador");
+        String rua = request.getParameter("txtRuaOrganizador");
+        String bairro = request.getParameter("txtBairroOrganizador");
+        String complemento = request.getParameter("txtComplementoOrganizador");
+        String numero = request.getParameter("txtNumeroOrganizador");
+        String cidade = request.getParameter("txtCidadeOrganizador");
+        String estado = request.getParameter("txtEstadoOrganizador");
+        String telefone = request.getParameter("txtTelefoneOrganizador");
+        String celular = request.getParameter("txtCelularOrganizador");
+        
+        try {
+            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+            organizador.alterar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
     }
 
 }

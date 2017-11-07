@@ -99,8 +99,9 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update organizadores set nome = ?,email = ?, senha = ?, senha = ?, sexo = ?, dataNascimento = ?, cpf = ?, "
-                    + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ? where id = ?";
+            String sql = "update organizadores set nome = ?,email = ?, senha = ?, sexo = ?, dataNascimento = ?, cpf = ?, "
+                    + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, " 
+                    + "celular = ? where id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, organizador.getNome());
             comando.setString(2, organizador.getEmail());

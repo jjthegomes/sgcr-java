@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td>Imagem do Percurso:</td>  
-                    <td><input type="file" name="fileImagemPercurso" value="${percurso.imagemPercurso}" accept="image/*" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="fileImagemPercurso" value="${percurso.imagemPercurso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Quilometragem:</td> 
@@ -34,10 +34,10 @@
                 <tr>
                     <td>Corrida:</td>
                     <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${percurso.corrida.corridasId == null}"> selected</c:if>> </option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${percurso.corrida.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                                <option value="${corrida.id}" <c:if test="${percurso.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>

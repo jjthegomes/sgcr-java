@@ -34,15 +34,31 @@ public class ManterKitController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")) {
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
         } else {
-            if(acao.equals("confirmarIncluir")) {
-                confirmarIncluir(request,response);
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
+            } else {
+                if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else {
+                    if (acao.equals("confirmarExcluir")) {
+                        confirmarExcluir(request, response);
+                    } else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        } else {
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-    
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
@@ -50,11 +66,11 @@ public class ManterKitController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("/manterKit.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
-            
+
         } catch (IOException ex) {
-            
+
         } catch (ClassNotFoundException ex) {
-            
+
         }
     }
 
@@ -108,6 +124,79 @@ public class ManterKitController extends HttpServlet {
             corrida = Corrida.obterCorrida(corridaId);
             Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
             kit.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            int idKit = Integer.parseInt(request.getParameter("id"));
+            Kit kit = Kit.obterKit(idKit);
+            request.setAttribute("kit", kit);
+            RequestDispatcher view = request.getRequestDispatcher("/manterKit.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdKit"));
+        String nome = request.getParameter("txtNomeKit");
+        String imagem = request.getParameter("fileImagemKit");
+        String tipoChip = request.getParameter("optTipoChip");
+        Kit kit = new Kit(id, nome, imagem, tipoChip, null);
+        try {
+            kit.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            int idKit = Integer.parseInt(request.getParameter("id"));
+            Kit kit = Kit.obterKit(idKit);
+            request.setAttribute("kit", kit);
+            RequestDispatcher view = request.getRequestDispatcher("/manterKit.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdKit"));
+        String nome = request.getParameter("txtNomeKit");
+        String imagem = request.getParameter("fileImagemKit");
+        String tipoChip = request.getParameter("optTipoChip");
+        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        try {
+            Corrida corrida = null;
+            corrida = Corrida.obterCorrida(corridaId);
+            Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
+            kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);
         } catch (IOException ex) {

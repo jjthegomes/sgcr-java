@@ -41,6 +41,22 @@ public class ManterInscricaoController extends HttpServlet {
         } else {
             if(acao.equals("confirmarIncluir")) {
                 confirmarIncluir(request,response);
+            } else {
+                if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else {
+                    if (acao.equals("confirmarExcluir")) {
+                        confirmarExcluir(request, response);
+                    } else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        } else {
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -120,6 +136,94 @@ public class ManterInscricaoController extends HttpServlet {
             kit = Kit.obterKit(kitId);
             Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, corrida, kit);
             inscricao.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("atletas", Atleta.obterAtletas());
+            request.setAttribute("kits", Kit.obterKits());
+            int idInscricao = Integer.parseInt(request.getParameter("id"));
+            Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
+            request.setAttribute("inscricao", inscricao);
+            RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
+        String dataCompra = request.getParameter("txtDataCompraInscricao");
+        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
+        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
+        String formaPagamento = request.getParameter("optFormaPagamento");
+        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
+        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, null, null, null);
+        try {
+            inscricao.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("atletas", Atleta.obterAtletas());
+            request.setAttribute("kits", Kit.obterKits());
+            int idInscricao = Integer.parseInt(request.getParameter("id"));
+            Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
+            request.setAttribute("inscricao", inscricao);
+            RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
+        String dataCompra = request.getParameter("txtDataCompraInscricao");
+        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
+        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
+        String formaPagamento = request.getParameter("optFormaPagamento");
+        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
+        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
+        int kitId = Integer.parseInt(request.getParameter("optKit"));
+        
+        try {
+            Corrida corrida = null;
+            corrida = Corrida.obterCorrida(corridaId);
+            Atleta atleta = null;
+            atleta = Atleta.obterAtleta(atletaId);
+            Kit kit = null;
+            kit = Kit.obterKit(kitId);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, corrida, kit);
+            inscricao.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
         } catch (IOException ex) {
