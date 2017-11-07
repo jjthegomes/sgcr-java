@@ -128,7 +128,7 @@ public class AtletaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "DELETE FROM atletas where id = " + atleta.getId();
+            stringSQL = "delete from atletas where id = " + atleta.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {
@@ -146,7 +146,7 @@ public class AtletaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM atletas WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("select * from atletas where id = " + id);
             rs.first();
             atleta = new Atleta(rs.getString("apelido"),
                     rs.getString("tamanhoCamisa"),

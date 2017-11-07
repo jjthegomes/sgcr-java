@@ -108,7 +108,7 @@ public class Ingresso {
     }
 
     public void excluir() throws ClassNotFoundException, SQLException {
-        IngressoDAO.alterar(this);
+        IngressoDAO.excluir(this);
     }
 
     public static Ingresso obterIngresso(int id) throws ClassNotFoundException {

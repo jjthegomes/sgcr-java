@@ -100,7 +100,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "DELETE FROM corridas where id = " + corrida.getId();
+            stringSQL = "delete from corridas where id = " + corrida.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {

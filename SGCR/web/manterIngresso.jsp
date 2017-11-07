@@ -34,11 +34,11 @@
                     </tr>
                     <tr>
                         <td>Data Inicio do Ingresso</td> 
-                        <td><input type="text" name="txtDataInicioIngresso" value="${ingresso.dataInicioIngresso}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataInicioIngresso" value="${ingresso.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data Final do Ingresso</td> 
-                        <td><input type="text" name="txtDataFinalIngresso" value="${ingresso.dataFinalIngresso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataFinalIngresso" value="${ingresso.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Quantidade do Ingresso</td> 

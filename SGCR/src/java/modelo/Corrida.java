@@ -186,7 +186,7 @@ public class Corrida {
     }
 
     public void excluir() throws ClassNotFoundException, SQLException {
-        CorridaDAO.alterar(this);
+        CorridaDAO.excluir(this);
     }
 
     public static Corrida obterCorrida(int id) throws ClassNotFoundException {

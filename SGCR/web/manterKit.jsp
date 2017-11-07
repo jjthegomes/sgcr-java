@@ -25,16 +25,16 @@
                 </tr>
                 <tr>
                     <td>Nome do kit:</td> 
-                    <td><input type="text" name="txtNomeKit" value="${kit.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtNomeKit" value="${kit.nomeKit}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Imagem do kit:</td>  
-                    <td><input type="file" name="fileImagemKit" value="${kit.imagemKit}" accept="image/*" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="fileImagemKit" value="${kit.imagemKit}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr> 
                     <td>Tipo do Chip:</td> 
                     <td>
-                        <select name="optTipoChip" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                        <select name="optTipoChip" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="Descartável" <c:if test="${kit.tipoChip == 'Descartável'}"> selected</c:if>>Descartável</option>
                             <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
                         </select>
@@ -43,10 +43,10 @@
                 <tr>
                     <td>Corrida:</td>
                     <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${kit.corrida.id == null}"> selected</c:if>> </option>  
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                            <option value="0" <c:if test="${kit.corrida.id == null}"> selected</c:if>> Selecione uma corrida</option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${kit.corrida.id == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                                <option value="${corrida.id}" <c:if test="${kit.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>

@@ -38,6 +38,15 @@ public class ManterIngressoController extends HttpServlet {
         } else {
             if (acao.equals("confirmarIncluir")) {
                 confirmarIncluir(request, response);
+            } else {
+                if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else {
+                    if (acao.equals("confirmarExcluir")) {
+                        confirmarExcluir(request, response);
+                    }
+                }
+
             }
         }
     }
@@ -48,12 +57,12 @@ public class ManterIngressoController extends HttpServlet {
         double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
         String dataInicio = request.getParameter("txtDataInicioIngresso");
         String dataFinal = request.getParameter("txtDataFinalIngresso");
-        int quantdade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
             Corrida corrida = Corrida.obterCorrida(corridasId);
-            Ingresso ingresso = new Ingresso(id, tipo, preco, dataInicio, dataFinal, quantdade, corrida);
+            Ingresso ingresso = new Ingresso(id, tipo, preco, dataInicio, dataFinal, quantidade, corrida);
             ingresso.gravar();
 
             RequestDispatcher view
@@ -79,6 +88,48 @@ public class ManterIngressoController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
         //catch(ClassNotFoundException ex){ }
+    }
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            Ingresso ingresso = Ingresso.obterIngresso(id);
+
+            request.setAttribute("ingresso", ingresso);
+            RequestDispatcher view = request.getRequestDispatcher("/manterIngresso.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdIngresso"));
+        String tipo = request.getParameter("txtTipoIngresso");
+        double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
+        String dataInicio = request.getParameter("txtDataInicioIngresso");
+        String dataFinal = request.getParameter("txtDataFinalIngresso");
+        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
+
+        try {
+            Corrida corrida = Corrida.obterCorrida(corridasId);
+            Ingresso ingresso = new Ingresso(id, tipo, preco, dataInicio, dataFinal, quantidade, corrida);
+
+            ingresso.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaIngressoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

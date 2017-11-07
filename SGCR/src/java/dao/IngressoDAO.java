@@ -80,7 +80,7 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "DELETE FROM ingressos where id = " + ingresso.getId();
+            stringSQL = "delete from ingressos where id = " + ingresso.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {

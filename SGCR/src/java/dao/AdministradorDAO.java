@@ -69,7 +69,7 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE administradores SET email = ? , senha = ? WHERE id = ? )";
+            String sql = "update administradores SET email = ? , senha = ? WHERE id = ? )";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, administrador.getEmail());
             comando.setString(2, administrador.getSenha());
@@ -86,7 +86,7 @@ public class AdministradorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "DELETE FROM administradores where id = " + administrador.getId();
+            stringSQL = "delete from administrador where id = " + administrador.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class AdministradorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM administrador WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("select * from administrador WHERE id = " + id);
             rs.first();
             administrador = new Administrador(
                     rs.getInt("id"),

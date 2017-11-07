@@ -21,7 +21,7 @@
             <table>
                 <tr>
                     <td>Codigo da Corrida</td> 
-                    <td><input type="text" name="txtIdCorrida" value="${corrida.idCorrida}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtIdCorrida" value="${corrida.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Nome da Corrida</td> 
@@ -29,48 +29,48 @@
                 </tr>
                 <tr>
                     <td>Max Pessoas</td> 
-                    <td><input type="number" name="txtMaxPessoasCorrida" value="${corrida.maxPessoasCorrida}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="number" name="txtMaxPessoasCorrida" value="${corrida.maxPessoas}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
 
                 <tr>
                     <td>Horario Inicio da Corrida</td> 
-                    <td><input type="text" name="txtHorarioInicioCorrida" value="${corrida.horarioFinaloCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtHorarioInicioCorrida" value="${corrida.horarioFinal}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>   
                 <tr>
                     <td>Horario Final da Corrida</td> 
-                    <td><input type="text" name="txtHorarioFinalCorrida" value="${corrida.horarioInicioCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtHorarioFinalCorrida" value="${corrida.horarioInicio}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>   
                 <tr>
                     <td>Banner da Corrida</td> 
-                    <td><input type="text" name="txtBannerCorrida" value="${corrida.bannerCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Rua do Corrida</td> 
-                    <td><input type="text" name="txtRuaCorrida" value="${corrida.ruaCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtRuaCorrida" value="${corrida.rua}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>CEP da Corrida</td> 
-                    <td><input type="text" name="txtCepCorrida" value="${corrida.cepCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtCepCorrida" value="${corrida.cep}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Cidade do Corrida</td> 
-                    <td><input type="text" name="txtCidadeCorrida" value="${corrida.cidadeCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtCidadeCorrida" value="${corrida.cidade}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Estado do Corrida</td> 
-                    <td><input type="text" name="txtEstadoCorrida" value="${corrida.estadoCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>                               
                 <tr>
                     <td>Bairro do Corrida</td> 
-                    <td><input type="text" name="txtBairroCorrida" value="${corrida.bairroCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtBairroCorrida" value="${corrida.bairro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Descricao da Corrida</td> 
-                    <td><input type="text" name="txtDescricaoCorrida" value="${corrida.descricaoCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtDescricaoCorrida" value="${corrida.descricao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Regulamento da Corrida</td> 
-                    <td><input type="text" name="txtRegulamentoCorrida" value="${corrida.regulamentoCorrida}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtRegulamentoCorrida" value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Organizador</td>
@@ -78,7 +78,7 @@
                         <select name="optOrganizador" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  
                             <c:forEach items="${organizadores}" var="organizador">
-                                <option value="${organizador.id}" <c:if test="${corrida.organizador.id == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
+                                <option value="${organizador.id}" <c:if test="${corrida.organizadoresId == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>

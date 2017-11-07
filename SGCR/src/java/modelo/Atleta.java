@@ -48,7 +48,7 @@ public class Atleta extends UsuarioComum {
     }
 
     public void excluir() throws ClassNotFoundException, SQLException {
-        AtletaDAO.alterar(this);
+        AtletaDAO.excluir(this);
     }
 
       public static Atleta obterAtleta(int id) throws ClassNotFoundException {
