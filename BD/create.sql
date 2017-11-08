@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`corridas` (
   CONSTRAINT `fk_corridas_organizadores1`
     FOREIGN KEY (`organizadoresId`)
     REFERENCES `sgcr`.`organizadores` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`ingressos` (
   CONSTRAINT `fk_ingressos_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -115,8 +115,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`percursos` (
   CONSTRAINT `fk_percursos_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`kits` (
   CONSTRAINT `fk_kits_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -159,18 +159,18 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
   CONSTRAINT `fk_inscricao_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_inscricao_atletas1`
     FOREIGN KEY (`atletasId`)
     REFERENCES `sgcr`.`atletas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_inscricao_kits1`
     FOREIGN KEY (`kitsId`)
     REFERENCES `sgcr`.`kits` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -201,8 +201,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`produtos_kit` (
   CONSTRAINT `fk_produtos_kit_kits1`
     FOREIGN KEY (`kitsId`)
     REFERENCES `sgcr`.`kits` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -218,8 +218,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`pontuacoes` (
   CONSTRAINT `fk_classificacao_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -247,8 +247,8 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`rankings` (
   CONSTRAINT `fk_rankings_administrador1`
     FOREIGN KEY (`administradorId`)
     REFERENCES `sgcr`.`administrador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -265,12 +265,12 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`corridas_ranking` (
   CONSTRAINT `fk_corrida_ranking_corridas1`
     FOREIGN KEY (`corridasId`)
     REFERENCES `sgcr`.`corridas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_corrida_ranking_rankings1`
     FOREIGN KEY (`rankingsId`)
     REFERENCES `sgcr`.`rankings` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
