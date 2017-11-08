@@ -19,85 +19,87 @@ import modelo.Ranking;
  * @author RAJ
  */
 public class RankingDAO {
-    public static void gravar (Ranking ranking)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
-        try{
+
+    public static void gravar(Ranking ranking) throws SQLException,
+            ClassNotFoundException {
+        Connection conexao = null;
+        try {
             conexao = BD.getConexao();
-            String sql= "insert into rankings (id,nomeRanking, intervaloFaixaEtaria, administradorId)values(?,?,?,?)";
+            String sql = "insert into rankings (id,nomeRanking, intervaloFaixaEtaria, administradorId)values(?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1,ranking.getId());
-            comando.setString(2,ranking.getNomeRanking());
-            comando.setInt(3,ranking.getIntervaloFaixaEtaria());
-            comando.setInt(4,ranking.getAdministrador().getId());
+            comando.setInt(1, ranking.getId());
+            comando.setString(2, ranking.getNomeRanking());
+            comando.setInt(3, ranking.getIntervaloFaixaEtaria());
+            comando.setInt(4, ranking.getAdministrador().getId());
             comando.execute();
             comando.close();
             conexao.close();
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             throw e;
         }
     }
-    public static void alterar (Ranking ranking)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
-        try{
+
+    public static void alterar(Ranking ranking) throws SQLException,
+            ClassNotFoundException {
+        Connection conexao = null;
+        try {
             conexao = BD.getConexao();
-            String sql= "upgrade rankings set nomeRanking = ?, intervaloFaixaEtaria=?, administradorId=? "
-              +"where id =?";
+            String sql = "upgrade rankings set nomeRanking = ?, intervaloFaixaEtaria=?, administradorId=? "
+                    + "where id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1,ranking.getNomeRanking());
-            comando.setInt(2,ranking.getIntervaloFaixaEtaria());
-            comando.setInt(3,ranking.getAdministrador().getId());
-            comando.setInt(4,ranking.getId());
+            comando.setString(1, ranking.getNomeRanking());
+            comando.setInt(2, ranking.getIntervaloFaixaEtaria());
+            comando.setInt(3, ranking.getAdministrador().getId());
+            comando.setInt(4, ranking.getId());
             comando.execute();
             comando.close();
             conexao.close();
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             throw e;
         }
     }
-    
-    
-    public static void excluir (Ranking ranking)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
+
+    public static void excluir(Ranking ranking) throws SQLException,
+            ClassNotFoundException {
+        Connection conexao = null;
         Statement comando = null;
         String stringSQL;
-        try{
-          conexao =BD.getConexao();
-          comando= conexao.createStatement();
-          stringSQL = "delete from rankings where id ="+ranking.getId();
-                  comando.execute(stringSQL);
-        }catch(SQLException e){
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            stringSQL = "delete from rankings where id =" + ranking.getId();
+            comando.execute(stringSQL);
+        } catch (SQLException e) {
             throw e;
-        }finally{
-            fecharConexao(conexao,comando);
+        } finally {
+            fecharConexao(conexao, comando);
         }
     }
-    public static Ranking obterRanking (int id)throws ClassNotFoundException{
-        Connection conexao =null;
+
+    public static Ranking obterRanking(int id) throws ClassNotFoundException {
+        Connection conexao = null;
         Statement comando = null;
-        Ranking ranking =null;
-        try{
-          conexao =BD.getConexao();
-          comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("select +from rankins where id = "+ id);
-          rs.first();
+        Ranking ranking = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select * from rankings where id = " + id);
+            rs.first();
             ranking = new Ranking(rs.getInt("id"),
-            rs.getString("nomeRanking"),
-            rs.getInt("intervaloFaixaEtaria"),
-            null);
+                    rs.getString("nomeRanking"),
+                    rs.getInt("intervaloFaixaEtaria"),
+                    null);
             ranking.setAdministradorId(rs.getInt("administradorId"));
-        }catch(SQLException e){
-             e.printStackTrace();
-        }finally{
-            fecharConexao(conexao,comando);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
         }
         return ranking;
     }
-    
+
     public static List<Ranking> obterRankings() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -106,9 +108,9 @@ public class RankingDAO {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select * from rankings");
-            
-            while (rs.next()) {                
-                Ranking ranking = new Ranking (
+
+            while (rs.next()) {
+                Ranking ranking = new Ranking(
                         rs.getInt("id"),
                         rs.getString("nomeRanking"),
                         rs.getInt("intervaloFaixaEtaria"),
@@ -123,17 +125,17 @@ public class RankingDAO {
         }
         return rankings;
     }
-    
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
-            if(comando != null) {
+            if (comando != null) {
                 comando.close();
             }
-            if(conexao != null) {
+            if (conexao != null) {
                 conexao.close();
             }
         } catch (SQLException e) {
-            
+
         }
     }
 }

@@ -57,7 +57,7 @@ public class Pontuacao {
         PontuacaoDAO.excluir(this);
     }
     
-    public Pontuacao obterPontuacao(int id) throws ClassNotFoundException{
+    public static Pontuacao obterPontuacao(int id) throws ClassNotFoundException{
         return PontuacaoDAO.obterPontuacao(id);
     }
 

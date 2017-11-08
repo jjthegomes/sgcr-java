@@ -62,7 +62,7 @@ public class ProdutoKit {
         ProdutoKitDAO.excluir(this);
     }
     
-    public ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException{
+    public static ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException{
         return ProdutoKitDAO.obterProdutoKit(id);
     }
 

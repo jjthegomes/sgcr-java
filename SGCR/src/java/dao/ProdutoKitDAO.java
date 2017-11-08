@@ -85,7 +85,7 @@ public class ProdutoKitDAO {
         try{
           conexao =BD.getConexao();
           comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("select +from produtos_kit where id = "+ id);
+          ResultSet rs =  comando.executeQuery("select * from produtos_kit where id = "+ id);
           rs.first();
             produtoKit= new ProdutoKit(rs.getInt("id"),
             rs.getString("nome"),

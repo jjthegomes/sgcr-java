@@ -39,9 +39,7 @@ public class Ranking {
         RankingDAO.excluir(this);
     }
     
-    public Ranking obterRanking(int id) throws ClassNotFoundException{
-        return RankingDAO.obterRanking(id);
-    }
+   
     
     public void setId(int id) {
         this.id = id;
@@ -85,6 +83,9 @@ public class Ranking {
     
     public static List<Ranking> obterRankings() throws ClassNotFoundException{
         return RankingDAO.obterRankings();
+    }
+    public static Ranking obterRanking(int id) throws ClassNotFoundException{
+        return RankingDAO.obterRanking(id);
     }
 
 }

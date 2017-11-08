@@ -35,48 +35,97 @@ public class ManterRankingController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        String acao= request.getParameter("acao");
-        if(acao.equals("prepararIncluir")){
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }else{
+        } else {
             if (acao.equals("confirmarIncluir")) {
-                confirmarIncluir(request,response);
+                confirmarIncluir(request, response);
+            } else {
+                if (acao.equals("prepararExcluir")) {
+                    prepararExcluir(request, response);
+                } else {
+                    if (acao.equals("confirmarExcluir")) {
+                        confirmarExcluir(request, response);
+                    }
+                }
+
             }
         }
     }
-    
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("administradores", Administrador.obterAdministradores());
             RequestDispatcher view = request.getRequestDispatcher("/manterRanking.jsp");
             view.forward(request, response);
-            
-        }catch(ServletException ex){
-        }catch(IOException ex){
-        }catch (ClassNotFoundException ex){
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
     }
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Excluir");
+            request.setAttribute("administradores", Administrador.obterAdministradores());
+            int codRanking = Integer.parseInt(request.getParameter("id"));
+
+            Ranking ranking = Ranking.obterRanking(codRanking);
+            request.setAttribute("ranking", ranking);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterRanking.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("txtIdRanking"));
+        String nomeRanking = request.getParameter("txtNomeRanking");
+        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+        //int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+
+        //Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
+        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, null);
+        try {
+            ranking.excluir();
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
+            view.forward(request, response);
+
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
-       int id = Integer.parseInt(request.getParameter("txtIdRanking"));
-       String nomeRanking = request.getParameter("txtNomeRanking");
-       int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
-       int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
-       try {
-           Administrador administrador = null;
-           
-               administrador = Administrador.obterAdministrador(administradorRanking);
-        
-           Ranking ranking = new Ranking(id,nomeRanking,intervaloFaixaEtaria,administrador); 
-       ranking.gravar();
-       RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
-       view.forward(request,response);  
-    }catch (IOException ex){
-    }catch(SQLException ex){
-    }catch(ClassNotFoundException ex){
-    }catch (ServletException ex){
-    }       
-}
+        int id = Integer.parseInt(request.getParameter("txtIdRanking"));
+        String nomeRanking = request.getParameter("txtNomeRanking");
+        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+        int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+        try {
+            Administrador administrador = null;
+
+            administrador = Administrador.obterAdministrador(administradorRanking);
+
+            Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, administrador);
+            ranking.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -128,7 +177,5 @@ public class ManterRankingController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

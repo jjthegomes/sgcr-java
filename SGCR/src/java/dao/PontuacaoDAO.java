@@ -67,7 +67,7 @@ public class PontuacaoDAO {
         try{
           conexao =BD.getConexao();
           comando= conexao.createStatement();
-          stringSQL = "delete from pontuacoes where id = "+pontuacao.getId();
+          stringSQL = "delete from pontuacoes where id = " + pontuacao.getId()+" and corridasId = " + pontuacao.getCorrida().getId();
                   comando.execute(stringSQL);
         }catch(SQLException e){
             throw e;
@@ -81,9 +81,9 @@ public class PontuacaoDAO {
         Statement comando = null;
         Pontuacao pontuacao = null;
         try{
-          conexao =BD.getConexao();
+          conexao = BD.getConexao();
           comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("select +from rankins where id = "+ id);
+          ResultSet rs =  comando.executeQuery("select * from pontuacoes where id = " + id);
           rs.first();
             pontuacao = new Pontuacao(rs.getInt("id"),
             rs.getInt("pontuacao"),
