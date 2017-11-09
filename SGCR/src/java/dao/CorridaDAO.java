@@ -116,7 +116,7 @@ public class CorridaDAO {
             conexao = BD.getConexao();
             /*id, nomeCorrida, maxPessoas, horaInicio, horarioFinal, banner, "
                     + "rua, cep, cidade, estado, bairro, descricao, regulamento, organizadoresId) */
-            String sql = "UPDATE corridas SET nomeCorrida = ?, maxPessoas = ?, horaInicio = ?, horarioFinal = ?, "
+            String sql = "UPDATE corridas SET nomeCorrida = ?, maxPessoas = ?, horarioInicio = ?, horarioFinal = ?, "
                     + "banner = ?, rua = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizadoresId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -131,9 +131,12 @@ public class CorridaDAO {
             comando.setString(9, corrida.getEstado());
             comando.setString(10, corrida.getBairro());
             comando.setString(11, corrida.getDescricao());
-            comando.setString(12, corrida.getRegulamento());            
-            comando.setInt(13, corrida.getOrganizadoresId());
+            comando.setString(12, corrida.getRegulamento());
+            comando.setInt(13, corrida.getOrganizador().getId());
             comando.setInt(14, corrida.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
         } catch (SQLException e) {
             throw e;
         }

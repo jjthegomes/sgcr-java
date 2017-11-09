@@ -44,6 +44,14 @@ public class ManterAtletaController extends HttpServlet {
                 } else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
+                    } else {
+                        if (acao.equals("prepararEditar")){
+                            prepararEditar(request, response);
+                        } else {
+                            if (acao.equals("confirmarEditar")){
+                                confirmarEditar(request, response);
+                            }
+                        }
                     }
                 }
             }
@@ -101,8 +109,8 @@ public class ManterAtletaController extends HttpServlet {
         } catch (ServletException ex) {
         }
     }
-
-    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+    
+     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
             //Para chave estrangeira
@@ -147,6 +155,61 @@ public class ManterAtletaController extends HttpServlet {
                 telefone, celular, id, email, senha);
         try {
             atleta.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaAtletaController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            //Para chave estrangeira
+            //request.setAttribute("administradores", Administrador.obterAdministradores());
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            Atleta atleta = Atleta.obterAtleta(id);
+            request.setAttribute("atleta", atleta);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterAtleta.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        String apelido = request.getParameter("txtApelidoAtleta");
+        String tamanhoCamisa = request.getParameter("optTamanhoCamisa");
+
+        String nome = request.getParameter("txtNomeAtleta");
+        String dataNascimento = request.getParameter("txtDataNascimentoAtleta");
+        String sexo = request.getParameter("txtSexoAtleta");
+        String cpf = request.getParameter("txtCpfAtleta");
+        String cep = request.getParameter("txtCepAtleta");
+        String rua = request.getParameter("txtRuaAtleta");
+        String bairro = request.getParameter("txtBairroAtleta");
+        String complemento = request.getParameter("txtComplementodAtleta");
+        String numero = request.getParameter("txtNumeroAtleta");
+        String cidade = request.getParameter("txtCidadeAtleta");
+        String estado = request.getParameter("txtEstadoAtleta");
+        String telefone = request.getParameter("txtTelefoneAtleta");
+        String celular = request.getParameter("txtCelularAtleta");
+
+        int id = Integer.parseInt(request.getParameter("txtIdAtleta"));
+        String email = request.getParameter("txtEmailAtleta");
+        String senha = request.getParameter("txtSenhaAtleta");
+
+        Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
+                sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado,
+                telefone, celular, id, email, senha);
+        try {
+            atleta.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaAtletaController");
             view.forward(request, response);
         } catch (IOException ex) {

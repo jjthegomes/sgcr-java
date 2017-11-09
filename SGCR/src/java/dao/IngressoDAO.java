@@ -95,23 +95,27 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             // id, tipo, preco, dataInicio, dataFinal, quantidade 
-            String sql = "UPDATE ingressos SET tipo = ?, preco = ?, dataInicio = ?, "
-                    + "dataFinal = ?, quantidade = ?, corridasId = ? WHERE id = ?";
+            String sql = "update ingressos set tipo = ?, preco = ?, dataInicio = ?, "
+                    + "dataFinal = ?, quantidade = ?, corridasId = ? where id = ?";            
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ingresso.getTipo());
             comando.setDouble(2, ingresso.getPreco());
             comando.setString(3, ingresso.getDataInicio());
             comando.setString(4, ingresso.getDataFinal());
             comando.setInt(5, ingresso.getQuantidade());
-            comando.setInt(6, ingresso.getCorridasId());
+            comando.setInt(6, ingresso.getCorrida().getId());
             comando.setInt(7, ingresso.getId());
+
+            comando.execute();
+            comando.close();
+            conexao.close();
 
         } catch (SQLException e) {
             throw e;
         }
     }
 
-    public static Ingresso obterIngresso (int id) throws ClassNotFoundException {
+    public static Ingresso obterIngresso(int id) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         Ingresso ingresso = null;

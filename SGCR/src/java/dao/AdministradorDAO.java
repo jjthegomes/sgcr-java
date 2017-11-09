@@ -69,11 +69,14 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update administradores SET email = ? , senha = ? WHERE id = ? )";
+            String sql = "update administrador SET email = ? , senha = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, administrador.getEmail());
             comando.setString(2, administrador.getSenha());
             comando.setInt(3, administrador.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
         } catch (SQLException e) {
             throw e;
         }
