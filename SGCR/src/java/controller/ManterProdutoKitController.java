@@ -47,6 +47,14 @@ public class ManterProdutoKitController extends HttpServlet {
                 } else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
+                    }else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        }else{
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
                     }
                 }
 
@@ -71,7 +79,25 @@ public class ManterProdutoKitController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
+    
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("kits", Kit.obterKits());
+            int codProdutoKit = Integer.parseInt(request.getParameter("id"));
 
+            ProdutoKit produtoKit = ProdutoKit.obterProdutoKit(codProdutoKit);
+            request.setAttribute("produto", produtoKit);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+    
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdProduto"));
         String nomeProduto = request.getParameter("txtNomeProduto");
@@ -80,6 +106,27 @@ public class ManterProdutoKitController extends HttpServlet {
         ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, null);
         try {
             produtoKit.excluir();
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoKitController");
+            view.forward(request, response);
+
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("txtIdProduto"));
+        String nomeProduto = request.getParameter("txtNomeProduto");
+        double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
+        int idProdutoKit = Integer.parseInt(request.getParameter("optKit"));
+        
+        Kit kit = Kit.obterKit(idProdutoKit);
+        ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, kit);
+        try {
+            produtoKit.alterar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoKitController");
             view.forward(request, response);

@@ -33,7 +33,7 @@
                 <tr>
                     <td>Kits:</td>
                     <td>
-                        <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                        <select name="optKit" <c:if test="${operacao == 'Excluir'}"> </c:if>>
                             <option value="0" <c:if test="${produto.kits.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${kits}" var="kit">
                                 <option value="${kit.id}" <c:if test="${produto.kitsId == kit.id}"> selected</c:if>>${kit.nomeKit}</option>  
