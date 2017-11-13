@@ -23,7 +23,7 @@
                 <th>Tempo Percorrido</th>
                 <th>Forma de Pagamento</th>
                 <th>Pago</th>
-                <th>Id Corrida</th>
+                <th>Percurso</th>
                 <th>Id Atleta</th>
                 <th>Id Kit</th>
                 <th colspan="2">Ação</th>
@@ -37,7 +37,7 @@
                     <td><c:out value="${inscricao.tempoPercorrido}" /></td>
                     <td><c:out value="${inscricao.formaPagamento}" /></td>
                     <td><c:out value="${inscricao.pago}" /></td>
-                    <td><c:out value="${inscricao.corridasId}" /></td>
+                    <td><c:out value="${inscricao.percursosId}" /></td>
                     <td><c:out value="${inscricao.atletasId}" /></td>
                     <td><c:out value="${inscricao.kitsId}" /></td>
                     <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>">Editar</a> </td>

@@ -191,8 +191,7 @@ public class ManterPercursoController extends HttpServlet {
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         
         try {
-            Corrida corrida = null;
-            corrida = Corrida.obterCorrida(corridaId);
+            Corrida corrida = Corrida.obterCorrida(corridaId);
             Percurso percurso = new Percurso(id, imagem, numQuilometragem, corrida);
             percurso.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");

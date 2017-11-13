@@ -17,14 +17,14 @@ public class Inscricao {
     private String formaPagamento;
     private String tempoPercorrido;
     private Atleta atleta;
-    private Corrida corrida;
+    private Percurso percurso;
     private Kit kit;
     
     private int atletasId;
-    private int corridasId;
+    private int percursosId;
     private int kitsId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, String formaPagamento, String tempoPercorrido, Atleta atleta, Corrida corrida, Kit kit) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, String formaPagamento, String tempoPercorrido, Atleta atleta, Percurso percurso, Kit kit) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
@@ -32,7 +32,7 @@ public class Inscricao {
         this.formaPagamento = formaPagamento;
         this.tempoPercorrido = tempoPercorrido;
         this.atleta = atleta;
-        this.corrida = corrida;
+        this.percurso = percurso;
         this.kit = kit;
     }
 
@@ -92,12 +92,12 @@ public class Inscricao {
         this.atleta = atleta;
     }
 
-    public Corrida getCorrida() {
-        return corrida;
+    public Percurso getPercurso() {
+        return percurso;
     }
 
-    public void setCorrida(Corrida corrida) {
-        this.corrida = corrida;
+    public void setPercurso(Percurso percurso) {
+        this.percurso = percurso;
     }
 
     public int getAtletasId() {
@@ -108,12 +108,12 @@ public class Inscricao {
         this.atletasId = atletasId;
     }
 
-    public int getCorridasId() {
-        return corridasId;
+    public int getPercursosId() {
+        return percursosId;
     }
 
-    public void setCorridasId(int corridasId) {
-        this.corridasId = corridasId;
+    public void setPercursosId(int percursosId) {
+        this.percursosId = percursosId;
     }
 
     public Kit getKit() {

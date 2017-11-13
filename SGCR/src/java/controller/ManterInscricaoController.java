@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Atleta;
-import modelo.Corrida;
 import modelo.Inscricao;
 import modelo.Kit;
+import modelo.Percurso;
 
 /**
  *
@@ -64,7 +64,7 @@ public class ManterInscricaoController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("kits", Kit.obterKits());
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
@@ -125,16 +125,13 @@ public class ManterInscricaoController extends HttpServlet {
         String formaPagamento = request.getParameter("optFormaPagamento");
         String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
-        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         try {
-            Atleta atleta = null;
-            atleta = Atleta.obterAtleta(atletaId);
-            Corrida corrida = null;
-            corrida = Corrida.obterCorrida(corridaId);
-            Kit kit = null;
-            kit = Kit.obterKit(kitId);
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, corrida, kit);
+            Atleta atleta = Atleta.obterAtleta(atletaId);
+            Percurso percurso = Percurso.obterPercurso(percursoId);
+            Kit kit = Kit.obterKit(kitId);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, percurso, kit);
             inscricao.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
@@ -148,7 +145,7 @@ public class ManterInscricaoController extends HttpServlet {
     private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("kits", Kit.obterKits());
             int idInscricao = Integer.parseInt(request.getParameter("id"));
@@ -187,7 +184,7 @@ public class ManterInscricaoController extends HttpServlet {
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("kits", Kit.obterKits());
             int idInscricao = Integer.parseInt(request.getParameter("id"));
@@ -211,18 +208,18 @@ public class ManterInscricaoController extends HttpServlet {
         Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
         String formaPagamento = request.getParameter("optFormaPagamento");
         String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
-        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         
         try {
-            Corrida corrida = null;
-            corrida = Corrida.obterCorrida(corridaId);
+            Percurso percurso = null;
+            percurso = Percurso.obterPercurso(percursoId);
             Atleta atleta = null;
             atleta = Atleta.obterAtleta(atletaId);
             Kit kit = null;
             kit = Kit.obterKit(kitId);
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, corrida, kit);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, percurso, kit);
             inscricao.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);

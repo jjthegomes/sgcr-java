@@ -193,8 +193,7 @@ public class ManterKitController extends HttpServlet {
         String tipoChip = request.getParameter("optTipoChip");
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
-            Corrida corrida = null;
-            corrida = Corrida.obterCorrida(corridaId);
+            Corrida corrida = Corrida.obterCorrida(corridaId);
             Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
             kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Corrida;
 import modelo.Percurso;
 
 /**
@@ -36,6 +37,7 @@ public class PercursoDAO {
                         rs.getDouble("quilometragem"),
                         null);
                 percurso.setCorridasId(rs.getInt("corridasId"));
+                percurso.setCorrida(Corrida.obterCorrida(percurso.getCorridasId()));
                 percursos.add(percurso);
             }
         } catch (SQLException e) {

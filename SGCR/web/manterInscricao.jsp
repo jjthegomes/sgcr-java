@@ -65,12 +65,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Corrida:</td>
+                    <td>Percurso:</td>
                     <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${inscricao.corrida.id == null}"> selected</c:if>> Selecione uma corrida</option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${inscricao.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                        <select name="optPercurso" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                            <option value="0" <c:if test="${inscricao.percurso.id == null}"> selected</c:if>> Selecione um percurso</option>  
+                            <c:forEach items="${percursos}" var="percurso">
+                                <option value="${percurso.id}" <c:if test="${inscricao.percursosId == percurso.id}"> selected</c:if>>${percurso.corrida.nomeCorrida} - ${percurso.quilometragem}km</option>  
                             </c:forEach>
                         </select>
                     </td>
