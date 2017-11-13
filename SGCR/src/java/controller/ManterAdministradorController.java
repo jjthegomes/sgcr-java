@@ -60,15 +60,12 @@ public class ManterAdministradorController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            //Para chave estrangeira
-            //request.setAttribute("administradores", Administrador.obterAdministradores());
             RequestDispatcher view
                     = request.getRequestDispatcher("/manterAdministrador.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
         } catch (IOException ex) {
         }
-        //catch(ClassNotFoundException ex){ }
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
@@ -78,13 +75,6 @@ public class ManterAdministradorController extends HttpServlet {
         String senha = request.getParameter("txtSenhaAdministrador");
         //int coordenador = Integer.parseInt(request.getParameter("optCoordenador"));
         try {
-            /*            
-            Chave Estrangeira
-            Professor professor = null;
-            if(coordenador != 0){
-                professor = Professor.obterProfessor(coordenador);
-            }            
-             */
             Administrador administrador = new Administrador(id, nome, email, senha);
             administrador.gravar();
             RequestDispatcher view
@@ -132,8 +122,6 @@ public class ManterAdministradorController extends HttpServlet {
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
-            //Para chave estrangeira
-            //request.setAttribute("administradores", Administrador.obterAdministradores());
             int id = Integer.parseInt(request.getParameter("id"));
             Administrador administrador = Administrador.obterAdministrador(id);
             request.setAttribute("administrador", administrador);

@@ -50,14 +50,7 @@ public class AdministradorDAO {
             comando.setString(2, administrador.getNome());
             comando.setString(3, administrador.getEmail());
             comando.setString(4, administrador.getSenha());
-
-            /*
-                Chave Estrangeira
-            if(curso.getCoordenador() = null)
-                comando.setNull(6, Types.Null);
-            else
-                comando.setInt(6, curso.getCoordenador().getMatricula());            
-             */
+     
             comando.execute();
             comando.close();
             conexao.close();
