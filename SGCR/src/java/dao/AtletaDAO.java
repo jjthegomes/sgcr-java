@@ -94,10 +94,10 @@ public class AtletaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE atletas SET nome = ?, apelido = ?, email = ?, senha = ?, "
+            String sql = "update atletas set nome = ?, apelido = ?, email = ?, senha = ?, "
                     + "dataNascimento = ?, cpf = ?, cep = ?, cidade = ?, estado = ? , rua = ?, "
-                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanhoCamisa = ?, "
-                    + " WHERE id = ?";
+                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanhoCamisa = ? "
+                    + " where id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, atleta.getNome());
             comando.setString(2, atleta.getApelido());
@@ -116,6 +116,9 @@ public class AtletaDAO {
             comando.setString(15, atleta.getCelular());
             comando.setString(16, atleta.getTamanhoCamisa());
             comando.setInt(17, atleta.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
         } catch (SQLException e) {
             throw e;
         }
@@ -165,7 +168,7 @@ public class AtletaDAO {
                     rs.getString("celular"),
                     rs.getInt("id"),
                     rs.getString("email"),
-                    rs.getString("senha"));            
+                    rs.getString("senha"));
 
         } catch (SQLException e) {
             e.printStackTrace();

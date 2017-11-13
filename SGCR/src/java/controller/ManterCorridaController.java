@@ -44,6 +44,14 @@ public class ManterCorridaController extends HttpServlet {
                 } else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
+                    } else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        } else {
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
                     }
                 }
 
@@ -137,6 +145,55 @@ public class ManterCorridaController extends HttpServlet {
             Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
                     banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+
+        }
+    }
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
+            request.setAttribute("organizadores", Organizador.obterOrganizadores());
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            Corrida corrida = Corrida.obterCorrida(id);
+
+            request.setAttribute("corrida", corrida);
+            RequestDispatcher view = request.getRequestDispatcher("/manterCorrida.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
+        String nomeCorrida = request.getParameter("txtNomeCorrida");
+        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
+        String horarioInicio = request.getParameter("txtHorarioInicioCorrida");
+        String horarioFinal = request.getParameter("txtHorarioFinalCorrida");
+        String banner = request.getParameter("txtBannerCorrida");
+        String rua = request.getParameter("txtRuaCorrida");
+        String cep = request.getParameter("txtCepCorrida");
+        String cidade = request.getParameter("txtCidadeCorrida");
+        String estado = request.getParameter("txtEstadoCorrida");
+        String bairro = request.getParameter("txtBairroCorrida");
+        String descricao = request.getParameter("txtDescricaoCorrida");
+        String regulamento = request.getParameter("txtRegulamentoCorrida");
+        int organizadoresId = Integer.parseInt(request.getParameter("optOrganizador"));
+
+        try {
+            Organizador organizador = Organizador.obterOrganizador(organizadoresId);
+            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
+                    banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
+            corrida.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
         } catch (IOException ex) {
