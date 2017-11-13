@@ -44,7 +44,7 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "upgrade pontuacoes set pontuacao=?, corridasId=? "
+            String sql= "update pontuacoes set pontuacao=?, corridasId=? "
               +"where id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getPontuacao());

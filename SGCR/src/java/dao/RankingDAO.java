@@ -45,7 +45,7 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "upgrade rankings set nomeRanking = ?, intervaloFaixaEtaria=?, administradorId=? "
+            String sql = "update rankings set nomeRanking = ?, intervaloFaixaEtaria=?, administradorId=? "
                     + "where id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ranking.getNomeRanking());

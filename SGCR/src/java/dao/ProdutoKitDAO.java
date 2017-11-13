@@ -45,7 +45,7 @@ public class ProdutoKitDAO {
         Connection conexao =null;
         try{
             conexao = BD.getConexao();
-            String sql= "upgrade produtos_kit set nome = ?, valor=?, kitId=? "
+            String sql= "update produtos_kit set nome = ?, valor=?, kitsId=? "
               +"where id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1,produtoKit.getNome());

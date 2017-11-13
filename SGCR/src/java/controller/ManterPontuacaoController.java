@@ -48,6 +48,14 @@ public class ManterPontuacaoController extends HttpServlet {
                 }else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
+                    }else {
+                        if (acao.equals("prepararEditar")) {
+                            prepararEditar(request, response);
+                        }else{
+                            if (acao.equals("confirmarEditar")) {
+                                confirmarEditar(request, response);
+                            }
+                        }
                     }
                 }
         }
@@ -56,6 +64,24 @@ public class ManterPontuacaoController extends HttpServlet {
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            int codPontuacao = Integer.parseInt(request.getParameter("id"));
+
+            Pontuacao pontuacao = Pontuacao.obterPontuacao(codPontuacao);
+            request.setAttribute("pontuacao", pontuacao);
+
+            RequestDispatcher view = request.getRequestDispatcher("/manterPontuacao.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+    
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("operacao", "Editar");
             request.setAttribute("corridas", Corrida.obterCorridas());
             int codPontuacao = Integer.parseInt(request.getParameter("id"));
 
@@ -81,6 +107,27 @@ public class ManterPontuacaoController extends HttpServlet {
         Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,corrida);
         try {
             pontuacao.excluir();
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
+            view.forward(request, response);
+
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+    
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+         int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
+        int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
+        
+        int idCorrida = Integer.parseInt(request.getParameter("optCorrida"));
+        Corrida corrida = Corrida.obterCorrida(idCorrida);
+        
+        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,corrida);
+        try {
+            pontuacao.alterar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
             view.forward(request, response);
