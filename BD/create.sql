@@ -1,3 +1,4 @@
+DROP DATABASE sgcr;
 CREATE DATABASE IF NOT EXISTS `sgcr`;
 
 -- -----------------------------------------------------
@@ -11,7 +12,7 @@ USE `sgcr` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`atletas` (
   `id` INT NOT NULL  PRIMARY KEY,
-  `nome` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(60) NOT NULL,
   `apelido` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`atletas` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`organizadores` (
   `id` INT NOT NULL ,
-  `nome` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(60) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
   `sexo` VARCHAR(1) NOT NULL,
@@ -149,16 +150,16 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
   `tempoPercorrido` TIME NULL,
   `formaPagamento` TINYINT(1) NOT NULL,
   `pago` TINYINT(1) NULL,
-  `corridasId` INT NOT NULL,
+  `percursosId` INT NOT NULL,
   `atletasId` INT NOT NULL,
   `kitsId` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_inscricao_corridas1_idx` (`corridasId` ASC),
+  INDEX `fk_inscricao_percursos1_idx` (`percursosId` ASC),
   INDEX `fk_inscricao_atletas1_idx` (`atletasId` ASC),
   INDEX `fk_inscricao_kits1_idx` (`kitsId` ASC),
-  CONSTRAINT `fk_inscricao_corridas1`
-    FOREIGN KEY (`corridasId`)
-    REFERENCES `sgcr`.`corridas` (`id`)
+  CONSTRAINT `fk_inscricao_percursos1`
+    FOREIGN KEY (`percursosId`)
+    REFERENCES `sgcr`.`percursos` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_inscricao_atletas1`
@@ -172,21 +173,6 @@ CREATE TABLE IF NOT EXISTS `sgcr`.`inscricoes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
-
-
--- -----------------------------------------------------
--- TABELA DESNECESSÁRIA
--- -----------------------------------------------------
--- Table `sgcr`.`produto_kit`
--- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `sgcr`.`produto_kit` (
---   `id` INT NOT NULL ,
---   `produto` VARCHAR(45) NULL,
---   `preco` FLOAT NULL,
---   PRIMARY KEY (`id`))
--- ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `sgcr`.`produtos_kit`
@@ -228,6 +214,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sgcr`.`administrador` (
   `id` INT NOT NULL ,
+  `nome` VARCHAR(60) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))

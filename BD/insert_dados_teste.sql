@@ -1,7 +1,9 @@
-INSERT INTO administrador VALUES(1, 'adm1@email.com', '111111');
-INSERT INTO administrador VALUES(2, 'adm2@email.com', '222222');
-INSERT INTO administrador VALUES(3, 'adm3@email.com', '333333');
+USE sgcr;
 
+INSERT INTO administrador VALUES(1, 'Arielson Altino de Souza','arielson@email.com', '123123');
+INSERT INTO administrador VALUES(2, 'Jonas Silva Gomes','jonas@email.com', '123123');
+INSERT INTO administrador VALUES(3, 'Rafael Souza de Lana','rafael@email.com', '123123');
+INSERT INTO administrador VALUES(4, 'Marco Antônio Pereira Araújo','marco@email.com', '123123');
 
 INSERT INTO atletas VALUES (
     1,
@@ -219,38 +221,42 @@ INSERT INTO kits VALUES(5,'Especial','caminho imagem','Retornavel',3);
 INSERT INTO kits VALUES(6,'Comum','caminho imagem','Descartavel',3);
 
 
-INSERT INTO produtos_kit VALUES (1,'Número de Peito',5.00,1); 
-INSERT INTO produtos_kit VALUES (2,'Chip Eletrônico',15.00,1); 
-INSERT INTO produtos_kit VALUES (3,'Camiseta Tecido Tecnológico',35.00,1); 
+INSERT INTO produtos_kit VALUES (1,'Número de Peito',5.00,1);
+INSERT INTO produtos_kit VALUES (2,'Chip Eletrônico',15.00,1);
+INSERT INTO produtos_kit VALUES (3,'Camiseta Tecido Tecnológico',35.00,1);
 
-INSERT INTO produtos_kit VALUES (4,'Número de Peito',5.00,2); 
-INSERT INTO produtos_kit VALUES (5,'Chip Eletrônico',15.00,2); 
+INSERT INTO produtos_kit VALUES (4,'Número de Peito',5.00,2);
+INSERT INTO produtos_kit VALUES (5,'Chip Eletrônico',15.00,2);
 
-INSERT INTO produtos_kit VALUES (6,'Número de Peito',4.00,3); 
-INSERT INTO produtos_kit VALUES (7,'Chip',12.00,3); 
-INSERT INTO produtos_kit VALUES (8,'Camiseta',30.00,3); 
+INSERT INTO produtos_kit VALUES (6,'Número de Peito',4.00,3);
+INSERT INTO produtos_kit VALUES (7,'Chip',12.00,3);
+INSERT INTO produtos_kit VALUES (8,'Camiseta',30.00,3);
 
-INSERT INTO produtos_kit VALUES (9,'Número de Peito',4.00,4); 
-INSERT INTO produtos_kit VALUES (10,'Chip',12.00,4); 
+INSERT INTO produtos_kit VALUES (9,'Número de Peito',4.00,4);
+INSERT INTO produtos_kit VALUES (10,'Chip',12.00,4);
 
-INSERT INTO produtos_kit VALUES (11,'Número de Peito',5.00,5); 
-INSERT INTO produtos_kit VALUES (12,'Chip Eletrônico',16.00,5); 
-INSERT INTO produtos_kit VALUES (13,'Camisa',32.00,5); 
+INSERT INTO produtos_kit VALUES (11,'Número de Peito',5.00,5);
+INSERT INTO produtos_kit VALUES (12,'Chip Eletrônico',16.00,5);
+INSERT INTO produtos_kit VALUES (13,'Camisa',32.00,5);
 
-INSERT INTO produtos_kit VALUES (14,'Número de Peito',5.00,6); 
-INSERT INTO produtos_kit VALUES (15,'Chip Eletrônico',16.00,6); 
+INSERT INTO produtos_kit VALUES (14,'Número de Peito',5.00,6);
+INSERT INTO produtos_kit VALUES (15,'Chip Eletrônico',16.00,6);
 
 
--- INSCRIÇÕES CORRIDA 1
--- data compra, número peito, tempo percorrido, forma pagamento, pago, corridasId, atletasId, kitsId
- 
+-- INSCRIÇÕES
+-- data compra, número peito, tempo percorrido, forma pagamento, pago, percursosId, atletasId, kitsId
+
+-- CORRIDA 1
 INSERT INTO inscricoes VALUES (1,'2017-09-15 17:25:20','1','01:20:15',1,1,1,1,1);
 INSERT INTO inscricoes VALUES (2,'2017-09-16 15:22:11','2','01:12:10',0,1,1,2,2);
-INSERT INTO inscricoes VALUES (3,'2017-09-10 12:22:11','3','01:21:12',0,1,1,3,2);
-INSERT INTO inscricoes VALUES (4,'2017-09-12 16:22:11','4','01:24:42',1,1,1,4,1);
+INSERT INTO inscricoes VALUES (3,'2017-09-10 12:22:11','3','01:21:12',0,1,2,3,2);
+INSERT INTO inscricoes VALUES (4,'2017-09-12 16:22:11','4','01:24:42',1,1,2,4,1);
 
--- INSCRIÇÕES CORRIDA 2
-INSERT INTO inscricoes VALUES (5,'2017-09-18 17:32:11','1','00:00:00',1,1,2,1,1);
-INSERT INTO inscricoes VALUES (6,'2017-09-19 09:28:23','2','00:00:00',1,0,2,2,1);
-INSERT INTO inscricoes VALUES (7,'2017-09-25 12:22:13','3','00:00:00',0,0,2,3,2);
+-- CORRIDA 2
+INSERT INTO inscricoes VALUES (5,'2017-09-18 17:32:11','1','00:00:00',1,1,3,1,1);
+INSERT INTO inscricoes VALUES (6,'2017-09-19 09:28:23','2','00:00:00',1,0,3,2,1);
+INSERT INTO inscricoes VALUES (7,'2017-09-25 12:22:13','3','00:00:00',0,0,3,3,2);
 
+-- CORRIDA 3
+INSERT INTO inscricoes VALUES (8,'2017-05-12 12:28:23','2','00:00:00',1,0,4,2,1);
+INSERT INTO inscricoes VALUES (9,'2017-05-13 19:12:51','3','00:00:00',0,0,4,3,2);
