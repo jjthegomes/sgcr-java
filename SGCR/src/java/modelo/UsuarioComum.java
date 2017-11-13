@@ -7,8 +7,6 @@ package modelo;
  * @author RAJ
  */
 public abstract class UsuarioComum extends Usuario{
-
-    private String nome;
     private String dataNascimento;
     private String sexo;
     private String cpf;
@@ -23,8 +21,7 @@ public abstract class UsuarioComum extends Usuario{
     private String celular;
 
     public UsuarioComum(String nome, String dataNascimento, String sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
-        super(id, email, senha);
-        this.nome = nome;
+        super(id, nome, email, senha);
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cpf = cpf;
@@ -37,14 +34,6 @@ public abstract class UsuarioComum extends Usuario{
         this.estado = estado;
         this.telefone = telefone;
         this.celular = celular;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDataNascimento() {

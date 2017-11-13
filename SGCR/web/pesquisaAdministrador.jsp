@@ -20,6 +20,7 @@
     <table border="1">
         <tr>
             <th>Codigo</th>
+            <th>Nome</th>
             <th>Email</th>
             <th>Senha</th>
             <th colspan="2">Ação</th>
@@ -27,6 +28,7 @@
         <c:forEach items="${administradores}" var="administrador">
             <tr>
                 <td><c:out value="${administrador.id}" /> </td>
+                <td><c:out value="${administrador.nome}" /> </td>
                 <td><c:out value="${administrador.email}" /> </td>
                 <td><c:out value="${administrador.senha}" /> </td>
                 <td><a href="ManterAdministradorController?acao=prepararEditar&id=<c:out value="${administrador.id}"/>">Editar</a> </td>

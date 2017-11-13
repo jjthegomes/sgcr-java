@@ -27,6 +27,7 @@ public class AdministradorDAO {
             while (rs.next()) {
                 Administrador administrador = new Administrador(
                         rs.getInt("id"),
+                        rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"));
                 administradores.add(administrador);
@@ -43,11 +44,12 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO administrador (id, email, senha) VALUES (?,?,?)";
+            String sql = "INSERT INTO administrador (id, nome, email, senha) VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, administrador.getId());
-            comando.setString(2, administrador.getEmail());
-            comando.setString(3, administrador.getSenha());
+            comando.setString(2, administrador.getNome());
+            comando.setString(3, administrador.getEmail());
+            comando.setString(4, administrador.getSenha());
 
             /*
                 Chave Estrangeira
@@ -69,11 +71,12 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update administrador SET email = ? , senha = ? WHERE id = ?";
+            String sql = "update administrador SET nome = ?, email = ?, senha = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, administrador.getEmail());
-            comando.setString(2, administrador.getSenha());
-            comando.setInt(3, administrador.getId());
+            comando.setString(1, administrador.getNome());
+            comando.setString(2, administrador.getEmail());
+            comando.setString(3, administrador.getSenha());
+            comando.setInt(4, administrador.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -111,6 +114,7 @@ public class AdministradorDAO {
             rs.first();
             administrador = new Administrador(
                     rs.getInt("id"),
+                    rs.getString("nome"),
                     rs.getString("email"),
                     rs.getString("senha")
             );

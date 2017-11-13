@@ -36,7 +36,7 @@
                         <select name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${administradores}" var="administrador">
-                                <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.email}</option>  
+                                <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>
