@@ -23,17 +23,17 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM ingresso");
+            ResultSet rs = comando.executeQuery("SELECT * FROM lote");
             while (rs.next()) {
                 Ingresso ingresso = new Ingresso(
                         rs.getInt("id"),
                         rs.getString("tipo"),
                         rs.getFloat("preco"),
-                        rs.getString("dataInicio"),
-                        rs.getString("dataFinal"),
+                        rs.getString("data_inicio"),
+                        rs.getString("data_final"),
                         rs.getInt("quantidade"),
                         null);
-                ingresso.setCorridasId(rs.getInt("corridasId"));
+                ingresso.setCorridasId(rs.getInt("corrida_id"));
                 ingressos.add(ingresso);
             }
         } catch (SQLException e) {
@@ -48,8 +48,8 @@ public class IngressoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ingresso (id, tipo, preco, dataInicio, dataFinal, quantidade, "
-                    + "corridasId) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO ingresso (id, tipo, preco, data_inicio, data_final, quantidade, "
+                    + "corrida_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, ingresso.getId());
             comando.setString(2, ingresso.getTipo());
@@ -94,9 +94,9 @@ public class IngressoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            // id, tipo, preco, dataInicio, dataFinal, quantidade 
-            String sql = "UPDATE ingresso SET tipo = ?, preco = ?, dataInicio = ?, "
-                    + "dataFinal = ?, quantidade = ?, corridasId = ? WHERE id = ?";            
+            // id, tipo, preco, data_inicio, data_final, quantidade 
+            String sql = "UPDATE ingresso SET tipo = ?, preco = ?, data_inicio = ?, "
+                    + "data_final = ?, quantidade = ?, corrida_id = ? WHERE id = ?";            
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ingresso.getTipo());
             comando.setDouble(2, ingresso.getPreco());
@@ -128,11 +128,11 @@ public class IngressoDAO {
                     rs.getInt("id"),
                     rs.getString("tipo"),
                     rs.getDouble("preco"),
-                    rs.getString("dataInicio"),
-                    rs.getString("dataFinal"),
+                    rs.getString("data_inicio"),
+                    rs.getString("data_final"),
                     rs.getInt("quantidade"),
                     null);
-            ingresso.setCorridasId(rs.getInt("corridasId"));
+            ingresso.setCorridasId(rs.getInt("corrida_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

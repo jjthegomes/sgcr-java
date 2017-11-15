@@ -26,13 +26,13 @@ public class AtletaDAO {
             ResultSet rs = comando.executeQuery("SELECT * from atleta");
             while (rs.next()) {
                 Atleta atleta = new Atleta(rs.getString("apelido"),
-                        rs.getString("tamanhoCamisa"),
+                        rs.getString("tamanho_camisa"),
                         rs.getString("nome"),
-                        rs.getString("dataNascimento"),
+                        rs.getString("data_nascimento"),
                         rs.getString("sexo"),
                         rs.getString("cpf"),
                         rs.getString("cep"),
-                        rs.getString("rua"),
+                        rs.getString("logradouro"),
                         rs.getString("bairro"),
                         rs.getString("complemento"),
                         rs.getString("numero"),
@@ -58,9 +58,9 @@ public class AtletaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO atleta (id, nome, apelido, email, senha, sexo, dataNascimento, "
-                    + "cpf, cep, cidade, estado, rua, bairro, numero, complemento, telefone, celular,"
-                    + "tamanhoCamisa) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO atleta (id, nome, apelido, email, senha, sexo, data_nascimento, "
+                    + "cpf, cep, cidade, estado, bairro, logradouro, numero, complemento, telefone, celular, tamanho_camisa) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, atleta.getId());
             comando.setString(2, atleta.getNome());
@@ -73,7 +73,7 @@ public class AtletaDAO {
             comando.setString(9, atleta.getCep());
             comando.setString(10, atleta.getCidade());
             comando.setString(11, atleta.getEstado());
-            comando.setString(12, atleta.getRua());
+            comando.setString(12, atleta.getRua()); //mudar para logradouro
             comando.setString(13, atleta.getBairro());
             comando.setString(14, atleta.getNumero());
             comando.setString(15, atleta.getComplemento());
@@ -95,8 +95,8 @@ public class AtletaDAO {
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE atleta SET nome = ?, apelido = ?, email = ?, senha = ?, "
-                    + "dataNascimento = ?, cpf = ?, cep = ?, cidade = ?, estado = ? , rua = ?, "
-                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanhoCamisa = ? "
+                    + "data_nascimento = ?, cpf = ?, cep = ?, cidade = ?, estado = ? , logradouro = ?, "
+                    + "bairro = ? , numero = ?, complemento = ?, telefone = ?, celular = ?, tamanho_camisa = ? "
                     + " WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, atleta.getNome());
@@ -108,7 +108,7 @@ public class AtletaDAO {
             comando.setString(7, atleta.getCep());
             comando.setString(8, atleta.getCidade());
             comando.setString(9, atleta.getEstado());
-            comando.setString(10, atleta.getRua());
+            comando.setString(10, atleta.getRua()); //mudar para logradouro
             comando.setString(11, atleta.getBairro());
             comando.setString(12, atleta.getNumero());
             comando.setString(13, atleta.getComplemento());
@@ -152,13 +152,13 @@ public class AtletaDAO {
             ResultSet rs = comando.executeQuery("SELECT * from atleta WHERE id = " + id);
             rs.first();
             atleta = new Atleta(rs.getString("apelido"),
-                    rs.getString("tamanhoCamisa"),
+                    rs.getString("tamanho_camisa"),
                     rs.getString("nome"),
-                    rs.getString("dataNascimento"),
+                    rs.getString("data_nascimento"),
                     rs.getString("sexo"),
                     rs.getString("cpf"),
                     rs.getString("cep"),
-                    rs.getString("rua"),
+                    rs.getString("logradouro"),
                     rs.getString("bairro"),
                     rs.getString("complemento"),
                     rs.getString("numero"),
