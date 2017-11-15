@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `SCGR`.`atleta` (
   `estado` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
-  `rua` VARCHAR(45) NOT NULL,
+  `logradouro` VARCHAR(45) NOT NULL,
   `numero` VARCHAR(6) NOT NULL,
   `complemento` VARCHAR(45) NULL,
   `telefone` VARCHAR(11) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `SCGR`.`organizador` (
   `estado` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
-  `rua` VARCHAR(45) NOT NULL,
+  `logradouro` VARCHAR(45) NOT NULL,
   `numero` VARCHAR(6) NOT NULL,
   `complemento` VARCHAR(45) NULL,
   `telefone` VARCHAR(11) NULL,
@@ -72,7 +72,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SCGR`.`corrida` (
   `id` INT NOT NULL,
-  `nome_corrida` VARCHAR(45) BINARY NOT NULL,
+  `nome` VARCHAR(45) BINARY NOT NULL,
   `horario` VARCHAR(5) NOT NULL,
   `data` VARCHAR(8) NOT NULL,
   `max_pessoa` INT NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `SCGR`.`corrida` (
   `estado` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
-  `rua` VARCHAR(45) NOT NULL,
+  `logradouro` VARCHAR(45) NOT NULL,
   `organizador_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_corridas_organizadores1_idx` (`organizador_id` ASC),
@@ -285,7 +285,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SCGR`.`ranking` (
   `id` INT NOT NULL,
-  `nome_ranking` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
   `administrador_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_rankings_administrador1_idx` (`administrador_id` ASC),
