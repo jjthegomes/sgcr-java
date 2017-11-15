@@ -35,3 +35,4 @@ nbdist/
 hs_err_pid*
 /SGCR/nbproject/private/
 /Grafin/nbproject/private/
+*.properties

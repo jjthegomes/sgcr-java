@@ -14,6 +14,8 @@
         <title>Manter Atleta</title>
     </head>
     <body>
+        <h1>Manter Atleta - ${operacao}</h1>
+
         <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>    
