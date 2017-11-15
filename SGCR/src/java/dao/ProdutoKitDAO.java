@@ -25,7 +25,7 @@ public class ProdutoKitDAO {
         Connection conexao =null;
         try{
             conexao = BD.getConexao();
-            String sql= "insert into produtos_kit (id, nome, valor, kitsId) values (?,?,?,?)";
+            String sql= "INSERT INTO produto_kit (id, nome, valor, kitsId) VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,produtoKit.getId());
             comando.setString(2,produtoKit.getNome());
@@ -45,8 +45,7 @@ public class ProdutoKitDAO {
         Connection conexao =null;
         try{
             conexao = BD.getConexao();
-            String sql= "update produtos_kit set nome = ?, valor=?, kitsId=? "
-              +"where id =?";
+            String sql= "UPDATE produto_kit SET nome = ?, valor = ?, kitsId = ? WHERE id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1,produtoKit.getNome());
             comando.setDouble(2,produtoKit.getValor());
@@ -69,7 +68,7 @@ public class ProdutoKitDAO {
         try{
           conexao = BD.getConexao();
           comando= conexao.createStatement();
-          stringSQL = "delete from produtos_kit where id ="+produtoKit.getId();
+          stringSQL = "DELETE FROM produto_kit WHERE id ="+produtoKit.getId();
                   comando.execute(stringSQL);
         }catch(SQLException e){
             throw e;
@@ -85,7 +84,7 @@ public class ProdutoKitDAO {
         try{
           conexao =BD.getConexao();
           comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("select * from produtos_kit where id = "+ id);
+          ResultSet rs =  comando.executeQuery("SELECT * FROM produto_kit WHERE id = "+ id);
           rs.first();
             produtoKit= new ProdutoKit(rs.getInt("id"),
             rs.getString("nome"),
@@ -107,7 +106,7 @@ public class ProdutoKitDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from produtos_kit");
+            ResultSet rs = comando.executeQuery("SELECT * FROM produto_kit");
             
             while (rs.next()) {
                 ProdutoKit produtoKit = new ProdutoKit(

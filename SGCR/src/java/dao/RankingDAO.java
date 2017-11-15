@@ -25,7 +25,8 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into rankings (id,nomeRanking, intervaloFaixaEtaria, administradorId)values(?,?,?,?)";
+            String sql = "INSERT INTO ranking (id, nomeRanking, intervaloFaixaEtaria, administradorId) "
+                    + "VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, ranking.getId());
             comando.setString(2, ranking.getNomeRanking());
@@ -45,8 +46,8 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update rankings set nomeRanking = ?, intervaloFaixaEtaria=?, administradorId=? "
-                    + "where id =?";
+            String sql = "UPDATE ranking SET nomeRanking = ?, intervaloFaixaEtaria = ?, administradorId = ? "
+                    + "WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ranking.getNomeRanking());
             comando.setInt(2, ranking.getIntervaloFaixaEtaria());
@@ -69,7 +70,7 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from rankings where id =" + ranking.getId();
+            stringSQL = "DELETE FROM ranking WHERE id =" + ranking.getId();
             comando.execute(stringSQL);
         } catch (SQLException e) {
             throw e;
@@ -85,7 +86,7 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from rankings where id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM ranking WHERE id = " + id);
             rs.first();
             ranking = new Ranking(rs.getInt("id"),
                     rs.getString("nomeRanking"),
@@ -107,7 +108,7 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from rankings");
+            ResultSet rs = comando.executeQuery("SELECT * FROM ranking");
 
             while (rs.next()) {
                 Ranking ranking = new Ranking(

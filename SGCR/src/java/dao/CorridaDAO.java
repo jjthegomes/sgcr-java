@@ -28,7 +28,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from corridas");
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida");
 
             while (rs.next()) {
                 Corrida corrida = new Corrida(
@@ -61,7 +61,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO corridas (id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal, banner, "
+            String sql = "INSERT INTO corrida (id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal, banner, "
                     + "rua, cep, cidade, estado, bairro, descricao, regulamento, organizadoresId) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from corridas where id = " + corrida.getId();
+            stringSQL = "DELETE FROM corrida WHERE id = " + corrida.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {
@@ -116,7 +116,7 @@ public class CorridaDAO {
             conexao = BD.getConexao();
             /*id, nomeCorrida, maxPessoas, horaInicio, horarioFinal, banner, "
                     + "rua, cep, cidade, estado, bairro, descricao, regulamento, organizadoresId) */
-            String sql = "UPDATE corridas SET nomeCorrida = ?, maxPessoas = ?, horarioInicio = ?, horarioFinal = ?, "
+            String sql = "UPDATE corrida SET nomeCorrida = ?, maxPessoas = ?, horarioInicio = ?, horarioFinal = ?, "
                     + "banner = ?, rua = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizadoresId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -149,7 +149,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM corridas WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE id = " + id);
             rs.first();
             corrida = new Corrida(
                     rs.getInt("id"),

@@ -23,7 +23,7 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from ingressos");
+            ResultSet rs = comando.executeQuery("SELECT * FROM ingresso");
             while (rs.next()) {
                 Ingresso ingresso = new Ingresso(
                         rs.getInt("id"),
@@ -48,7 +48,7 @@ public class IngressoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ingressos (id, tipo, preco, dataInicio, dataFinal, quantidade, "
+            String sql = "INSERT INTO ingresso (id, tipo, preco, dataInicio, dataFinal, quantidade, "
                     + "corridasId) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, ingresso.getId());
@@ -95,8 +95,8 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             // id, tipo, preco, dataInicio, dataFinal, quantidade 
-            String sql = "update ingressos set tipo = ?, preco = ?, dataInicio = ?, "
-                    + "dataFinal = ?, quantidade = ?, corridasId = ? where id = ?";            
+            String sql = "UPDATE ingresso SET tipo = ?, preco = ?, dataInicio = ?, "
+                    + "dataFinal = ?, quantidade = ?, corridasId = ? WHERE id = ?";            
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ingresso.getTipo());
             comando.setDouble(2, ingresso.getPreco());
@@ -122,7 +122,7 @@ public class IngressoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM ingressos WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM ingresso WHERE id = " + id);
             rs.first();
             ingresso = new Ingresso(
                     rs.getInt("id"),

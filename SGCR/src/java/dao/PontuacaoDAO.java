@@ -25,7 +25,7 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "insert into pontuacoes (id,pontuacao, corridasId)values(?,?,?)";
+            String sql= "INSERT INTO pontuacao (id, pontuacao, corridasId) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getId());
             comando.setInt(2,pontuacao.getPontuacao());
@@ -44,8 +44,7 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "update pontuacoes set pontuacao=?, corridasId=? "
-              +"where id =?";
+            String sql= "UPDATE pontuacao SET pontuacao = ?, corridasId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getPontuacao());
             comando.setInt(2,pontuacao.getCorrida().getId());
@@ -67,7 +66,8 @@ public class PontuacaoDAO {
         try{
           conexao =BD.getConexao();
           comando= conexao.createStatement();
-          stringSQL = "delete from pontuacoes where id = " + pontuacao.getId()+" and corridasId = " + pontuacao.getCorrida().getId();
+          stringSQL = "DELETE FROM pontuacao WHERE id = " + pontuacao.getId()+" and "
+                  + "corridasId = " + pontuacao.getCorrida().getId();
                   comando.execute(stringSQL);
         }catch(SQLException e){
             throw e;
@@ -83,7 +83,7 @@ public class PontuacaoDAO {
         try{
           conexao = BD.getConexao();
           comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("select * from pontuacoes where id = " + id);
+          ResultSet rs =  comando.executeQuery("SELECT * FROM pontuacao WHERE id = " + id);
           rs.first();
             pontuacao = new Pontuacao(rs.getInt("id"),
             rs.getInt("pontuacao"),
@@ -104,7 +104,7 @@ public class PontuacaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from pontuacoes");
+            ResultSet rs = comando.executeQuery("SELECT * FROM pontuacao");
             
             while (rs.next()) {
                 Pontuacao pontuacao = new Pontuacao(

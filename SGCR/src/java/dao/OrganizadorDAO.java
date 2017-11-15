@@ -29,7 +29,7 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from organizadores");
+            ResultSet rs = comando.executeQuery("SELECT * from organizador");
             while (rs.next()) {
                 Organizador organizador = new Organizador(
                         rs.getString("nome"),
@@ -62,9 +62,9 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into organizadores ("
-                    + "id,nome,email,senha,sexo,dataNascimento,cpf,cep,cidade,estado,rua,bairro,numero,complemento, telefone,celular) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO organizador (id,nome,email,senha,sexo,dataNascimento,"
+                    + "cpf,cep,cidade,estado,rua,bairro,numero,complemento, telefone,celular) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, organizador.getId());
             comando.setString(2, organizador.getNome());
@@ -99,9 +99,9 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update organizadores set nome = ?,email = ?, senha = ?, sexo = ?, dataNascimento = ?, cpf = ?, "
-                    + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, " 
-                    + "celular = ? where id = ?";
+            String sql = "UPDATE organizador SET nome = ?,email = ?, senha = ?, sexo = ?, dataNascimento = ?, cpf = ?, "
+                    + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, "
+                    + "celular = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, organizador.getNome());
             comando.setString(2, organizador.getEmail());
@@ -139,7 +139,7 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from organizadores where id = " + organizador.getId();
+            stringSQL = "DELETE FROM organizador WHERE id = " + organizador.getId();
             comando.execute(stringSQL);
         } catch (Exception e) {
             throw e;
@@ -155,7 +155,7 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from organizadores where id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM organizador WHERE id = " + id);
             rs.first();
             organizador = new Organizador(
                     rs.getString("nome"),

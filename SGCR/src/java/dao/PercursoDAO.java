@@ -28,7 +28,7 @@ public class PercursoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from percursos");
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso");
 
             while (rs.next()) {
                 Percurso percurso = new Percurso(
@@ -52,7 +52,7 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into percursos (id,imagemPercurso,quilometragem,corridasId) values (?,?,?,?)";
+            String sql = "INSERT INTO percurso (id, imagemPercurso, quilometragem, corridasId) VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, percurso.getId());
             comando.setString(2, percurso.getImagemPercurso());
@@ -71,7 +71,7 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update percursos set imagemPercurso = ?,quilometragem = ?, corridasId = ? where id = ?";
+            String sql = "UPDATE percurso SET imagemPercurso = ?,quilometragem = ?, corridasId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, percurso.getImagemPercurso());
             comando.setDouble(2, percurso.getQuilometragem());
@@ -93,7 +93,7 @@ public class PercursoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from percursos where id = " + percurso.getId();
+            stringSQL = "DELETE FROM percurso WHERE id = " + percurso.getId();
             comando.execute(stringSQL);
         } catch (Exception e) {
             throw e;
@@ -109,7 +109,7 @@ public class PercursoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from percursos where id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE id = " + id);
             rs.first();
             percurso = new Percurso(
                     rs.getInt("id"), 

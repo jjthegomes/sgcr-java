@@ -23,7 +23,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from inscricoes");
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao");
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
@@ -54,9 +54,8 @@ public class InscricaoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into inscricoes ("
-                    + "id,dataCompra,numeroPeito,tempoPercorrido,formaPagamento,pago,percursosId,atletasId,kitsId) "
-                    + "values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO inscricao (id, dataCompra, numeroPeito, tempoPercorrido, formaPagamento, "
+                    + "pago, percursosId, atletasId, kitsId) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, inscricao.getId());
             comando.setString(2, inscricao.getDataCompra());
@@ -80,8 +79,8 @@ public class InscricaoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update inscricoes set dataCompra = ?, numeroPeito = ?, tempoPercorrido = ?, formaPagamento = ?, "
-                    + "pago = ?, percursosId = ?, atletasId = ?, kitsId = ? where id = ?";
+            String sql = "UPDATE inscricao SET dataCompra = ?, numeroPeito = ?, tempoPercorrido = ?, formaPagamento = ?, "
+                    + "pago = ?, percursosId = ?, atletasId = ?, kitsId = ? WHERE id = ?";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
@@ -111,7 +110,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from inscricoes where id = " + inscricao.getId();
+            stringSQL = "DELETE FROM inscricao WHERE id = " + inscricao.getId();
             comando.execute(stringSQL);
         } catch (Exception e) {
             throw e;
@@ -127,7 +126,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from inscricoes where id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE id = " + id);
             rs.first();
             inscricao = new Inscricao(
                     rs.getInt("id"),

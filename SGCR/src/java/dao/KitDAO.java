@@ -21,7 +21,7 @@ public class KitDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from kits");
+            ResultSet rs = comando.executeQuery("SELECT * from kit");
             
             while (rs.next()) {
                 Kit kit = new Kit(
@@ -45,7 +45,7 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into kits (id,nomeKit,imagemKit,tipoChip,corridasId) values (?,?,?,?,?)";
+            String sql = "INSERT INTO kit (id, nomeKit, imagemKit, tipoChip, corridasId) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, kit.getId());
             comando.setString(2, kit.getNomeKit());
@@ -65,7 +65,7 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "update kits set nomeKit = ?, imagemKit = ?,tipoChip = ?, corridasId = ? where id = ?";
+            String sql = "UPDATE kit SET nomeKit = ?, imagemKit = ?, tipoChip = ?, corridasId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNomeKit());
             comando.setString(2, kit.getImagemKit());
@@ -88,7 +88,7 @@ public class KitDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from kits where id = " + kit.getId();
+            stringSQL = "DELETE FROM kit WHERE id = " + kit.getId();
             comando.execute(stringSQL);
         } catch (Exception e) {
             throw e;
@@ -104,7 +104,7 @@ public class KitDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select * from kits where id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id);
             rs.first();
             kit = new Kit (
                     rs.getInt("id"), 
