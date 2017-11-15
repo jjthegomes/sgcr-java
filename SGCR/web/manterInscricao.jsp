@@ -40,15 +40,6 @@
                         </select>
                     </td>
                 </tr>
-                <tr> 
-                    <td>Forma de Pagamento:</td> 
-                    <td>
-                        <select name="optFormaPagamento" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="1" <c:if test="${inscricao.formaPagamento == '1'}"> selected</c:if>>Cartão de Crédito</option>
-                            <option value="0" <c:if test="${inscricao.formaPagamento == '0'}"> selected</c:if>>Boleto</option>
-                        </select>
-                    </td>
-                </tr>
                 <tr>
                     <td>Tempo Percorrido:</td> 
                     <td><input type="text" name="txtTempoPercorridoInscricao" value="${inscricao.tempoPercorrido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
@@ -90,6 +81,13 @@
                     <td>
                         <input type="submit" name="btnConfirmar" value="Confirmar"/>
                     </td>
+                </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaInscricaoController">Voltar para pesquisa</a></td>
                 </tr>
             </table>
         </form>

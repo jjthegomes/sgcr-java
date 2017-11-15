@@ -78,8 +78,8 @@ public class ManterCorridaController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
         String nomeCorrida = request.getParameter("txtNomeCorrida");
         int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
-        String horarioInicio = request.getParameter("txtHorarioInicioCorrida");
-        String horarioFinal = request.getParameter("txtHorarioFinalCorrida");
+        String horarioInicio = request.getParameter("txtHorario");
+        String horarioFinal = request.getParameter("txtData");
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");

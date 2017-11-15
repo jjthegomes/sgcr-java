@@ -48,5 +48,9 @@
         <form action="ManterInscricaoController?acao=prepararIncluir" method="post">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
+        <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
     </body>
 </html>

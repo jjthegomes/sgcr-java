@@ -67,10 +67,10 @@ public class CorridaDAO {
             comando.setInt(1, corrida.getId());
             comando.setString(2, corrida.getNomeCorrida());
             comando.setInt(3, corrida.getMaxPessoas());
-            comando.setString(4, corrida.getHorarioInicio());
-            comando.setString(5, corrida.getHorarioFinal());
+            comando.setString(4, corrida.getHorario());
+            comando.setString(5, corrida.getData());
             comando.setString(6, corrida.getBanner());
-            comando.setString(7, corrida.getRua());
+            comando.setString(7, corrida.getLogradouro());
             comando.setString(8, corrida.getCep());
             comando.setString(9, corrida.getCidade());
             comando.setString(10, corrida.getEstado());
@@ -114,10 +114,10 @@ public class CorridaDAO {
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNomeCorrida());
             comando.setInt(2, corrida.getMaxPessoas());
-            comando.setString(3, corrida.getHorarioInicio());
-            comando.setString(4, corrida.getHorarioFinal());
+            comando.setString(3, corrida.getHorario());
+            comando.setString(4, corrida.getData());
             comando.setString(5, corrida.getBanner());
-            comando.setString(6, corrida.getRua());
+            comando.setString(6, corrida.getLogradouro());
             comando.setString(7, corrida.getCep());
             comando.setString(8, corrida.getCidade());
             comando.setString(9, corrida.getEstado());

@@ -25,11 +25,11 @@
                 </tr>
                 <tr>
                     <td>Nome do kit:</td> 
-                    <td><input type="text" name="txtNomeKit" value="${kit.nomeKit}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtNomeKit" value="${kit.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Imagem do kit:</td>  
-                    <td><input type="text" name="fileImagemKit" value="${kit.imagemKit}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="fileImagemKit" value="${kit.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr> 
                     <td>Tipo do Chip:</td> 
@@ -55,6 +55,13 @@
                     <td>
                         <input type="submit" name="btnConfirmar" value="Confirmar"/>
                     </td>
+                </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaKitController">Voltar para pesquisa</a></td>
                 </tr>
             </table>
         </form>

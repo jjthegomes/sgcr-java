@@ -31,10 +31,14 @@
                     <td><a href="ManterPontuacaoController?acao=prepararEditar&id=<c:out value="${pontuacao.id}"/>">Editar</a> </td>
                     <td><a href="ManterPontuacaoController?acao=prepararExcluir&id=<c:out value="${pontuacao.id}"/>">Excluir</a> </td>
                 </tr>
-            </c:forEach>                    
+            </c:forEach>  
         </table>
         <form action="ManterPontuacaoController?acao=prepararIncluir" method="post">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
+        <br>
+        <tr>
+            <td><a href="index.jsp">Menu</a></td>
+        </tr>
     </body>
 </html>

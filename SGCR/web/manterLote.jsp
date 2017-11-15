@@ -15,7 +15,7 @@
     </head>
     <body>
 
-        <h1>Manter Ingressos - ${operacao}</h1>
+        <h1>Manter Lotes - ${operacao}</h1>
 
         <form action="ManterIngressoController?acao=confirmar${operacao}" method="post" name="frmManterIngresso"> 
             <!-- onsubmit="return validarFormulario(this)" --> 
@@ -26,23 +26,23 @@
                     </tr>
                     <tr>
                         <td>Tipo do Ingresso</td> 
-                        <td><input type="text" name="txtTipoIngresso" value="${ingresso.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtTipoLote" value="${ingresso.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Preço do Ingresso</td> 
-                        <td><input type="text" name="txtPrecoIngresso" value="${ingresso.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtPrecoLote" value="${ingresso.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data Inicio do Ingresso</td> 
-                        <td><input type="text" name="txtDataInicioIngresso" value="${ingresso.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataInicioLote" value="${ingresso.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data Final do Ingresso</td> 
-                        <td><input type="text" name="txtDataFinalIngresso" value="${ingresso.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataFinalLote" value="${ingresso.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Quantidade do Ingresso</td> 
-                        <td><input type="text" name="txtQuantidadeIngresso" value="${ingresso.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtQuantidadeLote" value="${ingresso.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Corrida</td>
@@ -58,6 +58,13 @@
                 </tr>
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaLoteController">Voltar para pesquisa</a></td>
                 </tr>
             </table>
         </form>

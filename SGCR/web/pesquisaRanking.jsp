@@ -33,10 +33,14 @@
                     <td><a href="ManterRankingController?acao=prepararEditar&id=<c:out value="${ranking.id}"/>">Editar</a> </td>
                     <td><a href="ManterRankingController?acao=prepararExcluir&id=<c:out value="${ranking.id}"/>">Excluir</a> </td>
                 </tr>
-            </c:forEach>                    
+            </c:forEach> 
         </table>
         <form action="ManterRankingController?acao=prepararIncluir" method="post">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
+        <br>
+        <tr>
+            <td><a href="index.jsp">Menu</a></td>
+        </tr>
     </body>
 </html>

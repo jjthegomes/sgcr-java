@@ -33,10 +33,14 @@
                     <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>">Excluir</a> </td>
                 </tr>
-            </c:forEach>                    
+            </c:forEach> 
         </table>
         <form action="ManterProdutoKitController?acao=prepararIncluir" method="post">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
+        <br>
+        <tr>
+            <td><a href="index.jsp">Menu</a></td>
+        </tr>
     </body>
 </html>

@@ -20,11 +20,11 @@
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Codigo da Corrida</td> 
+                    <td>Codigo</td> 
                     <td><input type="text" name="txtIdCorrida" value="${corrida.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Nome da Corrida</td> 
+                    <td>Nome</td> 
                     <td><input type="text" name="txtNomeCorrida" value="${corrida.nomeCorrida}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
@@ -33,43 +33,43 @@
                 </tr>
 
                 <tr>
-                    <td>Horario Inicio da Corrida</td> 
-                    <td><input type="text" name="txtHorarioInicioCorrida" value="${corrida.horarioFinal}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td>Horario</td> 
+                    <td><input type="text" name="txtHorario" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>   
                 <tr>
-                    <td>Horario Final da Corrida</td> 
-                    <td><input type="text" name="txtHorarioFinalCorrida" value="${corrida.horarioInicio}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td>Data</td> 
+                    <td><input type="text" name="txtData" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>   
                 <tr>
-                    <td>Banner da Corrida</td> 
+                    <td>Banner</td> 
                     <td><input type="text" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Rua do Corrida</td> 
-                    <td><input type="text" name="txtRuaCorrida" value="${corrida.rua}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td>Rua</td> 
+                    <td><input type="text" name="txtRuaCorrida" value="${corrida.logradouro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>CEP da Corrida</td> 
+                    <td>CEP</td> 
                     <td><input type="text" name="txtCepCorrida" value="${corrida.cep}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Cidade do Corrida</td> 
+                    <td>Cidade</td> 
                     <td><input type="text" name="txtCidadeCorrida" value="${corrida.cidade}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Estado do Corrida</td> 
+                    <td>Estado</td> 
                     <td><input type="text" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>                               
                 <tr>
-                    <td>Bairro do Corrida</td> 
+                    <td>Bairro</td> 
                     <td><input type="text" name="txtBairroCorrida" value="${corrida.bairro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Descricao da Corrida</td> 
+                    <td>Descricao</td> 
                     <td><input type="text" name="txtDescricaoCorrida" value="${corrida.descricao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Regulamento da Corrida</td> 
+                    <td>Regulamento</td> 
                     <td><input type="text" name="txtRegulamentoCorrida" value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
@@ -87,6 +87,13 @@
 
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaCorridaController">Voltar para pesquisa</a></td>
                 </tr>
             </table>
         </form>

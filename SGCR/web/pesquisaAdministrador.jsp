@@ -22,7 +22,6 @@
             <th>Codigo</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Senha</th>
             <th colspan="2">Ação</th>
         </tr>
         <c:forEach items="${administradores}" var="administrador">
@@ -30,7 +29,6 @@
                 <td><c:out value="${administrador.id}" /> </td>
                 <td><c:out value="${administrador.nome}" /> </td>
                 <td><c:out value="${administrador.email}" /> </td>
-                <td><c:out value="${administrador.senha}" /> </td>
                 <td><a href="ManterAdministradorController?acao=prepararEditar&id=<c:out value="${administrador.id}"/>">Editar</a> </td>
                 <td><a href="ManterAdministradorController?acao=prepararExcluir&id=<c:out value="${administrador.id}"/>">Excluir</a> </td>
             </tr>
@@ -40,4 +38,8 @@
     <form action="ManterAdministradorController?acao=prepararIncluir" method="post">
         <input type="submit" name="btnIncluir" value="Incluir">
     </form>
+    <br>
+        <tr>
+            <td><a href="index.jsp">Menu</a></td>
+        </tr>
     </html>

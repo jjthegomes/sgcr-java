@@ -22,12 +22,8 @@
             <th>Codigo</th>
             <th>Nome</th>
             <th>E-mail</th>
-            <th>Sexo</th>
             <th>Data Nascimento</th>
-            <th>CPF</th>
-            <th>CEP</th>
-            <th>Rua</th>
-            <th>Bairro</th>
+          
 
 
             <th colspan="2">Ação</th>
@@ -36,13 +32,8 @@
             <tr>
                 <td><c:out value="${atleta.id}" /> </td>
                 <td><c:out value="${atleta.nome}" /> </td>
-                <td><c:out value="${atleta.email}" /> </td>
-                <td><c:out value="${atleta.sexo}" /> </td>            
+                <td><c:out value="${atleta.email}" /> </td>        
                 <td><c:out value="${atleta.dataNascimento}" /> </td>
-            <td><c:out value="${atleta.cpf}" /> </td>
-            <td><c:out value="${atleta.cep}" /> </td>
-            <td><c:out value="${atleta.rua}" /> </td>
-            <td><c:out value="${atleta.bairro}" /> </td>
             <td><a href="ManterAtletaController?acao=prepararEditar&id=<c:out value="${atleta.id}"/>">Editar</a> </td>
             <td><a href="ManterAtletaController?acao=prepararExcluir&id=<c:out value="${atleta.id}"/>">Excluir</a> </td>
         </tr>
@@ -52,4 +43,8 @@
 <form action="ManterAtletaController?acao=prepararIncluir" method="post">
     <input type="submit" name="btnIncluir" value="Incluir">
 </form>
+    <br>
+        <tr>
+            <td><a href="index.jsp">Menu</a></td>
+        </tr>
 </html>

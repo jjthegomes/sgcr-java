@@ -38,6 +38,13 @@
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaAdministradorController">Voltar para pesquisa</a></td>
+                </tr>
             </table>
         </form>
     </form>

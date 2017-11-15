@@ -18,10 +18,10 @@ public class Corrida {
     private int id;
     private String nomeCorrida;
     private int maxPessoas;
-    private String horarioInicio;
-    private String horarioFinal;
+    private String horario;
+    private String data;
     private String banner;
-    private String rua;
+    private String logradouro;
     private String cep;
     private String cidade;
     private String estado;
@@ -36,14 +36,14 @@ public class Corrida {
 
     }
 
-    public Corrida(int id, String nomeCorrida, int maxPessoas, String horarioInicio, String horarioFinal, String banner, String rua, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
+    public Corrida(int id, String nomeCorrida, int maxPessoas, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
         this.id = id;
         this.nomeCorrida = nomeCorrida;
         this.maxPessoas = maxPessoas;
-        this.horarioInicio = horarioInicio;
-        this.horarioFinal = horarioFinal;
+        this.horario = horario;
+        this.data = data;
         this.banner = banner;
-        this.rua = rua;
+        this.logradouro = logradouro;
         this.cep = cep;
         this.cidade = cidade;
         this.estado = estado;
@@ -77,20 +77,20 @@ public class Corrida {
         this.maxPessoas = maxPessoas;
     }
 
-    public String getHorarioInicio() {
-        return horarioInicio;
+    public String getHorario() {
+        return horario;
     }
 
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
-    public String getHorarioFinal() {
-        return horarioFinal;
+    public String getData() {
+        return data;
     }
 
-    public void setHorarioFinal(String horarioFinal) {
-        this.horarioFinal = horarioFinal;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getBanner() {
@@ -101,12 +101,12 @@ public class Corrida {
         this.banner = banner;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getCep() {
