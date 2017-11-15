@@ -19,86 +19,87 @@ import modelo.ProdutoKit;
  * @author RAJ
  */
 public class ProdutoKitDAO {
-    
-    public static void gravar (ProdutoKit produtoKit)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
-        try{
+
+    public static void gravar(ProdutoKit produtoKit) throws SQLException,
+            ClassNotFoundException {
+        Connection conexao = null;
+        try {
             conexao = BD.getConexao();
-            String sql= "INSERT INTO produto_kit (id, nome, valor, kitsId) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO produto_kit (id, kit_id, descricao, valor, produto_id) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1,produtoKit.getId());
-            comando.setString(2,produtoKit.getNome());
-            comando.setDouble(3,produtoKit.getValor());
-            comando.setInt(4,produtoKit.getKits().getId());
+            comando.setInt(1, produtoKit.getId());
+            comando.setInt(2, produtoKit.getKit().getId());
+            comando.setString(3, produtoKit.getDescricao());
+            comando.setDouble(4, produtoKit.getValor());
+            comando.setInt(5, produtoKit.getProduto().getId());
+
             comando.execute();
             comando.close();
             conexao.close();
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             throw e;
         }
     }
-    
-    public static void alterar (ProdutoKit produtoKit)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
-        try{
+
+    public static void alterar(ProdutoKit produtoKit) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
             conexao = BD.getConexao();
-            String sql= "UPDATE produto_kit SET nome = ?, valor = ?, kitsId = ? WHERE id =?";
+            String sql = "UPDATE produto_kit SET descricao = ?, valor = ?, kitsId = ? WHERE id =?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1,produtoKit.getNome());
-            comando.setDouble(2,produtoKit.getValor());
-            comando.setInt(3,produtoKit.getKits().getId());
-            comando.setInt(4,produtoKit.getId());
+            comando.setString(1, produtoKit.getDescricao());
+            comando.setDouble(2, produtoKit.getValor());
+            comando.setInt(3, produtoKit.getKit().getId());
+            comando.setInt(4, produtoKit.getId());
             comando.execute();
             comando.close();
             conexao.close();
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             throw e;
         }
     }
-    
-    public static void excluir (ProdutoKit produtoKit)throws SQLException,
-            ClassNotFoundException{
-        Connection conexao =null;
-        Statement comando = null;
-        String stringSQL;
-        try{
-          conexao = BD.getConexao();
-          comando= conexao.createStatement();
-          stringSQL = "DELETE FROM produto_kit WHERE id ="+produtoKit.getId();
-                  comando.execute(stringSQL);
-        }catch(SQLException e){
-            throw e;
-        }finally{
-            fecharConexao(conexao,comando);
-        }
-    }
-    
-    public static ProdutoKit obterProdutoKit (int id)throws ClassNotFoundException{
+
+    public static void excluir(ProdutoKit produtoKit) throws SQLException,
+            ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        ProdutoKit produtoKit =null;
-        try{
-          conexao =BD.getConexao();
-          comando= conexao.createStatement();
-          ResultSet rs =  comando.executeQuery("SELECT * FROM produto_kit WHERE id = "+ id);
-          rs.first();
-            produtoKit= new ProdutoKit(rs.getInt("id"),
-            rs.getString("nome"),
-            rs.getDouble("valor"),
-            null);
-            produtoKit.setKitsId(rs.getInt("kitsId"));
-        }catch(SQLException e){
-             e.printStackTrace();
-        }finally{
-            fecharConexao(conexao,comando);
+        String stringSQL;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            stringSQL = "DELETE FROM produto_kit WHERE id =" + produtoKit.getId();
+            comando.execute(stringSQL);
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+    }
+
+    public static ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        ProdutoKit produtoKit = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM produto_kit WHERE id = " + id);
+            rs.first();
+            produtoKit = new ProdutoKit(rs.getInt("id"),
+                    rs.getString("descricao"),
+                    rs.getDouble("valor"),
+                    null);
+            produtoKit.setKitId(rs.getInt("kitsId"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
         }
         return produtoKit;
     }
-    
+
     public static List<ProdutoKit> obterProdutos_Kit() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -107,14 +108,14 @@ public class ProdutoKitDAO {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM produto_kit");
-            
+
             while (rs.next()) {
                 ProdutoKit produtoKit = new ProdutoKit(
-                        rs.getInt("id"), 
-                        rs.getString("nome"), 
-                        rs.getDouble("valor"), 
+                        rs.getInt("id"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"),
                         null);
-                produtoKit.setKitsId(rs.getInt("kitsId"));
+                produtoKit.setKitId(rs.getInt("kitsId"));
                 produtosKit.add(produtoKit);
             }
         } catch (SQLException e) {
@@ -124,17 +125,17 @@ public class ProdutoKitDAO {
         }
         return produtosKit;
     }
-    
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
-            if(comando != null) {
+            if (comando != null) {
                 comando.close();
             }
-            if(conexao != null) {
+            if (conexao != null) {
                 conexao.close();
             }
         } catch (SQLException e) {
-            
+
         }
     }
 }

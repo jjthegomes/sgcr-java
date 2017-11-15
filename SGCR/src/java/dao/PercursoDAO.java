@@ -33,11 +33,11 @@ public class PercursoDAO {
             while (rs.next()) {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
-                        rs.getString("imagemPercurso"),
+                        rs.getString("imagem"),
                         rs.getDouble("quilometragem"),
                         null);
-                percurso.setCorridasId(rs.getInt("corridasId"));
-                percurso.setCorrida(Corrida.obterCorrida(percurso.getCorridasId()));
+                percurso.setCorridaId(rs.getInt("corridasId"));
+                percurso.setCorrida(Corrida.obterCorrida(percurso.getCorridaId()));
                 percursos.add(percurso);
             }
         } catch (SQLException e) {
@@ -52,10 +52,10 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO percurso (id, imagemPercurso, quilometragem, corridasId) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO percurso (id, imagem, quilometragem, corridasId) VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, percurso.getId());
-            comando.setString(2, percurso.getImagemPercurso());
+            comando.setString(2, percurso.getImagem());
             comando.setDouble(3, percurso.getQuilometragem());
             comando.setInt(4, percurso.getCorrida().getId());
 
@@ -71,9 +71,9 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE percurso SET imagemPercurso = ?,quilometragem = ?, corridasId = ? WHERE id = ?";
+            String sql = "UPDATE percurso SET imagem = ?,quilometragem = ?, corridasId = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, percurso.getImagemPercurso());
+            comando.setString(1, percurso.getImagem());
             comando.setDouble(2, percurso.getQuilometragem());
             comando.setInt(3, percurso.getCorrida().getId());
             comando.setInt(4, percurso.getId());
@@ -113,10 +113,10 @@ public class PercursoDAO {
             rs.first();
             percurso = new Percurso(
                     rs.getInt("id"), 
-                    rs.getString("imagemPercurso"), 
+                    rs.getString("imagem"), 
                     rs.getDouble("quilometragem"),
                     null);
-            percurso.setCorridasId(rs.getInt("corridasId"));
+            percurso.setCorridaId(rs.getInt("corridasId"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

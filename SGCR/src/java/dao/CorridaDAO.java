@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Corrida;
@@ -46,7 +45,7 @@ public class CorridaDAO {
                         rs.getString("descricao"),
                         rs.getString("regulamento"),
                         null);
-                corrida.setOrganizadoresId(rs.getInt("organizador_id"));
+                corrida.setOrganizadorId(rs.getInt("organizador_id"));
                 corridas.add(corrida);
             }
         } catch (SQLException e) {
@@ -61,7 +60,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO corrida (id, nomeCorrida, max_pessoas, horario, data, banner, "
+            String sql = "INSERT INTO corrida (id, nome, max_pessoas, horario, data, banner, "
                     + "logradouro, cep, cidade, estado, bairro, descricao, regulamento, organizador_id) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -78,12 +77,7 @@ public class CorridaDAO {
             comando.setString(11, corrida.getBairro());
             comando.setString(12, corrida.getDescricao());
             comando.setString(13, corrida.getRegulamento());
-            /*  if(corrida.getOrganizador() == null){
-               comando.setInt(14, Types.NULL);
-           }else{*/
             comando.setInt(14, corrida.getOrganizador().getId());
-            //}
-
             comando.execute();
             comando.close();
             conexao.close();
@@ -114,9 +108,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            /*id, nomeCorrida, max_pessoas, horaInicio, data, banner, "
-                    + "logradouro, cep, cidade, estado, bairro, descricao, regulamento, organizador_id) */
-            String sql = "UPDATE corrida SET nomeCorrida = ?, max_pessoas = ?, horario = ?, data = ?, "
+            String sql = "UPDATE corrida SET nome = ?, max_pessoas = ?, horario = ?, data = ?, "
                     + "banner = ?, logradouro = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -153,7 +145,7 @@ public class CorridaDAO {
             rs.first();
             corrida = new Corrida(
                     rs.getInt("id"),
-                    rs.getString("nomeCorrida"),
+                    rs.getString("nome"),
                     rs.getInt("max_pessoas"),
                     rs.getString("horario"),
                     rs.getString("data"),
@@ -166,7 +158,7 @@ public class CorridaDAO {
                     rs.getString("descricao"),
                     rs.getString("regulamento"),
                     null);
-            corrida.setOrganizadoresId(rs.getInt("organizador_id"));
+            corrida.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

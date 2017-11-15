@@ -13,8 +13,8 @@
         <servlet-class>controller.PesquisaCorridaController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PesquisaIngressoController</servlet-name>
-        <servlet-class>controller.PesquisaIngressoController</servlet-class>
+        <servlet-name>PesquisaLoteController</servlet-name>
+        <servlet-class>controller.PesquisaLoteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PesquisaKitController</servlet-name>
@@ -69,8 +69,8 @@
         <servlet-class>controller.ManterCorridaController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManterIngressoController</servlet-name>
-        <servlet-class>controller.ManterIngressoController</servlet-class>
+        <servlet-name>ManterLoteController</servlet-name>
+        <servlet-class>controller.ManterLoteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManterAdministradorController</servlet-name>
@@ -101,8 +101,8 @@
         <url-pattern>/PesquisaCorridaController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PesquisaIngressoController</servlet-name>
-        <url-pattern>/PesquisaIngressoController</url-pattern>
+        <servlet-name>PesquisaLoteController</servlet-name>
+        <url-pattern>/PesquisaLoteController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PesquisaKitController</servlet-name>
@@ -157,8 +157,8 @@
         <url-pattern>/ManterCorridaController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManterIngressoController</servlet-name>
-        <url-pattern>/ManterIngressoController</url-pattern>
+        <servlet-name>ManterLoteController</servlet-name>
+        <url-pattern>/ManterLoteController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManterAdministradorController</servlet-name>

@@ -36,11 +36,11 @@ public class ManterInscricaoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
-        if(acao.equals("prepararIncluir")) {
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
         } else {
-            if(acao.equals("confirmarIncluir")) {
-                confirmarIncluir(request,response);
+            if (acao.equals("confirmarIncluir")) {
+                confirmarIncluir(request, response);
             } else {
                 if (acao.equals("prepararExcluir")) {
                     prepararExcluir(request, response);
@@ -60,7 +60,7 @@ public class ManterInscricaoController extends HttpServlet {
             }
         }
     }
-    
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
@@ -70,11 +70,11 @@ public class ManterInscricaoController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
-            
+
         } catch (IOException ex) {
-            
+
         } catch (ClassNotFoundException ex) {
-            
+
         }
     }
 
@@ -119,19 +119,24 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
-        String dataCompra = request.getParameter("txtDataCompraInscricao");
-        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
-        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
-        String formaPagamento = request.getParameter("optFormaPagamento");
-        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
+        String dataCompra = "00/00/0000";
+        String numeroPeito = "0";
+        Boolean pago = false;
+        Boolean kitRetirado = false;
+        String tempoLargada = "00:00:00";
+        String tempoChegada = "00:00:00";
+
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
+        int kitCorridaId = Integer.parseInt(request.getParameter("hiddenCorrida"));
+
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
-            Kit kit = Kit.obterKit(kitId);
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, percurso, kit);
+            Kit kit = Kit.obterKit(kitId, kitCorridaId);
+
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit);
             inscricao.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
@@ -167,9 +172,12 @@ public class ManterInscricaoController extends HttpServlet {
         String dataCompra = request.getParameter("txtDataCompraInscricao");
         String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
         Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
-        String formaPagamento = request.getParameter("optFormaPagamento");
-        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
-        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, null, null, null);
+        Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
+        String tempoLargada = request.getParameter("txtTempoLargada");
+
+        String tempoChegada = request.getParameter("txtTempoChegada");
+
+        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null);
         try {
             inscricao.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
@@ -203,23 +211,24 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
-        String dataCompra = request.getParameter("txtDataCompraInscricao");
-        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
-        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
-        String formaPagamento = request.getParameter("optFormaPagamento");
-        String tempoPercorrido = request.getParameter("txtTempoPercorridoInscricao");
-        int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
+        String dataCompra = "00/00/0000";
+        String numeroPeito = "0";
+        Boolean pago = false;
+        Boolean kitRetirado = false;
+        String tempoLargada = "00:00:00";
+        String tempoChegada = "00:00:00";
+
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
+        int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
-        
+        int kitCorridaId = Integer.parseInt(request.getParameter("hiddenCorrida"));
+
         try {
-            Percurso percurso = null;
-            percurso = Percurso.obterPercurso(percursoId);
-            Atleta atleta = null;
-            atleta = Atleta.obterAtleta(atletaId);
-            Kit kit = null;
-            kit = Kit.obterKit(kitId);
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, formaPagamento, tempoPercorrido, atleta, percurso, kit);
+            Atleta atleta = Atleta.obterAtleta(atletaId);
+            Percurso percurso = Percurso.obterPercurso(percursoId);
+            Kit kit = Kit.obterKit(kitId, kitCorridaId);
+
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit);
             inscricao.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);

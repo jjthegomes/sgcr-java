@@ -14,23 +14,23 @@ import modelo.Kit;
  * @author RAJ
  */
 public class KitDAO {
-    public static List<Kit> obterKit() throws ClassNotFoundException {
+    public static List<Kit> obterKits() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Kit> kits = new ArrayList<Kit>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * from kit");
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit");
             
             while (rs.next()) {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
-                        rs.getString("nomeKit"),
-                        rs.getString("imagemKit"), 
-                        rs.getString("tipoChip"), 
+                        rs.getString("nome"),
+                        rs.getString("imagem"), 
+                        rs.getString("tipo_chip"), 
                         null);
-                kit.setCorridasId(rs.getInt("corridasId"));
+                kit.setCorridaId(rs.getInt("corrida_id"));
                 kits.add(kit);
             }
         } catch (SQLException e) {
@@ -45,11 +45,11 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (id, nomeKit, imagemKit, tipoChip, corridasId) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO kit (id, nome, imagem, tipo_chip, corrida_id) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, kit.getId());
-            comando.setString(2, kit.getNomeKit());
-            comando.setString(3, kit.getImagemKit());
+            comando.setString(2, kit.getNome());
+            comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
             comando.setInt(5, kit.getCorrida().getId());
 
@@ -65,10 +65,10 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE kit SET nomeKit = ?, imagemKit = ?, tipoChip = ?, corridasId = ? WHERE id = ?";
+            String sql = "UPDATE kit SET nome = ?, imagem = ?, tipo_chip = ?, corrida_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, kit.getNomeKit());
-            comando.setString(2, kit.getImagemKit());
+            comando.setString(1, kit.getNome());
+            comando.setString(2, kit.getImagem());
             comando.setString(3, kit.getTipoChip());
             comando.setInt(4, kit.getCorrida().getId());
             comando.setInt(5, kit.getId());
@@ -97,22 +97,22 @@ public class KitDAO {
         }
     }
     
-    public static Kit obterKit(int id) throws ClassNotFoundException {
+    public static Kit obterKit(int id, int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         Kit kit = null;
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id + " AND corrida_id = " + corridaId);
             rs.first();
             kit = new Kit (
                     rs.getInt("id"), 
-                    rs.getString("nomeKit"),
-                    rs.getString("imagemKit"), 
-                    rs.getString("tipoChip"),
+                    rs.getString("nome"),
+                    rs.getString("imagem"), 
+                    rs.getString("tipo_chip"),
                     null);
-            kit.setCorridasId(rs.getInt("corridasId"));
+            kit.setCorridaId(rs.getInt("corrida_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

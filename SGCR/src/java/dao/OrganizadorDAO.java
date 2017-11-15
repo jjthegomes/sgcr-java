@@ -29,11 +29,11 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * from organizador");
+            ResultSet rs = comando.executeQuery("SELECT * FROM organizador");
             while (rs.next()) {
                 Organizador organizador = new Organizador(
                         rs.getString("nome"),
-                        rs.getString("dataNascimento"),
+                        rs.getString("data_nascimento"),
                         rs.getString("sexo"),
                         rs.getString("cpf"),
                         rs.getString("cep"),
@@ -62,7 +62,7 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO organizador (id,nome,email,senha,sexo,dataNascimento,"
+            String sql = "INSERT INTO organizador (id,nome,email,senha,sexo,data_nascimento,"
                     + "cpf,cep,cidade,estado,rua,bairro,numero,complemento, telefone,celular) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -99,7 +99,7 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE organizador SET nome = ?,email = ?, senha = ?, sexo = ?, dataNascimento = ?, cpf = ?, "
+            String sql = "UPDATE organizador SET nome = ?,email = ?, senha = ?, sexo = ?, data_nascimento = ?, cpf = ?, "
                     + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, "
                     + "celular = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -159,7 +159,7 @@ public class OrganizadorDAO {
             rs.first();
             organizador = new Organizador(
                     rs.getString("nome"),
-                    rs.getString("dataNascimento"),
+                    rs.getString("data_nascimento"),
                     rs.getString("sexo"),
                     rs.getString("cpf"),
                     rs.getString("cep"),

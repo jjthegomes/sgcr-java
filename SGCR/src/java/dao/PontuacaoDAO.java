@@ -88,7 +88,7 @@ public class PontuacaoDAO {
             pontuacao = new Pontuacao(rs.getInt("id"),
             rs.getInt("pontuacao"),
             null);
-            pontuacao.setCorridasId(rs.getInt("corridasId"));
+            pontuacao.setCorridaId(rs.getInt("corridasId"));
         }catch(SQLException e){
              e.printStackTrace();
         }finally{
@@ -111,7 +111,7 @@ public class PontuacaoDAO {
                         rs.getInt("id"), 
                         rs.getInt("pontuacao"), 
                         null);
-                pontuacao.setCorridasId(rs.getInt("corridasId"));
+                pontuacao.setCorridaId(rs.getInt("corridasId"));
                 pontuacoes.add(pontuacao);
             }
         } catch (SQLException e) {

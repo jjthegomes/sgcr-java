@@ -25,11 +25,11 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ranking (id, nomeRanking, intervaloFaixaEtaria, administradorId) "
+            String sql = "INSERT INTO ranking (id, nome, intervalo_faixa_etaria, administrador_id) "
                     + "VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, ranking.getId());
-            comando.setString(2, ranking.getNomeRanking());
+            comando.setString(2, ranking.getNome());
             comando.setInt(3, ranking.getIntervaloFaixaEtaria());
             comando.setInt(4, ranking.getAdministrador().getId());
             comando.execute();
@@ -41,15 +41,14 @@ public class RankingDAO {
         }
     }
 
-    public static void alterar(Ranking ranking) throws SQLException,
-            ClassNotFoundException {
+    public static void alterar(Ranking ranking) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE ranking SET nomeRanking = ?, intervaloFaixaEtaria = ?, administradorId = ? "
+            String sql = "UPDATE ranking SET nome = ?, intervalo_faixa_etaria = ?, administrador_id = ? "
                     + "WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, ranking.getNomeRanking());
+            comando.setString(1, ranking.getNome());
             comando.setInt(2, ranking.getIntervaloFaixaEtaria());
             comando.setInt(3, ranking.getAdministrador().getId());
             comando.setInt(4, ranking.getId());
@@ -62,8 +61,7 @@ public class RankingDAO {
         }
     }
 
-    public static void excluir(Ranking ranking) throws SQLException,
-            ClassNotFoundException {
+    public static void excluir(Ranking ranking) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         String stringSQL;
@@ -89,10 +87,10 @@ public class RankingDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM ranking WHERE id = " + id);
             rs.first();
             ranking = new Ranking(rs.getInt("id"),
-                    rs.getString("nomeRanking"),
-                    rs.getInt("intervaloFaixaEtaria"),
+                    rs.getString("nome"),
+                    rs.getInt("intervalo_faixa_etaria"),
                     null);
-            ranking.setAdministradorId(rs.getInt("administradorId"));
+            ranking.setAdministradorId(rs.getInt("administrador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,10 +111,10 @@ public class RankingDAO {
             while (rs.next()) {
                 Ranking ranking = new Ranking(
                         rs.getInt("id"),
-                        rs.getString("nomeRanking"),
-                        rs.getInt("intervaloFaixaEtaria"),
+                        rs.getString("nome"),
+                        rs.getInt("intervalo_faixa_etaria"),
                         null);
-                ranking.setAdministradorId(rs.getInt("administradorId"));
+                ranking.setAdministradorId(rs.getInt("administrador_id"));
                 rankings.add(ranking);
             }
         } catch (SQLException e) {
