@@ -11,20 +11,20 @@ import java.util.List;
 public class Kit {
 
     private int id;
-    private String nomeKit;
-    private String imagemKit;
+    private String nome;
+    private String imagem;
     private String tipoChip;
     private Corrida corrida;
 
-    private int corridasId;
+    private int corridaId;
 
     public Kit() {
     }
 
-    public Kit(int id, String nomeKit, String imagemKit, String tipoChip, Corrida corrida) {
+    public Kit(int id, String nome, String imagem, String tipoChip, Corrida corrida) {
         this.id = id;
-        this.nomeKit = nomeKit;
-        this.imagemKit = imagemKit;
+        this.nome = nome;
+        this.imagem = imagem;
         this.tipoChip = tipoChip;
         this.corrida = corrida;
     }
@@ -37,12 +37,12 @@ public class Kit {
         this.id = id;
     }
 
-    public String getImagemKit() {
-        return imagemKit;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setImagemKit(String imagemKit) {
-        this.imagemKit = imagemKit;
+    public void setImagem(String imagemKit) {
+        this.imagem = imagemKit;
     }
 
     public String getTipoChip() {
@@ -61,24 +61,24 @@ public class Kit {
         this.corrida = corrida;
     }
 
-    public int getCorridasId() {
-        return corridasId;
+    public int getCorridaId() {
+        return corridaId;
     }
 
-    public void setCorridasId(int corridasId) {
-        this.corridasId = corridasId;
+    public void setCorridaId(int corridaId) {
+        this.corridaId = corridaId;
     }
 
-    public String getNomeKit() {
-        return nomeKit;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeKit(String nomeKit) {
-        this.nomeKit = nomeKit;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public static List<Kit> obterKits() throws ClassNotFoundException {
-        return KitDAO.obterKit();
+        return KitDAO.obterKits();
     }
     
     public void gravar() throws SQLException, ClassNotFoundException {
@@ -93,7 +93,7 @@ public class Kit {
         KitDAO.excluir(this);
     }
     
-    public static Kit obterKit(int id) throws ClassNotFoundException {
-        return KitDAO.obterKit(id);
+    public static Kit obterKit(int id, int corridaId) throws ClassNotFoundException {
+        return KitDAO.obterKit(id, corridaId);
     }
 }

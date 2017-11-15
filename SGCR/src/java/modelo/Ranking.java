@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class Ranking {
     private int id;
-    private String nomeRanking;
+    private String nome;
     private int intervaloFaixaEtaria;
     private Administrador administrador;
     
     private int administradorId;
 
-    public Ranking(int id, String nomeRanking, int intervaloFaixaEtaria, Administrador administrador) {
+    public Ranking(int id, String nome, int intervaloFaixaEtaria, Administrador administrador) {
         this.id = id;
-        this.nomeRanking = nomeRanking;
+        this.nome = nome;
         this.intervaloFaixaEtaria = intervaloFaixaEtaria;
         this.administrador = administrador;
     }
@@ -27,30 +27,17 @@ public class Ranking {
     public int getId() {
         return id;
     }
-    public void gravar() throws SQLException,
-        ClassNotFoundException{
-        RankingDAO.gravar(this);
-    }
-    public void alterar() throws SQLException, ClassNotFoundException{
-        RankingDAO.alterar(this);
-    }
-    
-    public void excluir() throws SQLException, ClassNotFoundException{
-        RankingDAO.excluir(this);
-    }
-    
-   
     
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getNomeRanking() {
-        return nomeRanking;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeRanking(String nomeRanking) {
-        this.nomeRanking = nomeRanking;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public int getIntervaloFaixaEtaria() {
@@ -79,6 +66,18 @@ public class Ranking {
 
     public void setAdministradorId(int administradorId) {
         this.administradorId = administradorId;
+    }
+    
+    public void gravar() throws SQLException,
+        ClassNotFoundException{
+        RankingDAO.gravar(this);
+    }
+    public void alterar() throws SQLException, ClassNotFoundException{
+        RankingDAO.alterar(this);
+    }
+    
+    public void excluir() throws SQLException, ClassNotFoundException{
+        RankingDAO.excluir(this);
     }
     
     public static List<Ranking> obterRankings() throws ClassNotFoundException{

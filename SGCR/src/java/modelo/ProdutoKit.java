@@ -11,19 +11,22 @@ import java.util.List;
  */
 public class ProdutoKit {
     private int id;
-    private String nome;
+    private String descricao;
     private Double valor;
-    private Kit kits;
-    private int kitsId;
-
+    private Kit kit;
+    private Produto produto;
+    
+    private int kitId;
+    private int produtoId;
+    
     public ProdutoKit() {
     }
 
-    public ProdutoKit(int id, String nome, Double valor, Kit kits) {
+    public ProdutoKit(int id, String descricao, Double valor, Kit kit) {
         this.id = id;
-        this.nome = nome;
+        this.descricao = descricao;
         this.valor = valor;
-        this.kits = kits;
+        this.kit = kit;
     }
 
     public int getId() {
@@ -34,12 +37,12 @@ public class ProdutoKit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nomeProduto) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Double getValor() {
@@ -48,6 +51,38 @@ public class ProdutoKit {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+    
+    public Kit getKit() {
+        return kit;
+    }
+
+    public void setKit(Kit kit) {
+        this.kit = kit;
+    }
+
+    public int getKitId() {
+        return kitId;
+    }
+
+    public void setKitId(int kitId) {
+        this.kitId = kitId;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public int getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(int produtoId) {
+        this.produtoId = produtoId;
     }
     
     public void gravar() throws SQLException,
@@ -64,22 +99,6 @@ public class ProdutoKit {
     
     public static ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException{
         return ProdutoKitDAO.obterProdutoKit(id);
-    }
-
-    public Kit getKits() {
-        return kits;
-    }
-
-    public void setKits(Kit kits) {
-        this.kits = kits;
-    }
-
-    public int getKitsId() {
-        return kitsId;
-    }
-
-    public void setKitsId(int kitsId) {
-        this.kitsId = kitsId;
     }
     
      public static List<ProdutoKit> obterProdutos_Kit() throws ClassNotFoundException{

@@ -16,15 +16,15 @@ import java.util.List;
 public class Percurso {
 
     private int id;
-    private String imagemPercurso;
+    private String imagem;
     private Double quilometragem;
     private Corrida corrida;
 
-    private int corridasId;
+    private int corridaId;
 
-    public Percurso(int id, String imagemPercurso, Double quilometragem, Corrida corrida) {
+    public Percurso(int id, String imagem, Double quilometragem, Corrida corrida) {
         this.id = id;
-        this.imagemPercurso = imagemPercurso;
+        this.imagem = imagem;
         this.quilometragem = quilometragem;
         this.corrida = corrida;
     } 
@@ -37,12 +37,12 @@ public class Percurso {
         this.id = id;
     }
 
-    public String getImagemPercurso() {
-        return imagemPercurso;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setImagemPercurso(String imagemPercurso) {
-        this.imagemPercurso = imagemPercurso;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public Double getQuilometragem() {
@@ -61,12 +61,12 @@ public class Percurso {
         this.corrida = corrida;
     }        
 
-    public int getCorridasId() {
-        return corridasId;
+    public int getCorridaId() {
+        return corridaId;
     }
 
-    public void setCorridasId(int corridasId) {
-        this.corridasId = corridasId;
+    public void setCorridaId(int corridaId) {
+        this.corridaId = corridaId;
     }
     
     public static List<Percurso> obterPercursos() throws ClassNotFoundException {

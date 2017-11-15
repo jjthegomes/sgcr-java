@@ -14,23 +14,26 @@ public class Inscricao {
     private String dataCompra;
     private String numeroPeito;
     private boolean pago;
-    private String formaPagamento;
-    private String tempoPercorrido;
+    private boolean kitRetirado;    
+    private String tempoLargada;
+    private String tempoChegada;
     private Atleta atleta;
     private Percurso percurso;
     private Kit kit;
     
-    private int atletasId;
-    private int percursosId;
-    private int kitsId;
+    private int atletaId;
+    private int percursoId;
+    private int kitId;
+    private int kitCorridaId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, String formaPagamento, String tempoPercorrido, Atleta atleta, Percurso percurso, Kit kit) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
         this.pago = pago;
-        this.formaPagamento = formaPagamento;
-        this.tempoPercorrido = tempoPercorrido;
+        this.kitRetirado = kitRetirado;
+        this.tempoLargada = tempoLargada;
+        this.tempoChegada = tempoChegada;
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;
@@ -67,21 +70,29 @@ public class Inscricao {
     public void setPago(boolean pago) {
         this.pago = pago;
     }
-
-    public String getFormaPagamento() {
-        return formaPagamento;
+    
+    public boolean isKitRetirado() {
+        return kitRetirado;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
+    public void setKitRetirado(boolean kitRetirado) {
+        this.kitRetirado = kitRetirado;
     }
 
-    public String getTempoPercorrido() {
-        return tempoPercorrido;
+    public String getTempoLargada() {
+        return tempoLargada;
     }
 
-    public void setTempoPercorrido(String tempoPercorrido) {
-        this.tempoPercorrido = tempoPercorrido;
+    public void setTempoLargada(String tempoLargada) {
+        this.tempoLargada = tempoLargada;
+    }
+    
+    public String getTempoChegada() {
+        return tempoChegada;
+    }
+
+    public void setTempoChegada(String tempoChegada) {
+        this.tempoChegada = tempoChegada;
     }
 
     public Atleta getAtleta() {
@@ -100,20 +111,20 @@ public class Inscricao {
         this.percurso = percurso;
     }
 
-    public int getAtletasId() {
-        return atletasId;
+    public int getAtletaId() {
+        return atletaId;
     }
 
-    public void setAtletasId(int atletasId) {
-        this.atletasId = atletasId;
+    public void setAtletaId(int atletaId) {
+        this.atletaId = atletaId;
     }
 
-    public int getPercursosId() {
-        return percursosId;
+    public int getPercursoId() {
+        return percursoId;
     }
 
-    public void setPercursosId(int percursosId) {
-        this.percursosId = percursosId;
+    public void setPercursoId(int percursoId) {
+        this.percursoId = percursoId;
     }
 
     public Kit getKit() {
@@ -124,13 +135,23 @@ public class Inscricao {
         this.kit = kit;
     }
 
-    public int getKitsId() {
-        return kitsId;
+    public int getKitId() {
+        return kitId;
     }
 
-    public void setKitsId(int kitsId) {
-        this.kitsId = kitsId;
+    public void setKitId(int kitId) {
+        this.kitId = kitId;
     }
+
+    public int getKitCorridaId() {
+        return kitCorridaId;
+    }
+
+    public void setKitCorridaId(int kitCorridaId) {
+        this.kitCorridaId = kitCorridaId;
+    }
+    
+    
     
     public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes();

@@ -1,7 +1,6 @@
 package modelo;
 
-import dao.CorridaDAO;
-import dao.IngressoDAO;
+import dao.LoteDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  *
  * @author RAJ
  */
-public class Ingresso {
+public class Lote {
 
     private int id;
     private String tipo;
@@ -19,9 +18,9 @@ public class Ingresso {
     private int quantidade;
     private Corrida corrida;
 
-    private int corridasId;
+    private int corridaId;
 
-    public Ingresso(int id, String tipo, double preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
+    public Lote(int id, String tipo, double preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
         this.id = id;
         this.tipo = tipo;
         this.preco = preco;
@@ -87,32 +86,32 @@ public class Ingresso {
         this.corrida = corrida;
     }
 
-    public int getCorridasId() {
-        return corridasId;
+    public int getCorridaId() {
+        return corridaId;
     }
 
-    public void setCorridasId(int corridasId) {
-        this.corridasId = corridasId;
+    public void setCorridaId(int corridaId) {
+        this.corridaId = corridaId;
     }
 
-    public static List<Ingresso> obterIngressos() throws ClassNotFoundException {
-        return IngressoDAO.obterIngressos();
+    public static List<Lote> obterIngressos() throws ClassNotFoundException {
+        return LoteDAO.obterIngressos();
     }
 
     public void gravar() throws ClassNotFoundException, SQLException {
-        IngressoDAO.gravar(this);
+        LoteDAO.gravar(this);
     }
 
     public void alterar() throws ClassNotFoundException, SQLException {
-        IngressoDAO.alterar(this);
+        LoteDAO.alterar(this);
     }
 
     public void excluir() throws ClassNotFoundException, SQLException {
-        IngressoDAO.excluir(this);
+        LoteDAO.excluir(this);
     }
 
-    public static Ingresso obterIngresso(int id) throws ClassNotFoundException {
-        return IngressoDAO.obterIngresso(id);
+    public static Lote obterIngresso(int id) throws ClassNotFoundException {
+        return LoteDAO.obterIngresso(id);
     }
 
 }

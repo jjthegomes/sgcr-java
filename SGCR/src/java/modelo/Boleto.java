@@ -21,6 +21,9 @@ public class Boleto implements Pagamento {
     private String dataVencimento;
     private String nomeTitular;
     private String cpfTitular;
+    private Inscricao inscricao;
+    
+    private int InscricaoId;
 
     public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular) {
         this.id = id;

@@ -30,7 +30,7 @@ public class Corrida {
     private String regulamento;
     private Organizador organizador;
 
-    private int organizadoresId;
+    private int organizadorId;
 
     public Corrida() {
 
@@ -165,12 +165,12 @@ public class Corrida {
         this.organizador = organizador;
     }
 
-    public int getOrganizadoresId() {
-        return organizadoresId;
+    public int getOrganizadorId() {
+        return organizadorId;
     }
 
-    public void setOrganizadoresId(int organizadoresId) {
-        this.organizadoresId = organizadoresId;
+    public void setOrganizadorId(int organizadoresId) {
+        this.organizadorId = organizadoresId;
     }
 
     public static List<Corrida> obterCorridas() throws ClassNotFoundException {
