@@ -33,7 +33,7 @@ public class CorridaDAO {
                 Corrida corrida = new Corrida(
                         rs.getInt("id"),
                         rs.getString("nome"),
-                        rs.getInt("max_pessoas"),
+                        rs.getInt("max_pessoa"),
                         rs.getString("horario"),
                         rs.getString("data"),
                         rs.getString("banner"),
@@ -60,7 +60,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO corrida (id, nome, max_pessoas, horario, data, banner, "
+            String sql = "INSERT INTO corrida (id, nome, max_pessoa, horario, data, banner, "
                     + "logradouro, cep, cidade, estado, bairro, descricao, regulamento, organizador_id) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class CorridaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE corrida SET nome = ?, max_pessoas = ?, horario = ?, data = ?, "
+            String sql = "UPDATE corrida SET nome = ?, max_pessoa = ?, horario = ?, data = ?, "
                     + "banner = ?, logradouro = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -146,7 +146,7 @@ public class CorridaDAO {
             corrida = new Corrida(
                     rs.getInt("id"),
                     rs.getString("nome"),
-                    rs.getInt("max_pessoas"),
+                    rs.getInt("max_pessoa"),
                     rs.getString("horario"),
                     rs.getString("data"),
                     rs.getString("banner"),
