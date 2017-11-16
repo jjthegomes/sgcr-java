@@ -3,9 +3,8 @@ USE sgcr;
 INSERT INTO administrador VALUES(1, 'Arielson Altino de Souza','arielson@email.com', '123123');
 INSERT INTO administrador VALUES(2, 'Jonas Silva Gomes','jonas@email.com', '123123');
 INSERT INTO administrador VALUES(3, 'Rafael Souza de Lana','rafael@email.com', '123123');
-INSERT INTO administrador VALUES(4, 'Marco Antônio Pereira Araújo','marco@email.com', '123123');
 
-INSERT INTO atletas VALUES (
+INSERT INTO atleta VALUES (
     1,
     'Rafael Lana',
     'Lana',
@@ -26,7 +25,7 @@ INSERT INTO atletas VALUES (
     'P'
 );
 
-INSERT INTO atletas VALUES (
+INSERT INTO atleta VALUES (
     2,
     'Arielson Altino',
     'Ariel',
@@ -47,7 +46,7 @@ INSERT INTO atletas VALUES (
     'M'
 );
 
-INSERT INTO atletas VALUES (
+INSERT INTO atleta VALUES (
     3,
     'Jonas Gomes',
     'JJ',
@@ -68,7 +67,7 @@ INSERT INTO atletas VALUES (
     'G'
 );
 
-INSERT INTO atletas VALUES (
+INSERT INTO atleta VALUES (
     4,
     'Lana Del Rey',
     'Lana',
@@ -89,7 +88,7 @@ INSERT INTO atletas VALUES (
     'M'
 );
 
-INSERT INTO organizadores VALUES (
+INSERT INTO organizador VALUES (
     1,
     'Maria ',
     'maria@gmail.com',
@@ -108,7 +107,7 @@ INSERT INTO organizadores VALUES (
     '98111-1212'
 );
 
-INSERT INTO organizadores VALUES (
+INSERT INTO organizador VALUES (
     2,
     'João',
     'joao@gmail.com',
@@ -128,7 +127,7 @@ INSERT INTO organizadores VALUES (
 );
 
 
-INSERT INTO corridas VALUES (
+INSERT INTO corrida VALUES (
     1,
     'Corrida em Homenagem a Mané Garricha',
     800,
@@ -145,7 +144,7 @@ INSERT INTO corridas VALUES (
     1
 );
 
-INSERT INTO corridas VALUES (
+INSERT INTO corrida VALUES (
     2,
     '1° Corrida e Caminhada Contra o Câncer de Mama',
     700,
@@ -162,7 +161,7 @@ INSERT INTO corridas VALUES (
     1
 );
 
-INSERT INTO corridas VALUES (
+INSERT INTO corrida VALUES (
     3,
     'AJ CIRCUITO RACE 2ª EDIÇÃO',
     1200,
@@ -180,83 +179,83 @@ INSERT INTO corridas VALUES (
 );
 
 
-INSERT INTO ingressos VALUES (1,'Único',60.00,'2017-10-15 00:00','2017-11-28 00:00',800,1);
-INSERT INTO ingressos VALUES (2,'Único',80.00,'2017-09-25 12:00','2017-11-26 00:00',700,2);
-INSERT INTO ingressos VALUES (3,'Único',95.00,'2017-11-05 06:00','2017-12-10 00:00',1200,3);
+INSERT INTO lote VALUES (1,'Único',60.00,'2017-10-15 00:00','2017-11-28 00:00',800,1);
+INSERT INTO lote VALUES (2,'Único',80.00,'2017-09-25 12:00','2017-11-26 00:00',700,2);
+INSERT INTO lote VALUES (3,'Único',95.00,'2017-11-05 06:00','2017-12-10 00:00',1200,3);
 
 
-INSERT INTO percursos VALUES (1,'caminho da imagem',9,1);
-INSERT INTO percursos VALUES (2,'caminho da imagem',4.5,1);
-INSERT INTO percursos VALUES (3,'caminho da imagem',10,2);
-INSERT INTO percursos VALUES (4,'caminho da imagem',12,3);
+INSERT INTO percurso VALUES (1,'caminho da imagem',9,1);
+INSERT INTO percurso VALUES (2,'caminho da imagem',4.5,1);
+INSERT INTO percurso VALUES (3,'caminho da imagem',10,2);
+INSERT INTO percurso VALUES (4,'caminho da imagem',12,3);
 
 
-INSERT INTO rankings VALUES (1,'Corridas Geral Juiz de Fora',5, 1);
-INSERT INTO rankings VALUES (2,'Corridas Premium',10, 1);
-INSERT INTO rankings VALUES (3,'Corridas do sudeste de Minas',7, 2);
+INSERT INTO ranking VALUES (1,'corrida Geral Juiz de Fora',5, 1);
+INSERT INTO ranking VALUES (2,'corrida Premium',10, 1);
+INSERT INTO ranking VALUES (3,'corrida do sudeste de Minas',7, 2);
 
-INSERT INTO corridas_ranking VALUES(1, 1, 1);
-INSERT INTO corridas_ranking VALUES(2, 2, 1);
-INSERT INTO corridas_ranking VALUES(3, 3, 1);
-INSERT INTO corridas_ranking VALUES(4, 1, 2);
-INSERT INTO corridas_ranking VALUES(5, 2, 2);
+INSERT INTO corrida_ranking VALUES(1, 1, 1);
+INSERT INTO corrida_ranking VALUES(2, 2, 1);
+INSERT INTO corrida_ranking VALUES(3, 3, 1);
+INSERT INTO corrida_ranking VALUES(4, 1, 2);
+INSERT INTO corrida_ranking VALUES(5, 2, 2);
 
-INSERT INTO pontuacoes VALUES(1, 50,1);
-INSERT INTO pontuacoes VALUES(2, 30,1);
-INSERT INTO pontuacoes VALUES(3, 20,1);
-INSERT INTO pontuacoes VALUES(1, 60,2);
-INSERT INTO pontuacoes VALUES(2, 35,2);
-INSERT INTO pontuacoes VALUES(3, 20,2);
-INSERT INTO pontuacoes VALUES(1, 75,3);
-INSERT INTO pontuacoes VALUES(2, 45,3);
-INSERT INTO pontuacoes VALUES(3, 35,3);
-INSERT INTO pontuacoes VALUES(4, 25,3);
-INSERT INTO pontuacoes VALUES(5, 10,3);
+INSERT INTO pontuacao VALUES(1, 50,1);
+INSERT INTO pontuacao VALUES(2, 30,1);
+INSERT INTO pontuacao VALUES(3, 20,1);
+INSERT INTO pontuacao VALUES(1, 60,2);
+INSERT INTO pontuacao VALUES(2, 35,2);
+INSERT INTO pontuacao VALUES(3, 20,2);
+INSERT INTO pontuacao VALUES(1, 75,3);
+INSERT INTO pontuacao VALUES(2, 45,3);
+INSERT INTO pontuacao VALUES(3, 35,3);
+INSERT INTO pontuacao VALUES(4, 25,3);
+INSERT INTO pontuacao VALUES(5, 10,3);
 
-INSERT INTO kits VALUES(1,'VIP','caminho imagem','Retornavel',1);
-INSERT INTO kits VALUES(2,'Comum','caminho imagem','Descartavel',1);
-INSERT INTO kits VALUES(3,'Premium','caminho imagem','Descartavel',2);
-INSERT INTO kits VALUES(4,'Normal','caminho imagem','Descartavel',2);
-INSERT INTO kits VALUES(5,'Especial','caminho imagem','Retornavel',3);
-INSERT INTO kits VALUES(6,'Comum','caminho imagem','Descartavel',3);
+INSERT INTO kit VALUES(1,1,'VIP','caminho imagem','Retornavel');
+INSERT INTO kit VALUES(2,1,'Comum','caminho imagem','Descartavel');
+INSERT INTO kit VALUES(1,2,'Premium','caminho imagem','Descartavel');
+INSERT INTO kit VALUES(2,2,'Normal','caminho imagem','Descartavel');
+INSERT INTO kit VALUES(1,3,'Especial','caminho imagem','Retornavel');
+INSERT INTO kit VALUES(2,3,'Comum','caminho imagem','Descartavel');
 
 
-INSERT INTO produtos_kit VALUES (1,'Número de Peito',5.00,1);
-INSERT INTO produtos_kit VALUES (2,'Chip Eletrônico',15.00,1);
-INSERT INTO produtos_kit VALUES (3,'Camiseta Tecido Tecnológico',35.00,1);
+INSERT INTO produto_kit VALUES (1,1,'Número de Peito',5.00);
+INSERT INTO produto_kit VALUES (2,1,'Chip Eletrônico',15.00,1);
+INSERT INTO produto_kit VALUES (3,1,'Camiseta Tecido Tecnológico',35.00);
 
-INSERT INTO produtos_kit VALUES (4,'Número de Peito',5.00,2);
-INSERT INTO produtos_kit VALUES (5,'Chip Eletrônico',15.00,2);
+INSERT INTO produto_kit VALUES (1,2,'Número de Peito',5.00);
+INSERT INTO produto_kit VALUES (2,2,'Chip Eletrônico',15.00);
 
-INSERT INTO produtos_kit VALUES (6,'Número de Peito',4.00,3);
-INSERT INTO produtos_kit VALUES (7,'Chip',12.00,3);
-INSERT INTO produtos_kit VALUES (8,'Camiseta',30.00,3);
+INSERT INTO produto_kit VALUES (1,3,'Número de Peito',4.00);
+INSERT INTO produto_kit VALUES (2,3,'Chip',12.00);
+INSERT INTO produto_kit VALUES (3,3,'Camiseta',30.00);
 
-INSERT INTO produtos_kit VALUES (9,'Número de Peito',4.00,4);
-INSERT INTO produtos_kit VALUES (10,'Chip',12.00,4);
+INSERT INTO produto_kit VALUES (9,'Número de Peito',4.00,4);
+INSERT INTO produto_kit VALUES (10,'Chip',12.00,4);
 
-INSERT INTO produtos_kit VALUES (11,'Número de Peito',5.00,5);
-INSERT INTO produtos_kit VALUES (12,'Chip Eletrônico',16.00,5);
-INSERT INTO produtos_kit VALUES (13,'Camisa',32.00,5);
+INSERT INTO produto_kit VALUES (11,'Número de Peito',5.00,5);
+INSERT INTO produto_kit VALUES (12,'Chip Eletrônico',16.00,5);
+INSERT INTO produto_kit VALUES (13,'Camisa',32.00,5);
 
-INSERT INTO produtos_kit VALUES (14,'Número de Peito',5.00,6);
-INSERT INTO produtos_kit VALUES (15,'Chip Eletrônico',16.00,6);
+INSERT INTO produto_kit VALUES (14,'Número de Peito',5.00,6);
+INSERT INTO produto_kit VALUES (15,'Chip Eletrônico',16.00,6);
 
 
 -- INSCRIÇÕES
--- data compra, número peito, tempo percorrido, forma pagamento, pago, percursosId, atletasId, kitsId
+-- data compra, número peito, pago, kit retirado, tempo largada, tempo chegada, percursoId, atletaId, kitId, corridaId
 
 -- CORRIDA 1
-INSERT INTO inscricoes VALUES (1,'2017-09-15 17:25:20','1','01:20:15',1,1,1,1,1);
-INSERT INTO inscricoes VALUES (2,'2017-09-16 15:22:11','2','01:12:10',0,1,1,2,2);
-INSERT INTO inscricoes VALUES (3,'2017-09-10 12:22:11','3','01:21:12',0,1,2,3,2);
-INSERT INTO inscricoes VALUES (4,'2017-09-12 16:22:11','4','01:24:42',1,1,2,4,1);
+INSERT INTO inscricao VALUES (1,'2017-09-15 17:25:20','1',true,true,'01:20:15','01:40:15',1,1,1,1);
+INSERT INTO inscricao VALUES (2,'2017-09-16 15:22:11','2',true,true,'01:12:10','02:20:20',1,2,2,1);
+INSERT INTO inscricao VALUES (3,'2017-09-10 12:22:11','3',true,false,'01:21:12','01:50:27',2,3,1,1);
+INSERT INTO inscricao VALUES (4,'2017-09-12 16:22:11','4',true,false,'01:24:42','02:10:11',2,4,2,1);
 
 -- CORRIDA 2
-INSERT INTO inscricoes VALUES (5,'2017-09-18 17:32:11','1','00:00:00',1,1,3,1,1);
-INSERT INTO inscricoes VALUES (6,'2017-09-19 09:28:23','2','00:00:00',1,0,3,2,1);
-INSERT INTO inscricoes VALUES (7,'2017-09-25 12:22:13','3','00:00:00',0,0,3,3,2);
+INSERT INTO inscricao VALUES (5,'2017-09-18 17:32:11','1',false,false,'00:00:00','00:00:00',3,1,1,2);
+INSERT INTO inscricao VALUES (6,'2017-09-19 09:28:23','2',false,false,'00:00:00','00:00:00',3,2,2,2);
+INSERT INTO inscricao VALUES (7,'2017-09-25 12:22:13','3',true,false,'00:00:00','00:00:00',3,3,1,2);
 
 -- CORRIDA 3
-INSERT INTO inscricoes VALUES (8,'2017-05-12 12:28:23','2','00:00:00',1,0,4,2,1);
-INSERT INTO inscricoes VALUES (9,'2017-05-13 19:12:51','3','00:00:00',0,0,4,3,2);
+INSERT INTO inscricao VALUES (8,'2017-05-12 12:28:23','2',false,false,'00:00:00','00:00:00',4,2,1,3);
+INSERT INTO inscricao VALUES (9,'2017-05-13 19:12:51','3',false,false,'00:00:00','00:00:00',4,4,1,3);
