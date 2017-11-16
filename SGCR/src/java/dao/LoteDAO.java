@@ -15,10 +15,10 @@ import modelo.Lote;
  */
 public class LoteDAO {
 
-    public static List<Lote> obterIngressos() throws ClassNotFoundException {
+    public static List<Lote> obterLotes() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Lote> ingressos = new ArrayList<Lote>();
+        List<Lote> lotes = new ArrayList<Lote>();
 
         try {
             conexao = BD.getConexao();
@@ -34,30 +34,30 @@ public class LoteDAO {
                         rs.getInt("quantidade"),
                         null);
                 ingresso.setCorridaId(rs.getInt("corrida_id"));
-                ingressos.add(ingresso);
+                lotes.add(ingresso);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return ingressos;
+        return lotes;
     }
 
-    public static void gravar(Lote ingresso) throws ClassNotFoundException, SQLException {
+    public static void gravar(Lote lote) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ingresso (id, tipo, preco, data_inicio, data_final, quantidade, "
+            String sql = "INSERT INTO lote (id, tipo, preco, data_inicio, data_final, quantidade, "
                     + "corrida_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, ingresso.getId());
-            comando.setString(2, ingresso.getTipo());
-            comando.setDouble(3, ingresso.getPreco());
-            comando.setString(4, ingresso.getDataInicio());
-            comando.setString(5, ingresso.getDataFinal());
-            comando.setInt(6, ingresso.getQuantidade());
-            comando.setInt(7, ingresso.getCorrida().getId());
+            comando.setInt(1, lote.getId());
+            comando.setString(2, lote.getTipo());
+            comando.setDouble(3, lote.getPreco());
+            comando.setString(4, lote.getDataInicio());
+            comando.setString(5, lote.getDataFinal());
+            comando.setInt(6, lote.getQuantidade());
+            comando.setInt(7, lote.getCorrida().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -67,14 +67,14 @@ public class LoteDAO {
         }
     }
 
-    public static void excluir(Lote ingresso) throws SQLException, ClassNotFoundException {
+    public static void excluir(Lote lote) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         String stringSQL;
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            stringSQL = "delete from ingressos where id = " + ingresso.getId();
+            stringSQL = "delete from lote where id = " + lote.getId();
             comando.execute(stringSQL);
 
         } catch (SQLException e) {
@@ -84,20 +84,20 @@ public class LoteDAO {
         }
     }
 
-    public static void alterar(Lote ingresso) throws ClassNotFoundException, SQLException {
+    public static void alterar(Lote lote) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE ingresso SET tipo = ?, preco = ?, data_inicio = ?, "
+            String sql = "UPDATE lote SET tipo = ?, preco = ?, data_inicio = ?, "
                     + "data_final = ?, quantidade = ?, corrida_id = ? WHERE id = ?";            
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, ingresso.getTipo());
-            comando.setDouble(2, ingresso.getPreco());
-            comando.setString(3, ingresso.getDataInicio());
-            comando.setString(4, ingresso.getDataFinal());
-            comando.setInt(5, ingresso.getQuantidade());
-            comando.setInt(6, ingresso.getCorrida().getId());
-            comando.setInt(7, ingresso.getId());
+            comando.setString(1, lote.getTipo());
+            comando.setDouble(2, lote.getPreco());
+            comando.setString(3, lote.getDataInicio());
+            comando.setString(4, lote.getDataFinal());
+            comando.setInt(5, lote.getQuantidade());
+            comando.setInt(6, lote.getCorrida().getId());
+            comando.setInt(7, lote.getId());
 
             comando.execute();
             comando.close();
@@ -108,16 +108,16 @@ public class LoteDAO {
         }
     }
 
-    public static Lote obterIngresso(int id) throws ClassNotFoundException {
+    public static Lote obterLote(int id) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        Lote ingresso = null;
+        Lote lote = null;
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM ingresso WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("SELECT * FROM lote WHERE id = " + id);
             rs.first();
-            ingresso = new Lote(
+            lote = new Lote(
                     rs.getInt("id"),
                     rs.getString("tipo"),
                     rs.getDouble("preco"),
@@ -125,13 +125,13 @@ public class LoteDAO {
                     rs.getString("data_final"),
                     rs.getInt("quantidade"),
                     null);
-            ingresso.setCorridaId(rs.getInt("corrida_id"));
+            lote.setCorridaId(rs.getInt("corrida_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return ingresso;
+        return lote;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
