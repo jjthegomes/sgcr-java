@@ -95,7 +95,7 @@ public class Lote {
     }
 
     public static List<Lote> obterLotes() throws ClassNotFoundException {
-        return LoteDAO.obterIngressos();
+        return LoteDAO.obterLotes();
     }
 
     public void gravar() throws ClassNotFoundException, SQLException {
@@ -111,7 +111,7 @@ public class Lote {
     }
 
     public static Lote obterLote(int id) throws ClassNotFoundException {
-        return LoteDAO.obterIngresso(id);
+        return LoteDAO.obterLote(id);
     }
 
 }
