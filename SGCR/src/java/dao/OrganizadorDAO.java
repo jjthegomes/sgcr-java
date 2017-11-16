@@ -76,7 +76,7 @@ public class OrganizadorDAO {
             comando.setString(8, organizador.getCep());
             comando.setString(9, organizador.getCidade());
             comando.setString(10, organizador.getEstado());
-            comando.setString(11, organizador.getRua());
+            comando.setString(11, organizador.getLogradouro());
             comando.setString(12, organizador.getBairro());
             comando.setString(13, organizador.getNumero());
             if (organizador.getComplemento() == null) {
@@ -112,7 +112,7 @@ public class OrganizadorDAO {
             comando.setString(7, organizador.getCep());
             comando.setString(8, organizador.getCidade());
             comando.setString(9, organizador.getEstado());
-            comando.setString(10, organizador.getRua());
+            comando.setString(10, organizador.getLogradouro());
             comando.setString(11, organizador.getBairro());
             comando.setString(12, organizador.getNumero());
             if (organizador.getComplemento() == null) {

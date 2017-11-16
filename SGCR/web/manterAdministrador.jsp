@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>Senha de Adm</td> 
-                    <td><input type="text" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="password" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>              
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>

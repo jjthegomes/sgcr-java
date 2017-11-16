@@ -94,7 +94,7 @@ public class Lote {
         this.corridaId = corridaId;
     }
 
-    public static List<Lote> obterIngressos() throws ClassNotFoundException {
+    public static List<Lote> obterLotes() throws ClassNotFoundException {
         return LoteDAO.obterIngressos();
     }
 
@@ -110,7 +110,7 @@ public class Lote {
         LoteDAO.excluir(this);
     }
 
-    public static Lote obterIngresso(int id) throws ClassNotFoundException {
+    public static Lote obterLote(int id) throws ClassNotFoundException {
         return LoteDAO.obterIngresso(id);
     }
 

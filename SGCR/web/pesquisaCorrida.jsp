@@ -22,8 +22,8 @@
             <th>Codigo</th>
             <th>Nome</th>
             <th>Max. Pessoas</th>
-            <th>Horario Inicio</th>
-            <th>Horario Fim</th>
+            <th>Horario</th>
+            <th>Data</th>
             <th>Rua</th>
             <th>Bairro</th>
             <th>CEP</th>
@@ -35,14 +35,14 @@
         <c:forEach items="${corridas}" var="corrida">
             <tr>
                 <td><c:out value="${corrida.id}" /> </td>
-                <td><c:out value="${corrida.nomeCorrida}" /> </td>
-                <td><c:out value="${corrida.maxPessoas}" /> </td>
-                <td><c:out value="${corrida.horarioInicio}" /> </td>
-                <td><c:out value="${corrida.horarioFinal}" /> </td>
-                <td><c:out value="${corrida.rua}" /> </td>
+                <td><c:out value="${corrida.nome}" /> </td>
+                <td><c:out value="${corrida.max_pessoas}" /> </td>
+                <td><c:out value="${corrida.horario}" /> </td>
+                <td><c:out value="${corrida.data}" /> </td>
+                <td><c:out value="${corrida.logradouro}" /> </td>
                 <td><c:out value="${corrida.bairro}" /> </td>
                 <td><c:out value="${corrida.cep}" /> </td>
-                <td><c:out value="${corrida.organizadoresId}" /> </td>
+                <td><c:out value="${corrida.organizador_id}" /> </td>
                 <td><a href="ManterCorridaController?acao=prepararEditar&id=<c:out value="${corrida.id}"/>">Editar</a> </td>
                 <td><a href="ManterCorridaController?acao=prepararExcluir&id=<c:out value="${corrida.id}"/>">Excluir</a> </td>
             </tr>

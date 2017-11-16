@@ -11,7 +11,7 @@ public abstract class UsuarioComum extends Usuario{
     private String sexo;
     private String cpf;
     private String cep;
-    private String rua;
+    private String logradouro;
     private String bairro;
     private String complemento;
     private String numero;
@@ -20,13 +20,13 @@ public abstract class UsuarioComum extends Usuario{
     private String telefone;
     private String celular;
 
-    public UsuarioComum(String nome, String dataNascimento, String sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
+    public UsuarioComum(String nome, String dataNascimento, String sexo, String cpf, String cep, String logradouro, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
         super(id, nome, email, senha);
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cpf = cpf;
         this.cep = cep;
-        this.rua = rua;
+        this.logradouro = logradouro;
         this.bairro = bairro;
         this.complemento = complemento;
         this.numero = numero;
@@ -73,12 +73,12 @@ public abstract class UsuarioComum extends Usuario{
         this.cep = cep;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getBairro() {

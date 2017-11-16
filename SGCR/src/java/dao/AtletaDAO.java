@@ -73,7 +73,7 @@ public class AtletaDAO {
             comando.setString(9, atleta.getCep());
             comando.setString(10, atleta.getCidade());
             comando.setString(11, atleta.getEstado());
-            comando.setString(12, atleta.getRua()); //mudar para logradouro
+            comando.setString(12, atleta.getLogradouro()); //mudar para logradouro
             comando.setString(13, atleta.getBairro());
             comando.setString(14, atleta.getNumero());
             comando.setString(15, atleta.getComplemento());
@@ -108,7 +108,7 @@ public class AtletaDAO {
             comando.setString(7, atleta.getCep());
             comando.setString(8, atleta.getCidade());
             comando.setString(9, atleta.getEstado());
-            comando.setString(10, atleta.getRua()); //mudar para logradouro
+            comando.setString(10, atleta.getLogradouro()); //mudar para logradouro
             comando.setString(11, atleta.getBairro());
             comando.setString(12, atleta.getNumero());
             comando.setString(13, atleta.getComplemento());

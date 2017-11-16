@@ -104,10 +104,10 @@ public class ManterLoteController extends HttpServlet {
             request.setAttribute("corridas", Corrida.obterCorridas());
 
             int id = Integer.parseInt(request.getParameter("id"));
-            Lote ingresso = Lote.obterIngresso(id);
+            Lote lote = Lote.obterLote(id);
 
-            request.setAttribute("ingresso", ingresso);
-            RequestDispatcher view = request.getRequestDispatcher("/manterIngresso.jsp");
+            request.setAttribute("lote", lote);
+            RequestDispatcher view = request.getRequestDispatcher("/manterLote.jsp");
             view.forward(request, response);
 
         } catch (ServletException ex) {
@@ -130,7 +130,7 @@ public class ManterLoteController extends HttpServlet {
             Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, corrida);
 
             ingresso.alterar();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaIngressoController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaLoteController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {
@@ -146,10 +146,10 @@ public class ManterLoteController extends HttpServlet {
             request.setAttribute("corridas", Corrida.obterCorridas());
 
             int id = Integer.parseInt(request.getParameter("id"));
-            Lote ingresso = Lote.obterIngresso(id);
+            Lote lote = Lote.obterLote(id);
 
-            request.setAttribute("ingresso", ingresso);
-            RequestDispatcher view = request.getRequestDispatcher("/manterIngresso.jsp");
+            request.setAttribute("lote", lote);
+            RequestDispatcher view = request.getRequestDispatcher("/manterLote.jsp");
             view.forward(request, response);
 
         } catch (ServletException ex) {
@@ -169,10 +169,10 @@ public class ManterLoteController extends HttpServlet {
 
         try {
             //Corrida corrida = Corrida.obterCorrida(corridasId);
-            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, null);
+            Lote lote = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, null);
 
-            ingresso.excluir();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaIngressoController");
+            lote.excluir();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaLoteController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {

@@ -16,7 +16,7 @@ import java.util.List;
 public class Corrida {
 
     private int id;
-    private String nomeCorrida;
+    private String nome;
     private int maxPessoas;
     private String horario;
     private String data;
@@ -36,9 +36,9 @@ public class Corrida {
 
     }
 
-    public Corrida(int id, String nomeCorrida, int maxPessoas, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
+    public Corrida(int id, String nome, int maxPessoas, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
         this.id = id;
-        this.nomeCorrida = nomeCorrida;
+        this.nome = nome;
         this.maxPessoas = maxPessoas;
         this.horario = horario;
         this.data = data;
@@ -61,12 +61,12 @@ public class Corrida {
         this.id = id;
     }
 
-    public String getNomeCorrida() {
-        return nomeCorrida;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCorrida(String nomeCorrida) {
-        this.nomeCorrida = nomeCorrida;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public int getMaxPessoas() {

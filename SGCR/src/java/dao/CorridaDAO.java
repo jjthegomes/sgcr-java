@@ -65,7 +65,7 @@ public class CorridaDAO {
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, corrida.getId());
-            comando.setString(2, corrida.getNomeCorrida());
+            comando.setString(2, corrida.getNome());
             comando.setInt(3, corrida.getMaxPessoas());
             comando.setString(4, corrida.getHorario());
             comando.setString(5, corrida.getData());
@@ -112,7 +112,7 @@ public class CorridaDAO {
                     + "banner = ?, logradouro = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, corrida.getNomeCorrida());
+            comando.setString(1, corrida.getNome());
             comando.setInt(2, corrida.getMaxPessoas());
             comando.setString(3, corrida.getHorario());
             comando.setString(4, corrida.getData());

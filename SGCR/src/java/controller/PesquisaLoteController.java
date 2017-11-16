@@ -32,8 +32,8 @@ public class PesquisaLoteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            request.setAttribute("lotes", Lote.obterIngressos());
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaIngresso.jsp");
+            request.setAttribute("lotes", Lote.obterLotes());
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaLote.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
 

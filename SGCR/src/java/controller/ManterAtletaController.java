@@ -81,7 +81,7 @@ public class ManterAtletaController extends HttpServlet {
         String sexo = request.getParameter("txtSexoAtleta");
         String cpf = request.getParameter("txtCpfAtleta");
         String cep = request.getParameter("txtCepAtleta");
-        String rua = request.getParameter("txtRuaAtleta");
+        String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
         String complemento = request.getParameter("txtComplementodAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
@@ -97,7 +97,7 @@ public class ManterAtletaController extends HttpServlet {
         try {
 
             Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
-                    sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado,
+                    sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
                     telefone, celular, id, email, senha);
             atleta.gravar();
             RequestDispatcher view
@@ -137,7 +137,7 @@ public class ManterAtletaController extends HttpServlet {
         String sexo = request.getParameter("txtSexoAtleta");
         String cpf = request.getParameter("txtCpfAtleta");
         String cep = request.getParameter("txtCepAtleta");
-        String rua = request.getParameter("txtRuaAtleta");
+        String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
         String complemento = request.getParameter("txtComplementodAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
@@ -151,7 +151,7 @@ public class ManterAtletaController extends HttpServlet {
         String senha = request.getParameter("txtSenhaAtleta");
 
         Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
-                sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado,
+                sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
                 telefone, celular, id, email, senha);
         try {
             atleta.excluir();
@@ -192,7 +192,7 @@ public class ManterAtletaController extends HttpServlet {
         String sexo = request.getParameter("txtSexoAtleta");
         String cpf = request.getParameter("txtCpfAtleta");
         String cep = request.getParameter("txtCepAtleta");
-        String rua = request.getParameter("txtRuaAtleta");
+        String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
         String complemento = request.getParameter("txtComplementodAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
@@ -206,7 +206,7 @@ public class ManterAtletaController extends HttpServlet {
         String senha = request.getParameter("txtSenhaAtleta");
 
         Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
-                sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado,
+                sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
                 telefone, celular, id, email, senha);
         try {
             atleta.alterar();

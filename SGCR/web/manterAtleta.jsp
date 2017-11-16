@@ -73,7 +73,7 @@
                     </tr>
                     <tr>
                         <td>Rua</td> 
-                        <td><input type="text" name="txtRuaAtleta" value="${atleta.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtLogradouroAtleta" value="${atleta.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Numero da Residencia</td> 
