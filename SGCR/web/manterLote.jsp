@@ -1,5 +1,5 @@
 <%-- 
-    Document   : manterIngresso
+    Document   : manterLote
     Created on : 17/10/2017, 10:26:14
     Author     : RAJ
 --%>
@@ -11,46 +11,46 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manter Ingresso</title>
+        <title>Manter Lote</title>
     </head>
     <body>
 
-        <h1>Manter Lotes - ${operacao}</h1>
+        <h1>Manter Lote - ${operacao}</h1>
 
-        <form action="ManterIngressoController?acao=confirmar${operacao}" method="post" name="frmManterIngresso"> 
+        <form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote"> 
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Código do Ingresso</td> 
-                    <td><input type="text" name="txtIdIngresso" value="${ingresso.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    <td>Código</td> 
+                    <td><input type="text" name="txtIdLote" value="${lote.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Tipo do Ingresso</td> 
-                        <td><input type="text" name="txtTipoLote" value="${ingresso.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Tipo</td> 
+                        <td><input type="text" name="txtTipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Preço do Ingresso</td> 
-                        <td><input type="text" name="txtPrecoLote" value="${ingresso.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Preço</td> 
+                        <td><input type="text" name="txtPrecoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Data Inicio do Ingresso</td> 
-                        <td><input type="text" name="txtDataInicioLote" value="${ingresso.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
+                        <td>Data Inicio</td> 
+                        <td><input type="text" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Data Final do Ingresso</td> 
-                        <td><input type="text" name="txtDataFinalLote" value="${ingresso.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Data Final</td> 
+                        <td><input type="text" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Quantidade do Ingresso</td> 
-                        <td><input type="text" name="txtQuantidadeLote" value="${ingresso.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>Quantidade</td> 
+                        <td><input type="text" name="txtQuantidadeLote" value="${lote.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Corrida</td>
                         <td>
                            <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">  </c:if>>
-                            <option value="0" <c:if test="${ingresso.corrida.corridasId == null}"> selected</c:if>> </option>  
+                            <option value="0" <c:if test="${lote.corrida.corridasId == null}"> selected</c:if>> </option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${ingresso.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                                <option value="${corrida.id}" <c:if test="${lote.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
                             </c:forEach>
                         </select>
                     </td>

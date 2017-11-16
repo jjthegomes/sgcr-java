@@ -27,7 +27,7 @@
             <c:forEach items="${rankings}" var="ranking">
                 <tr>
                     <td><c:out value="${ranking.id}" /></td>
-                    <td><c:out value="${ranking.nomeRanking}" /></td>
+                    <td><c:out value="${ranking.nome}" /></td>
                     <td><c:out value="${ranking.intervaloFaixaEtaria}" /></td>
                      <td><c:out value="${ranking.administradorId}" /></td>
                     <td><a href="ManterRankingController?acao=prepararEditar&id=<c:out value="${ranking.id}"/>">Editar</a> </td>
