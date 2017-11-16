@@ -22,10 +22,9 @@
             <th>Codigo</th>
             <th>Nome</th>
             <th>E-mail</th>
-            <th>Data Nascimento</th>
-          
-
-
+            <th>Data Nascimento</th>        
+            <th>Tamanho Camisa</th>
+            <th>Celular</th>
             <th colspan="2">Ação</th>
         </tr>
         <c:forEach items="${atletas}" var="atleta">
@@ -34,17 +33,20 @@
                 <td><c:out value="${atleta.nome}" /> </td>
                 <td><c:out value="${atleta.email}" /> </td>        
                 <td><c:out value="${atleta.dataNascimento}" /> </td>
-            <td><a href="ManterAtletaController?acao=prepararEditar&id=<c:out value="${atleta.id}"/>">Editar</a> </td>
-            <td><a href="ManterAtletaController?acao=prepararExcluir&id=<c:out value="${atleta.id}"/>">Excluir</a> </td>
-        </tr>
-    </c:forEach>
-</table>
+                <td> <c:out value="${atleta.tamanhoCamisa}" /> </td>
+                <td> <c:out value="${atleta.celular}" /> </td>
 
-<form action="ManterAtletaController?acao=prepararIncluir" method="post">
-    <input type="submit" name="btnIncluir" value="Incluir">
-</form>
+                <td><a href="ManterAtletaController?acao=prepararEditar&id=<c:out value="${atleta.id}"/>">Editar</a> </td>
+                <td><a href="ManterAtletaController?acao=prepararExcluir&id=<c:out value="${atleta.id}"/>">Excluir</a> </td>
+            </tr>
+        </c:forEach>
+    </table>
+
+    <form action="ManterAtletaController?acao=prepararIncluir" method="post">
+        <input type="submit" name="btnIncluir" value="Incluir">
+    </form>
     <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+    <tr>
+        <td><a href="index.jsp">Menu</a></td>
+    </tr>
 </html>

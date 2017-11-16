@@ -48,9 +48,9 @@
                         <td>Corrida</td>
                         <td>
                            <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">  </c:if>>
-                            <option value="0" <c:if test="${lote.corrida.corridasId == null}"> selected</c:if>> </option>  
+                            <option value="0" <c:if test="${lote.corrida.corridaId == null}"> selected</c:if>> </option>  
                             <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${lote.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                                <option value="${corrida.id}" <c:if test="${lote.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>

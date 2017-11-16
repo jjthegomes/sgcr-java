@@ -31,21 +31,6 @@
                         <td>Apelido</td> 
                         <td><input type="text" name="txtApelidoAtleta" value="${atleta.apelido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
-                    <tr>
-                        <td>Email</td> 
-                        <td><input type="text" name="txtEmailAtleta" value="${atleta.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>                                                           
-                    <tr>
-                        <td>Senha</td> 
-                        <td><input type="password" name="txtSenhaAtleta" value="${atleta.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Sexo</td> 
-                        <td><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                               <c:if test="${atleta.sexo == 'M'}"> checked</c:if>>Masculino</td>
-                    <td><input type="radio" name="txtSexoAtleta" value="F"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                               <c:if test="${atleta.sexo == 'F'}"> checked</c:if>>Feminino</td>
-                    </tr>
                     <!-- ALTERAR PARA SELECT DIA MES ANO -->
                     <tr>
                         <td>Data de Nascimento</td> 
@@ -54,7 +39,35 @@
                     <tr>
                         <td>CPF</td> 
                         <td><input type="text" name="txtCpfAtleta" value="${atleta.cpf}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>                 
+                    </tr>
+                    <tr>
+                        <td>Tamanho da Camisa</td> 
+                        <td>
+                            <select name="optTamanhoCamisa" <c:if test="${operacao == 'Excluir'}"> disabled </c:if>>
+                            <option value="P" <c:if test="${atleta.tamanhoCamisa == 'P'}"> selected</c:if>>P</option>
+                            <option value="M" <c:if test="${atleta.tamanhoCamisa == 'M'}"> selected</c:if>>M</option>
+                            <option value="G" <c:if test="${atleta.tamanhoCamisa == 'G'}"> selected</c:if>>G</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Sexo</td> 
+                        <td><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                               <c:if test="${atleta.sexo == 'M'}"> checked</c:if>>Masculino</td>
+                        <td><input type="radio" name="txtSexoAtleta" value="F"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                               <c:if test="${atleta.sexo == 'F'}"> checked</c:if>>Feminino</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Email</td> 
+                        <td><input type="text" name="txtEmailAtleta" value="${atleta.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>                                                           
+                    <tr>
+                        <td>Senha</td> 
+                        <td><input type="password" name="txtSenhaAtleta" value="${atleta.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+
                     <tr>
                         <td>CEP</td> 
                         <td><input type="text" name="txtCepAtleta" value="${atleta.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
@@ -72,7 +85,7 @@
                         <td><input type="text" name="txtBairroAtleta" value="${atleta.bairro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Rua</td> 
+                        <td>Logradouro</td> 
                         <td><input type="text" name="txtLogradouroAtleta" value="${atleta.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
@@ -90,17 +103,8 @@
                     <tr>
                         <td>Celular</td> 
                         <td><input type="text" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Tamanho da Camisa</td> 
-                        <td>
-                            <select name="optTamanhoCamisa" <c:if test="${operacao == 'Excluir'}"> disabled </c:if>>
-                            <option value="P" <c:if test="${atleta.tamanhoCamisa == 'P'}"> selected</c:if>>P</option>
-                            <option value="M" <c:if test="${atleta.tamanhoCamisa == 'M'}"> selected</c:if>>M</option>
-                            <option value="G" <c:if test="${atleta.tamanhoCamisa == 'G'}"> selected</c:if>>G</option>
-                        </select>
-                    </td>
                 </tr>
+
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>

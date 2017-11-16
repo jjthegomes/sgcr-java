@@ -17,7 +17,7 @@ public class Corrida {
 
     private int id;
     private String nome;
-    private int maxPessoas;
+    private int maxPessoa;
     private String horario;
     private String data;
     private String banner;
@@ -36,10 +36,10 @@ public class Corrida {
 
     }
 
-    public Corrida(int id, String nome, int maxPessoas, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
+    public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
         this.id = id;
         this.nome = nome;
-        this.maxPessoas = maxPessoas;
+        this.maxPessoa = maxPessoa;
         this.horario = horario;
         this.data = data;
         this.banner = banner;
@@ -69,12 +69,12 @@ public class Corrida {
         this.nome = nome;
     }
 
-    public int getMaxPessoas() {
-        return maxPessoas;
+    public int getMaxPessoa() {
+        return maxPessoa;
     }
 
-    public void setMaxPessoas(int maxPessoas) {
-        this.maxPessoas = maxPessoas;
+    public void setMaxPessoa(int maxPessoa) {
+        this.maxPessoa = maxPessoa;
     }
 
     public String getHorario() {

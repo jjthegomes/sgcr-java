@@ -76,10 +76,10 @@ public class ManterCorridaController extends HttpServlet {
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
-        String nomeCorrida = request.getParameter("txtNomeCorrida");
-        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
-        String horarioInicio = request.getParameter("txtHorario");
-        String horarioFinal = request.getParameter("txtData");
+        String nome = request.getParameter("txtNomeCorrida");
+        int maxPessoa = Integer.parseInt(request.getParameter("txtMaxPessoaCorrida"));
+        String horario = request.getParameter("txtHorarioCorrida");
+        String data = request.getParameter("txtDataCorrida");
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
@@ -93,7 +93,7 @@ public class ManterCorridaController extends HttpServlet {
         try {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
 
-            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
+            Corrida corrida = new Corrida(id, nome, maxPessoa, horario, data,
                     banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.gravar();
             RequestDispatcher view
@@ -127,9 +127,9 @@ public class ManterCorridaController extends HttpServlet {
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
         String nomeCorrida = request.getParameter("txtNomeCorrida");
-        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
-        String horarioInicio = request.getParameter("txtHorarioInicioCorrida");
-        String horarioFinal = request.getParameter("txtHorarioFinalCorrida");
+        int maxPessoa = Integer.parseInt(request.getParameter("txtMaxPessoaCorrida"));
+        String horario = request.getParameter("txtHorarioCorrida");
+        String data = request.getParameter("txtDataCorrida");
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
@@ -142,7 +142,7 @@ public class ManterCorridaController extends HttpServlet {
 
         try {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
-            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
+            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoa, horario, data,
                     banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
@@ -175,10 +175,10 @@ public class ManterCorridaController extends HttpServlet {
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdCorrida"));
-        String nomeCorrida = request.getParameter("txtNomeCorrida");
-        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoasCorrida"));
-        String horarioInicio = request.getParameter("txtHorarioInicioCorrida");
-        String horarioFinal = request.getParameter("txtHorarioFinalCorrida");
+        String nome = request.getParameter("txtNomeCorrida");
+        int maxPessoas = Integer.parseInt(request.getParameter("txtMaxPessoaCorrida"));
+        String horario = request.getParameter("txtHorarioCorrida");
+        String data = request.getParameter("txtDataCorrida");
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
@@ -191,7 +191,7 @@ public class ManterCorridaController extends HttpServlet {
 
         try {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
-            Corrida corrida = new Corrida(id, nomeCorrida, maxPessoas, horarioInicio, horarioFinal,
+            Corrida corrida = new Corrida(id, nome, maxPessoas, horario, data,
                     banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");

@@ -66,7 +66,7 @@ public class CorridaDAO {
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, corrida.getId());
             comando.setString(2, corrida.getNome());
-            comando.setInt(3, corrida.getMaxPessoas());
+            comando.setInt(3, corrida.getMaxPessoa());
             comando.setString(4, corrida.getHorario());
             comando.setString(5, corrida.getData());
             comando.setString(6, corrida.getBanner());
@@ -113,7 +113,7 @@ public class CorridaDAO {
                     + "descricao = ?, regulamento = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNome());
-            comando.setInt(2, corrida.getMaxPessoas());
+            comando.setInt(2, corrida.getMaxPessoa());
             comando.setString(3, corrida.getHorario());
             comando.setString(4, corrida.getData());
             comando.setString(5, corrida.getBanner());

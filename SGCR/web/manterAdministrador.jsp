@@ -20,7 +20,7 @@
         <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Código do Adm</td> 
+                    <td>Código</td> 
                     <td><input type="text" name="txtIdAdministrador" value="${administrador.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
