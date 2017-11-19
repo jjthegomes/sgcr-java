@@ -33,7 +33,7 @@
                 <tr>
                     <td>Kits:</td>
                     <td>
-                        <select name="optKit" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                        <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${kits}" var="kit">
                                 <option value="${kit.id}" <c:if test="${produtoKit.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
@@ -44,7 +44,7 @@
                 <tr>
                     <td>Produtos:</td>
                     <td>
-                        <select name="optProduto" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                        <select name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${produtos}" var="produto">
                                 <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
@@ -55,9 +55,9 @@
                 <tr>
                     <td>Corridas:</td>
                     <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${corridass}" var="corrida">
+                            <c:forEach items="${corridas}" var="corrida">
                                 <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
                             </c:forEach>
                         </select>

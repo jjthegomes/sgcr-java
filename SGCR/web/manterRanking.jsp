@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>Nome do Ranking:</td> 
-                    <td><input type="text" name="txtNomeRanking" value="${ranking.nomeRanking}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Intervalo Faixa Etaria:</td> 
