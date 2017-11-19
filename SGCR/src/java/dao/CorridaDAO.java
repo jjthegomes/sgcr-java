@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Corrida;
+import modelo.Organizador;
 
 /**
  *
@@ -158,7 +159,7 @@ public class CorridaDAO {
                     rs.getString("descricao"),
                     rs.getString("regulamento"),
                     null);
-            corrida.setOrganizadorId(rs.getInt("organizador_id"));
+            corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

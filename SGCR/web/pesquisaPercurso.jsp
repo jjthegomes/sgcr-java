@@ -18,19 +18,19 @@
         <h1>Pesquisa Percurso</h1>
         <table border="1">
             <tr>
-                <th>Id Percurso</th>
-                <th>Imagem Percurso</th>
+                <th>Código</th>
+                <th>Corrida</th>
+                <th>Imagem</th>
                 <th>Quilometragem</th>
-                <th>Id Corrida</th>
                 <th colspan="2">Ação</th>
             </tr>
             
             <c:forEach items="${percursos}" var="percurso">
                 <tr>
                     <td><c:out value="${percurso.id}" /></td>
-                    <td><c:out value="${percurso.imagemPercurso}" /></td>
+                    <td><c:out value="${percurso.corridaId}" /></td>
+                    <td><c:out value="${percurso.imagem}" /></td>
                     <td><c:out value="${percurso.quilometragem}" /></td>
-                    <td><c:out value="${percurso.corridasId}" /></td>
                     <td><a href="ManterPercursoController?acao=prepararEditar&id=<c:out value="${percurso.id}"/>">Editar</a> </td>
                     <td><a href="ManterPercursoController?acao=prepararExcluir&id=<c:out value="${percurso.id}"/>">Excluir</a> </td>
                 </tr>

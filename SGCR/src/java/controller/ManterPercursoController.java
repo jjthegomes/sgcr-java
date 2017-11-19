@@ -116,7 +116,7 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
-        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragem"));
+        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
             Corrida corrida = null;
@@ -153,7 +153,7 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
-        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragem"));
+        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         Percurso percurso = new Percurso(id, imagem, numQuilometragem, null);
         try {
             percurso.excluir();
@@ -187,7 +187,7 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
-        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragem"));
+        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         
         try {

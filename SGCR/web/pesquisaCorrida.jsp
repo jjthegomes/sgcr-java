@@ -36,13 +36,13 @@
             <tr>
                 <td><c:out value="${corrida.id}" /> </td>
                 <td><c:out value="${corrida.nome}" /> </td>
-                <td><c:out value="${corrida.max_pessoas}" /> </td>
+                <td><c:out value="${corrida.maxPessoa}" /> </td>
                 <td><c:out value="${corrida.horario}" /> </td>
                 <td><c:out value="${corrida.data}" /> </td>
                 <td><c:out value="${corrida.logradouro}" /> </td>
                 <td><c:out value="${corrida.bairro}" /> </td>
                 <td><c:out value="${corrida.cep}" /> </td>
-                <td><c:out value="${corrida.organizador_id}" /> </td>
+                <td><c:out value="${corrida.organizadorId}" /> </td>
                 <td><a href="ManterCorridaController?acao=prepararEditar&id=<c:out value="${corrida.id}"/>">Editar</a> </td>
                 <td><a href="ManterCorridaController?acao=prepararExcluir&id=<c:out value="${corrida.id}"/>">Excluir</a> </td>
             </tr>

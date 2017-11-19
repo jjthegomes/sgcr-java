@@ -116,13 +116,14 @@ public class ManterKitController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
             Corrida corrida = null;
             corrida = Corrida.obterCorrida(corridaId);
-            Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
+            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, corrida);
             kit.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);
@@ -138,7 +139,8 @@ public class ManterKitController extends HttpServlet {
             request.setAttribute("operacao", "Excluir");
             request.setAttribute("corridas", Corrida.obterCorridas());
             int idKit = Integer.parseInt(request.getParameter("id"));
-            Kit kit = Kit.obterKit(idKit);
+            int idCorrida = Integer.parseInt(request.getParameter("corridaId"));
+            Kit kit = Kit.obterKit(idKit,idCorrida);
             request.setAttribute("kit", kit);
             RequestDispatcher view = request.getRequestDispatcher("/manterKit.jsp");
             view.forward(request, response);
@@ -154,9 +156,11 @@ public class ManterKitController extends HttpServlet {
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
-        Kit kit = new Kit(id, nome, imagem, tipoChip, null);
+        
+        Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, null);
         try {
             kit.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
@@ -173,7 +177,8 @@ public class ManterKitController extends HttpServlet {
             request.setAttribute("operacao", "Editar");
             request.setAttribute("corridas", Corrida.obterCorridas());
             int idKit = Integer.parseInt(request.getParameter("id"));
-            Kit kit = Kit.obterKit(idKit);
+            int idCorrida = Integer.parseInt(request.getParameter("corridaId"));
+            Kit kit = Kit.obterKit(idKit,idCorrida);
             request.setAttribute("kit", kit);
             RequestDispatcher view = request.getRequestDispatcher("/manterKit.jsp");
             view.forward(request, response);
@@ -189,12 +194,13 @@ public class ManterKitController extends HttpServlet {
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
             Corrida corrida = Corrida.obterCorrida(corridaId);
-            Kit kit = new Kit(id, nome, imagem, tipoChip, corrida);
+            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, corrida);
             kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);

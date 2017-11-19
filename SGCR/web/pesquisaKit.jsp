@@ -17,23 +17,23 @@
         <h1>Pesquisas Kit</h1>
         <table border="1">
             <tr>
-                <th>Código Kit</th>
-                <th>Nome Kit</th>
+                <th>Código</th>
+                <th>Nome</th>
                 <th>Imagem</th>
                 <th>Tipo Chip</th>
-                <th>Código Corrida</th>
+                <th>Corrida</th>
                 <th colspan="2">Ação</th>
             </tr>
             
             <c:forEach items="${kits}" var="kit">
                 <tr>
                     <td><c:out value="${kit.id}" /></td>
-                    <td><c:out value="${kit.nomeKit}" /></td>
-                    <td><c:out value="${kit.imagemKit}" /></td>
+                    <td><c:out value="${kit.nome}" /></td>
+                    <td><c:out value="${kit.imagem}" /></td>
                     <td><c:out value="${kit.tipoChip}" /></td>
-                    <td><c:out value="${kit.corridasId}" /></td>
-                    <td><a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>">Editar</a> </td>
-                    <td><a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>">Excluir</a> </td>
+                    <td><c:out value="${kit.corridaId}" /></td>
+                    <td><a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>">Editar</a> </td>
+                    <td><a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>">Excluir</a> </td>
                 </tr>
             </c:forEach>
         </table>

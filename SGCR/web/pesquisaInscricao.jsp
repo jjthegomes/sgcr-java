@@ -19,27 +19,28 @@
             <tr>
                 <th>Id Inscrição</th>
                 <th>Data da Compra</th>
-                <th>Nº de Peito</th>
-                <th>Tempo Percorrido</th>
-                <th>Forma de Pagamento</th>
-                <th>Pago</th>
+                <!--<th>Nº de Peito</th>-->
+                <!--<th>Tempo Percorrido</th>-->
+                <!--<th>Forma de Pagamento</th>-->
+                <!--<th>Pago</th>-->
                 <th>Percurso</th>
                 <th>Id Atleta</th>
                 <th>Id Kit</th>
                 <th colspan="2">Ação</th>
             </tr>
-            
+
             <c:forEach items="${inscricoes}" var="inscricao">
                 <tr>
                     <td><c:out value="${inscricao.id}" /></td>
                     <td><c:out value="${inscricao.dataCompra}" /></td>
-                    <td><c:out value="${inscricao.numeroPeito}" /></td>
-                    <td><c:out value="${inscricao.tempoPercorrido}" /></td>
-                    <td><c:out value="${inscricao.formaPagamento}" /></td>
-                    <td><c:out value="${inscricao.pago}" /></td>
-                    <td><c:out value="${inscricao.percursosId}" /></td>
-                    <td><c:out value="${inscricao.atletasId}" /></td>
-                    <td><c:out value="${inscricao.kitsId}" /></td>
+                    <!--<td><c:out value="${inscricao.numeroPeito}" /></td>-->
+                    <!--<td><c:out value="${inscricao.tempoLargada}" /></td>-->
+                    <!--<td><c:out value="${inscricao.tempoChegada}" /></td>-->
+                    <!--<td><c:out value="${inscricao.pago}" /></td>-->
+                    <!--<td><c:out value="${inscricao.kitRetirado}" /></td>-->
+                    <td><c:out value="${inscricao.percursoId}" /></td>
+                    <td><c:out value="${inscricao.atletaId}" /></td>
+                    <td><c:out value="${inscricao.kitId}" /></td>
                     <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>">Editar</a> </td>
                     <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>">Excluir</a> </td>
                 </tr>
@@ -49,8 +50,8 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-                <tr>
-                    <td><a href="index.jsp">Menu</a></td>
-                </tr>
-    </body>
+    <tr>
+        <td><a href="index.jsp">Menu</a></td>
+    </tr>
+</body>
 </html>
