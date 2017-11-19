@@ -25,13 +25,14 @@ public class ProdutoKitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO produto_kit (id, kit_id, descricao, valor, produto_id) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO produto_kit (id, descricao, valor, produto_id, kit_id,kit_corrida_id) VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, produtoKit.getId());
-            comando.setInt(2, produtoKit.getKit().getId());
-            comando.setString(3, produtoKit.getDescricao());
-            comando.setDouble(4, produtoKit.getValor());
-            comando.setInt(5, produtoKit.getProduto().getId());
+            comando.setString(2, produtoKit.getDescricao());
+            comando.setDouble(3, produtoKit.getValor());
+            comando.setInt(4, produtoKit.getProduto().getId());
+            comando.setInt(5, produtoKit.getKit().getId());
+            comando.setInt(6, produtoKit.getCorrida().getId());
 
             comando.execute();
             comando.close();
@@ -46,12 +47,14 @@ public class ProdutoKitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE produto_kit SET descricao = ?, valor = ?, kitsId = ? WHERE id =?";
+            String sql = "UPDATE produto_kit SET descricao = ?, valor = ?, kit_id = ?, produto_id = ?, kit_corrida_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, produtoKit.getDescricao());
             comando.setDouble(2, produtoKit.getValor());
             comando.setInt(3, produtoKit.getKit().getId());
-            comando.setInt(4, produtoKit.getId());
+            comando.setInt(4, produtoKit.getProduto().getId());
+            comando.setInt(5, produtoKit.getCorrida().getId());
+            comando.setInt(6, produtoKit.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -90,8 +93,12 @@ public class ProdutoKitDAO {
             produtoKit = new ProdutoKit(rs.getInt("id"),
                     rs.getString("descricao"),
                     rs.getDouble("valor"),
+                    null,
+                    null,
                     null);
-            produtoKit.setKitId(rs.getInt("kitsId"));
+            produtoKit.setProdutoId(rs.getInt("produto_id"));
+            produtoKit.setKitId(rs.getInt("kit_id"));
+            produtoKit.setCorridaId(rs.getInt("kit_corrida_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -114,8 +121,12 @@ public class ProdutoKitDAO {
                         rs.getInt("id"),
                         rs.getString("descricao"),
                         rs.getDouble("valor"),
+                        null,
+                        null,
                         null);
-                produtoKit.setKitId(rs.getInt("kitsId"));
+                produtoKit.setProdutoId(rs.getInt("produto_id"));
+                produtoKit.setKitId(rs.getInt("kit_id"));
+                produtoKit.setCorridaId(rs.getInt("kit_corrida_id"));
                 produtosKit.add(produtoKit);
             }
         } catch (SQLException e) {

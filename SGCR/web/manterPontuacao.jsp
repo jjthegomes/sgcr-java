@@ -27,12 +27,12 @@
                     <td><input type="text" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Corridas:</td>
+                    <td>Rankings:</td>
                     <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"></c:if>>
-                            <option value="0" <c:if test="${pontuacao.corrida.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${pontuacao.corridasId == corrida.id}"> selected</c:if>>${corrida.nomeCorrida}</option>  
+                        <select name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                            <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
+                            <c:forEach items="${rankings}" var="ranking">
+                                <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>

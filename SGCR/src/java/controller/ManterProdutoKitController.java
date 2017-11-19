@@ -15,7 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Corrida;
 import modelo.Kit;
+import modelo.Produto;
 import modelo.ProdutoKit;
 
 /**
@@ -66,10 +68,12 @@ public class ManterProdutoKitController extends HttpServlet {
         try {
             request.setAttribute("operacao", "Excluir");
             request.setAttribute("kits", Kit.obterKits());
+            request.setAttribute("produtos", Produto.obterProdutos());
+            request.setAttribute("corridas", Corrida.obterCorridas());
             int codProdutoKit = Integer.parseInt(request.getParameter("id"));
 
             ProdutoKit produtoKit = ProdutoKit.obterProdutoKit(codProdutoKit);
-            request.setAttribute("produto", produtoKit);
+            request.setAttribute("produtos_kit", produtoKit);
 
             RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
             view.forward(request, response);
@@ -83,11 +87,13 @@ public class ManterProdutoKitController extends HttpServlet {
     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            request.setAttribute("kits", Kit.obterKits());
+           request.setAttribute("kits", Kit.obterKits());
+            request.setAttribute("produtos", Produto.obterProdutos());
+            request.setAttribute("corridas", Corrida.obterCorridas());
             int codProdutoKit = Integer.parseInt(request.getParameter("id"));
 
             ProdutoKit produtoKit = ProdutoKit.obterProdutoKit(codProdutoKit);
-            request.setAttribute("produto", produtoKit);
+            request.setAttribute("produto_kit", produtoKit);
 
             RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
             view.forward(request, response);
@@ -100,10 +106,10 @@ public class ManterProdutoKitController extends HttpServlet {
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdProduto"));
-        String nomeProduto = request.getParameter("txtNomeProduto");
+        String nomeProduto = request.getParameter("txtdescricao");
         double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
         
-        ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, null);
+        ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, null,null,null);
         try {
             produtoKit.excluir();
 
@@ -119,12 +125,17 @@ public class ManterProdutoKitController extends HttpServlet {
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdProduto"));
-        String nomeProduto = request.getParameter("txtNomeProduto");
+        String nomeProduto = request.getParameter("txtDescricao");
         double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
-        int idProdutoKit = Integer.parseInt(request.getParameter("optKit"));
+        int idKit = Integer.parseInt(request.getParameter("optKit"));
+        int idProduto = Integer.parseInt(request.getParameter("optProduto"));
+        int idCorrida = Integer.parseInt(request.getParameter("optCorrida"));
         
-        Kit kit = Kit.obterKit(idProdutoKit);
-        ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, kit);
+        Kit kit = Kit.obterKit(idKit,idCorrida);
+        Produto produto = Produto.obterProduto(idProduto);
+        Corrida corrida = Corrida.obterCorrida(idCorrida);
+        
+        ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, kit, produto, corrida);
         try {
             produtoKit.alterar();
 
@@ -141,6 +152,8 @@ public class ManterProdutoKitController extends HttpServlet {
         try{
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("kits",Kit.obterKits());
+            request.setAttribute("produtos",Produto.obterProdutos());
+            request.setAttribute("corridas",Corrida.obterCorridas());
             RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
             view.forward(request, response);
 
@@ -151,15 +164,21 @@ public class ManterProdutoKitController extends HttpServlet {
     }
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
        int id = Integer.parseInt(request.getParameter("txtIdProduto"));
-       String nome =  request.getParameter("txtNomeProduto");
+       String nome =  request.getParameter("txtDescricao");
        double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
-       int kitProduto = Integer.parseInt(request.getParameter("optKit"));
+       int idKit = Integer.parseInt(request.getParameter("optKit"));
+        int idProduto = Integer.parseInt(request.getParameter("optProduto"));
+        int idCorrida = Integer.parseInt(request.getParameter("optCorrida"));
        try {
            Kit kit = null;
+           Produto produto = null;
+           Corrida corrida = null;
            
-               kit = Kit.obterKit(kitProduto);
+               kit = Kit.obterKit(idKit,idCorrida);
+               produto = Produto.obterProduto(idProduto);
+               corrida = Corrida.obterCorrida(idCorrida);
         
-           ProdutoKit produtoKit = new ProdutoKit(id,nome,valor,kit); 
+           ProdutoKit produtoKit = new ProdutoKit(id,nome,valor,kit,produto,corrida); 
        produtoKit.gravar();
        RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoKitController");
        view.forward(request,response);  

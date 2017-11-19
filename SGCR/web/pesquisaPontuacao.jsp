@@ -19,7 +19,7 @@
             <tr>
                 <th>Id Pontuação</th>
                 <th>Pontuação</th>
-                <th>Id Corrida</th>
+                <th>Nome Ranking</th>
                 <th colspan="2">Ação</th>
             </tr>
             
@@ -27,7 +27,7 @@
                 <tr>
                     <td><c:out value="${pontuacao.id}" /></td>
                     <td><c:out value="${pontuacao.pontuacao}" /></td>
-                    <td><c:out value="${pontuacao.corridasId}" /></td>
+                    <td><c:out value="${pontuacao.ranking.nome}" /></td>
                     <td><a href="ManterPontuacaoController?acao=prepararEditar&id=<c:out value="${pontuacao.id}"/>">Editar</a> </td>
                     <td><a href="ManterPontuacaoController?acao=prepararExcluir&id=<c:out value="${pontuacao.id}"/>">Excluir</a> </td>
                 </tr>

@@ -15,15 +15,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Corrida;
-import modelo.Pontuacao;
-import modelo.Ranking;
+import modelo.Administrador;
+import modelo.Produto;
 
 /**
  *
- * @author RAJ
+ * @author ariel
  */
-public class ManterPontuacaoController extends HttpServlet {
+public class ManterProdutoController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,19 +57,21 @@ public class ManterPontuacaoController extends HttpServlet {
                         }
                     }
                 }
+            }
         }
     }
-    }
+    
+    
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
-        try {
+      try {
             request.setAttribute("operacao", "Excluir");
-            request.setAttribute("rankings", Ranking.obterRankings());
-            int codPontuacao = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("administradores", Administrador.obterAdministradores());
+            int codProduto = Integer.parseInt(request.getParameter("id"));
 
-            Pontuacao pontuacao = Pontuacao.obterPontuacao(codPontuacao);
-            request.setAttribute("pontuacao", pontuacao);
+            Produto produto = Produto.obterProduto(codProduto);
+            request.setAttribute("produto", produto);
 
-            RequestDispatcher view = request.getRequestDispatcher("/manterPontuacao.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterProduto.jsp");
             view.forward(request, response);
 
         } catch (ServletException ex) {
@@ -82,13 +83,13 @@ public class ManterPontuacaoController extends HttpServlet {
     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            request.setAttribute("rankings", Ranking.obterRankings());
-            int codPontuacao = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("administradores", Administrador.obterAdministradores());
+            int codProduto = Integer.parseInt(request.getParameter("id"));
 
-            Pontuacao pontuacao = Pontuacao.obterPontuacao(codPontuacao);
-            request.setAttribute("pontuacao", pontuacao);
+            Produto produto = Produto.obterProduto(codProduto);
+            request.setAttribute("produto", produto);
 
-            RequestDispatcher view = request.getRequestDispatcher("/manterPontuacao.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterProduto.jsp");
             view.forward(request, response);
 
         } catch (ServletException ex) {
@@ -98,17 +99,17 @@ public class ManterPontuacaoController extends HttpServlet {
     }
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-         int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
-        int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-        
-        int idRanking = Integer.parseInt(request.getParameter("optRanking"));
-        Ranking ranking = Ranking.obterRanking(idRanking);
-        
-        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,ranking);
-        try {
-            pontuacao.excluir();
+          int id = Integer.parseInt(request.getParameter("txtIdProduto"));
+        String nomeProduto = request.getParameter("txtNome");
+    
+        //int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
 
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
+        //Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
+        Produto produto = new Produto(id, nomeProduto, null);
+        try {
+            produto.excluir();
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoController");
             view.forward(request, response);
 
         } catch (IOException ex) {
@@ -119,17 +120,16 @@ public class ManterPontuacaoController extends HttpServlet {
     }
     
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-         int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
-        int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-        
-        int idRanking = Integer.parseInt(request.getParameter("optRanking"));
-        Ranking ranking = Ranking.obterRanking(idRanking);
-        
-        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,ranking);
-        try {
-            pontuacao.alterar();
+         int id = Integer.parseInt(request.getParameter("txtIdProduto"));
+        String nomeProduto = request.getParameter("txtNome");
+        int idAdministradorProduto = Integer.parseInt(request.getParameter("optAdministrador"));
 
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
+        Administrador administrador = Administrador.obterAdministrador(idAdministradorProduto);
+        Produto produto = new Produto(id, nomeProduto, administrador);
+        try {
+            produto.alterar();
+
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoController");
             view.forward(request, response);
 
         } catch (IOException ex) {
@@ -139,41 +139,39 @@ public class ManterPontuacaoController extends HttpServlet {
         }
     }
 
-    
-    
-    
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+        try {
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute("rankings", Ranking.obterRankings());
-            RequestDispatcher view = request.getRequestDispatcher("/manterPontuacao.jsp");
+            request.setAttribute("administradores", Administrador.obterAdministradores());
+            RequestDispatcher view = request.getRequestDispatcher("/manterProduto.jsp");
             view.forward(request, response);
-            
-        }catch(ServletException ex){
-        }catch(IOException ex){
-        }catch (ClassNotFoundException ex){
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
     }
     
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-       int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
-       int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-       int rankingId = Integer.parseInt(request.getParameter("optRanking"));
-       try {
-           Ranking ranking = null;
-           
-               ranking = Ranking.obterRanking(rankingId);
-        
-           Pontuacao pontuacao = new Pontuacao(id,valorPontuacao,ranking); 
-       pontuacao.gravar();
-       RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
-       view.forward(request,response);  
-    }catch (IOException ex){
-    }catch(SQLException ex){
-    }catch(ClassNotFoundException ex){
-    }catch (ServletException ex){
+        int id = Integer.parseInt(request.getParameter("txtIdProduto"));
+        String nomeProduto= request.getParameter("txtNome");
+        int idAdministrador = Integer.parseInt(request.getParameter("optAdministrador"));
+        try {
+            Administrador administrador = null;
+
+            administrador = Administrador.obterAdministrador(idAdministrador);
+
+            Produto produto = new Produto(id, nomeProduto, administrador);
+            produto.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
     }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -190,9 +188,9 @@ public class ManterPontuacaoController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -210,9 +208,9 @@ public class ManterPontuacaoController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -225,7 +223,5 @@ public class ManterPontuacaoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

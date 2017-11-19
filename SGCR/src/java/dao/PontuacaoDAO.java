@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Pontuacao;
+import modelo.Ranking;
 
 /**
  *
@@ -25,11 +26,11 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "INSERT INTO pontuacao (id, pontuacao, corridasId) VALUES (?,?,?)";
+            String sql= "INSERT INTO pontuacao (id, pontuacao, ranking_id) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getId());
             comando.setInt(2,pontuacao.getPontuacao());
-            comando.setInt(3,pontuacao.getCorrida().getId());
+            comando.setInt(3,pontuacao.getRanking().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -44,10 +45,10 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "UPDATE pontuacao SET pontuacao = ?, corridasId = ? WHERE id = ?";
+            String sql= "UPDATE pontuacao SET pontuacao = ?, ranking_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1,pontuacao.getPontuacao());
-            comando.setInt(2,pontuacao.getCorrida().getId());
+            comando.setInt(2,pontuacao.getRanking().getId());
             comando.setInt(3,pontuacao.getId());
             comando.execute();
             comando.close();
@@ -67,7 +68,7 @@ public class PontuacaoDAO {
           conexao =BD.getConexao();
           comando= conexao.createStatement();
           stringSQL = "DELETE FROM pontuacao WHERE id = " + pontuacao.getId()+" and "
-                  + "corridasId = " + pontuacao.getCorrida().getId();
+                  + "ranking_id = " + pontuacao.getRanking().getId();
                   comando.execute(stringSQL);
         }catch(SQLException e){
             throw e;
@@ -88,7 +89,7 @@ public class PontuacaoDAO {
             pontuacao = new Pontuacao(rs.getInt("id"),
             rs.getInt("pontuacao"),
             null);
-            pontuacao.setCorridaId(rs.getInt("corridasId"));
+            pontuacao.setRankingId(rs.getInt("ranking_id"));
         }catch(SQLException e){
              e.printStackTrace();
         }finally{
@@ -111,7 +112,8 @@ public class PontuacaoDAO {
                         rs.getInt("id"), 
                         rs.getInt("pontuacao"), 
                         null);
-                pontuacao.setCorridaId(rs.getInt("corridasId"));
+                pontuacao.setRanking(Ranking.obterRanking(rs.getInt("ranking_id")));
+                pontuacao.setRankingId(rs.getInt("ranking_id"));
                 pontuacoes.add(pontuacao);
             }
         } catch (SQLException e) {

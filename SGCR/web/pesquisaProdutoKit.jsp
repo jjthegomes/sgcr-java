@@ -27,9 +27,9 @@
             <c:forEach items="${produtos_kit}" var="produtoKit">
                 <tr>
                     <td><c:out value="${produtoKit.id}" /></td>
-                    <td><c:out value="${produtoKit.nome}" /></td>
+                    <td><c:out value="${produtoKit.descricao}" /></td>
                     <td><c:out value="${produtoKit.valor}" /></td>
-                     <td><c:out value="${produtoKit.kitsId}" /></td>
+                     <td><c:out value="${produtoKit.kitId}" /></td>
                     <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>">Excluir</a> </td>
                 </tr>

@@ -113,7 +113,7 @@ public class ManterRankingController extends HttpServlet {
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
-        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
         //int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
 
         //Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
@@ -134,7 +134,7 @@ public class ManterRankingController extends HttpServlet {
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
-        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
         int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
 
         Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
@@ -155,7 +155,7 @@ public class ManterRankingController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("txtIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
-        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtTotalPeriodos"));
+        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
         int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
         try {
             Administrador administrador = null;

@@ -17,13 +17,13 @@ public class Pontuacao {
 
     private int id;
     private int pontuacao;
-    private Corrida corrida;
-    private int corridaId;
+    private Ranking ranking;
+    private int rankingId;
 
-    public Pontuacao(int id, int pontuacao, Corrida corrida) {
+    public Pontuacao(int id, int pontuacao, Ranking ranking) {
         this.id = id;
         this.pontuacao = pontuacao;
-        this.corrida = corrida;
+        this.ranking = ranking;
     }
 
     public int getId() {
@@ -42,20 +42,20 @@ public class Pontuacao {
         this.pontuacao = pontuacao;
     }
 
-    public int getCorridaId() {
-        return corridaId;
+    public int getRankingId() {
+        return rankingId;
     }
 
-    public void setCorrida(Corrida corrida) {
-        this.corrida = corrida;
+    public void setRanking(Ranking ranking) {
+        this.ranking = ranking;
     }
 
-    public Corrida getCorrida() {
-        return corrida;
+    public Ranking getRanking() {
+        return ranking;
     }
 
-    public void setCorridaId(int corridaId) {
-        this.corridaId = corridaId;
+    public void setRankingId(int RankingId) {
+        this.rankingId = rankingId;
     }
 
     public void gravar() throws SQLException,

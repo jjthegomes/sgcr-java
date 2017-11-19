@@ -15,18 +15,22 @@ public class ProdutoKit {
     private Double valor;
     private Kit kit;
     private Produto produto;
+    private Corrida corrida;
     
     private int kitId;
     private int produtoId;
+    private int corridaId;
     
     public ProdutoKit() {
     }
 
-    public ProdutoKit(int id, String descricao, Double valor, Kit kit) {
+    public ProdutoKit(int id, String descricao, Double valor, Kit kit, Produto produto, Corrida corrida) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.kit = kit;
+        this.produto = produto;
+        this.corrida = corrida;
     }
 
     public int getId() {
@@ -55,6 +59,22 @@ public class ProdutoKit {
     
     public Kit getKit() {
         return kit;
+    }
+
+    public Corrida getCorrida() {
+        return corrida;
+    }
+
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
+    }
+
+    public int getCorridaId() {
+        return corridaId;
+    }
+
+    public void setCorridaId(int corridaId) {
+        this.corridaId = corridaId;
     }
 
     public void setKit(Kit kit) {

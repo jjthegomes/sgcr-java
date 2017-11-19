@@ -88,6 +88,14 @@
         <servlet-name>ManterProdutoKitController</servlet-name>
         <servlet-class>controller.ManterProdutoKitController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaProdutoController</servlet-name>
+        <servlet-class>controller.PesquisaProdutoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManterProdutoController</servlet-name>
+        <servlet-class>controller.ManterProdutoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>ManterProdutoKitController</servlet-name>
         <url-pattern>/ManterProdutoKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaProdutoController</servlet-name>
+        <url-pattern>/PesquisaProdutoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterProdutoController</servlet-name>
+        <url-pattern>/ManterProdutoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

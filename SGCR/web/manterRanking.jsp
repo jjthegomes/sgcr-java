@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>Intervalo Faixa Etaria:</td> 
-                    <td><input type="text" name="txtTotalPeriodos" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Administrador:</td>

@@ -84,7 +84,7 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM ranking WHERE id = " + id);
+            ResultSet rs = comando.executeQuery("select * from ranking where id= " + id);
             rs.first();
             ranking = new Ranking(rs.getInt("id"),
                     rs.getString("nome"),
@@ -106,7 +106,7 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM ranking");
+            ResultSet rs = comando.executeQuery("SELECT * FROM ranking ");
 
             while (rs.next()) {
                 Ranking ranking = new Ranking(

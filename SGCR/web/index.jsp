@@ -21,6 +21,8 @@
         <br>
         <a href="PesquisaKitController">Manter Kit</a>
         <br>
+        <a href="PesquisaProdutoController">Manter Produto</a>
+        <br>
         <a href="PesquisaProdutoKitController">Manter Produto Kit</a> 
         <br>
         <a href="PesquisaRankingController">Manter Ranking</a>
