@@ -25,7 +25,7 @@
             <th>Data Nascimento</th>
             <th>CPF</th>
             <th>CEP</th>
-            <th>Rua</th>
+            <th>Logradouro</th>
             <th>Bairro</th>
 
             <th colspan="2">Ação</th>
@@ -39,7 +39,7 @@
                 <td><c:out value="${organizador.dataNascimento}" /> </td>
                 <td><c:out value="${organizador.cpf}" /> </td>
                 <td><c:out value="${organizador.cep}" /> </td>
-                <td><c:out value="${organizador.rua}" /> </td>
+                <td><c:out value="${organizador.logradouro}" /> </td>
                 <td><c:out value="${organizador.bairro}" /> </td>
                 <td><a href="ManterOrganizadorController?acao=prepararEditar&id=<c:out value="${organizador.id}"/>">Editar</a> </td>
                 <td><a href="ManterOrganizadorController?acao=prepararExcluir&id=<c:out value="${organizador.id}"/>">Excluir</a> </td>

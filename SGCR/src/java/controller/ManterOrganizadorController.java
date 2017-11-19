@@ -116,7 +116,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String sexo = request.getParameter("optSexo");
         String cpf = request.getParameter("txtCpfOrganizador");
         String cep = request.getParameter("txtCepOrganizador");
-        String rua = request.getParameter("txtRuaOrganizador");
+        String logradouro = request.getParameter("txtLogradouroOrganizador");
         String bairro = request.getParameter("txtBairroOrganizador");
         String complemento = request.getParameter("txtComplementoOrganizador");
         String numero = request.getParameter("txtNumeroOrganizador");
@@ -126,7 +126,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String celular = request.getParameter("txtCelularOrganizador");
 
         try {
-            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
             organizador.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
             view.forward(request, response);
@@ -162,7 +162,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String sexo = request.getParameter("optSexo");
         String cpf = request.getParameter("txtCpfOrganizador");
         String cep = request.getParameter("txtCepOrganizador");
-        String rua = request.getParameter("txtRuaOrganizador");
+        String logradouro = request.getParameter("txtLogradouroOrganizador");
         String bairro = request.getParameter("txtBairroOrganizador");
         String complemento = request.getParameter("txtComplementoOrganizador");
         String numero = request.getParameter("txtNumeroOrganizador");
@@ -170,7 +170,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String estado = request.getParameter("txtEstadoOrganizador");
         String telefone = request.getParameter("txtTelefoneOrganizador");
         String celular = request.getParameter("txtCelularOrganizador");
-        Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+        Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
         
         try {
             organizador.excluir();
@@ -207,7 +207,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String sexo = request.getParameter("optSexo");
         String cpf = request.getParameter("txtCpfOrganizador");
         String cep = request.getParameter("txtCepOrganizador");
-        String rua = request.getParameter("txtRuaOrganizador");
+        String logradouro = request.getParameter("txtLogradouroOrganizador");
         String bairro = request.getParameter("txtBairroOrganizador");
         String complemento = request.getParameter("txtComplementoOrganizador");
         String numero = request.getParameter("txtNumeroOrganizador");
@@ -217,7 +217,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String celular = request.getParameter("txtCelularOrganizador");
         
         try {
-            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
+            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, estado, sexo);
             organizador.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
             view.forward(request, response);

@@ -37,7 +37,7 @@ public class OrganizadorDAO {
                         rs.getString("sexo"),
                         rs.getString("cpf"),
                         rs.getString("cep"),
-                        rs.getString("rua"),
+                        rs.getString("logradouro"),
                         rs.getString("bairro"),
                         rs.getString("complemento"),
                         rs.getString("numero"),
@@ -63,7 +63,7 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO organizador (id,nome,email,senha,sexo,data_nascimento,"
-                    + "cpf,cep,cidade,estado,rua,bairro,numero,complemento, telefone,celular) "
+                    + "cpf,cep,cidade,estado,logradouro,bairro,numero,complemento, telefone,celular) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, organizador.getId());
@@ -100,7 +100,7 @@ public class OrganizadorDAO {
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE organizador SET nome = ?,email = ?, senha = ?, sexo = ?, data_nascimento = ?, cpf = ?, "
-                    + "cep = ?, cidade = ?, estado = ?, rua = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, "
+                    + "cep = ?, cidade = ?, estado = ?, logradouro = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, "
                     + "celular = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, organizador.getNome());
@@ -163,7 +163,7 @@ public class OrganizadorDAO {
                     rs.getString("sexo"),
                     rs.getString("cpf"),
                     rs.getString("cep"),
-                    rs.getString("rua"),
+                    rs.getString("logradouro"),
                     rs.getString("bairro"),
                     rs.getString("complemento"),
                     rs.getString("numero"),

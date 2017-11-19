@@ -20,11 +20,11 @@
         <form action="ManterOrganizadorController?acao=confirmar${operacao}" method="post" name="frmManterOrganizador">
             <table>
                 <tr>
-                    <td>Codigo do Organizador:</td> 
+                    <td>Codigo:</td> 
                     <td><input type="text" name="txtIdOrganizador" value="${organizador.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Nome do Organizador:</td> 
+                    <td>Nome:</td> 
                     <td><input type="text" name="txtNomeOrganizador" value="${organizador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 
@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <td>Rua:</td> 
-                    <td><input type="text" name="txtRuaOrganizador" value="${organizador.rua}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    <td><input type="text" name="txtLogradouroOrganizador" value="${organizador.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
                     <td>Bairro:</td> 

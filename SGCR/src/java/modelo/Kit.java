@@ -12,6 +12,7 @@ public class Kit {
 
     private int id;
     private String nome;
+    private int quantidade;
     private String imagem;
     private String tipoChip;
     private Corrida corrida;
@@ -21,9 +22,10 @@ public class Kit {
     public Kit() {
     }
 
-    public Kit(int id, String nome, String imagem, String tipoChip, Corrida corrida) {
+    public Kit(int id, String nome, int quantidade, String imagem, String tipoChip, Corrida corrida) {
         this.id = id;
         this.nome = nome;
+        this.quantidade = quantidade;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
         this.corrida = corrida;
@@ -37,6 +39,22 @@ public class Kit {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
     public String getImagem() {
         return imagem;
     }
@@ -67,14 +85,6 @@ public class Kit {
 
     public void setCorridaId(int corridaId) {
         this.corridaId = corridaId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public static List<Kit> obterKits() throws ClassNotFoundException {

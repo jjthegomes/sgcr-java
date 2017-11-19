@@ -128,8 +128,8 @@ public class ManterInscricaoController extends HttpServlet {
 
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
+        int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
-        int kitCorridaId = Integer.parseInt(request.getParameter("hiddenCorrida"));
 
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
@@ -174,10 +174,10 @@ public class ManterInscricaoController extends HttpServlet {
         Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
         Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
         String tempoLargada = request.getParameter("txtTempoLargada");
-
         String tempoChegada = request.getParameter("txtTempoChegada");
 
         Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null);
+        
         try {
             inscricao.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
@@ -211,17 +211,17 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
-        String dataCompra = "00/00/0000";
-        String numeroPeito = "0";
-        Boolean pago = false;
-        Boolean kitRetirado = false;
-        String tempoLargada = "00:00:00";
-        String tempoChegada = "00:00:00";
+        String dataCompra = request.getParameter("txtDataCompraInscricao");
+        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
+        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
+        Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
+        String tempoLargada = request.getParameter("txtTempoLargada");
+        String tempoChegada = request.getParameter("txtTempoChegada");
 
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
-        int kitCorridaId = Integer.parseInt(request.getParameter("hiddenCorrida"));
+        int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
