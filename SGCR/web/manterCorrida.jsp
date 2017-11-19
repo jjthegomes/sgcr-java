@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td>Max Pessoas</td> 
-                        <td><input type="number" name="txtMaxPessoaCorrida" value="${corrida.maxPessoas}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="number" name="txtMaxPessoaCorrida" value="${corrida.maxPessoa}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
                         <td>Data</td> 
