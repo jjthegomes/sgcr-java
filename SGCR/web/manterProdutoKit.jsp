@@ -31,7 +31,7 @@
                     <td><input type="text" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Kits:</td>
+                    <td>Kit:</td>
                     <td>
                         <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>> </option>  
@@ -42,7 +42,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Produtos:</td>
+                    <td>Produto:</td>
                     <td>
                         <select name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
@@ -53,7 +53,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Corridas:</td>
+                    <td>Corrida:</td>
                     <td>
                         <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  

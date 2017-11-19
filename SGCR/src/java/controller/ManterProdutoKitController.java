@@ -73,7 +73,7 @@ public class ManterProdutoKitController extends HttpServlet {
             int codProdutoKit = Integer.parseInt(request.getParameter("id"));
 
             ProdutoKit produtoKit = ProdutoKit.obterProdutoKit(codProdutoKit);
-            request.setAttribute("produtos_kit", produtoKit);
+            request.setAttribute("produtoKit", produtoKit);
 
             RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
             view.forward(request, response);
@@ -93,7 +93,7 @@ public class ManterProdutoKitController extends HttpServlet {
             int codProdutoKit = Integer.parseInt(request.getParameter("id"));
 
             ProdutoKit produtoKit = ProdutoKit.obterProdutoKit(codProdutoKit);
-            request.setAttribute("produto_kit", produtoKit);
+            request.setAttribute("produtoKit", produtoKit);
 
             RequestDispatcher view = request.getRequestDispatcher("/manterProdutoKit.jsp");
             view.forward(request, response);
@@ -106,7 +106,7 @@ public class ManterProdutoKitController extends HttpServlet {
     
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdProduto"));
-        String nomeProduto = request.getParameter("txtdescricao");
+        String nomeProduto = request.getParameter("txtDescricao");
         double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
         
         ProdutoKit produtoKit = new ProdutoKit(id, nomeProduto, valor, null,null,null);

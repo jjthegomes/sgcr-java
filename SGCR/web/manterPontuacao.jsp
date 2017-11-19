@@ -27,7 +27,7 @@
                     <td><input type="text" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Rankings:</td>
+                    <td>Ranking:</td>
                     <td>
                         <select name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
                             <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
