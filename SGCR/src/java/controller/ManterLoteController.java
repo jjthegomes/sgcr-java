@@ -60,12 +60,12 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdIngresso"));
-        String tipo = request.getParameter("txtTipoIngresso");
-        double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
-        String dataInicio = request.getParameter("txtDataInicioIngresso");
-        String dataFinal = request.getParameter("txtDataFinalIngresso");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int id = Integer.parseInt(request.getParameter("txtIdLote"));
+        String tipo = request.getParameter("txtTipoLote");
+        double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
+        String dataInicio = request.getParameter("txtDataInicioLote");
+        String dataFinal = request.getParameter("txtDataFinalLote");
+        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
@@ -74,7 +74,7 @@ public class ManterLoteController extends HttpServlet {
             ingresso.gravar();
 
             RequestDispatcher view
-                    = request.getRequestDispatcher("PesquisaIngressoController");
+                    = request.getRequestDispatcher("PesquisaLoteController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {
@@ -89,7 +89,7 @@ public class ManterLoteController extends HttpServlet {
             //Para chave estrangeira
             request.setAttribute("corridas", Corrida.obterCorridas());
             RequestDispatcher view
-                    = request.getRequestDispatcher("/manterIngresso.jsp");
+                    = request.getRequestDispatcher("/manterLote.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
         } catch (IOException ex) {
@@ -117,12 +117,12 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdIngresso"));
-        String tipo = request.getParameter("txtTipoIngresso");
-        double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
-        String dataInicio = request.getParameter("txtDataInicioIngresso");
-        String dataFinal = request.getParameter("txtDataFinalIngresso");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int id = Integer.parseInt(request.getParameter("txtIdLote"));
+        String tipo = request.getParameter("txtTipoLote");
+        double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
+        String dataInicio = request.getParameter("txtDataInicioLote");
+        String dataFinal = request.getParameter("txtDataFinalLote");
+        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
@@ -159,12 +159,12 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdIngresso"));
-        String tipo = request.getParameter("txtTipoIngresso");
-        double preco = Double.parseDouble(request.getParameter("txtPrecoIngresso"));
-        String dataInicio = request.getParameter("txtDataInicioIngresso");
-        String dataFinal = request.getParameter("txtDataFinalIngresso");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeIngresso"));
+        int id = Integer.parseInt(request.getParameter("txtIdLote"));
+        String tipo = request.getParameter("txtTipoLote");
+        double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
+        String dataInicio = request.getParameter("txtDataInicioLote");
+        String dataFinal = request.getParameter("txtDataFinalLote");
+        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {

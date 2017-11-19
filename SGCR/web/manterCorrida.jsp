@@ -37,12 +37,12 @@
                     </tr>
                     <tr>
                         <td>Data</td> 
-                        <td><input type="text" name="txtData" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtDataCorrida" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
                         <td>Horario</td> 
-                        <td><input type="text" name="txtHorario" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td><input type="text" name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>   
 
                     <tr>

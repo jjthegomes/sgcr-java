@@ -37,7 +37,7 @@
                 <td><c:out value="${lote.dataInicio}" /> </td>
                 <td><c:out value="${lote.dataFinal}" /> </td>
                 <td><c:out value="${lote.quantidade}" /> </td>
-                <td><c:out value="${lote.corridasId}" /> </td>                
+                <td><c:out value="${lote.corridaId}" /> </td>                
                 <td><a href="ManterLoteController?acao=prepararEditar&id=<c:out value="${lote.id}"/>">Editar</a> </td>
                 <td><a href="ManterLoteController?acao=prepararExcluir&id=<c:out value="${lote.id}"/>">Excluir</a> </td>
             </tr>

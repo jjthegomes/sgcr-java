@@ -99,7 +99,7 @@ public class ManterAtletaController extends HttpServlet {
             Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
                     sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
                     telefone, celular, id, email, senha);
-            atleta.gravar();
+                atleta.gravar();
             RequestDispatcher view
                     = request.getRequestDispatcher("PesquisaAtletaController");
             view.forward(request, response);
