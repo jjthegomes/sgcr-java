@@ -18,16 +18,16 @@
         <table border="1">
             <tr>
                 <th>Código</th>
-                <th>Nome</th>
                 <th>Administrador</th>
+                <th>Nome</th>
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${produtos}" var="produto">
                 <tr>
                     <td><c:out value="${produto.id}" /></td>
-                    <td><c:out value="${produto.nome}" /></td>
-                    <td><c:out value="${produto.administradorId}" /></td>
+                    <td><c:out value="${produto.administrador.nome}" /></td>
+                    <td><c:out value="${produto.nome}" /></td>                    
                     <td><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a> </td>
                 </tr>

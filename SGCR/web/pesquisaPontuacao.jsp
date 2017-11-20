@@ -18,16 +18,16 @@
         <table border="1">
             <tr>
                 <th>Id Pontuação</th>
+                <th>Ranking</th>
                 <th>Pontuação</th>
-                <th>Nome Ranking</th>
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${pontuacoes}" var="pontuacao">
                 <tr>
                     <td><c:out value="${pontuacao.id}" /></td>
-                    <td><c:out value="${pontuacao.pontuacao}" /></td>
                     <td><c:out value="${pontuacao.ranking.nome}" /></td>
+                    <td><c:out value="${pontuacao.pontuacao}" /></td>
                     <td><a href="ManterPontuacaoController?acao=prepararEditar&id=<c:out value="${pontuacao.id}"/>">Editar</a> </td>
                     <td><a href="ManterPontuacaoController?acao=prepararExcluir&id=<c:out value="${pontuacao.id}"/>">Excluir</a> </td>
                 </tr>

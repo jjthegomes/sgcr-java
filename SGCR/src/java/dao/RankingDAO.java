@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Administrador;
 import modelo.Ranking;
 
 /**
@@ -115,6 +116,7 @@ public class RankingDAO {
                         rs.getInt("intervalo_faixa_etaria"),
                         null);
                 ranking.setAdministradorId(rs.getInt("administrador_id"));
+                ranking.setAdministrador(Administrador.obterAdministrador(rs.getInt("administrador_id")));
                 rankings.add(ranking);
             }
         } catch (SQLException e) {

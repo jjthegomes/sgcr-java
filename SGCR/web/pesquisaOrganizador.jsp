@@ -23,10 +23,7 @@
                 <th>Sexo</th>
                 <th>Data Nascimento</th>
                 <th>CPF</th>
-                <th>CEP</th>
-                <th>Logradouro</th>
-                <th>Bairro</th>
-
+                
                 <th colspan="2">Ação</th>
             </tr>
             <c:forEach items="${organizadores}" var="organizador">
@@ -36,10 +33,7 @@
                     <td><c:out value="${organizador.email}" /> </td>
                     <td><c:out value="${organizador.sexo}" /> </td>
                     <td><c:out value="${organizador.dataNascimento}" /> </td>
-                    <td><c:out value="${organizador.cpf}" /> </td>
-                    <td><c:out value="${organizador.cep}" /> </td>
-                    <td><c:out value="${organizador.logradouro}" /> </td>
-                    <td><c:out value="${organizador.bairro}" /> </td>
+                    <td><c:out value="${organizador.cpf}" /> </td>                   
                     <td><a href="ManterOrganizadorController?acao=prepararEditar&id=<c:out value="${organizador.id}"/>">Editar</a> </td>
                     <td><a href="ManterOrganizadorController?acao=prepararExcluir&id=<c:out value="${organizador.id}"/>">Excluir</a> </td>
                 </tr>

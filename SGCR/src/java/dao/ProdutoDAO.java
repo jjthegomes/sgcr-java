@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Administrador;
 import modelo.CartaoCredito;
 import modelo.Produto;
 
@@ -109,6 +110,7 @@ public class ProdutoDAO {
                         rs.getString("nome"),
                         null);
                 produto.setAdministradorId(rs.getInt("administrador_id"));
+                produto.setAdministrador(Administrador.obterAdministrador(rs.getInt("administrador_id")));
                 produtos.add(produto);
             }
         } catch (SQLException e) {

@@ -169,8 +169,8 @@ public class Corrida {
         return organizadorId;
     }
 
-    public void setOrganizadorId(int organizadoresId) {
-        this.organizadorId = organizadoresId;
+    public void setOrganizadorId(int organizadorId) {
+        this.organizadorId = organizadorId;
     }
 
     public static List<Corrida> obterCorridas() throws ClassNotFoundException {

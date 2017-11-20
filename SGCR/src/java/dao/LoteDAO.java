@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Corrida;
 import modelo.Lote;
 
 /**
@@ -34,6 +35,7 @@ public class LoteDAO {
                         rs.getInt("quantidade"),
                         null);
                 ingresso.setCorridaId(rs.getInt("corrida_id"));
+                ingresso.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
                 lotes.add(ingresso);
             }
         } catch (SQLException e) {

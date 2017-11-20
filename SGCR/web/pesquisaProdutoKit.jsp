@@ -17,19 +17,19 @@
         <h1>Pesquisas Produto Kit</h1>
         <table border="1">
             <tr>
-                <th>Id Produto</th>
+                <th>Codigo</th>
+                <th>Kit</th>
                 <th>Nome Produto</th>
                 <th>Valor</th>
-                <th>Id Kit</th>
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${produtos_kit}" var="produtoKit">
                 <tr>
                     <td><c:out value="${produtoKit.id}" /></td>
+                    <td><c:out value="${produtoKit.kit.nome}" /></td>
                     <td><c:out value="${produtoKit.descricao}" /></td>
-                    <td><c:out value="${produtoKit.valor}" /></td>
-                    <td><c:out value="${produtoKit.kitId}" /></td>
+                    <td><c:out value="${produtoKit.valor}" /></td>                    
                     <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>">Excluir</a> </td>
                 </tr>

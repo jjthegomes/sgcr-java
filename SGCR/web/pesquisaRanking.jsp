@@ -17,19 +17,19 @@
         <h1>Pesquisa Ranking</h1>
         <table border="1">
             <tr>
-                <th>Id Ranking</th>
+                <th>Código</th>
+                <th>Administrador</th>
                 <th>Nome Ranking</th>
-                <th>Faixa Etaria</th>
-                <th>Id Administrador</th>
+                <th>Faixa Etaria</th>                
                 <th colspan="2">Ação</th>
             </tr>
 
             <c:forEach items="${rankings}" var="ranking">
                 <tr>
                     <td><c:out value="${ranking.id}" /></td>
+                    <td><c:out value="${ranking.administrador.nome}" /></td>
                     <td><c:out value="${ranking.nome}" /></td>
                     <td><c:out value="${ranking.intervaloFaixaEtaria}" /></td>
-                    <td><c:out value="${ranking.administradorId}" /></td>
                     <td><a href="ManterRankingController?acao=prepararEditar&id=<c:out value="${ranking.id}"/>">Editar</a> </td>
                     <td><a href="ManterRankingController?acao=prepararExcluir&id=<c:out value="${ranking.id}"/>">Excluir</a> </td>
                 </tr>

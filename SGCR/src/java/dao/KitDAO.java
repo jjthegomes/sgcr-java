@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Corrida;
 import modelo.Kit;
 
 /**
@@ -32,6 +33,7 @@ public class KitDAO {
                         rs.getString("tipo_chip"), 
                         null);
                 kit.setCorridaId(rs.getInt("corrida_id"));
+                kit.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
                 kits.add(kit);
             }
         } catch (SQLException e) {

@@ -47,6 +47,7 @@ public class CorridaDAO {
                         rs.getString("regulamento"),
                         null);
                 corrida.setOrganizadorId(rs.getInt("organizador_id"));
+                corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
                 corridas.add(corrida);
             }
         } catch (SQLException e) {
@@ -159,7 +160,7 @@ public class CorridaDAO {
                     rs.getString("descricao"),
                     rs.getString("regulamento"),
                     null);
-            corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
+                corrida.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

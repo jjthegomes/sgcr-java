@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Kit;
 import modelo.ProdutoKit;
 
 /**
@@ -127,6 +128,7 @@ public class ProdutoKitDAO {
                 produtoKit.setProdutoId(rs.getInt("produto_id"));
                 produtoKit.setKitId(rs.getInt("kit_id"));
                 produtoKit.setCorridaId(rs.getInt("kit_corrida_id"));
+                produtoKit.setKit(Kit.obterKit(rs.getInt("kit_id"), rs.getInt("kit_corrida_id")));
                 produtosKit.add(produtoKit);
             }
         } catch (SQLException e) {
