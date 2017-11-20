@@ -27,7 +27,7 @@ public class Percurso {
         this.imagem = imagem;
         this.quilometragem = quilometragem;
         this.corrida = corrida;
-    } 
+    }
 
     public int getId() {
         return id;
@@ -59,7 +59,7 @@ public class Percurso {
 
     public void setCorrida(Corrida corrida) {
         this.corrida = corrida;
-    }        
+    }
 
     public int getCorridaId() {
         return corridaId;
@@ -68,11 +68,15 @@ public class Percurso {
     public void setCorridaId(int corridaId) {
         this.corridaId = corridaId;
     }
-    
+
     public static List<Percurso> obterPercursos() throws ClassNotFoundException {
         return PercursoDAO.obterPercursos();
     }
-    
+
+    public static List<Percurso> obterPercursos(int corridaId) throws ClassNotFoundException {
+        return PercursoDAO.obterPercursos(corridaId);
+    }
+
     public void gravar() throws SQLException, ClassNotFoundException {
         PercursoDAO.gravar(this);
     }
@@ -80,11 +84,11 @@ public class Percurso {
     public void alterar() throws SQLException, ClassNotFoundException {
         PercursoDAO.alterar(this);
     }
-    
+
     public void excluir() throws SQLException, ClassNotFoundException {
         PercursoDAO.excluir(this);
     }
-    
+
     public static Percurso obterPercurso(int id) throws ClassNotFoundException {
         return PercursoDAO.obterPercurso(id);
     }

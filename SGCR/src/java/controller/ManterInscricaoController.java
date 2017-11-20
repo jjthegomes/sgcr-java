@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Atleta;
+import modelo.Corrida;
 import modelo.Inscricao;
 import modelo.Kit;
 import modelo.Percurso;
@@ -38,35 +39,29 @@ public class ManterInscricaoController extends HttpServlet {
         String acao = request.getParameter("acao");
         if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        } else {
-            if (acao.equals("confirmarIncluir")) {
-                confirmarIncluir(request, response);
-            } else {
-                if (acao.equals("prepararExcluir")) {
-                    prepararExcluir(request, response);
-                } else {
-                    if (acao.equals("confirmarExcluir")) {
-                        confirmarExcluir(request, response);
-                    } else {
-                        if (acao.equals("prepararEditar")) {
-                            prepararEditar(request, response);
-                        } else {
-                            if (acao.equals("confirmarEditar")) {
-                                confirmarEditar(request, response);
-                            }
-                        }
-                    }
-                }
-            }
+        } else if (acao.equals("confirmarIncluir")) {
+            confirmarIncluir(request, response);
+        } else if (acao.equals("prepararExcluir")) {
+            prepararExcluir(request, response);
+        } else if (acao.equals("confirmarExcluir")) {
+            confirmarExcluir(request, response);
+        } else if (acao.equals("prepararEditar")) {
+            prepararEditar(request, response);
+        } else if (acao.equals("confirmarEditar")) {
+            confirmarEditar(request, response);
+        } else if (acao.equals("escolherCorrida")) {
+            escolherCorrida(request, response);
         }
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+            request.setAttribute("corridaId", corridaId);
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
-            request.setAttribute("kits", Kit.obterKits());
+            request.setAttribute("percursos", Percurso.obterPercursos(corridaId));
+            request.setAttribute("kits", Kit.obterKits(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -125,16 +120,17 @@ public class ManterInscricaoController extends HttpServlet {
         Boolean kitRetirado = false;
         String tempoLargada = "00:00:00";
         String tempoChegada = "00:00:00";
-
+        
+        int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+        
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
-        int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
 
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
-            Kit kit = Kit.obterKit(kitId, kitCorridaId);
+            Kit kit = Kit.obterKit(kitId, corridaId);
 
             Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit);
             inscricao.gravar();
@@ -177,7 +173,7 @@ public class ManterInscricaoController extends HttpServlet {
         String tempoChegada = request.getParameter("txtTempoChegada");
 
         Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null);
-        
+
         try {
             inscricao.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
@@ -234,6 +230,17 @@ public class ManterInscricaoController extends HttpServlet {
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
+    }
+
+    private void escolherCorrida(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaInscricao.jsp");
+            view.forward(request, response);
+        } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
         } catch (ServletException ex) {
         }

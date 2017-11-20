@@ -9,7 +9,6 @@ import java.util.List;
  * @author RAJ
  */
 public class Kit {
-
     private int id;
     private String nome;
     private int quantidade;
@@ -89,6 +88,10 @@ public class Kit {
 
     public static List<Kit> obterKits() throws ClassNotFoundException {
         return KitDAO.obterKits();
+    }
+    
+    public static List<Kit> obterKits(int corridaId) throws ClassNotFoundException {
+        return KitDAO.obterKits(corridaId);
     }
     
     public void gravar() throws SQLException, ClassNotFoundException {

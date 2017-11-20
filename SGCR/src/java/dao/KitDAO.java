@@ -42,6 +42,34 @@ public class KitDAO {
         return kits;
     }
     
+    public static List<Kit> obterKits(int corridaId) throws ClassNotFoundException  {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Kit> kits = new ArrayList<Kit>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE corrida_id = "+corridaId);
+            
+            while (rs.next()) {
+                Kit kit = new Kit(
+                        rs.getInt("id"), 
+                        rs.getString("nome"),
+                        rs.getInt("quantidade"),
+                        rs.getString("imagem"), 
+                        rs.getString("tipo_chip"), 
+                        null);
+                kit.setCorridaId(rs.getInt("corrida_id"));
+                kits.add(kit);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return kits;
+    }
+    
     public static void gravar(Kit kit) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {

@@ -7,64 +7,174 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page import="modelo.Corrida"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;" charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Inscrição</title>
+        <meta http-equiv="pragma" content="no-cache">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
         <title>Manter Inscrição</title>
     </head>
     <body>
-        <h1>Manter Inscrição - ${operacao}</h1>
-        
-        <form action="ManterInscricaoController?acao=confirmar${operacao}" method="post" name="frmManterInscricao">
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sistema de Corrida</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nome do Atleta<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Minha Conta</a></li>
+                                <li><a href="#">Meus Eventos</a></li>
+                                <li><a href="#">Alterar Dados</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Busca" size="40">
+                            </div>
+                        </div>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <div class="container corpo">
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">${corrida.nome}</li> 
+            </ul>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Nome da Corrida</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Informações da Corrida</div>
+                                <div class="panel-body">
+                                    <h4>Nome da Corrida - Cidade, UF</h4>
+                                    <h4>00 de Mês de 0000, 00:00 - 00:00</h4>
+                                    <br>
+                                    <h3>Descrição:</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <h3>Tipo de Chip:</h3>
+                                    <p>Retornável</p>
+                                    <h3>Data de retirada do kit:</h3> 
+                                    <p>00 de Mês de 0000</p>
+                                    <h3>Local:</h3>
+                                    <p>Logradouro, número 000, bairro</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Lote</div>
+                                <div class="panel-body">
+                                    <div class="panel panel-danger radio disabled">
+                                        <div class="panel-heading">Encerrado</div>
+                                        <label>
+                                            <div class="panel-body disabled">
+                                                <input type="radio" name="optradio" disabled>1º Lote: R$ 50,00 até dia 00/00/0000
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="panel panel-danger radio disabled">
+                                        <div class="panel-heading">Encerrado</div>
+                                        <label>
+                                            <div class="panel-body">
+                                                <input type="radio" name="optradio" disabled>2º Lote: R$ 70,00 até dia 00/00/0000
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="panel panel-success radio">
+                                        <div class="panel-heading">Disponível</div>
+                                        <label>
+                                            <div class="panel-body">
+                                                <input type="radio" name="optradio">3º Lote: R$ 150,00 até dia 00/00/0000
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul class="pager">
+                                <li><a href="#" class="btn-lg">&laquo; Voltar</a></li>
+                                <li><a href="#" class="btn-lg">Inscrever</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--<h1>Manter Inscrição - ${operacao}</h1>-->
+
+        <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
             <table>
                 <tr>
                     <td>Código do Inscrição:</td> 
                     <td><input type="text" name="txtIdInscricao" value="${inscricao.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Data da Compra:</td> 
-                    <td><input type="text" name="txtDataCompraInscricao" value="${inscricao.dataCompra}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-<!--                <tr>
-                    <td>Número de Peito:</td> 
-                    <td><input type="text" name="txtNumeroPeitoInscricao" value="${inscricao.numeroPeito}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>-->
-<!--                <tr> 
-                    <td>Pago:</td> 
-                    <td>
-                        <select name="optPago" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="false" <c:if test="${inscricao.pago == false}"> selected</c:if>>Não</option>
-                            <option value="true" <c:if test="${inscricao.pago == true}"> selected</c:if>>Sim</option>
-                        </select>
-                    </td>
-                </tr>-->
-<!--                <tr>
-                    <td>Tempo Percorrido:</td> 
-                    <td><input type="text" name="txtTempoPercorridoInscricao" value="${inscricao.tempoPercorrido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>-->
-                
-                <!--FORMA DE PAGAMENTO-->
-                
-                <tr>
-                    <td>Atleta:</td>
-                    <td>
-                        <select name="optAtleta" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                    </tr>
+                    <tr>
+                        <td>Data da Compra:</td> 
+                        <td><input type="text" name="txtDataCompraInscricao" value="${inscricao.dataCompra}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <!--                <tr>
+                                        <td>Número de Peito:</td> 
+                                        <td><input type="text" name="txtNumeroPeitoInscricao" value="${inscricao.numeroPeito}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                                    </tr>-->
+                    <!--                <tr> 
+                                        <td>Pago:</td> 
+                                        <td>
+                                            <select name="optPago" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                <option value="false" <c:if test="${inscricao.pago == false}"> selected</c:if>>Não</option>
+                                                <option value="true" <c:if test="${inscricao.pago == true}"> selected</c:if>>Sim</option>
+                                            </select>
+                                        </td>
+                                    </tr>-->
+                    <!--                <tr>
+                                        <td>Tempo Percorrido:</td> 
+                                        <td><input type="text" name="txtTempoPercorridoInscricao" value="${inscricao.tempoPercorrido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                                    </tr>-->
+
+                    <!--FORMA DE PAGAMENTO-->
+
+                    <tr>
+                        <td>Atleta:</td>
+                        <td>
+                            <select name="optAtleta" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${inscricao.atleta.id == null}"> selected</c:if>> Selecione um atleta</option>  
                             <c:forEach items="${atletas}" var="atleta">
                                 <option value="${atleta.id}" <c:if test="${inscricao.atletaId == atleta.id}"> selected</c:if>>${atleta.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Corrida:</td>
-                    <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${inscricao.corrida.id == null}"> selected</c:if>> Selecione um corrida</option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${inscricao.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>
@@ -105,5 +215,10 @@
                 </tr>
             </table>
         </form>
+                            
+        <!-- Bootstrap JS and jQuery -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
     </body>
 </html>

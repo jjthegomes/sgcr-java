@@ -48,6 +48,33 @@ public class PercursoDAO {
         return percursos;
     }
 
+    public static List<Percurso> obterPercursos(int corridaId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Percurso> percursos = new ArrayList<>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE corrida_id = " + corridaId);
+
+            while (rs.next()) {
+                Percurso percurso = new Percurso(
+                        rs.getInt("id"),
+                        rs.getString("imagem"),
+                        rs.getDouble("quilometragem"),
+                        null);
+                percurso.setCorridaId(rs.getInt("corrida_id"));
+                percurso.setCorrida(Corrida.obterCorrida(percurso.getCorridaId()));
+                percursos.add(percurso);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return percursos;
+    }
+
     public static void gravar(Percurso percurso) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
@@ -66,7 +93,7 @@ public class PercursoDAO {
             throw e;
         }
     }
-    
+
     public static void alterar(Percurso percurso) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
@@ -89,7 +116,7 @@ public class PercursoDAO {
         Connection conexao = null;
         Statement comando = null;
         String stringSQL;
-        
+
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
@@ -101,7 +128,7 @@ public class PercursoDAO {
             fecharConexao(conexao, comando);
         }
     }
-    
+
     public static Percurso obterPercurso(int id) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -112,8 +139,8 @@ public class PercursoDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE id = " + id);
             rs.first();
             percurso = new Percurso(
-                    rs.getInt("id"), 
-                    rs.getString("imagem"), 
+                    rs.getInt("id"),
+                    rs.getString("imagem"),
                     rs.getDouble("quilometragem"),
                     null);
             percurso.setCorridaId(rs.getInt("corrida_id"));
@@ -124,7 +151,7 @@ public class PercursoDAO {
         }
         return percurso;
     }
-    
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

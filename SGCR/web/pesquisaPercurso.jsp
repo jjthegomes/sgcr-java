@@ -28,7 +28,7 @@
             <c:forEach items="${percursos}" var="percurso">
                 <tr>
                     <td><c:out value="${percurso.id}" /></td>
-                    <td><c:out value="${percurso.corridaId}" /></td>
+                    <td><c:out value="${percurso.corrida.nome}" /></td>
                     <td><c:out value="${percurso.imagem}" /></td>
                     <td><c:out value="${percurso.quilometragem}" /></td>
                     <td><a href="ManterPercursoController?acao=prepararEditar&id=<c:out value="${percurso.id}"/>">Editar</a> </td>

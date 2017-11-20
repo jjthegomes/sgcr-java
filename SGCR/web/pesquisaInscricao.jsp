@@ -46,8 +46,8 @@
                 </tr>
             </c:forEach>
         </table>
-        <form action="ManterInscricaoController?acao=prepararIncluir" method="post">
-            <input type="submit" name="btnIncluir" value="Incluir">
+        <form action="ManterInscricaoController?acao=escolherCorrida" method="post">
+            <input type="submit" name="btnIncluir" value="Fazer Inscrição">
         </form>
         <br>
     <tr>
