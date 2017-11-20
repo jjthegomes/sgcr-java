@@ -34,4 +34,5 @@ public class Organizador extends UsuarioComum{
     public static Organizador obterOrganizador(int id) throws ClassNotFoundException {
         return OrganizadorDAO.obterOrganizador(id);
     }
+    
 }
