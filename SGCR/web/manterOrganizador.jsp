@@ -52,7 +52,7 @@
                     <td><input type="text" name="txtCepOrganizador" value="${organizador.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Rua:</td> 
+                    <td>Logradouro:</td> 
                     <td><input type="text" name="txtLogradouroOrganizador" value="${organizador.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>

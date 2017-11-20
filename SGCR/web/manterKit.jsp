@@ -43,18 +43,7 @@
                             <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td>Corrida:</td>
-                    <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${kit.corrida.id == null}"> selected</c:if>> Selecione uma corrida</option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${kit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
+                </tr>              
                 <tr>
                     <td>
                         <input type="submit" name="btnConfirmar" value="Confirmar"/>

@@ -16,40 +16,38 @@
     </head>
     <body>
         <h1>Pesquisa Lote</h1>
-    
-    <table border="1">
-        <tr>
-            <th>Codigo</th>
-            <th>Tipo</th>
-            <th>Preço</th>
-            <th>Data Inicio</th>
-            <th>Data Final</th>
-            <th>Quantidade</th>
-            <th>Corrida</th>           
 
-            <th colspan="2">Ação</th>
-        </tr>
-        <c:forEach items="${lotes}" var="lote">
+        <table border="1">
             <tr>
-                <td><c:out value="${lote.id}" /> </td>
-                <td><c:out value="${lote.tipo}" /> </td>
-                <td><c:out value="${lote.preco}" /> </td>
-                <td><c:out value="${lote.dataInicio}" /> </td>
-                <td><c:out value="${lote.dataFinal}" /> </td>
-                <td><c:out value="${lote.quantidade}" /> </td>
-                <td><c:out value="${lote.corridaId}" /> </td>                
-                <td><a href="ManterLoteController?acao=prepararEditar&id=<c:out value="${lote.id}"/>">Editar</a> </td>
-                <td><a href="ManterLoteController?acao=prepararExcluir&id=<c:out value="${lote.id}"/>">Excluir</a> </td>
-            </tr>
-        </c:forEach>
-    </table>
+                <th>Codigo</th>
+                <th>Tipo</th>
+                <th>Preço</th>
+                <th>Data Inicio</th>
+                <th>Data Final</th>
+                <th>Quantidade</th>
+                <th>Corrida</th>           
 
-    <form action="ManterLoteController?acao=prepararIncluir" method="post">
-        <input type="submit" name="btnIncluir" value="Incluir">
-    </form>
-    <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+                <th colspan="2">Ação</th>
+            </tr>
+            <c:forEach items="${lotes}" var="lote">
+                <tr>
+                    <td><c:out value="${lote.id}" /> </td>
+                    <td><c:out value="${lote.tipo}" /> </td>
+                    <td><c:out value="${lote.preco}" /> </td>
+                    <td><c:out value="${lote.dataInicio}" /> </td>
+                    <td><c:out value="${lote.dataFinal}" /> </td>
+                    <td><c:out value="${lote.quantidade}" /> </td>
+                    <td><c:out value="${lote.corridaId}" /> </td>                
+                    <td><a href="ManterLoteController?acao=prepararEditar&id=<c:out value="${lote.id}"/>">Editar</a> </td>
+                    <td><a href="ManterLoteController?acao=prepararExcluir&id=<c:out value="${lote.id}"/>">Excluir</a> </td>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <form action="ManterLoteController?acao=prepararIncluir" method="post">
+            <input type="submit" name="btnIncluir" value="Incluir">
+        </form>
+        <br>
+        <a href="index.jsp">Menu</a>
     </body>
 </html>

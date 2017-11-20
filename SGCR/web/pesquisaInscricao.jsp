@@ -49,9 +49,6 @@
         <form action="ManterInscricaoController?acao=escolherCorrida" method="post">
             <input type="submit" name="btnIncluir" value="Fazer Inscrição">
         </form>
-        <br>
-    <tr>
-        <td><a href="index.jsp">Menu</a></td>
-    </tr>
-</body>
+        <a href="index.jsp">Menu</a>
+    </body>
 </html>

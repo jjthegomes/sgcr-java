@@ -20,19 +20,19 @@
         <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Código</td> 
+                    <td>Código:</td> 
                     <td><input type="text" name="txtIdAdministrador" value="${administrador.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Nome do Adm</td> 
+                    <td>Nome Completo:</td> 
                     <td><input type="text" name="txtNomeAdministrador" value="${administrador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Email do Adm</td> 
+                    <td>Email:</td> 
                     <td><input type="text" name="txtEmailAdministrador" value="${administrador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
-                    <td>Senha de Adm</td> 
+                    <td>Senha:</td> 
                     <td><input type="password" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>              
                 <tr>

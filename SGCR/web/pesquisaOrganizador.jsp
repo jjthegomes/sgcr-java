@@ -15,43 +15,42 @@
     </head>
     <body>
         <h1>Pesquisa Organizador</h1>
-    </body>
-    <table border="1">
-        <tr>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Sexo</th>
-            <th>Data Nascimento</th>
-            <th>CPF</th>
-            <th>CEP</th>
-            <th>Logradouro</th>
-            <th>Bairro</th>
-
-            <th colspan="2">Ação</th>
-        </tr>
-        <c:forEach items="${organizadores}" var="organizador">
+        <table border="1">
             <tr>
-                <td><c:out value="${organizador.id}" /> </td>
-                <td><c:out value="${organizador.nome}" /> </td>
-                <td><c:out value="${organizador.email}" /> </td>
-                <td><c:out value="${organizador.sexo}" /> </td>
-                <td><c:out value="${organizador.dataNascimento}" /> </td>
-                <td><c:out value="${organizador.cpf}" /> </td>
-                <td><c:out value="${organizador.cep}" /> </td>
-                <td><c:out value="${organizador.logradouro}" /> </td>
-                <td><c:out value="${organizador.bairro}" /> </td>
-                <td><a href="ManterOrganizadorController?acao=prepararEditar&id=<c:out value="${organizador.id}"/>">Editar</a> </td>
-                <td><a href="ManterOrganizadorController?acao=prepararExcluir&id=<c:out value="${organizador.id}"/>">Excluir</a> </td>
-            </tr>
-        </c:forEach>
-    </table>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Sexo</th>
+                <th>Data Nascimento</th>
+                <th>CPF</th>
+                <th>CEP</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
 
-    <form action="ManterOrganizadorController?acao=prepararIncluir" method="post">
-        <input type="submit" name="btnIncluir" value="Incluir">
-    </form>
-    <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+                <th colspan="2">Ação</th>
+            </tr>
+            <c:forEach items="${organizadores}" var="organizador">
+                <tr>
+                    <td><c:out value="${organizador.id}" /> </td>
+                    <td><c:out value="${organizador.nome}" /> </td>
+                    <td><c:out value="${organizador.email}" /> </td>
+                    <td><c:out value="${organizador.sexo}" /> </td>
+                    <td><c:out value="${organizador.dataNascimento}" /> </td>
+                    <td><c:out value="${organizador.cpf}" /> </td>
+                    <td><c:out value="${organizador.cep}" /> </td>
+                    <td><c:out value="${organizador.logradouro}" /> </td>
+                    <td><c:out value="${organizador.bairro}" /> </td>
+                    <td><a href="ManterOrganizadorController?acao=prepararEditar&id=<c:out value="${organizador.id}"/>">Editar</a> </td>
+                    <td><a href="ManterOrganizadorController?acao=prepararExcluir&id=<c:out value="${organizador.id}"/>">Excluir</a> </td>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <form action="ManterOrganizadorController?acao=prepararIncluir" method="post">
+            <input type="submit" name="btnIncluir" value="Incluir">
+        </form>
+        <br>
+        <a href="index.jsp">Menu</a>
+    </body>
+
 </html>

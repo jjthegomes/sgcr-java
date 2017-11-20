@@ -23,13 +23,13 @@
                 <th>Id Kit</th>
                 <th colspan="2">Ação</th>
             </tr>
-            
+
             <c:forEach items="${produtos_kit}" var="produtoKit">
                 <tr>
                     <td><c:out value="${produtoKit.id}" /></td>
                     <td><c:out value="${produtoKit.descricao}" /></td>
                     <td><c:out value="${produtoKit.valor}" /></td>
-                     <td><c:out value="${produtoKit.kitId}" /></td>
+                    <td><c:out value="${produtoKit.kitId}" /></td>
                     <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>">Excluir</a> </td>
                 </tr>
@@ -39,8 +39,6 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+        <a href="index.jsp">Menu</a>
     </body>
 </html>

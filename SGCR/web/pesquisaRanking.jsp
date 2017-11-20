@@ -23,13 +23,13 @@
                 <th>Id Administrador</th>
                 <th colspan="2">Ação</th>
             </tr>
-            
+
             <c:forEach items="${rankings}" var="ranking">
                 <tr>
                     <td><c:out value="${ranking.id}" /></td>
                     <td><c:out value="${ranking.nome}" /></td>
                     <td><c:out value="${ranking.intervaloFaixaEtaria}" /></td>
-                     <td><c:out value="${ranking.administradorId}" /></td>
+                    <td><c:out value="${ranking.administradorId}" /></td>
                     <td><a href="ManterRankingController?acao=prepararEditar&id=<c:out value="${ranking.id}"/>">Editar</a> </td>
                     <td><a href="ManterRankingController?acao=prepararExcluir&id=<c:out value="${ranking.id}"/>">Excluir</a> </td>
                 </tr>
@@ -39,8 +39,7 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+        <a href="index.jsp">Menu</a>
+
     </body>
 </html>

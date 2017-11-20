@@ -16,30 +16,29 @@
     </head>
     <body>
         <h1>Pesquisa Administrador</h1>
-    </body>
-    <table border="1">
-        <tr>
-            <th>Codigo</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th colspan="2">Ação</th>
-        </tr>
-        <c:forEach items="${administradores}" var="administrador">
+        <table border="1">
             <tr>
-                <td><c:out value="${administrador.id}" /> </td>
-                <td><c:out value="${administrador.nome}" /> </td>
-                <td><c:out value="${administrador.email}" /> </td>
-                <td><a href="ManterAdministradorController?acao=prepararEditar&id=<c:out value="${administrador.id}"/>">Editar</a> </td>
-                <td><a href="ManterAdministradorController?acao=prepararExcluir&id=<c:out value="${administrador.id}"/>">Excluir</a> </td>
+                <th>Codigo</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th colspan="2">Ação</th>
             </tr>
-        </c:forEach>
-        </table>
-    
-    <form action="ManterAdministradorController?acao=prepararIncluir" method="post">
-        <input type="submit" name="btnIncluir" value="Incluir">
-    </form>
-    <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
-    </html>
+            <c:forEach items="${administradores}" var="administrador">
+                <tr>
+                    <td><c:out value="${administrador.id}" /> </td>
+                    <td><c:out value="${administrador.nome}" /> </td>
+                    <td><c:out value="${administrador.email}" /> </td>
+                    <td><a href="ManterAdministradorController?acao=prepararEditar&id=<c:out value="${administrador.id}"/>">Editar</a> </td>
+                    <td><a href="ManterAdministradorController?acao=prepararExcluir&id=<c:out value="${administrador.id}"/>">Excluir</a> </td>
+                </tr>
+            </c:forEach>
+        </table>            
+
+        <form action="ManterAdministradorController?acao=prepararIncluir" method="post">
+            <input type="submit" name="btnIncluir" value="Incluir">
+        </form>
+        <br>
+        <a href="index.jsp">Menu</a>
+    </body>
+
+</html>

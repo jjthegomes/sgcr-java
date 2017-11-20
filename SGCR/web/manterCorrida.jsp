@@ -20,68 +20,68 @@
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Codigo</td> 
+                    <td>Código:</td> 
                         <td><input type="text" name="txtIdCorrida" value="${corrida.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Nome</td> 
+                        <td>Nome:</td> 
                         <td><input type="text" name="txtNomeCorrida" value="${corrida.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Descricao</td> 
+                        <td>Descricao:</td> 
                         <td><input type="text" name="txtDescricaoCorrida" value="${corrida.descricao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Max Pessoas</td> 
+                        <td>Max Pessoas:</td> 
                         <td><input type="number" name="txtMaxPessoaCorrida" value="${corrida.maxPessoa}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     <tr>
-                        <td>Data</td> 
+                        <td>Data:</td> 
                         <td><input type="text" name="txtDataCorrida" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Horario</td> 
+                        <td>Horario:</td> 
                         <td><input type="text" name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>   
 
                     <tr>
-                        <td>CEP</td> 
+                        <td>CEP:</td> 
                         <td><input type="text" name="txtCepCorrida" value="${corrida.cep}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Estado</td> 
+                        <td>Estado:</td> 
                         <td><input type="text" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>      
 
                     <tr>
-                        <td>Cidade</td> 
+                        <td>Cidade:</td> 
                         <td><input type="text" name="txtCidadeCorrida" value="${corrida.cidade}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Logradouro</td> 
+                        <td>Logradouro:</td> 
                         <td><input type="text" name="txtRuaCorrida" value="${corrida.logradouro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Bairro</td> 
+                        <td>Bairro:</td> 
                         <td><input type="text" name="txtBairroCorrida" value="${corrida.bairro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Regulamento</td> 
+                        <td>Regulamento:</td> 
                         <td><input type="text" name="txtRegulamentoCorrida" value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
 
                     <tr>
-                        <td>Banner</td> 
+                        <td>Banner:</td> 
                         <td><input type="text" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
                     
                     <tr>
-                        <td>Organizador</td>
+                        <td>Organizador:</td>
                         <td>
                             <select name="optOrganizador" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  

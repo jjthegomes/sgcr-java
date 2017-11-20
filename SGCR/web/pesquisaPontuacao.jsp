@@ -22,7 +22,7 @@
                 <th>Nome Ranking</th>
                 <th colspan="2">Ação</th>
             </tr>
-            
+
             <c:forEach items="${pontuacoes}" var="pontuacao">
                 <tr>
                     <td><c:out value="${pontuacao.id}" /></td>
@@ -37,8 +37,7 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+        <a href="index.jsp">Menu</a>
+
     </body>
 </html>

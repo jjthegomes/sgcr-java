@@ -22,12 +22,12 @@
                 <th>Administrador</th>
                 <th colspan="2">Ação</th>
             </tr>
-            
+
             <c:forEach items="${produtos}" var="produto">
                 <tr>
                     <td><c:out value="${produto.id}" /></td>
                     <td><c:out value="${produto.nome}" /></td>
-                     <td><c:out value="${produto.administradorId}" /></td>
+                    <td><c:out value="${produto.administradorId}" /></td>
                     <td><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a> </td>
                     <td><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a> </td>
                 </tr>
@@ -37,8 +37,7 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <tr>
-            <td><a href="index.jsp">Menu</a></td>
-        </tr>
+        <a href="index.jsp">Menu</a>
+
     </body>
 </html>

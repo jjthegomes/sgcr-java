@@ -21,19 +21,19 @@
                 <tr>
                     <td>Código do Ranking:</td> 
                     <td><input type="text" name="txtIdRanking" value="${ranking.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Nome do Ranking:</td> 
-                    <td><input type="text" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Intervalo Faixa Etaria:</td> 
-                    <td><input type="text" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Administrador:</td>
-                    <td>
-                        <select name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                    </tr>
+                    <tr>
+                        <td>Nome do Ranking:</td> 
+                        <td><input type="text" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Intervalo Faixa Etaria:</td> 
+                        <td><input type="text" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Administrador:</td>
+                        <td>
+                            <select name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${administradores}" var="administrador">
                                 <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
@@ -43,6 +43,13 @@
                 </tr>
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td><a href="index.jsp">Menu</a></td>
+                </tr>
+                <tr>
+                    <td><a href="PesquisaOrganizadorController">Voltar para pesquisa</a></td>
                 </tr>
             </table>
         </form>       
