@@ -1,0 +1,12 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.corpo {
+    padding-top: 30px;
+}
+.grid-exemplo .row div {
+    border: solid 1px #FFF;
+    padding: 10px;
+    background-color: #c818FB;
+}
