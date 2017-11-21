@@ -21,31 +21,7 @@
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
                 <tr>
-                    <td>Código</td> 
-                    <td><input type="text" name="txtIdLote" value="${lote.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Tipo</td> 
-                        <td><input type="text" name="txtTipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Preço</td> 
-                        <td><input type="text" name="txtPrecoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Data Inicio</td> 
-                        <td><input type="text" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Data Final</td> 
-                        <td><input type="text" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Quantidade</td> 
-                        <td><input type="text" name="txtQuantidadeLote" value="${lote.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Corrida</td>
+                        <td>Corrida:</td>
                         <td>
                            <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">  </c:if>>
                             <option value="0" <c:if test="${lote.corrida.corridaId == null}"> selected</c:if>> </option>  
@@ -54,8 +30,32 @@
                             </c:forEach>
                         </select>
                     </td>
-                    <!-- ATENÇAO AO SELECT DAS CHAVES Estrangeira!! -->
                 </tr>
+                <tr>
+                    <td>Código:</td> 
+                    <td><input type="text" name="txtIdLote" value="${lote.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Tipo:</td> 
+                        <td><input type="text" name="txtTipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Preço:</td> 
+                        <td><input type="text" name="txtPrecoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Data Inicio:</td> 
+                        <td><input type="text" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Data Final:</td> 
+                        <td><input type="text" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Quantidade:</td> 
+                        <td><input type="text" name="txtQuantidadeLote" value="${lote.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>

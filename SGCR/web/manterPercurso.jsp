@@ -20,6 +20,17 @@
         <form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">
             <table>
                 <tr>
+                    <td>Corrida:</td>
+                    <td>
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                            <option value="0" <c:if test="${percurso.corrida.corridaId == null}"> selected</c:if>> Selecione uma corrida</option>  
+                            <c:forEach items="${corridas}" var="corrida">
+                                <option value="${corrida.id}" <c:if test="${percurso.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>Código do Percurso:</td> 
                     <td><input type="text" name="txtIdPercurso" value="${percurso.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                 </tr>
@@ -31,17 +42,7 @@
                     <td>Quilometragem:</td> 
                     <td><input type="number" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
-                <tr>
-                    <td>Corrida:</td>
-                    <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                            <option value="0" <c:if test="${percurso.corrida.corridaId == null}"> selected</c:if>> Selecione uma corrida</option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${percurso.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td>
                         <input type="submit" name="btnConfirmar" value="Confirmar"/>

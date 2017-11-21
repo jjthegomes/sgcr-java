@@ -18,15 +18,7 @@
 
         <form action="ManterPontuacaoController?acao=confirmar${operacao}" method="post" name="frmManterPontuacao" >
             <table>
-                <tr>
-                    <td>Código do Pontuação:</td> 
-                    <td><input type="text" name="txtIdPontuacao" value="${pontuacao.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
-                    <td>Pontuação</td> 
-                    <td><input type="text" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-                <tr>
+                  <tr>
                     <td>Ranking:</td>
                     <td>
                         <select name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
@@ -37,6 +29,15 @@
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td>Código do Pontuação:</td> 
+                    <td><input type="text" name="txtIdPontuacao" value="${pontuacao.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                </tr>
+                <tr>
+                    <td>Pontuação</td> 
+                    <td><input type="text" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                </tr>
+              
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>
