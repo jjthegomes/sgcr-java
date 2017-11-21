@@ -19,21 +19,20 @@
         <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
             <table>
                 <tr>
-                    <td>Código</td> 
-                    <td><input type="text" name="txtIdProduto" value="${produtoKit.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Descrição</td> 
-                        <td><input type="text" name="txtDescricao" value="${produtoKit.descricao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Valor:</td> 
-                        <td><input type="text" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Kit:</td>
-                        <td>
-                            <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                    <td>Corrida:</td>
+                    <td>
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                            <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
+                            <c:forEach items="${corridas}" var="corrida">
+                                <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kit:</td>
+                    <td>
+                        <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                             <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${kits}" var="kit">
                                 <option value="${kit.id}" <c:if test="${produtoKit.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
@@ -52,17 +51,20 @@
                         </select>
                     </td>
                 </tr>
+
                 <tr>
-                    <td>Corrida:</td>
-                    <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                            <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
+                    <td>Código</td> 
+                    <td><input type="text" name="txtIdProduto" value="${produtoKit.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Descrição</td> 
+                        <td><input type="text" name="txtDescricao" value="${produtoKit.descricao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                    </tr>
+                    <tr>
+                        <td>Valor:</td> 
+                        <td><input type="text" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
+
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>

@@ -19,6 +19,18 @@
         <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida"> 
             <!-- onsubmit="return validarFormulario(this)" --> 
             <table>
+                  <tr>
+                        <td>Organizador:</td>
+                        <td>
+                            <select name="optOrganizador" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  
+                            <c:forEach items="${organizadores}" var="organizador">
+                                <option value="${organizador.id}" <c:if test="${corrida.organizadorId == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
+                            </c:forEach>
+                        </select>
+                    </td>
+                    <!-- ATENÇAO AO SELECT DAS CHAVES PRIMARIAS!! -->
+                </tr>
                 <tr>
                     <td>Código:</td> 
                         <td><input type="text" name="txtIdCorrida" value="${corrida.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
@@ -79,19 +91,7 @@
                         <td>Banner:</td> 
                         <td><input type="text" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
-                    
-                    <tr>
-                        <td>Organizador:</td>
-                        <td>
-                            <select name="optOrganizador" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  
-                            <c:forEach items="${organizadores}" var="organizador">
-                                <option value="${organizador.id}" <c:if test="${corrida.organizadorId == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                    <!-- ATENÇAO AO SELECT DAS CHAVES PRIMARIAS!! -->
-                </tr>
+                                      
 
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>

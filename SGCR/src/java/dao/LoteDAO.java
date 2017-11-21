@@ -26,7 +26,7 @@ public class LoteDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM lote");
             while (rs.next()) {
-                Lote ingresso = new Lote(
+                Lote lote = new Lote(
                         rs.getInt("id"),
                         rs.getString("tipo"),
                         rs.getFloat("preco"),
@@ -34,9 +34,9 @@ public class LoteDAO {
                         rs.getString("data_final"),
                         rs.getInt("quantidade"),
                         null);
-                ingresso.setCorridaId(rs.getInt("corrida_id"));
-                ingresso.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
-                lotes.add(ingresso);
+                lote.setCorridaId(rs.getInt("corrida_id"));
+                lote.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
+                lotes.add(lote);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,7 +45,35 @@ public class LoteDAO {
         }
         return lotes;
     }
+    public static List<Lote> obterLotes(int corridaId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Lote> lotes = new ArrayList<Lote>();
 
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM lote WHERE corrida_id = " + corridaId);
+            while (rs.next()) {
+                Lote lote = new Lote(
+                        rs.getInt("id"),
+                        rs.getString("tipo"),
+                        rs.getFloat("preco"),
+                        rs.getString("data_inicio"),
+                        rs.getString("data_final"),
+                        rs.getInt("quantidade"),
+                        null);
+                lote.setCorridaId(rs.getInt("corrida_id"));
+                lotes.add(lote);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return lotes;
+    }
+    
     public static void gravar(Lote lote) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         try {
