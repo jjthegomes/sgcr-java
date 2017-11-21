@@ -69,29 +69,24 @@
                 <li class="active">${corrida.nome}</li> 
             </ul>
             <div class="panel panel-primary">
-                <div class="panel-heading">Nome da Corrida</div>
+                <div class="panel-heading">Inscrição</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="panel panel-info">
                                 <div class="panel-heading">Informações da Corrida</div>
                                 <div class="panel-body">
-                                    <h4>Nome da Corrida - Cidade, UF</h4>
-                                    <h4>00 de Mês de 0000, 00:00 - 00:00</h4>
+                                    <h4>${corrida.nome} - ${corrida.cidade}, ${corrida.estado}</h4>
+                                    <h4>${corrida.data}, ${corrida.horario}</h4>
                                     <br>
                                     <h3>Descrição:</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    <h3>Tipo de Chip:</h3>
-                                    <p>Retornável</p>
-                                    <h3>Data de retirada do kit:</h3> 
-                                    <p>00 de Mês de 0000</p>
+                                    <p>${corrida.descricao}</p>
+<!--                                    <h3>Tipo de Chip:</h3>
+                                    <p>Retornável</p>-->
+<!--                                    <h3>Data de retirada do kit:</h3> 
+                                    <p>00 de Mês de 0000</p>-->
                                     <h3>Local:</h3>
-                                    <p>Logradouro, número 000, bairro</p>
+                                    <p>${corrida.logradouro}, bairro ${corrida.bairro}</p>
                                 </div>
                             </div>
                         </div>
@@ -99,30 +94,35 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Lote</div>
                                 <div class="panel-body">
-                                    <div class="panel panel-danger radio disabled">
+                                <c:forEach items="${lotes}" var="lote">  
+                                    <div class="panel panel-success radio">
+                                        <div class="panel-heading">Disponível</div>
+                                        <label>
+                                            <div class="panel-body">
+                                                <input type="radio" name="optradio" value="${lote.id}" 
+                                                   <c:if test="${inscricao.loteId == lote.id}"> selected</c:if>>
+                                            Lote ${lote.tipo}: R$ ${lote.preco} até dia ${lote.dataFinal}
+                                            </div>
+                                        </label>
+                                    </div>
+                                </c:forEach>
+<!--                                    <div class="panel panel-danger radio disabled">
                                         <div class="panel-heading">Encerrado</div>
                                         <label>
                                             <div class="panel-body disabled">
                                                 <input type="radio" name="optradio" disabled>1º Lote: R$ 50,00 até dia 00/00/0000
                                             </div>
                                         </label>
-                                    </div>
-                                    <div class="panel panel-danger radio disabled">
-                                        <div class="panel-heading">Encerrado</div>
-                                        <label>
-                                            <div class="panel-body">
-                                                <input type="radio" name="optradio" disabled>2º Lote: R$ 70,00 até dia 00/00/0000
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="panel panel-success radio">
+                                    </div>-->
+
+<!--                                    <div class="panel panel-success radio">
                                         <div class="panel-heading">Disponível</div>
                                         <label>
                                             <div class="panel-body">
                                                 <input type="radio" name="optradio">3º Lote: R$ 150,00 até dia 00/00/0000
                                             </div>
                                         </label>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
 

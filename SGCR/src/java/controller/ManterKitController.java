@@ -116,6 +116,7 @@ public class ManterKitController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        String dataRetirada = request.getParameter("txtDataRetiradaKit");
         int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
@@ -123,7 +124,7 @@ public class ManterKitController extends HttpServlet {
         try {
             Corrida corrida = null;
             corrida = Corrida.obterCorrida(corridaId);
-            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, corrida);
+            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, dataRetirada, corrida);
             kit.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);
@@ -156,11 +157,12 @@ public class ManterKitController extends HttpServlet {
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        String dataRetirada = request.getParameter("txtDataRetiradaKit");
         int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
         
-        Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, null);
+        Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, dataRetirada, null);
         try {
             kit.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
@@ -194,13 +196,14 @@ public class ManterKitController extends HttpServlet {
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdKit"));
         String nome = request.getParameter("txtNomeKit");
+        String dataRetirada = request.getParameter("txtDataRetiradaKit");
         int quantidade = Integer.parseInt(request.getParameter("numQuantidadeKit"));
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
             Corrida corrida = Corrida.obterCorrida(corridaId);
-            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, corrida);
+            Kit kit = new Kit(id, nome, quantidade, imagem, tipoChip, dataRetirada, corrida);
             kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);

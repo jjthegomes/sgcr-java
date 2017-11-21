@@ -20,13 +20,15 @@ public class Inscricao {
     private Atleta atleta;
     private Percurso percurso;
     private Kit kit;
+    private Lote lote;
     
     private int atletaId;
     private int percursoId;
     private int kitId;
     private int kitCorridaId;
+    private int loteId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit) {
+    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
         this.id = id;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
@@ -37,6 +39,7 @@ public class Inscricao {
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;
+        this.lote = lote;
     }
 
     public int getId() {
@@ -150,8 +153,22 @@ public class Inscricao {
     public void setKitCorridaId(int kitCorridaId) {
         this.kitCorridaId = kitCorridaId;
     }
-    
-    
+
+    public Lote getLote() {
+        return lote;
+    }
+
+    public void setLote(Lote lote) {
+        this.lote = lote;
+    }
+
+    public int getLoteId() {
+        return loteId;
+    }
+
+    public void setLoteId(int loteId) {
+        this.loteId = loteId;
+    }
     
     public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes();

@@ -7,7 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Atleta;
 import modelo.Inscricao;
+import modelo.Kit;
+import modelo.Lote;
+import modelo.Percurso;
 
 /**
  *
@@ -36,11 +40,17 @@ public class InscricaoDAO {
                         rs.getString("tempo_chegada"),
                         null,
                         null,
+                        null,
                         null);
                 inscricao.setPercursoId(rs.getInt("percurso_id"));
                 inscricao.setAtletaId(rs.getInt("atleta_id"));
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setKitCorridaId(rs.getInt("kit_corrida_id"));
+                inscricao.setLoteId(rs.getInt("lote_id"));
+                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+                inscricao.setKit(Kit.obterKit(rs.getInt("Kit_id"), rs.getInt("kit_corrida_id")));
+                inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
                 inscricoes.add(inscricao);
             }
         } catch (SQLException e) {
@@ -56,7 +66,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO inscricao (id, data_compra, numero_peito, pago, kit_retirado, tempo_largada, "
-                    + "tempo_chegada, percurso_id, atleta_id, kit_id, kit_corrida_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    + "tempo_chegada, percurso_id, atleta_id, kit_id, kit_corrida_id, lote_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, inscricao.getId());
             comando.setString(2, inscricao.getDataCompra());
@@ -69,6 +79,7 @@ public class InscricaoDAO {
             comando.setInt(9, inscricao.getAtleta().getId());
             comando.setInt(10, inscricao.getKit().getId());
             comando.setInt(11, inscricao.getKit().getCorridaId());
+            comando.setInt(12, inscricao.getLote().getId());
 
             comando.execute();
             comando.close();
@@ -84,7 +95,7 @@ public class InscricaoDAO {
             conexao = BD.getConexao();
             String sql = "UPDATE inscricao SET data_compra = ?, numero_peito = ?, pago = ?, kit_retirado = ?, "
                     + " tempo_largada = ?,  tempo_chegada = ?, percurso_id = ?, atleta_id = ?, kit_id = ?, "
-                    + "kit_corrida_id = ? WHERE id = ?";
+                    + "kit_corrida_id = ?, lote_id = ? WHERE id = ?";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
@@ -99,6 +110,7 @@ public class InscricaoDAO {
             comando.setInt(9, inscricao.getAtleta().getId());
             comando.setInt(10, inscricao.getKit().getId());
             comando.setInt(11, inscricao.getKit().getCorridaId());
+            comando.setInt(12, inscricao.getLote().getId());
 
             comando.execute();
             comando.close();
@@ -144,11 +156,13 @@ public class InscricaoDAO {
                     rs.getString("tempo_chegada"),
                     null,
                     null,
+                    null, 
                     null);
             inscricao.setPercursoId(rs.getInt("percurso_id"));
             inscricao.setAtletaId(rs.getInt("atleta_id"));
             inscricao.setKitId(rs.getInt("kit_id"));
             inscricao.setKitCorridaId(rs.getInt("kit_corrida_id"));
+            inscricao.setLoteId(rs.getInt("lote_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -17,15 +17,11 @@
         <h1>Pesquisa Inscrição</h1>
         <table border="1">
             <tr>
-                <th>Id Inscrição</th>
+                <th>Código Inscrição</th>
                 <th>Data da Compra</th>
-                <!--<th>Nº de Peito</th>-->
-                <!--<th>Tempo Percorrido</th>-->
-                <!--<th>Forma de Pagamento</th>-->
-                <!--<th>Pago</th>-->
                 <th>Percurso</th>
-                <th>Id Atleta</th>
-                <th>Id Kit</th>
+                <th>Atleta</th>
+                <th>Kit</th>
                 <th colspan="2">Ação</th>
             </tr>
 
@@ -33,14 +29,9 @@
                 <tr>
                     <td><c:out value="${inscricao.id}" /></td>
                     <td><c:out value="${inscricao.dataCompra}" /></td>
-                    <!--<td><c:out value="${inscricao.numeroPeito}" /></td>-->
-                    <!--<td><c:out value="${inscricao.tempoLargada}" /></td>-->
-                    <!--<td><c:out value="${inscricao.tempoChegada}" /></td>-->
-                    <!--<td><c:out value="${inscricao.pago}" /></td>-->
-                    <!--<td><c:out value="${inscricao.kitRetirado}" /></td>-->
-                    <td><c:out value="${inscricao.percursoId}" /></td>
-                    <td><c:out value="${inscricao.atletaId}" /></td>
-                    <td><c:out value="${inscricao.kitId}" /></td>
+                    <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
+                    <td><c:out value="${inscricao.atleta.nome}" /></td>
+                    <td><c:out value="${inscricao.kit.nome}" /></td>
                     <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>">Editar</a> </td>
                     <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>">Excluir</a> </td>
                 </tr>

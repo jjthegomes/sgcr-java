@@ -16,6 +16,7 @@ import modelo.Atleta;
 import modelo.Corrida;
 import modelo.Inscricao;
 import modelo.Kit;
+import modelo.Lote;
 import modelo.Percurso;
 
 /**
@@ -62,6 +63,8 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("percursos", Percurso.obterPercursos(corridaId));
             request.setAttribute("kits", Kit.obterKits(corridaId));
+            request.setAttribute("lotes", Lote.obterLotes());
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -126,13 +129,15 @@ public class ManterInscricaoController extends HttpServlet {
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
+        int loteId = Integer.parseInt(request.getParameter("optLote"));
 
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
             Kit kit = Kit.obterKit(kitId, corridaId);
+            Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);
             inscricao.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
@@ -172,7 +177,7 @@ public class ManterInscricaoController extends HttpServlet {
         String tempoLargada = request.getParameter("txtTempoLargada");
         String tempoChegada = request.getParameter("txtTempoChegada");
 
-        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null);
+        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null, null);
 
         try {
             inscricao.excluir();
@@ -218,13 +223,15 @@ public class ManterInscricaoController extends HttpServlet {
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        int loteId = Integer.parseInt(request.getParameter("optLote"));
 
         try {
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
             Kit kit = Kit.obterKit(kitId, kitCorridaId);
+            Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit);
+            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);
             inscricao.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);

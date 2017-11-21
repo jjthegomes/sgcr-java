@@ -32,6 +32,10 @@
                     <td><input type="number" name="numQuantidadeKit" value="${kit.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
                 <tr>
+                    <td>Data de retirada:</td>  
+                    <td><input type="text" name="txtDataRetiradaKit" value="${kit.dataRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                </tr>
+                <tr>
                     <td>Imagem:</td>  
                     <td><input type="text" name="fileImagemKit" value="${kit.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                 </tr>
@@ -43,7 +47,18 @@
                             <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
                         </select>
                     </td>
-                </tr>              
+                </tr>       
+                <tr>
+                    <td>Corrida:</td>
+                    <td>
+                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                            <option value="0" <c:if test="${kit.corrida.corridaId == null}"> selected</c:if>> Selecione uma corrida</option>  
+                            <c:forEach items="${corridas}" var="corrida">
+                                <option value="${corrida.id}" <c:if test="${kit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <input type="submit" name="btnConfirmar" value="Confirmar"/>

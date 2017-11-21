@@ -14,6 +14,7 @@ public class Kit {
     private int quantidade;
     private String imagem;
     private String tipoChip;
+    private String dataRetirada;
     private Corrida corrida;
 
     private int corridaId;
@@ -21,12 +22,13 @@ public class Kit {
     public Kit() {
     }
 
-    public Kit(int id, String nome, int quantidade, String imagem, String tipoChip, Corrida corrida) {
+    public Kit(int id, String nome, int quantidade, String imagem, String tipoChip, String dataRetirada, Corrida corrida) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
+        this.dataRetirada = dataRetirada;
         this.corrida = corrida;
     }
 
@@ -70,6 +72,14 @@ public class Kit {
         this.tipoChip = tipoChip;
     }
 
+    public String getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(String dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+    
     public Corrida getCorrida() {
         return corrida;
     }

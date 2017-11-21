@@ -30,7 +30,8 @@ public class KitDAO {
                         rs.getString("nome"),
                         rs.getInt("quantidade"),
                         rs.getString("imagem"), 
-                        rs.getString("tipo_chip"), 
+                        rs.getString("tipo_chip"),
+                        rs.getString("data_retirada"),
                         null);
                 kit.setCorridaId(rs.getInt("corrida_id"));
                 kit.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
@@ -59,7 +60,8 @@ public class KitDAO {
                         rs.getString("nome"),
                         rs.getInt("quantidade"),
                         rs.getString("imagem"), 
-                        rs.getString("tipo_chip"), 
+                        rs.getString("tipo_chip"),
+                        rs.getString("data_retirada"),
                         null);
                 kit.setCorridaId(rs.getInt("corrida_id"));
                 kits.add(kit);
@@ -76,14 +78,15 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (id, nome, quantidade, imagem, tipo_chip, corrida_id) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO kit (id, nome, quantidade, imagem, tipo_chip, data_retirada, corrida_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, kit.getId());
             comando.setString(2, kit.getNome());
             comando.setInt(3, kit.getQuantidade());
             comando.setString(4, kit.getImagem());
             comando.setString(5, kit.getTipoChip());
-            comando.setInt(6, kit.getCorrida().getId());
+            comando.setString(6, kit.getDataRetirada());
+            comando.setInt(7, kit.getCorrida().getId());
 
             comando.execute();
             comando.close();
@@ -97,14 +100,15 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE kit SET nome = ?, quantidade = ?, imagem = ?, tipo_chip = ?, corrida_id = ? WHERE id = ?";
+            String sql = "UPDATE kit SET nome = ?, quantidade = ?, imagem = ?, tipo_chip = ?, data_retirada = ?, corrida_id = ?  WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
             comando.setInt(2, kit.getQuantidade());
             comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
-            comando.setInt(5, kit.getCorrida().getId());
-            comando.setInt(6, kit.getId());
+            comando.setString(5, kit.getDataRetirada());
+            comando.setInt(6, kit.getCorrida().getId());
+            comando.setInt(7, kit.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -145,6 +149,7 @@ public class KitDAO {
                     rs.getInt("quantidade"),
                     rs.getString("imagem"), 
                     rs.getString("tipo_chip"),
+                    rs.getString("data_retirada"),
                     null);
             kit.setCorridaId(rs.getInt("corrida_id"));
         } catch (SQLException e) {

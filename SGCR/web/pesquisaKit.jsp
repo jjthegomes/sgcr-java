@@ -19,8 +19,8 @@
             <tr>
                 <th>Código</th>
                 <th>Corrida</th>
-
                 <th>Nome</th>
+                <th>Data da retirada</th>
                 <th>Imagem</th>
                 <th>Tipo Chip</th>
                 <th colspan="2">Ação</th>
@@ -31,6 +31,7 @@
                     <td><c:out value="${kit.id}" /></td>
                     <td><c:out value="${kit.corrida.nome}" /></td>
                     <td><c:out value="${kit.nome}" /></td>
+                    <td><c:out value="${kit.dataRetirada}" /></td>
                     <td><c:out value="${kit.imagem}" /></td>
                     <td><c:out value="${kit.tipoChip}" /></td>
                     <td><a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>">Editar</a> </td>
