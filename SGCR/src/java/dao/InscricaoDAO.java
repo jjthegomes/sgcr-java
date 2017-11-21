@@ -99,18 +99,18 @@ public class InscricaoDAO {
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
-            comando.setInt(1, inscricao.getId());
-            comando.setString(2, inscricao.getDataCompra());
-            comando.setString(3, inscricao.getNumeroPeito());
-            comando.setBoolean(4, inscricao.isPago());
-            comando.setBoolean(5, inscricao.isKitRetirado());
-            comando.setString(6, inscricao.getTempoLargada());
-            comando.setString(7, inscricao.getTempoChegada());
-            comando.setInt(8, inscricao.getPercurso().getId());
-            comando.setInt(9, inscricao.getAtleta().getId());
-            comando.setInt(10, inscricao.getKit().getId());
-            comando.setInt(11, inscricao.getKit().getCorridaId());
-            comando.setInt(12, inscricao.getLote().getId());
+            comando.setString(1, inscricao.getDataCompra());
+            comando.setString(2, inscricao.getNumeroPeito());
+            comando.setBoolean(3, inscricao.isPago());
+            comando.setBoolean(4, inscricao.isKitRetirado());
+            comando.setString(5, inscricao.getTempoLargada());
+            comando.setString(6, inscricao.getTempoChegada());
+            comando.setInt(7, inscricao.getPercurso().getId());
+            comando.setInt(8, inscricao.getAtleta().getId());
+            comando.setInt(9, inscricao.getKit().getId());
+            comando.setInt(10, inscricao.getKit().getCorridaId());
+            comando.setInt(11, inscricao.getLote().getId());
+            comando.setInt(12, inscricao.getId());
 
             comando.execute();
             comando.close();

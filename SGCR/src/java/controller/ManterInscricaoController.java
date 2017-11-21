@@ -63,7 +63,7 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("percursos", Percurso.obterPercursos(corridaId));
             request.setAttribute("kits", Kit.obterKits(corridaId));
-            request.setAttribute("lotes", Lote.obterLotes());
+            request.setAttribute("lotes", Lote.obterLotes(corridaId));
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
             view.forward(request, response);
@@ -150,11 +150,17 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("operacao", "Excluir");
-            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
-            request.setAttribute("kits", Kit.obterKits());
+            request.setAttribute("percursos", Percurso.obterPercursos(corridaId));
+            request.setAttribute("kits", Kit.obterKits(corridaId));
+            request.setAttribute("lotes", Lote.obterLotes(corridaId));
             int idInscricao = Integer.parseInt(request.getParameter("id"));
+
+            request.setAttribute("corridaId", corridaId);
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+
             Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
             request.setAttribute("inscricao", inscricao);
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
@@ -192,20 +198,15 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
+            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("operacao", "Editar");
-            request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
-            request.setAttribute("kits", Kit.obterKits());
-            request.setAttribute("lotes", Lote.obterLotes());
-            try {
-                int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-                request.setAttribute("corridaId", corridaId);
-                request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
-            } catch (NullPointerException ex) {
-
-            } catch (NumberFormatException ex) {
-
-            }
+            request.setAttribute("percursos", Percurso.obterPercursos(corridaId));
+            request.setAttribute("kits", Kit.obterKits(corridaId));
+            request.setAttribute("lotes", Lote.obterLotes(corridaId));
+            request.setAttribute("corridaId", corridaId);
+            
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
 
             int idInscricao = Integer.parseInt(request.getParameter("id"));
             Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
@@ -226,12 +227,6 @@ public class ManterInscricaoController extends HttpServlet {
 
         try {
             Inscricao thisInscricao = Inscricao.obterInscricao(id);
-            //String dataCompra = request.getParameter("txtDataCompraInscricao");
-            //String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
-            //Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
-            //Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
-            //String tempoLargada = request.getParameter("txtTempoLargada");
-            //String tempoChegada = request.getParameter("txtTempoChegada");
 
             String dataCompra = thisInscricao.getDataCompra();
             String numeroPeito = thisInscricao.getNumeroPeito();
@@ -243,11 +238,19 @@ public class ManterInscricaoController extends HttpServlet {
             int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
             int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
             int kitId = Integer.parseInt(request.getParameter("optKit"));
-            int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
+
+            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+            try {
+                request.setAttribute("corridaId", corridaId);
+                request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            } catch (NullPointerException | NumberFormatException ex) {
+
+            }
+            
             int loteId = Integer.parseInt(request.getParameter("optLote"));
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
-            Kit kit = Kit.obterKit(kitId, kitCorridaId);
+            Kit kit = Kit.obterKit(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
 
             Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);

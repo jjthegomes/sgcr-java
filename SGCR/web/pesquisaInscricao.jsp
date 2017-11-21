@@ -33,7 +33,7 @@
                     <td><c:out value="${inscricao.atleta.nome}" /></td>
                     <td><c:out value="${inscricao.kit.nome}" /></td>
                     <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Editar</a> </td>
-                    <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>">Excluir</a> </td>
+                    <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Excluir</a> </td>
                 </tr>
             </c:forEach>
         </table>
