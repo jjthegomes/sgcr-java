@@ -192,5 +192,9 @@ public class Corrida {
     public static Corrida obterCorrida(int id) throws ClassNotFoundException {
         return CorridaDAO.obterCorrida(id);
     }
+    
+     public static Corrida obterUltimaCorrida(int id) throws ClassNotFoundException {
+        return CorridaDAO.obterUltimaCorrida(id);
+    }
 
 }

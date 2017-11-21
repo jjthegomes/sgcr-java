@@ -83,7 +83,7 @@ public class ManterAtletaController extends HttpServlet {
         String cep = request.getParameter("txtCepAtleta");
         String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
-        String complemento = request.getParameter("txtComplementodAtleta");
+        String complemento = request.getParameter("txtComplementoAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
         String cidade = request.getParameter("txtCidadeAtleta");
         String estado = request.getParameter("txtEstadoAtleta");
@@ -139,7 +139,7 @@ public class ManterAtletaController extends HttpServlet {
         String cep = request.getParameter("txtCepAtleta");
         String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
-        String complemento = request.getParameter("txtComplementodAtleta");
+        String complemento = request.getParameter("txtComplementoAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
         String cidade = request.getParameter("txtCidadeAtleta");
         String estado = request.getParameter("txtEstadoAtleta");
@@ -194,7 +194,7 @@ public class ManterAtletaController extends HttpServlet {
         String cep = request.getParameter("txtCepAtleta");
         String logradouro = request.getParameter("txtLogradouroAtleta");
         String bairro = request.getParameter("txtBairroAtleta");
-        String complemento = request.getParameter("txtComplementodAtleta");
+        String complemento = request.getParameter("txtComplementoAtleta");
         String numero = request.getParameter("txtNumeroAtleta");
         String cidade = request.getParameter("txtCidadeAtleta");
         String estado = request.getParameter("txtEstadoAtleta");

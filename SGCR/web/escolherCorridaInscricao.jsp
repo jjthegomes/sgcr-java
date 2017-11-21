@@ -37,7 +37,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Logado Atleta</title>
+        <title>Faze Inscrica</title>
         <meta http-equiv="pragma" content="no-cache">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">

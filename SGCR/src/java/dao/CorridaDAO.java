@@ -160,13 +160,51 @@ public class CorridaDAO {
                     rs.getString("descricao"),
                     rs.getString("regulamento"),
                     null);
-                corrida.setOrganizadorId(rs.getInt("organizador_id"));
+            corrida.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
         return corrida;
+    }
+
+    public static Corrida obterUltimaCorrida(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM `corrida` WHERE organizador_id = " + id
+                    + " ORDER BY `corrida`.`id` DESC");
+
+            if(rs.first()){
+            Corrida corrida = new Corrida(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getInt("max_pessoa"),
+                    rs.getString("horario"),
+                    rs.getString("data"),
+                    rs.getString("banner"),
+                    rs.getString("logradouro"),
+                    rs.getString("cep"),
+                    rs.getString("cidade"),
+                    rs.getString("estado"),
+                    rs.getString("bairro"),
+                    rs.getString("descricao"),
+                    rs.getString("regulamento"),
+                    null);
+            corrida.setOrganizadorId(rs.getInt("organizador_id"));
+            corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
+            return corrida;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return null;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
