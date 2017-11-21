@@ -123,9 +123,9 @@ public class ManterInscricaoController extends HttpServlet {
         Boolean kitRetirado = false;
         String tempoLargada = "00:00:00";
         String tempoChegada = "00:00:00";
-        
+
         int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-        
+
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
@@ -196,6 +196,17 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("percursos", Percurso.obterPercursos());
             request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("kits", Kit.obterKits());
+            request.setAttribute("lotes", Lote.obterLotes());
+            try {
+                int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+                request.setAttribute("corridaId", corridaId);
+                request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            } catch (NullPointerException ex) {
+
+            } catch (NumberFormatException ex) {
+
+            }
+
             int idInscricao = Integer.parseInt(request.getParameter("id"));
             Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
             request.setAttribute("inscricao", inscricao);
@@ -212,20 +223,28 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
-        String dataCompra = request.getParameter("txtDataCompraInscricao");
-        String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
-        Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
-        Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
-        String tempoLargada = request.getParameter("txtTempoLargada");
-        String tempoChegada = request.getParameter("txtTempoChegada");
-
-        int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
-        int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
-        int kitId = Integer.parseInt(request.getParameter("optKit"));
-        int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
-        int loteId = Integer.parseInt(request.getParameter("optLote"));
 
         try {
+            Inscricao thisInscricao = Inscricao.obterInscricao(id);
+            //String dataCompra = request.getParameter("txtDataCompraInscricao");
+            //String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
+            //Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
+            //Boolean kitRetirado = Boolean.parseBoolean(request.getParameter("optKitRetirado"));
+            //String tempoLargada = request.getParameter("txtTempoLargada");
+            //String tempoChegada = request.getParameter("txtTempoChegada");
+
+            String dataCompra = thisInscricao.getDataCompra();
+            String numeroPeito = thisInscricao.getNumeroPeito();
+            Boolean pago = thisInscricao.isPago();
+            Boolean kitRetirado = thisInscricao.isKitRetirado();
+            String tempoLargada = thisInscricao.getTempoLargada();
+            String tempoChegada = thisInscricao.getTempoChegada();
+
+            int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
+            int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
+            int kitId = Integer.parseInt(request.getParameter("optKit"));
+            int kitCorridaId = Integer.parseInt(request.getParameter("optCorrida"));
+            int loteId = Integer.parseInt(request.getParameter("optLote"));
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
             Kit kit = Kit.obterKit(kitId, kitCorridaId);

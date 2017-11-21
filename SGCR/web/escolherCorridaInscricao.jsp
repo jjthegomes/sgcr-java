@@ -12,14 +12,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;" charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Inscrição</title>
         <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
+         Bootstrap CSS 
         <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
+         Font Awesome 
         <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">-->
         <title>Corridas</title>
     </head>
     <body>
@@ -59,7 +59,7 @@
 
     <!-- Bootstrap JS and jQuery -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-    <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+<!--    <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>-->
     </body>
 </html>
