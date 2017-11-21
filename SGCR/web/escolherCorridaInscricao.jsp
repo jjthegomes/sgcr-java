@@ -12,54 +12,109 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;" charset=UTF-8">
-<!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Inscrição</title>
-        <meta http-equiv="pragma" content="no-cache">
-         Bootstrap CSS 
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-         Font Awesome 
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">-->
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>Inscrição</title>
+                <meta http-equiv="pragma" content="no-cache">
+                 Bootstrap CSS 
+                <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
+                 Font Awesome 
+                <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
+                <link rel="stylesheet" type="text/css" href="public/css/estilo.css">-->
         <title>Corridas</title>
     </head>
     <body>
-    
-        <h1>Corridas</h1>
-    
-    <table border="1">
-        <tr>
-            <th>Codigo</th>
-            <th>Nome</th>
-            <th>Max. Pessoas</th>
-            <th>Horario</th>
-            <th>Data</th>
-            <th>Rua</th>
-            <th>Bairro</th>
-            <th>CEP</th>
-            <th>Organizador</th>
-            <th>Ação</th>
-        </tr>
-        <c:forEach items="${corridas}" var="corrida">
-            <tr>
-                <td><c:out value="${corrida.id}" /> </td>
-                <td><c:out value="${corrida.nome}" /> </td>
-                <td><c:out value="${corrida.maxPessoa}" /> </td>
-                <td><c:out value="${corrida.horario}" /> </td>
-                <td><c:out value="${corrida.data}" /> </td>
-                <td><c:out value="${corrida.logradouro}" /> </td>
-                <td><c:out value="${corrida.bairro}" /> </td>
-                <td><c:out value="${corrida.cep}" /> </td>
-                <td><c:out value="${corrida.organizadorId}" /> </td>
-                <td><a href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>">Inscrever</a> </td>
-            </tr>
-        </c:forEach>
-    </table>
-    <br>
-    <a href="index.jsp">Menu</a>
 
-    <!-- Bootstrap JS and jQuery -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-<!--    <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>-->
+        <!-- Bootstrap JS and jQuery -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <!--    <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+            <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>-->
+    </body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Logado Atleta</title>
+        <meta http-equiv="pragma" content="no-cache">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sistema de Corrida</a>
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nome Atleta<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Atleta</li>
+                                <li><a href="#">Minha Conta</a></li>
+                                <li><a href="#">Minhas Corridas</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Busca" size="40">
+                            </div>
+                        </div>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <div class="container corpo">
+            <div class="row">
+                <c:forEach items="${corridas}" var="corrida">
+                    <div class="col-md-4">                      
+                        <div class="panel panel-info">
+                            <div class="panel-heading">${corrida.nome}</div>
+                            <div class="panel-body">
+                               
+                                <img class="img-rounded" width="100%" src="./public/images/corrida.jpg">
+                            </div>
+                            <div class="panel-footer">
+                                <strong>Informações da Corrida:</strong> ${corrida.descricao}
+                                <a style="text-decoration: none" href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>">
+                                     <button class="btn btn-block btn-success"> Inscrever </button> 
+                                 </a>   
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+               
+            </div>
+        </div>
+
+
+
+        <!-- Bootstrap JS and jQuery -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
     </body>
 </html>
