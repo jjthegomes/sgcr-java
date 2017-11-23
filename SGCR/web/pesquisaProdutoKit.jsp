@@ -20,6 +20,7 @@
                 <th>Codigo</th>
                 <th>Kit</th>
                 <th>Nome Produto</th>
+                <th>Descrição</th>
                 <th>Valor</th>
                 <th colspan="2">Ação</th>
             </tr>
@@ -28,6 +29,7 @@
                 <tr>
                     <td><c:out value="${produtoKit.id}" /></td>
                     <td><c:out value="${produtoKit.kit.nome}" /></td>
+                    <td><c:out value="${produtoKit.produto.nome}" /></td>
                     <td><c:out value="${produtoKit.descricao}" /></td>
                     <td><c:out value="${produtoKit.valor}" /></td>                    
                     <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>

@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Kit;
+import modelo.Produto;
 import modelo.ProdutoKit;
 
 /**
@@ -125,6 +126,7 @@ public class ProdutoKitDAO {
                         null,
                         null,
                         null);
+                produtoKit.setProduto(Produto.obterProduto(rs.getInt("produto_id")));
                 produtoKit.setProdutoId(rs.getInt("produto_id"));
                 produtoKit.setKitId(rs.getInt("kit_id"));
                 produtoKit.setCorridaId(rs.getInt("kit_corrida_id"));
