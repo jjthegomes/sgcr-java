@@ -61,28 +61,33 @@
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterPontuacaoController?acao=confirmar${operacao}" method="post" name="frmManterPontuacao" >
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                        <label for="codigoRank">Ranking:</label>
-                                        <select class="form-control" name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
-                                            <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
-                                            <c:forEach items="${rankings}" var="ranking">
-                                                <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
-                                            </c:forEach>
-                                        </select>
-                                    </div>
+                                            <label for="codigoRank">Ranking:</label>
+                                            <select class="form-control" name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                                                <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
+                                                <c:forEach items="${rankings}" var="ranking">
+                                                    <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
+                                                </c:forEach>
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <label for="codigo">Código:</label>
                                             <input type="text" id="codigo" class="form-control" name="txtIdPontuacao" value="${pontuacao.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="pontuacao">Pontuação</label>
                                             <td><input type="text" class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
+                                            <div class="col-md-6">
+                                                <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                            </div>
                                         </div>
                                     </div>
                             </form>

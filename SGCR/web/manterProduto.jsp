@@ -59,30 +59,36 @@
                     <div class="panel panel-success">
                         <div class="panel-heading">Produto - ${operacao}</div>
                         <div class="panel-body">
-                            <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
+                            <p><label class="label label-primary" >Digite suas informações abaixo:</label></p>
                             <form action="ManterProdutoController?acao=confirmar${operacao}" method="post" name="frmManterProduto" >
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                         <label for="codigoAdm">Administrador:</label>
                                         <select class="form-control" id="codigoAdm" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                        <option value="0" <c:if test="${produto.administrador.id == null}"> selected</c:if>> </option>  
-                                        <c:forEach items="${administradores}" var="administrador">
-                                            <option value="${administrador.id}" <c:if test="${produto.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
-                                        </c:forEach>
-                                    </select>
-                                    </div>
+                                            <option value="0" <c:if test="${produto.administrador.id == null}"> selected</c:if>> </option>  
+                                            <c:forEach items="${administradores}" var="administrador">
+                                                <option value="${administrador.id}" <c:if test="${produto.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
+                                            </c:forEach>
+                                        </select>
+                                        </div>
                                         <div class="form-group">
                                             <label for="codigo">Código:</label>
                                             <input type="text" id="codigo" class="form-control" name="txtIdProduto" value="${produto.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                         </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nome">Nome</label>
                                             <input type="text" id="nome" class="form-control" name="txtNome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
+                                            <div class="col-md-6">
+                                                <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                            </div>
                                         </div>
                                     </div>
                             </form>

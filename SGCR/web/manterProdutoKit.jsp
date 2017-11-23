@@ -60,10 +60,10 @@
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="codigocorrida">Corrida:</label>
-                                        <select class="form-control" id="codigocorrida" name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                                        <label for="codigoCorrida">Corrida:</label>
+                                        <select class="form-control" id="codigoCorrida" name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                                             <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
                                             <c:forEach items="${corridas}" var="corrida">
                                                 <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
@@ -80,17 +80,19 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="codigoPro">Produto:</label>
-                                        <select class="form-control" id="codigoPro" name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                                            <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
-                                            <c:forEach items="${produtos}" var="produto">
-                                                <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="codigo">Código:</label>
                                         <input type="text" class="form-control" id="codigo" name="txtIdProduto" value="${produtoKit.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="codigoPro">Produto:</label>
+                                            <select class="form-control" id="codigoPro" name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                                                <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
+                                                <c:forEach items="${produtos}" var="produto">
+                                                    <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="descricao">Descrição</label>
@@ -101,9 +103,12 @@
                                             <input type="text" class="form-control" id="valor" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
+                                            <div class="col-md-6">
+                                                <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -112,68 +117,6 @@
                     </div>
                 </div>
             </div>
-            <h1>Manter Produto Kit - ${operacao}</h1>
-
-        <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
-            <table>
-                <tr>
-                    <td>Corrida:</td>
-                    <td>
-                        <select name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                            <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${corridas}" var="corrida">
-                                <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kit:</td>
-                    <td>
-                        <select name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                            <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${kits}" var="kit">
-                                <option value="${kit.id}" <c:if test="${produtoKit.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Produto:</td>
-                    <td>
-                        <select name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                            <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${produtos}" var="produto">
-                                <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Código</td> 
-                    <td><input type="text" name="txtIdProduto" value="${produtoKit.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Descrição</td> 
-                        <td><input type="text" name="txtDescricao" value="${produtoKit.descricao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                    </tr>
-                    <tr>
-                        <td>Valor:</td> 
-                        <td><input type="text" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                </tr>
-
-                <tr>
-                    <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
-                </tr>
-                <br>
-                <tr>
-                    <td><a href="index.jsp">Menu</a></td>
-                </tr>
-                <tr>
-                    <td><a href="PesquisaOrganizadorController">Voltar para pesquisa</a></td>
-                </tr>
-            </table>
         </form>       
     </body>
 </html>

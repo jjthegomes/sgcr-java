@@ -62,20 +62,23 @@
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterRankingController?acao=confirmar${operacao}" method="post" name="frmManterRanking">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                         <label for="codigo">Administrador:</label>
-                                        <select  class="form-control" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
-                                            <c:forEach items="${administradores}" var="administrador">
-                                            <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
-                                            </c:forEach>
-                                        </select>
-                                    </div>
+                                            <select  class="form-control" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
+                                                <c:forEach items="${administradores}" var="administrador">
+                                                <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
+                                                </c:forEach>
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <label for="codigo">Código:</label>
                                             <input type="text" class="form-control" name="txtIdRanking" value="${ranking.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                         </div>
+            
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nome">Nome</label>
                                             <input type="text" id="nome" class="form-control" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -85,10 +88,14 @@
                                             <input type="text" class="form-control" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
+                                            <div class="col-md-6">
+                                                <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                            </div>
                                         </div>
+                                        
                                     </div>
                             </form>
                         </div>
