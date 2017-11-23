@@ -110,8 +110,13 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-                                 
-                                    <button type="submit" class="btn btn-success">Confirmar</button>
+                                    
+                                    <div class="col-sm-6">
+                                        <a href="PesquisaKitController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Voltar</div></a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
