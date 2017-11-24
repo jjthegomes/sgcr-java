@@ -55,7 +55,7 @@
                     <div class="panel panel-success">
                         <div class="panel-heading">Cadastro de Atleta</div>
                         <div class="panel-body">
-                            <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
+                            <p><label class="label label-primary btn-lg" >Digite suas informações abaixo:</label></p>
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
                                 <div class="form-group">
                                     <label for="Nome">Código:</label>
@@ -87,7 +87,7 @@
                                             </select>
 
                                         </div>
-                                      
+
                                         <div class="form-group">
                                             <label for="cel">Celular</label>
                                             <input type="tel" class="form-control" id="cel" placeholder="(xx) x xxxx-xxxx" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -97,8 +97,8 @@
                                             <label for="telefone">Telefone:</label>
                                             <input type="tel" class="form-control" id="telefone" name="txtTelefoneAtleta" value="${atleta.telefone}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
-                                        
-                                          <div class="form-group">
+
+                                        <div class="form-group">
                                             <label for="sexo">Sexo:</label> <br>
                                             <div class="radio-inline">
                                                 <label><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
@@ -161,7 +161,6 @@
                                     <div class="form-group">
                                         <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
                                         <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
                                     </div>
                                 </div>
                             </form>
