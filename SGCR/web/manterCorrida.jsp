@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Sistema de Corrida</a>
+                    <a class="navbar-brand" href="index.jsp">Sistema de Corrida</a>
                 </div>
 
                 <div id="navbar" class="navbar-collapse collapse">
@@ -69,13 +69,13 @@
 
         <div class="container corpo">
             <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Cadastro Corrida</li>
+                <li><a href="index.jsp">Home</a></li>
+                <li class="active">${operacao} Corrida</li>
             </ul>
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Criar Corrida</div>
+                        <div class="panel-heading">${operacao} Corrida</div>
                         <div class="panel-body">
                             <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida"> 
 
@@ -89,7 +89,6 @@
                                         <c:forEach items="${organizadores}" var="organizador">
                                             <option value="${organizador.id}" <c:if test="${corrida.organizadorId == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
                                         </c:forEach>
-                                    </select>
                                     </select>
                                 </div>           
                                 <div class="col-md-4">
@@ -155,7 +154,7 @@
                                             <input type="text" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
                                     </div>
                                     <div class="form-group">
-                                        <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                        <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
                                         <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
                                     </div>
                                 </div>
@@ -169,7 +168,7 @@
 
         <!-- Bootstrap JS and jQuery -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="publicbootstrap/js/bootstrap.js"></script>
     </body>
 </html>

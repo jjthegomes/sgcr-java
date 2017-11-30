@@ -159,7 +159,7 @@
                                         <label><input type="checkbox"> Aceito e Concordo com os <a href="#">Termos</a></label>
                                     </div>
                                     <div class="form-group">
-                                        <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                        <a href="PesquisaAtletaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
                                         <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
 
         <!-- Bootstrap JS and jQuery -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="publicbootstrap/js/bootstrap.js"></script>
     </body>
 </html>
