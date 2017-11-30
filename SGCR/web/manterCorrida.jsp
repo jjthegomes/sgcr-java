@@ -21,6 +21,8 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        <script type="text/javascript" src="public/js/myscript.js"></script>
+
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -117,7 +119,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepCorrida" value="${corrida.cep}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cep" name="txtCepCorrida" value="${corrida.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>                                   
                                         <div class="form-group">
                                             <label for="estado">Estado:</label>
@@ -135,6 +137,7 @@
                                             <label for="bairro">Bairro:</label>
                                             <input type="text" class="form-control" id="bairro" name="txtBairroCorrida" value="${corrida.bairro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
+                                        <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
 
                                     </div>
                                     <div class="col-md-4">

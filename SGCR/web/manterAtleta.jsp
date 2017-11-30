@@ -19,6 +19,8 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        <script type="text/javascript" src="public/js/myscript.js"></script>
+
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -113,7 +115,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="cidade">Cidade:</label>
@@ -139,6 +141,8 @@
                                             <label for="complemento">Complemento:</label>
                                             <input type="text" class="form-control" id="complemento" name="txtComplementoAtleta" value="${atleta.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
+                                        <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
+
                                     </div>
                                     <div class="col-md-4">
 
