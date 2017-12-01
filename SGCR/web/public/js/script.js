@@ -1,7 +1,9 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+function pagamento(formaPagamento) {
+    if (formaPagamento === "cartaoCredito") {
+        $('.pagamentoCartaoCredito').prop("disabled", false);
+        $('.pagamentoBoleto').prop("disabled", true);
+    } else if (formaPagamento === "boleto") {
+        $('.pagamentoCartaoCredito').prop("disabled", true);
+        $('.pagamentoBoleto').prop("disabled", false);
+    }
+}

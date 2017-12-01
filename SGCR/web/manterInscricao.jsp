@@ -49,7 +49,7 @@
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
-        
+
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
             <div class="container corpo">
                 <ul class="breadcrumb">
@@ -59,10 +59,10 @@
                 <div class="form-group">
                     <label for="txtIdInscricao">Código da Inscrição:</label>
                     <input type="text" class="form-control" name="txtIdInscricao" value="${inscricao.id}" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                </div>
-                <div class="form-group">
-                    <label for="atleta">Atleta:</label>
-                    <select name="optAtleta" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                    </div>
+                    <div class="form-group">
+                        <label for="atleta">Atleta:</label>
+                        <select name="optAtleta" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                         <option value="0" <c:if test="${inscricao.atleta.id == null}"> selected</c:if>> Selecione um atleta</option>  
                         <c:forEach items="${atletas}" var="atleta">
                             <option value="${atleta.id}" <c:if test="${inscricao.atletaId == atleta.id}"> selected</c:if>>${atleta.nome}</option>  
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                                                
+
                             <div class="col-md-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Lote</div>
@@ -125,23 +125,129 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                            
-                                <div class="col-sm-6">
-                                    <a href="PesquisaInscricaoController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Voltar</div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Forma de Pagamento</h4>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse1" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('cartaoCredito')"</c:if>>
+                                Cartão de Crédito
+                            </div>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="form-group col-md-12">
+                                            <label for="idCartaoCredito">Código do Cartão:</label>
+                                            <input type="text" class="form-control pagamentoCartaoCredito" name="idCartaoCredito" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nCartao">Número do Cartão:</label>
+                                            <input type="text" class="form-control pagamentoCartaoCredito" name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nomeTitularCartao">Nome impresso no cartão:</label>
+                                            <input type="text" class="form-control pagamentoCartaoCredito" name="nomeTitularCartaoCredito" placeholder="Nome" id="nomeTitularCartao" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                        </div>
+                                        <div class="form-group  col-md-3">
+                                            <label for="cSeguranca">Código de Segurança:</label>
+                                            <input type="text" class="form-control pagamentoCartaoCredito" name="codigoSegurancaCartaoCredito" placeholder="000" id="cSeguranca" maxlength="3" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                        </div>
+                                        <div class="form-group col-md-9">
+                                            <label for="dtValidade">Data de Validade:</label>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <select class="form-control pagamentoCartaoCredito" id="mesValidade" name="mesValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                        <option hidden>Mês</option>
+                                                        <option value="1">01</option>
+                                                        <option value="2">02</option>
+                                                        <option value="3">03</option>
+                                                        <option value="4">04</option>
+                                                        <option value="5">05</option>
+                                                        <option value="6">06</option>
+                                                        <option value="7">07</option>
+                                                        <option value="8">08</option>
+                                                        <option value="9">09</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <select class="form-control pagamentoCartaoCredito" id="anoValidade" name="anoValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                        <option hidden>Ano</option>
+                                                        <c:forEach items="${anos}" var="ano">  
+                                                            <option value="${ano}">${ano}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <c:if test="${operacao != 'Excluir'}">
+                                        <div class="form-group col-md-6 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success btn-block pagamentoCartaoCredito" name="formaPagamento" value="cartaoCredito">Pagar Com Cartão</button>
+                                        </div>
+                                        </c:if>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse2" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('boleto')"</c:if>> 
+                                Boleto
+                            </div>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="form-group col-md-12">
+                                            <label for="idCartaoCredito">Código do Boleto:</label>
+                                            <input type="text" class="form-control pagamentoBoleto" name="idBoleto" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if> />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="nomeTitularBoleto">Nome do Titular:</label>
+                                            <input type="text" class="form-control pagamentoBoleto" name="nomeTitularBoleto" id="nomeTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="cpfTitularBoleto">CPF do Titular:</label>
+                                            <input type="text" class="form-control pagamentoBoleto" name="cpfTitularBoleto" id="cpfTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                        </div>
+                                        <c:if test="${operacao != 'Excluir'}">
+                                        <div class="form-group col-md-6 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success btn-block pagamentoBoleto" name="formaPagamento" value="boleto">Pagar Com Boleto</button>
+                                        </div>
+                                        </c:if>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <c:if test="${operacao == 'Excluir'}">
+                    <div class="form-group col-md-6 col-md-offset-3">
+                        <button type="submit" class="btn btn-success btn-block" value="Confirmar">Confirmar</button>
+                    </div>
+                </c:if>
             </div>
         </form>
+
+        <div class="rodape">
+            Rodapé super cool<br/>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, inventore.
+        </div>
 
         <!-- Bootstrap JS and jQuery -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
         <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="public/js/script.js"></script>
     </body>
 </html>

@@ -13,27 +13,18 @@ import java.util.List;
  *
  * @author RAJ
  */
-public class CartaoCredito implements Pagamento {
-    private int id;
+public class CartaoCredito extends Pagamento {
     private String numero;
     private String codigoSeguranca;
     private String validade;
     private String nomeTitular;
 
-    public CartaoCredito(int id, String numero, String codigoSeguranca, String validade, String nomeTitular) {
-        this.id = id;
+    public CartaoCredito(int id, String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao) {
+        super(id, inscricao);
         this.numero = numero;
         this.codigoSeguranca = codigoSeguranca;
         this.validade = validade;
         this.nomeTitular = nomeTitular;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNumero() {
