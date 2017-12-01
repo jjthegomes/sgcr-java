@@ -19,7 +19,9 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
-        <title>Manter Organizador</title>
+        <script type="text/javascript" src="public/js/myscript.js"></script>
+
+        <title>${operacao} Organizador</title>
     </head>
     <body>
 
@@ -41,7 +43,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-success">
-                        <div class="panel-heading">Cadastro de Organizador - ${operacao}</div>
+                        <div class="panel-heading">${operacao} Organizador </div>
                         <div class="panel-body">
                             <form action="ManterOrganizadorController?acao=confirmar${operacao}" method="post" name="frmManterOrganizador">
                                 <div class="col-md-12">
@@ -120,7 +122,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepOrganizador" value="${organizador.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cep" name="txtCepOrganizador" value="${organizador.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="cidade">Cidade:</label>
@@ -146,6 +148,8 @@
                                             <label for="complemento">Complemento:</label>
                                             <input type="text" class="form-control" id="complemento" name="txtComplementoOrganizador" value="${organizador.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
+                                        <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
+
                                     </div>
 
                                     <div class="col-md-4">
