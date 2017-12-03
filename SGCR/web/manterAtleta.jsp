@@ -19,6 +19,8 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        <script type="text/javascript" src="public/js/myscript.js"></script>
+
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -55,7 +57,7 @@
                     <div class="panel panel-success">
                         <div class="panel-heading">Cadastro de Atleta</div>
                         <div class="panel-body">
-                            <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
+                            <p><label class="label label-primary btn-lg" >Digite suas informações abaixo:</label></p>
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
                                 <div class="form-group">
                                     <label for="Nome">Código:</label>
@@ -87,7 +89,7 @@
                                             </select>
 
                                         </div>
-                                      
+
                                         <div class="form-group">
                                             <label for="cel">Celular</label>
                                             <input type="tel" class="form-control" id="cel" placeholder="(xx) x xxxx-xxxx" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -97,8 +99,8 @@
                                             <label for="telefone">Telefone:</label>
                                             <input type="tel" class="form-control" id="telefone" name="txtTelefoneAtleta" value="${atleta.telefone}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
-                                        
-                                          <div class="form-group">
+
+                                        <div class="form-group">
                                             <label for="sexo">Sexo:</label> <br>
                                             <div class="radio-inline">
                                                 <label><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
@@ -113,7 +115,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="cidade">Cidade:</label>
@@ -139,6 +141,8 @@
                                             <label for="complemento">Complemento:</label>
                                             <input type="text" class="form-control" id="complemento" name="txtComplementoAtleta" value="${atleta.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
+                                        <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
+
                                     </div>
                                     <div class="col-md-4">
 
@@ -159,9 +163,8 @@
                                         <label><input type="checkbox"> Aceito e Concordo com os <a href="#">Termos</a></label>
                                     </div>
                                     <div class="form-group">
-                                        <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                        <a href="PesquisaAtletaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
                                         <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-
                                     </div>
                                 </div>
                             </form>
@@ -177,7 +180,7 @@
 
         <!-- Bootstrap JS and jQuery -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="publicbootstrap/js/bootstrap.js"></script>
     </body>
 </html>

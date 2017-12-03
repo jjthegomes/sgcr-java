@@ -3,6 +3,7 @@ package modelo;
 
 import dao.InscricaoDAO;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -41,7 +42,23 @@ public class Inscricao {
         this.kit = kit;
         this.lote = lote;
     }
-
+    
+    public Inscricao(int id, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
+        this.id = id;
+        this.atleta = atleta;
+        this.percurso = percurso;
+        this.kit = kit;
+        this.lote = lote;
+        
+        Calendar hoje = Calendar.getInstance();
+        this.dataCompra = hoje.get(Calendar.DAY_OF_MONTH) + "/" + (hoje.get(Calendar.MONTH)+1) + "/" + hoje.get(Calendar.YEAR);
+        this.numeroPeito = "0";
+        this.pago = false;
+        this.kitRetirado = false;
+        this.tempoLargada = "00:00:00";
+        this.tempoChegada = "00:00:00";
+    }
+    
     public int getId() {
         return id;
     }

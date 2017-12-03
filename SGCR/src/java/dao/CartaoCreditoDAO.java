@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.CartaoCredito;
+import modelo.Inscricao;
 
 /**
  *
@@ -35,7 +36,10 @@ public class CartaoCreditoDAO {
                         rs.getString("numero"),
                         rs.getString("codigo_seguranca"),
                         rs.getString("validade"),
-                        rs.getString("nome_titular"));
+                        rs.getString("nome_titular"),
+                        null);
+                cartao.setInscricaoId(rs.getInt("inscricao_id"));
+                cartao.setInscricao(Inscricao.obterInscricao(cartao.getInscricaoId()));
                 cartoes.add(cartao);
             }
         } catch (SQLException e) {
@@ -50,13 +54,14 @@ public class CartaoCreditoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO cartao_credito (id, numero, codigo_seguranca, validade, nome_titular) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO cartao_credito (id, numero, codigo_seguranca, validade, nome_titular, inscricao_id) VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, cartaoCredito.getId());
             comando.setString(2, cartaoCredito.getNumero());
             comando.setString(3, cartaoCredito.getCodigoSeguranca());
             comando.setString(4, cartaoCredito.getValidade());
             comando.setString(5, cartaoCredito.getNomeTitular());
+            comando.setInt(6, cartaoCredito.getInscricao().getId());
 
             comando.execute();
             comando.close();
@@ -71,13 +76,14 @@ public class CartaoCreditoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE cartao_credito SET numero = ?, codigo_seguranca = ?, validade = ?, nome_titular = ? WHERE id = ?";
+            String sql = "UPDATE cartao_credito SET numero = ?, codigo_seguranca = ?, validade = ?, nome_titular = ?, inscricao_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, cartaoCredito.getNumero());
             comando.setString(2, cartaoCredito.getCodigoSeguranca());
             comando.setString(3, cartaoCredito.getValidade());
             comando.setString(4, cartaoCredito.getNomeTitular());
             comando.setInt(5, cartaoCredito.getId());
+            comando.setInt(6, cartaoCredito.getInscricao().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -118,7 +124,9 @@ public class CartaoCreditoDAO {
                     rs.getString("numero"),
                     rs.getString("codigo_seguranca"),
                     rs.getString("vencimento"),
-                    rs.getString("nome_titular"));
+                    rs.getString("nome_titular"), 
+                    null);
+            cartaoCredito.setInscricaoId(rs.getInt("inscricao_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

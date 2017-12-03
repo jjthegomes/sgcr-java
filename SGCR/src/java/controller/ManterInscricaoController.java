@@ -7,12 +7,17 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Atleta;
+import modelo.Boleto;
+import modelo.CartaoCredito;
 import modelo.Corrida;
 import modelo.Inscricao;
 import modelo.Kit;
@@ -65,6 +70,15 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("kits", Kit.obterKits(corridaId));
             request.setAttribute("lotes", Lote.obterLotes(corridaId));
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+
+            Calendar hoje = Calendar.getInstance();
+            ArrayList<Integer> anos = new ArrayList();
+            anos.add(hoje.get(Calendar.YEAR));
+            for (int i = anos.get(0) + 1; i < anos.get(0) + 15; i++) {
+                anos.add(i);
+            }
+            request.setAttribute("anos", anos);
+
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -117,13 +131,6 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
-        String dataCompra = "00/00/0000";
-        String numeroPeito = "0";
-        Boolean pago = false;
-        Boolean kitRetirado = false;
-        String tempoLargada = "00:00:00";
-        String tempoChegada = "00:00:00";
-
         int corridaId = Integer.parseInt(request.getParameter("corridaId"));
 
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
@@ -137,14 +144,39 @@ public class ManterInscricaoController extends HttpServlet {
             Kit kit = Kit.obterKit(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);
+            Inscricao inscricao = new Inscricao(id, atleta, percurso, kit, lote);
             inscricao.gravar();
+            
+            if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
+                int idCartaoCredito = Integer.parseInt(request.getParameter("idCartaoCredito"));
+                String numeroCartaoCredito = request.getParameter("numeroCartaoCredito");
+                String nomeTitularCartaoCredito = request.getParameter("nomeTitularCartaoCredito");
+                String codigoSegurancaCartaoCredito = request.getParameter("codigoSegurancaCartaoCredito");
+                String mesValidadeCartaoCredito = request.getParameter("mesValidadeCartaoCredito");
+                String anoValidadeCartaoCredito = request.getParameter("anoValidadeCartaoCredito");
+                String dataValidadeCartaoCredito = mesValidadeCartaoCredito + "/" + anoValidadeCartaoCredito;
+
+                try {
+                    CartaoCredito cartaoCredito = new CartaoCredito(idCartaoCredito, numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao);
+                    cartaoCredito.gravar();
+                } catch (SQLException | ClassNotFoundException ex) {
+                }
+                
+            } else if (request.getParameter("formaPagamento").equals("boleto")) {
+                int idBoleto = Integer.parseInt(request.getParameter("idBoleto"));
+                String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
+                String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
+                
+                try {
+                    Boleto boleto = new Boleto(idBoleto, nomeTitularBoleto, cpfTitularBoleto, inscricao);
+                    boleto.gravar();
+                } catch (SQLException | ClassNotFoundException ex) {
+                }
+            }
+            
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
-        } catch (IOException ex) {
-        } catch (SQLException ex) {
-        } catch (ClassNotFoundException ex) {
-        } catch (ServletException ex) {
+        } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {
         }
     }
 
@@ -205,7 +237,7 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("kits", Kit.obterKits(corridaId));
             request.setAttribute("lotes", Lote.obterLotes(corridaId));
             request.setAttribute("corridaId", corridaId);
-            
+
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
 
             int idInscricao = Integer.parseInt(request.getParameter("id"));
@@ -246,7 +278,7 @@ public class ManterInscricaoController extends HttpServlet {
             } catch (NullPointerException | NumberFormatException ex) {
 
             }
-            
+
             int loteId = Integer.parseInt(request.getParameter("optLote"));
             Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);

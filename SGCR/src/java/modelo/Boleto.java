@@ -7,39 +7,41 @@ package modelo;
 
 import dao.BoletoDAO;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author RAJ
  */
-public class Boleto implements Pagamento {
+public class Boleto extends Pagamento {
 
-    private int id;
     private String codigoBarra;
     private String dataEmissao;
     private String dataVencimento;
     private String nomeTitular;
     private String cpfTitular;
-    private Inscricao inscricao;
     
-    private int InscricaoId;
-
-    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular) {
-        this.id = id;
+    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular, Inscricao inscricao) {
+        super(id, inscricao);
         this.codigoBarra = codigoBarra;
         this.dataEmissao = dataEmissao;
         this.dataVencimento = dataVencimento;
         this.nomeTitular = nomeTitular;
         this.cpfTitular = cpfTitular;
     }
+    
+    public Boleto(int id, String nomeTitular, String cpfTitular, Inscricao inscricao) {
+        super(id, inscricao);
+        this.nomeTitular = nomeTitular;
+        this.cpfTitular = cpfTitular;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        Random random = new Random();
+        this.codigoBarra = Integer.toString(100000 + random.nextInt(899999));
+        Calendar hoje = Calendar.getInstance();
+        this.dataEmissao = hoje.get(Calendar.DAY_OF_MONTH) + "/" + (hoje.get(Calendar.MONTH) + 1) + "/" + hoje.get(Calendar.YEAR);
+        this.dataVencimento = (hoje.get(Calendar.DAY_OF_MONTH) + 2) + "/" + (hoje.get(Calendar.MONTH) + 1) + "/" + hoje.get(Calendar.YEAR);
     }
 
     public String getCodigoBarra() {
@@ -106,5 +108,4 @@ public class Boleto implements Pagamento {
     public static Boleto obterBoleto(int id) throws ClassNotFoundException {
         return BoletoDAO.obterBoleto(id);
     }
-
 }
