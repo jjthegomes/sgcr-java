@@ -12,43 +12,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html;" charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        <%@ include file = "layout/head.jsp" %>
         <title>Inscrição</title>
     </head>
     <body>
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Sistema de Corrida</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nome do Atleta<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Minha Conta</a></li>
-                                <li><a href="#">Meus Eventos</a></li>
-                                <li><a href="#">Alterar Dados</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </nav>
+        <%@ include file = "layout/menuAtleta.jsp" %>
 
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
             <div class="container corpo">
@@ -238,16 +207,9 @@
                 </c:if>
             </div>
         </form>
+        
+        <%@ include file = "layout/rodape.jsp" %>
 
-        <div class="rodape">
-            Rodapé super cool<br/>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, inventore.
-        </div>
-
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="public/js/myscript.js"></script>
     </body>
 </html>

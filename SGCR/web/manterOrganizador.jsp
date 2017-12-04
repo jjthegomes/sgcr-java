@@ -11,33 +11,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+        
+        <%@ include file = "layout/head.jsp" %>
         <script type="text/javascript" src="public/js/myscript.js"></script>
-
         <title>${operacao} Organizador</title>
+        
     </head>
     <body>
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">Sistema de Corrida</a>
-                </div>
-            </div>
-        </nav>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container corpo">
             <div class="row">
@@ -181,9 +163,7 @@
             </div>
         </div>
 
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+        <%@ include file = "layout/rodape.jsp" %>                            
+                                    
     </body>
 </html>

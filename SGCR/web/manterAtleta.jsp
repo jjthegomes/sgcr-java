@@ -10,46 +10,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <%@ include file = "layout/head.jsp" %>
         <title>Manter Atleta - ${operacao}</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
         <script type="text/javascript" src="public/js/myscript.js"></script>
 
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">Sistema de Corrida</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Busca" size="40">
-                            </div>
-                        </div>
-                    </form>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </nav>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container corpo">
             <div class="row">
@@ -177,10 +145,8 @@
 
         <a href="index.jsp">Menu</a>
         <a href="PesquisaAtletaController">Voltar para pesquisa</a>
-
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="publicbootstrap/js/bootstrap.js"></script>
+        
+        <%@ include file = "layout/rodape.jsp" %>
+        
     </body>
 </html>

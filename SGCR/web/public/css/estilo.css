@@ -17,3 +17,22 @@ body {
     text-align: center; 
     border-top: 1px solid #555;
 }
+
+.corrida-info {
+    height: 150px;
+}
+
+.corrida-info p {
+    text-align: center;
+    font-size: 14px;
+}
+
+.corrida-info span {
+    margin-left: 10px;
+}
+
+.corrida-info-conteudo {
+    height: 104px;
+    padding: 10px 5px;
+    overflow: hidden;
+}
