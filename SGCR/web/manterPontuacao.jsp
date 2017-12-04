@@ -54,10 +54,14 @@
         </nav>
         
         <div class="container corpo">
+            <ul class="breadcrumb">
+                <li><a href="index.jsp">Home</a></li>
+                <li class="active">${operacao} Pontuação</li>
+            </ul>
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-success">
-                        <div class="panel-heading">Pontuação - ${operacao}</div>
+                        <div class="panel-heading">${operacao} Pontuação</div>
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterPontuacaoController?acao=confirmar${operacao}" method="post" name="frmManterPontuacao" >

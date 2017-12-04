@@ -53,10 +53,14 @@
         </nav>
 
         <div class="container corpo">
+            <ul class="breadcrumb">
+                <li><a href="index.jsp">Home</a></li>
+                <li class="active">${operacao} Produto Kit</li>
+            </ul>
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-success">
-                        <div class="panel-heading">Produto kit - ${operacao}</div>
+                        <div class="panel-heading">${operacao} Produto Kit</div>
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
