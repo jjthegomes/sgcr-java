@@ -63,10 +63,8 @@ public class ManterPagamentoController extends HttpServlet {
             //ADICIONAR LOGICA AQUI!
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPagamentoController");
             view.forward(request, response);
-        } catch (ServletException ex) {
-            Logger.getLogger(ManterPagamentoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ManterPagamentoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
         }
     }
 

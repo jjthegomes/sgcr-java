@@ -206,5 +206,9 @@ public class Inscricao {
     public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricao(id);
     }
+    
+      public static Inscricao obterInscricao(int id, int corridaId) throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricao(id, corridaId);
+    }
 
 }
