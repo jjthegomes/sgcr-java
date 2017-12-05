@@ -17,6 +17,8 @@
         <%@ include file = "layout/menuAtleta.jsp" %>
 
         <div class="container corpo">
+            <center>  <h1>Manter Pagamento</h1> </center> <br>
+
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      

@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class="container">
-            <h2>Pesquisa Pagamento</h2>
+            <h1>Manter Pagamento</h1>
 
             <table class="table">
                 <thead>
@@ -35,18 +35,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                <form action="ManterPagamentoController?acao=prepararPagamento&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.lote.corridaId}"/>" method="post">
                     <c:forEach items="${inscricoes}" var="inscricao">
                         <tr <c:if test="${inscricao.pago == false}"> class="danger" </c:if>>
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.lote.preco}" /></td>
-                            <td><button class="btn btn-success" type="submit" value="Pagar">Pagar</button>
-                        </tr>
-                    </c:forEach>
-                </form>
-
+                            <td><a style="text-decoration: none" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.lote.corridaId}"/>">
+                        <button class="btn btn-success">  Pagar </button> 
+                                </a></td>                      
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
 
