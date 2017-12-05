@@ -104,6 +104,14 @@
         <servlet-name>PesquisaPagamentoController</servlet-name>
         <servlet-class>controller.PesquisaPagamentoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManterRetirarKitController</servlet-name>
+        <servlet-class>controller.ManterRetirarKitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaRetirarKitController</servlet-name>
+        <servlet-class>controller.PesquisaRetirarKitController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>PesquisaPagamentoController</servlet-name>
         <url-pattern>/PesquisaPagamentoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManterRetirarKitController</servlet-name>
+        <url-pattern>/ManterRetirarKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaRetirarKitController</servlet-name>
+        <url-pattern>/PesquisaRetirarKitController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

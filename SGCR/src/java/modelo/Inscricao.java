@@ -195,6 +195,10 @@ public class Inscricao {
         return InscricaoDAO.obterInscricoes(corridaId);
     }
     
+    public static List<Inscricao> obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricoesPagas(corridaId);
+    }
+    
     public void gravar() throws SQLException, ClassNotFoundException {
         InscricaoDAO.gravar(this);
     }
@@ -209,6 +213,10 @@ public class Inscricao {
     
     public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricao(id);
+    }
+    
+    public void retirarKit() throws SQLException, ClassNotFoundException {
+        InscricaoDAO.retirarKit(this);
     }
 
 }

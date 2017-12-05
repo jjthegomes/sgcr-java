@@ -1,11 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import modelo.Atleta;
 import modelo.Inscricao;
@@ -70,6 +73,49 @@ public class InscricaoDAO {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId);
+            while (rs.next()) {
+
+                Inscricao inscricao = new Inscricao(
+                        rs.getInt("id"),
+                        rs.getString("data_compra"),
+                        rs.getString("numero_peito"),
+                        rs.getBoolean("pago"),
+                        rs.getBoolean("kit_retirado"),
+                        rs.getString("tempo_largada"),
+                        rs.getString("tempo_chegada"),
+                        null,
+                        null,
+                        null,
+                        null);
+                inscricao.setPercursoId(rs.getInt("percurso_id"));
+                inscricao.setAtletaId(rs.getInt("atleta_id"));
+                inscricao.setKitId(rs.getInt("kit_id"));
+                inscricao.setKitCorridaId(rs.getInt("kit_corrida_id"));
+                inscricao.setLoteId(rs.getInt("lote_id"));
+                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+                inscricao.setKit(Kit.obterKit(rs.getInt("Kit_id"), rs.getInt("kit_corrida_id")));
+                inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
+                inscricoes.add(inscricao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return inscricoes;
+    }
+    
+    public static List<Inscricao> obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Inscricao> inscricoes = new ArrayList<>();
+       
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId + 
+                    " and pago ="+ true + " and kit_retirado = " + false);
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
@@ -211,6 +257,23 @@ public class InscricaoDAO {
             fecharConexao(conexao, comando);
         }
         return inscricao;
+    }
+    
+    public static void retirarKit(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE inscricao SET kit_retirado = ? WHERE id = ?";
+ 
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setBoolean(1, true);
+
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
