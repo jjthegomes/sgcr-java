@@ -33,7 +33,7 @@
             </thead>
             <tbody>
               <c:forEach items="${kits}" var="kit">
-                <tr <c:if test="${kit.id == '1'}">class="danger"</c:if>>
+                <tr>
                     <td><c:out value="${kit.id}" /></td>
                     <td><c:out value="${kit.corrida.nome}" /></td>
                     <td><c:out value="${kit.nome}" /></td>
@@ -48,7 +48,7 @@
           </table>
           <form action="ManterKitController?acao=prepararIncluir" method="post">
             <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir">Incluir</button>
-            <a href="index.jsp">Menu</a>
+            <a href="index.jsp" class="btn btn-primary">Menu</a>
           </form>
         </div>
 

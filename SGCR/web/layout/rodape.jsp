@@ -5,10 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-        <div class="rodape">
+<!--        <div class="rodape">
             Rodapé super cool<br/>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, inventore.
-        </div>
+        </div>-->
         
         <!-- Bootstrap JS and jQuery -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->

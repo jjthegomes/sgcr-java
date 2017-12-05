@@ -63,7 +63,7 @@ public class InscricaoDAO {
         }
         return inscricoes;
     }
-    
+
     public static List<Inscricao> obterInscricoes(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -105,17 +105,17 @@ public class InscricaoDAO {
         }
         return inscricoes;
     }
-    
+
     public static List<Inscricao> obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Inscricao> inscricoes = new ArrayList<>();
-       
+
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId + 
-                    " and pago ="+ true + " and kit_retirado = " + false);
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId
+                    + " and pago =" + true + " and kit_retirado = " + false);
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
@@ -258,13 +258,35 @@ public class InscricaoDAO {
         }
         return inscricao;
     }
-    
+
+    public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws ClassNotFoundException, SQLException {
+        for (Inscricao inscricao : inscricoes) {
+            Connection conexao = null;
+            try {
+                conexao = BD.getConexao();
+                String sql = "UPDATE inscricao SET tempo_largada = ?, tempo_chegada = ? WHERE id = ?";
+
+                PreparedStatement comando = conexao.prepareStatement(sql);
+
+                comando.setString(1, inscricao.getTempoLargada());
+                comando.setString(2, inscricao.getTempoChegada());
+                comando.setInt(3, inscricao.getId());
+
+                comando.execute();
+                comando.close();
+                conexao.close();
+            } catch (SQLException e) {
+                throw e;
+            }
+        }
+    }
+
     public static void retirarKit(Inscricao inscricao) throws SQLException, ClassNotFoundException {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE inscricao SET kit_retirado = ? WHERE id = ?";
- 
+
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setBoolean(1, true);
 

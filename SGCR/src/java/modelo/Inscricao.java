@@ -55,8 +55,8 @@ public class Inscricao {
         this.numeroPeito = "0";
         this.pago = false;
         this.kitRetirado = false;
-        this.tempoLargada = "00:00:00";
-        this.tempoChegada = "00:00:00";
+        this.tempoLargada = "";
+        this.tempoChegada = "";
     }
     
     public int getId() {
@@ -218,5 +218,8 @@ public class Inscricao {
     public void retirarKit() throws SQLException, ClassNotFoundException {
         InscricaoDAO.retirarKit(this);
     }
-
+    
+    public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException{
+        InscricaoDAO.atualizarResultadoCorrida(inscricoes);
+    }
 }

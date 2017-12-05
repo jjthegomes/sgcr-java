@@ -30,7 +30,8 @@
         <a href="PesquisaPontuacaoController">Manter Pontuação</a> 
         <br>
         <a href="PesquisaPagamentoController">Manter Pagamento </a>
-
+        <br>
+        <a href="PesquisaResultadoCorridaController">Manter Resultado Corridas </a>
 
     </body>
 </html>
