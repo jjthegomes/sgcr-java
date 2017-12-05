@@ -10,10 +10,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@ include file = "layout/head.jsp" %>
         <title>Pesquisa Inscrição</title>
     </head>
     <body>
+        <%@ include file = "layout/menuAdministrador.jsp" %>
+        
         <h1>Pesquisa Inscrição</h1>
         <table border="1">
             <tr>
@@ -41,5 +43,6 @@
             <input type="submit" name="btnIncluir" value="Fazer Inscrição">
         </form>
         <a href="index.jsp">Menu</a>
+        <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>
