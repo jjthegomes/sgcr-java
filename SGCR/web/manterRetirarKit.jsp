@@ -42,8 +42,8 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.kit.nome}" /></td>
-                            <td><a style="text-decoration: none" href="ManterRetirarKitController?acao=confirmarRetirarKit&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.lote.corridaId}"/>">
-                        <button class="btn btn-success">Retirar Kit</button> 
+                            <td><a style="text-decoration: none" href="ManterRetirarKitController?acao=confirmarRetirarKit&id=<c:out value="${inscricao.id}"/>">
+                            <button class="btn btn-success">Retirar Kit</button> 
                                 </a></td>                      
                     </tr>
                 </c:forEach>

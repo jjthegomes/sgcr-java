@@ -61,9 +61,11 @@ public class ManterRetirarKitController extends HttpServlet {
     }
 
     private void confirmarRetirarKit(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
-        int id = Integer.parseInt(request.getParameter("txtId"));
+        int id = Integer.parseInt(request.getParameter("id"));
         
         Inscricao inscricao = Inscricao.obterInscricao(id);
+        
+        inscricao.setKitRetirado(true);
         
         try {
             inscricao.retirarKit();

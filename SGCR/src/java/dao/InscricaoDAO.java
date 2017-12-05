@@ -288,7 +288,8 @@ public class InscricaoDAO {
             String sql = "UPDATE inscricao SET kit_retirado = ? WHERE id = ?";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setBoolean(1, true);
+            comando.setBoolean(1, inscricao.isKitRetirado());
+            comando.setInt(2, inscricao.getId());
 
             comando.execute();
             comando.close();
