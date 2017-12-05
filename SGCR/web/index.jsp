@@ -28,5 +28,9 @@
         <a href="PesquisaRankingController">Manter Ranking</a>
         <br>
         <a href="PesquisaPontuacaoController">Manter Pontuação</a> 
+        <br>
+        <a href="PesquisaPagamentoController">Manter Pagamento </a>
+
+
     </body>
 </html>
