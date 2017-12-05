@@ -222,4 +222,8 @@ public class Inscricao {
     public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException{
         InscricaoDAO.atualizarResultadoCorrida(inscricoes);
     }
+
+    public void pagarInscricao() throws SQLException, ClassNotFoundException {
+        InscricaoDAO.pagarInscricao(this);
+    }
 }

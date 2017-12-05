@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -58,14 +59,20 @@ public class ManterPagamentoController extends HttpServlet {
         }
     }
 
-    private void confirmarPagamento(HttpServletRequest request, HttpServletResponse response) {
+    private void confirmarPagamento(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Inscricao inscricao = Inscricao.obterInscricao(id);
+
+        inscricao.setPago(true);
 
         try {
-            //ADICIONAR LOGICA AQUI!
+            inscricao.pagarInscricao();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPagamentoController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (ServletException ex) {
+        } catch (SQLException ex) {
         }
     }
 

@@ -41,7 +41,7 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.lote.preco}" /></td>
-                            <td><a style="text-decoration: none" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.lote.corridaId}"/>">
+                            <td><a style="text-decoration: none" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>">
                         <button class="btn btn-success">  Pagar </button> 
                                 </a></td>                      
                     </tr>

@@ -298,6 +298,24 @@ public class InscricaoDAO {
             throw e;
         }
     }
+    
+    public static void pagarInscricao(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE inscricao SET pago = ? WHERE id = ?";
+
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setBoolean(1, inscricao.isPago());
+            comando.setInt(2, inscricao.getId());
+
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
