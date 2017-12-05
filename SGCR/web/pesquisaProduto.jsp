@@ -10,21 +10,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@ include file = "layout/head.jsp" %>
+        <%@ include file = "layout/head.jsp" %>     
         <title>Pesquisa Produto</title>
     </head>
     <body>
         <%@ include file = "layout/menuAdministrador.jsp" %>
-        
+        <div class="container">
         <h1>Pesquisa Produto</h1>
-        <table border="1">
-            <tr>
-                <th>Código</th>
-                <th>Administrador</th>
-                <th>Nome</th>
-                <th colspan="2">Ação</th>
-            </tr>
-
+         <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Administrador</th>
+                    <th>Nome</th>
+                    <th colspan="2">Ação</th>
+                </tr>
+            </thead>
             <c:forEach items="${produtos}" var="produto">
                 <tr>
                     <td><c:out value="${produto.id}" /></td>
@@ -40,6 +41,7 @@
         </form>
         <br>
         <a href="index.jsp">Menu</a>
+        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>
