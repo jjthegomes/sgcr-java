@@ -120,6 +120,10 @@
         <servlet-name>PesquisaRetirarKitController</servlet-name>
         <servlet-class>controller.PesquisaRetirarKitController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaHomeController</servlet-name>
+        <servlet-class>controller.PesquisaHomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>PesquisaRetirarKitController</servlet-name>
         <url-pattern>/PesquisaRetirarKitController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaHomeController</servlet-name>
+        <url-pattern>/PesquisaHomeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
