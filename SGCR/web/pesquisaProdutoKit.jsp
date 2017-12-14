@@ -43,7 +43,7 @@
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <a href="index.jsp">Menu</a>]
+        <a href="index.jsp">Menu</a>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

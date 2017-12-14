@@ -253,4 +253,12 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>PesquisaHomeController</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>web.IndexServlet</servlet-class>
+    </servlet>
 </web-app>
