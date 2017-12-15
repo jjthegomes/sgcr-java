@@ -15,8 +15,8 @@
     </head>
     <body>
         <%@ include file = "layout/menuAdministrador.jsp" %>
-
-        <div class="container corpo">
+        
+        <div class="container-fluid corpo corpo-adm">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-success">

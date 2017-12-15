@@ -19,7 +19,7 @@
         <div class="container">
           <h2>Pesquisa Kit</h2>
           
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th>Código</th>
@@ -28,7 +28,7 @@
                 <th>Data da retirada</th>
                 <th>Imagem</th>
                 <th>Tipo Chip</th>
-                <!-- <th colspan="2" style="text-align: center">Ação</th> -->
+                <th colspan="2" style="text-align: center">Ação</th> 
               </tr>
             </thead>
             <tbody>
@@ -40,8 +40,16 @@
                     <td><c:out value="${kit.dataRetirada}" /></td>
                     <td><c:out value="${kit.imagem}" /></td>
                     <td><c:out value="${kit.tipoChip}" /></td>
-                    <td><a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>">Editar</a> </td>
-                    <td><a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>">Excluir</a> </td>
+                    <td>
+                        <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-primary btn-block">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a> 
+                    </td>
+                    <td>
+                        <a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-danger btn-block">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a> 
+                    </td>
                 </tr>
               </c:forEach>
             </tbody>

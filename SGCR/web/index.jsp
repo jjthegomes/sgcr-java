@@ -21,7 +21,7 @@
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      
-                        <div class="panel panel-info">
+                        <div class="panel panel-info mouse-up" id="corrida${corrida.id}" onmouseover="mouseOver('corrida${corrida.id}')" >
                             <div class="panel-heading">${corrida.nome}</div>
                             <div class="panel-body corrida-info">
                                 <div class="corrida-info-conteudo">
@@ -32,17 +32,34 @@
                             </div>
                             <div class="panel-footer">
                                 <a style="text-decoration: none" href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>">
-                                     <button class="btn btn-block btn-success"> Inscrever </button> 
-                                 </a>   
+                                    <button class="btn btn-block btn-success"> Inscrever </button> 
+                                </a>   
+                            </div>
+
+                            <div id="conteudo${corrida.id}" style="display: none">
+                                <div class="panel-heading">${corrida.nome}</div>
+                                <div class="panel-body corrida-info">
+                                    <div class="corrida-info-conteudo">
+                                        <p><i class="fa fa-calendar" aria-hidden="true"></i> <span>${corrida.data}</span></p>
+                                        <p>${corrida.descricao}</p>
+                                    </div>
+                                    <p><b>...</b></p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a style="text-decoration: none" href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>">
+                                        <button class="btn btn-block btn-success"> Inscrever </button> 
+                                    </a>   
+                                </div>
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-               
+
             </div>
         </div>
-        
+
+        <script type="text/javascript" src="public/js/myscript.js"></script>
         <%@ include file = "layout/rodape.jsp" %>
-        
+
     </body>
 </html>
