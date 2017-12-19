@@ -1,4 +1,3 @@
-
 package modelo;
 
 import dao.InscricaoDAO;
@@ -11,18 +10,19 @@ import java.util.List;
  * @author RAJ
  */
 public class Inscricao {
+
     private int id;
     private String dataCompra;
     private String numeroPeito;
     private boolean pago;
-    private boolean kitRetirado;    
+    private boolean kitRetirado;
     private String tempoLargada;
     private String tempoChegada;
     private Atleta atleta;
     private Percurso percurso;
     private Kit kit;
     private Lote lote;
-    
+
     private int atletaId;
     private int percursoId;
     private int kitId;
@@ -42,23 +42,23 @@ public class Inscricao {
         this.kit = kit;
         this.lote = lote;
     }
-    
+
     public Inscricao(int id, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
         this.id = id;
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;
         this.lote = lote;
-        
+
         Calendar hoje = Calendar.getInstance();
-        this.dataCompra = hoje.get(Calendar.DAY_OF_MONTH) + "/" + (hoje.get(Calendar.MONTH)+1) + "/" + hoje.get(Calendar.YEAR);
+        this.dataCompra = hoje.get(Calendar.DAY_OF_MONTH) + "/" + (hoje.get(Calendar.MONTH) + 1) + "/" + hoje.get(Calendar.YEAR);
         this.numeroPeito = "0";
         this.pago = false;
         this.kitRetirado = false;
         this.tempoLargada = "";
         this.tempoChegada = "";
     }
-    
+
     public int getId() {
         return id;
     }
@@ -90,7 +90,7 @@ public class Inscricao {
     public void setPago(boolean pago) {
         this.pago = pago;
     }
-    
+
     public boolean isKitRetirado() {
         return kitRetirado;
     }
@@ -106,7 +106,7 @@ public class Inscricao {
     public void setTempoLargada(String tempoLargada) {
         this.tempoLargada = tempoLargada;
     }
-    
+
     public String getTempoChegada() {
         return tempoChegada;
     }
@@ -186,19 +186,23 @@ public class Inscricao {
     public void setLoteId(int loteId) {
         this.loteId = loteId;
     }
-    
+
     public static List<Inscricao> obterInscricoes() throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes();
     }
-    
+
     public static List<Inscricao> obterInscricoes(int corridaId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes(corridaId);
     }
-    
+
     public static List<Inscricao> obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoesPagas(corridaId);
     }
     
+    public static List<Inscricao> obterInscricoesNaoPagas(int corridaId) throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricoesNaoPagas(corridaId);
+    }
+
     public void gravar() throws SQLException, ClassNotFoundException {
         InscricaoDAO.gravar(this);
     }
@@ -206,20 +210,20 @@ public class Inscricao {
     public void alterar() throws SQLException, ClassNotFoundException {
         InscricaoDAO.alterar(this);
     }
-    
+
     public void excluir() throws SQLException, ClassNotFoundException {
         InscricaoDAO.excluir(this);
     }
-    
+
     public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricao(id);
     }
-    
+
     public void retirarKit() throws SQLException, ClassNotFoundException {
         InscricaoDAO.retirarKit(this);
     }
-    
-    public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException{
+
+    public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException {
         InscricaoDAO.atualizarResultadoCorrida(inscricoes);
     }
 

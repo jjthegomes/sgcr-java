@@ -49,7 +49,7 @@ public class ManterPagamentoController extends HttpServlet {
         try {
             //LOGICA AQUI!
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-            request.setAttribute("inscricoes", Inscricao.obterInscricoes(corridaId));
+            request.setAttribute("inscricoes", Inscricao.obterInscricoesNaoPagas(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterPagamento.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
