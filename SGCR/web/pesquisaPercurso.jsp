@@ -45,7 +45,7 @@
                 </tbody>
             </table>
             <form action="ManterPercursoController?acao=prepararIncluir" method="post">
-                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Percurso</button>
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-map" aria-hidden="true"></i> Incluir Percurso</button>
             </form>
             <br>
         </div>

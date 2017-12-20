@@ -76,7 +76,7 @@
             <li><a href="PesquisaProdutoKitController"><i class="fa fa-cubes fa-lg"></i> Produto Kit</a></li>
             <li><a href="PesquisaInscricaoController"><i class="fa fa-calendar fa-lg"></i> Inscrição</a></li>
             <li><a href="PesquisaLoteController"><i class="fa fa-ticket fa-lg"></i> Lote</a></li>
-            <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li>
+<!--            <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li>-->
 
         </ul>
     </div>

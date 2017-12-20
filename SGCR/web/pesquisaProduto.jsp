@@ -15,32 +15,32 @@
     </head>
     <body>
         <%@ include file = "layout/menuAdministrador.jsp" %>
-        <div class="container">
-        <h1>Pesquisa Produto</h1>
-         <table class="table">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Administrador</th>
-                    <th>Nome</th>
-                    <th colspan="2">Ação</th>
-                </tr>
-            </thead>
-            <c:forEach items="${produtos}" var="produto">
-                <tr>
-                    <td><c:out value="${produto.id}" /></td>
-                    <td><c:out value="${produto.administrador.nome}" /></td>
-                    <td><c:out value="${produto.nome}" /></td>                    
-                    <td><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>">Editar</a> </td>
-                    <td><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>">Excluir</a> </td>
-                </tr>
-            </c:forEach> 
-        </table>
-        <form action="ManterProdutoController?acao=prepararIncluir" method="post">
-            <input type="submit" name="btnIncluir" value="Incluir">
-        </form>
-        <br>
-        <a href="index.jsp">Menu</a>
+        <div class="container-fluid corpo corpo-adm">
+            <h1>Pesquisa Produto</h1>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Administrador</th>
+                        <th>Nome</th>
+                        <th colspan="2" class="table-action">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${produtos}" var="produto">
+                        <tr>
+                            <td><c:out value="${produto.id}" /></td>
+                            <td><c:out value="${produto.administrador.nome}" /></td>
+                            <td><c:out value="${produto.nome}" /></td>                    
+                            <td class="table-action"><a href="ManterProdutoController?acao=prepararEditar&id=<c:out value="${produto.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Editar</a> </td>
+                            <td class="table-action"><a href="ManterProdutoController?acao=prepararExcluir&id=<c:out value="${produto.id}"/>" class="btn-danger btn-block btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</a> </td>
+                        </tr>
+                    </c:forEach> 
+                </tbody>
+            </table>
+            <form action="ManterProdutoController?acao=prepararIncluir" method="post">
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-cube" aria-hidden="true"></i> Incluir Produto</button>
+            </form>
         </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>

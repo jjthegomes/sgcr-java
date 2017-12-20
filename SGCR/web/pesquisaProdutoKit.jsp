@@ -44,7 +44,7 @@
                 </tbody>
             </table>
             <form action="ManterProdutoKitController?acao=prepararIncluir" method="post">
-                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Produto Kit</button>
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-cubes" aria-hidden="true"></i> Incluir Produto Kit</button>
             </form>
             <br>
 

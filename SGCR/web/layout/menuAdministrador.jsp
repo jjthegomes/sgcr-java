@@ -80,7 +80,7 @@
             <li><a href="PesquisaInscricaoController"><i class="fa fa-calendar fa-lg"></i> Inscrição</a></li>
             <li><a href="PesquisaLoteController"><i class="fa fa-ticket fa-lg"></i> Lote</a></li>
             <li><a href="PesquisaRankingController"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
-            <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li>
+           <!-- <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li> -->
 
         </ul>
     </div>
