@@ -10,30 +10,27 @@
 
 <!DOCTYPE html><html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Pesquisa Pagamento</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
+         <head>
+        <%@ include file = "layout/head.jsp" %>
+        <title>Pesquisa de Pagamento</title>
     </head>
     <body>
-        <div class="container">
+        <%@ include file = "layout/menuOrganizador.jsp" %>
+          <div class="container-fluid corpo corpo-adm">
             <h2>Pesquisa Pagamento</h2>
-
-            <table class="table">
+            <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
                         <th>Valor</th>
+
+                        <th colspan="2" class="table-action">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                 <form action="ManterPagamentoController?acao=prepararPagamento&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.lote.corridaId}"/>" method="post">
                     <c:forEach items="${inscricoes}" var="inscricao">
                         <tr <c:if test="${inscricao.pago == false}"> class="danger" </c:if>>
@@ -41,6 +38,7 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.lote.preco}" /></td>
+                            
                         </tr>
                     </c:forEach>
                 </form>

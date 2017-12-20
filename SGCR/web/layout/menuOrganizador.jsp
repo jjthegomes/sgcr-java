@@ -67,6 +67,8 @@
             <ul class="sub-menu collapse" id="service">
                 <li><a href="PesquisaRetirarKitController">Retirar Kit</a></li>
                 <li><a href="PesquisaResultadoCorridaController">Resultado Corridas </a></li>
+                <li><a href="ManterPagamentoController?acao=escolherCorrida"> Pagamento</a></li>
+
             </ul>
             <li><a href="PesquisaCorridaController"><i class="fa fa-map-marker fa-lg"></i> Corrida</a></li>
             <li><a href="PesquisaPercursoController"><i class="fa fa-map fa-lg"></i> Percurso</a></li>
@@ -75,7 +77,6 @@
             <li><a href="PesquisaInscricaoController"><i class="fa fa-calendar fa-lg"></i> Inscrição</a></li>
             <li><a href="PesquisaLoteController"><i class="fa fa-ticket fa-lg"></i> Lote</a></li>
             <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li>
-            <li><a href="PesquisaPagamentoController"><i class="fa fa-credit-card fa-lg"></i> Pagamento</a></li>
 
         </ul>
     </div>

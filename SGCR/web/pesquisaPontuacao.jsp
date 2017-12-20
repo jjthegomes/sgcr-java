@@ -9,22 +9,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    
+     <head>
         <%@ include file = "layout/head.jsp" %>
-        <title>Pesquisa Pontuação</title>
+        <title>Pesquisa de Pontuação</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAdministrador.jsp" %>
-        
-        <h1>Pesquisas Pontuação</h1>
-        <table border="1">
-            <tr>
-                <th>Id Pontuação</th>
+        <%@ include file = "layout/menuOrganizador.jsp" %>
+
+        <div class="container-fluid corpo corpo-adm">
+            <h2>Pesquisa Pontuação</h2>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                         <th>Id Pontuação</th>
                 <th>Ranking</th>
                 <th>Pontuação</th>
-                <th colspan="2">Ação</th>
-            </tr>
 
+
+                        <th colspan="2" class="table-action">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
             <c:forEach items="${pontuacoes}" var="pontuacao">
                 <tr>
                     <td><c:out value="${pontuacao.id}" /></td>
@@ -34,12 +41,12 @@
                     <td><a href="ManterPontuacaoController?acao=prepararExcluir&id=<c:out value="${pontuacao.id}"/>">Excluir</a> </td>
                 </tr>
             </c:forEach>  
+                </tbody>
         </table>
         <form action="ManterPontuacaoController?acao=prepararIncluir" method="post">
             <input type="submit" name="btnIncluir" value="Incluir">
         </form>
         <br>
-        <a href="index.jsp">Menu</a>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>
