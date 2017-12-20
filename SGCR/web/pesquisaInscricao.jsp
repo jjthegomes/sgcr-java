@@ -15,34 +15,39 @@
     </head>
     <body>
         <%@ include file = "layout/menuAdministrador.jsp" %>
-        
-        <h1>Pesquisa Inscrição</h1>
-        <table border="1">
-            <tr>
-                <th>Código Inscrição</th>
-                <th>Data da Compra</th>
-                <th>Percurso</th>
-                <th>Atleta</th>
-                <th>Kit</th>
-                <th colspan="2">Ação</th>
-            </tr>
 
-            <c:forEach items="${inscricoes}" var="inscricao">
-                <tr>
-                    <td><c:out value="${inscricao.id}" /></td>
-                    <td><c:out value="${inscricao.dataCompra}" /></td>
-                    <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
-                    <td><c:out value="${inscricao.atleta.nome}" /></td>
-                    <td><c:out value="${inscricao.kit.nome}" /></td>
-                    <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Editar</a> </td>
-                    <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Excluir</a> </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <form action="ManterInscricaoController?acao=escolherCorrida" method="post">
-            <input type="submit" name="btnIncluir" value="Fazer Inscrição">
-        </form>
-        <a href="index.jsp">Menu</a>
+        <div class="container-fluid corpo corpo-adm">
+
+            <h2>Pesquisa Inscrição</h2>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Atleta</th>
+                        <th>Número de Peito</th>
+                        <th>Data da Compra</th>
+                        <th>Percurso</th>
+                        <th>Kit</th>
+                        <th colspan="2">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${inscricoes}" var="inscricao">
+                        <tr>
+                            <td><c:out value="${inscricao.atleta.nome}" /></td>
+                            <td><c:out value="${inscricao.numeroPeito}" /></td>
+                            <td><c:out value="${inscricao.dataCompra}" /></td>
+                            <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
+                            <td><c:out value="${inscricao.kit.nome}" /></td>
+                            <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Editar</a> </td>
+                            <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Excluir</a> </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <form action="ManterInscricaoController?acao=escolherCorrida" method="post">
+                <!--<button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Inscrição</button>-->
+            </form>
+        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

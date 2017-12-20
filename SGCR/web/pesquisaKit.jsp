@@ -15,49 +15,48 @@
     </head>
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
-        
-        <div class="container">
-          <h2>Pesquisa Kit</h2>
-          
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Corrida</th>
-                <th>Nome</th>
-                <th>Data da retirada</th>
-                <th>Imagem</th>
-                <th>Tipo Chip</th>
-                <th colspan="2" style="text-align: center">Ação</th> 
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach items="${kits}" var="kit">
-                <tr>
-                    <td><c:out value="${kit.id}" /></td>
-                    <td><c:out value="${kit.corrida.nome}" /></td>
-                    <td><c:out value="${kit.nome}" /></td>
-                    <td><c:out value="${kit.dataRetirada}" /></td>
-                    <td><c:out value="${kit.imagem}" /></td>
-                    <td><c:out value="${kit.tipoChip}" /></td>
-                    <td>
-                        <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-primary btn-block">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a> 
-                    </td>
-                    <td>
-                        <a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-danger btn-block">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a> 
-                    </td>
-                </tr>
-              </c:forEach>
-            </tbody>
-          </table>
-          <form action="ManterKitController?acao=prepararIncluir" method="post">
-            <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir">Incluir</button>
-            <a href="index.jsp" class="btn btn-primary">Menu</a>
-          </form>
+
+        <div class="container-fluid corpo corpo-adm">
+            <h2>Pesquisa Kit</h2>
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Corrida</th>
+                        <th>Nome</th>
+                        <th>Data da retirada</th>
+                        <th>Imagem</th>
+                        <th>Tipo Chip</th>
+                        <th colspan="2" class="table-action">Ação</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${kits}" var="kit">
+                        <tr>
+                            <td><c:out value="${kit.id}" /></td>
+                            <td><c:out value="${kit.corrida.nome}" /></td>
+                            <td><c:out value="${kit.nome}" /></td>
+                            <td><c:out value="${kit.dataRetirada}" /></td>
+                            <td><c:out value="${kit.imagem}" /></td>
+                            <td><c:out value="${kit.tipoChip}" /></td>
+                            <td class="table-action">
+                                <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-primary btn-block btn-xs">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar
+                                </a> 
+                            </td>
+                            <td class="table-action">
+                                <a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-danger btn-block btn-xs">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Excluir
+                                </a> 
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <form action="ManterKitController?acao=prepararIncluir" method="post">
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Kit</button>
+            </form>
         </div>
 
         <%@ include file = "layout/rodape.jsp" %>

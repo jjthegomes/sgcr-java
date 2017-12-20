@@ -15,35 +15,40 @@
     </head>
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
-        
-        <h1>Pesquisas Produto Kit</h1>
-        <table border="1">
-            <tr>
-                <th>Codigo</th>
-                <th>Kit</th>
-                <th>Nome Produto</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-                <th colspan="2">Ação</th>
-            </tr>
 
-            <c:forEach items="${produtos_kit}" var="produtoKit">
-                <tr>
-                    <td><c:out value="${produtoKit.id}" /></td>
-                    <td><c:out value="${produtoKit.kit.nome}" /></td>
-                    <td><c:out value="${produtoKit.produto.nome}" /></td>
-                    <td><c:out value="${produtoKit.descricao}" /></td>
-                    <td><c:out value="${produtoKit.valor}" /></td>                    
-                    <td><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>">Editar</a> </td>
-                    <td><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>">Excluir</a> </td>
-                </tr>
-            </c:forEach> 
-        </table>
-        <form action="ManterProdutoKitController?acao=prepararIncluir" method="post">
-            <input type="submit" name="btnIncluir" value="Incluir">
-        </form>
-        <br>
-        <a href="index.jsp">Menu</a>
+        <div class="container-fluid corpo corpo-adm">
+            <h2>Pesquisas Produto Kit</h2>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Kit</th>
+                        <th>Nome Produto</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th colspan="2" class="table-action">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${produtos_kit}" var="produtoKit">
+                        <tr>
+                            <td><c:out value="${produtoKit.id}" /></td>
+                            <td><c:out value="${produtoKit.kit.nome}" /></td>
+                            <td><c:out value="${produtoKit.produto.nome}" /></td>
+                            <td><c:out value="${produtoKit.descricao}" /></td>
+                            <td><c:out value="${produtoKit.valor}" /></td>                    
+                            <td class="table-action"><a href="ManterProdutoKitController?acao=prepararEditar&id=<c:out value="${produtoKit.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> </td>
+                            <td class="table-action"><a href="ManterProdutoKitController?acao=prepararExcluir&id=<c:out value="${produtoKit.id}"/>" class="btn-danger btn-block btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</a></td>
+                        </tr>
+                    </c:forEach> 
+                </tbody>
+            </table>
+            <form action="ManterProdutoKitController?acao=prepararIncluir" method="post">
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Produto Kit</button>
+            </form>
+            <br>
+
+        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

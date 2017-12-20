@@ -16,40 +16,44 @@
     </head>
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
-        
-        <h1>Pesquisa Corrida</h1>
-        <table border="1">
-            <tr>
-                <th>Codigo</th>
-                <th>Organizador</th>
-                <th>Nome</th>
-                <th>Horario</th>
-                <th>Data</th>
-                <th>Logradouro</th>
-                <th>Bairro</th>
 
-                <th colspan="2">Ação</th>
-            </tr>
-            <c:forEach items="${corridas}" var="corrida">
-                <tr>
-                    <td><c:out value="${corrida.id}" /> </td>
-                    <td><c:out value="${corrida.organizador.nome}" /> </td>
-                    <td><c:out value="${corrida.nome}" /> </td>
-                    <td><c:out value="${corrida.horario}" /> </td>
-                    <td><c:out value="${corrida.data}" /> </td>
-                    <td><c:out value="${corrida.logradouro}" /> </td>
-                    <td><c:out value="${corrida.bairro}" /> </td>
-                    <td><a href="ManterCorridaController?acao=prepararEditar&id=<c:out value="${corrida.id}"/>">Editar</a> </td>
-                    <td><a href="ManterCorridaController?acao=prepararExcluir&id=<c:out value="${corrida.id}"/>">Excluir</a> </td>
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="container-fluid corpo corpo-adm">
+            <h2>Pesquisa Corrida</h2>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Organizador</th>
+                        <th>Nome</th>
+                        <th>Horario</th>
+                        <th>Data</th>
+                        <th>Logradouro</th>
+                        <th>Bairro</th>
 
-        <form action="ManterCorridaController?acao=prepararIncluir" method="post">
-            <input type="submit" name="btnIncluir" value="Incluir">
-        </form>
-        <br>
-        <a href="index.jsp">Menu</a>
+                        <th colspan="2" class="table-action">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${corridas}" var="corrida">
+                        <tr>
+                            <td><c:out value="${corrida.id}" /> </td>
+                            <td><c:out value="${corrida.organizador.nome}" /> </td>
+                            <td><c:out value="${corrida.nome}" /> </td>
+                            <td><c:out value="${corrida.horario}" /> </td>
+                            <td><c:out value="${corrida.data}" /> </td>
+                            <td><c:out value="${corrida.logradouro}" /> </td>
+                            <td><c:out value="${corrida.bairro}" /> </td>
+                            <td class="table-action"><a href="ManterCorridaController?acao=prepararEditar&id=<c:out value="${corrida.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Editar</a> </td>
+                            <td class="table-action"><a href="ManterCorridaController?acao=prepararExcluir&id=<c:out value="${corrida.id}"/>" class="btn-danger btn-block btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</a> </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+            <form action="ManterCorridaController?acao=prepararIncluir" method="post">
+                <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir"><i class="fa fa-user-plus" aria-hidden="true"></i> Incluir Corrida</button>
+            </form>
+        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

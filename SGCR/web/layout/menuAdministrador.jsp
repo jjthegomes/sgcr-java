@@ -68,7 +68,7 @@
                 <li><a href="PesquisaRetirarKitController">Retirar Kit</a></li>
                 <li><a href="PesquisaResultadoCorridaController">Resultado Corridas </a></li>
             </ul>
-            <li class="active"><a href="PesquisaAdministradorController"><i class="fa fa-lock fa-lg"></i> Administrador</a></li>
+            <li><a href="PesquisaAdministradorController"><i class="fa fa-lock fa-lg"></i> Administrador</a></li>
             <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
             <li><a href="PesquisaCorridaController"><i class="fa fa-map-marker fa-lg"></i> Corrida</a></li>
             <li><a href="PesquisaPercursoController"><i class="fa fa-map fa-lg"></i> Percurso</a></li>
@@ -78,7 +78,7 @@
             <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
             <li><a href="PesquisaInscricaoController"><i class="fa fa-calendar fa-lg"></i> Inscrição</a></li>
             <li><a href="PesquisaLoteController"><i class="fa fa-ticket fa-lg"></i> Lote</a></li>
-            <li><a href="PesquisaRankingController"><i class="fa fa-list fa-lg"></i> Ranking</a></li>
+            <li><a href="PesquisaRankingController"><i class="fa fa-list-ul fa-lg"></i> Ranking</a></li>
             <li><a href="PesquisaPontuacaoController"><i class="fa fa-gamepad fa-lg"></i> Pontuação</a> </li>
             <li><a href="PesquisaPagamentoController"><i class="fa fa-credit-card fa-lg"></i> Pagamento</a></li>
 
