@@ -124,6 +124,10 @@
         <servlet-name>PesquisaHomeController</servlet-name>
         <servlet-class>controller.PesquisaHomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -248,6 +252,10 @@
         <servlet-name>PesquisaHomeController</servlet-name>
         <url-pattern>/PesquisaHomeController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -256,7 +264,6 @@
     <welcome-file-list>
         <welcome-file>PesquisaHomeController</welcome-file>
     </welcome-file-list>
-
     <servlet>
         <servlet-name>index</servlet-name>
         <servlet-class>web.IndexServlet</servlet-class>

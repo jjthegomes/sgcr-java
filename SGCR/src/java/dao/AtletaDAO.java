@@ -177,6 +177,47 @@ public class AtletaDAO {
         return atleta;
     }
 
+    public static Atleta logar(String email, String senha) throws ClassNotFoundException {
+        Connection conexao = null;
+        Atleta atleta = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "SELECT * FROM atleta WHERE email = ? AND senha = ?";
+            comando = conexao.prepareStatement(sql);
+            comando.setString(1, email);
+            comando.setString(2, senha);
+            ResultSet rs = comando.executeQuery();
+            rs.first();
+            atleta = new Atleta(rs.getString("apelido"),
+                    rs.getString("tamanho_camisa"),
+                    rs.getString("nome"),
+                    rs.getString("data_nascimento"),
+                    rs.getString("sexo"),
+                    rs.getString("cpf"),
+                    rs.getString("cep"),
+                    rs.getString("logradouro"),
+                    rs.getString("bairro"),
+                    rs.getString("complemento"),
+                    rs.getString("numero"),
+                    rs.getString("cidade"),
+                    rs.getString("estado"),
+                    rs.getString("telefone"),
+                    rs.getString("celular"),
+                    rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("senha"));
+
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return atleta;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

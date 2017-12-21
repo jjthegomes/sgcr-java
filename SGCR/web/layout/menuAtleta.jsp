@@ -21,7 +21,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nome Atleta<span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">${atleta.nome}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Atleta</li>
                         <li><a href="#">Minha Conta</a></li>

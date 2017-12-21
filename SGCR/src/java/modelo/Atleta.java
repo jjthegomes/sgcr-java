@@ -51,7 +51,11 @@ public class Atleta extends UsuarioComum {
         AtletaDAO.excluir(this);
     }
 
-      public static Atleta obterAtleta(int id) throws ClassNotFoundException {
+    public static Atleta obterAtleta(int id) throws ClassNotFoundException {
         return AtletaDAO.obterAtleta(id);
+    }
+    
+    public static Atleta logar(String email, String senha) throws ClassNotFoundException, SQLException{
+        return  AtletaDAO.logar(email, senha);
     }
 }

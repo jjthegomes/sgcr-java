@@ -23,29 +23,30 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">Login</div>
                         <div class="panel-body">
-                            <form>
+                            <form action="LoginController?acao=logar" method="post" name="frmManterAtleta">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" id="email" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="senha">Senha:</label>
-                                    <input type="password" class="form-control" id="senha">
+                                    <input type="password" class="form-control" id="senha" name="senha">
                                 </div>
                                 <div class="form-group">
                                     <div class="radio-inline">
-                                        <label><input type="radio" name="optradio">Administrador</label>
+                                        <label><input type="radio" name="optUsuario" value="0">Administrador</label>
                                     </div>
                                     <div class="radio-inline">
-                                        <label><input type="radio" name="optradio">Organizador</label>
+                                        <label><input type="radio" name="optUsuario" value="1" >Organizador</label>
                                     </div>
                                     <div class="radio-inline">
-                                        <label><input type="radio" name="optradio" checked="checked">Atleta</label>
+                                        <label><input type="radio" name="optUsuario" checked="checked" value="2">Atleta</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-2">
                                         <button type="submit" class="btn btn-info btn-block">Entrar</button>
+
                                     </div>
                                 </div>
                             </form>
