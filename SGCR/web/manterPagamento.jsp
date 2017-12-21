@@ -18,7 +18,7 @@
 
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
-                <li><a href="PesquisaHomeController">Dashboard</a></li>
+                <li><a href="dashboard.jsp">Dashboard</a></li>
                 <li><a href="ManterPagamentoController?acao=escolherCorrida">Manter Pagamento</a></li>
                 <li class="active">${corrida.nome}</li> 
             </ul>

@@ -23,7 +23,7 @@
 
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
-                <li><a href="index.jsp">Home</a></li>
+                <li><a href="dashboard.jsp">Home</a></li>
                 <li class="active"> ${operacao} Organizador</li>
             </ul>
             <div class="row">
