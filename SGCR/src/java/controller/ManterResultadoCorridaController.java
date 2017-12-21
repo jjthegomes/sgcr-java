@@ -69,7 +69,7 @@ public class ManterResultadoCorridaController extends HttpServlet {
              
             Inscricao.atualizarResultadoCorrida(inscricoes);
             
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaResultadoCorridaController");
+            RequestDispatcher view = request.getRequestDispatcher("ManterResultadoCorridaController?acao=escolherCorrida");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (ServletException ex) {

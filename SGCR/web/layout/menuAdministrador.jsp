@@ -61,14 +61,14 @@
                     <i class="fa fa-dashboard fa-lg"></i> Dashboard
                 </a>
             </li>
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
+<!--            <li data-toggle="collapse" data-target="#service" class="collapsed">
                 <a href="#"><i class="fa fa-cog fa-lg"></i> Gerenciar <span class="arrow"></span></a>
             </li>  
             <ul class="sub-menu collapse" id="service">
                 <li><a href="PesquisaRetirarKitController">Retirar Kit</a></li>
                 <li><a href="PesquisaResultadoCorridaController">Resultado Corridas </a></li>
                 <li><a href="ManterPagamentoController?acao=escolherCorrida"> Pagamento</a></li>
-            </ul>
+            </ul>-->
             <li><a href="PesquisaAdministradorController"><i class="fa fa-lock fa-lg"></i> Administrador</a></li>
             <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
             <li><a href="PesquisaCorridaController"><i class="fa fa-map-marker fa-lg"></i> Corrida</a></li>

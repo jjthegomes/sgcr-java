@@ -15,9 +15,14 @@
         <title>Gerenciar Retirada do Kit</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAtleta.jsp" %>
+        <%@ include file = "layout/menuOrganizador.jsp" %>
 
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
+            <ul class="breadcrumb">
+                <li><a href="PesquisaHomeController">Dashboard</a></li>
+                <li class="active">Manter Retirada Kit</li>
+            </ul>
+            <center><h2>Manter Retirada de Kit</h1></center><br>
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      
@@ -32,18 +37,18 @@
                             </div>
                             <div class="panel-footer">
                                 <a style="text-decoration: none" href="ManterRetirarKitController?acao=prepararRetirarKit&corridaId=<c:out value="${corrida.id}"/>">
-                                     <button class="btn btn-block btn-success">  Gerenciar Retirada do Kit </button> 
-                                 </a>   
+                                    <button class="btn btn-block btn-success">  Gerenciar Retirada do Kit </button> 
+                                </a>   
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-               
+
             </div>
         </div>
-        
+
         <%@ include file = "layout/rodape.jsp" %>
-        
+
     </body>
 </html>
 

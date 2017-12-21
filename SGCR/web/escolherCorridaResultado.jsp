@@ -16,7 +16,7 @@
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
 
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
             <center><h1>Manter Resultado Corrida</h1></center><br>
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">

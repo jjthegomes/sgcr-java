@@ -24,7 +24,7 @@
         <%@ include file = "layout/menuAdministrador.jsp" %>
 
         <div class="corpo container-fluid corpo-adm">
-            <div class="row">
+<!--            <div class="row">
                 <div class="col-md-6 col-lg-4">                      
                     <div class="panel panel-info mouse-up" >
                         <div class="panel-heading"><i class="fa fa-bell-o" aria-hidden="true"></i> Nova Corrida</div>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         <script type="text/javascript" src="public/js/myscript.js"></script>

@@ -10,28 +10,29 @@
 
 <!DOCTYPE html><html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <%@ include file = "layout/head.jsp" %>
         <title>Gerenciar Retirar Kit</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
     </head>
     <body>
-        <div class="container">
-            <h1>Manter Retirar Kit</h1>
 
-            <table class="table">
+        <%@ include file = "layout/menuOrganizador.jsp" %>
+
+        <div class="container-fluid corpo corpo-adm">
+            <ul class="breadcrumb">
+                <li><a href="PesquisaHomeController">Dashboard</a></li>
+                <li><a href="ManterRetirarKitController?acao=escolherCorrida">Manter Retirada Kit</a></li>
+                <li class="active">${corrida.nome}</li> 
+            </ul>
+            <h2>Manter Retirada Kit - ${corrida.nome}</h2>
+
+            <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
                         <th>Nome Kit</th>
-                        <th>Ação</th>
+                        <th class="table-action">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,23 +43,19 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.kit.nome}" /></td>
-                            <td><a style="text-decoration: none" href="ManterRetirarKitController?acao=confirmarRetirarKit&id=<c:out value="${inscricao.id}"/>">
-                            <button class="btn btn-success">Retirar Kit</button> 
+                            <td class="table-action"><a style="text-decoration: none" href="ManterRetirarKitController?acao=confirmarRetirarKit&id=<c:out value="${inscricao.id}"/>">
+                                    <button class="btn btn-success btn-xs">Retirar Kit</button> 
                                 </a></td>                      
-                    </tr>
-                </c:forEach>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
 
-            <form action="ManterRetirarKitController?acao=escolherCorrida" method="post">
-                <button type="submit" name="btnIncluir">Manter Retirar Kit</button>
-            </form>
-            <a href="index.jsp">Menu</a>
+<!--            <form action="ManterRetirarKitController?acao=escolherCorrida" method="post">
+                <button type="submit" name="btnIncluir" class="btn btn-success">Manter Retirar Kit</button>
+            </form>-->
         </div>
 
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+        <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

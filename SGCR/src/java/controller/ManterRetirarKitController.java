@@ -51,6 +51,7 @@ public class ManterRetirarKitController extends HttpServlet {
             //LOGICA AQUI!
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("inscricoes", Inscricao.obterInscricoesPagas(corridaId));
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterRetirarKit.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
@@ -69,7 +70,7 @@ public class ManterRetirarKitController extends HttpServlet {
         
         try {
             inscricao.retirarKit();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaRetirarKitController");
+            RequestDispatcher view = request.getRequestDispatcher("ManterRetirarKitController?acao=escolherCorrida");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (ServletException ex) {

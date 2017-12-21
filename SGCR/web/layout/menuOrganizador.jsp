@@ -65,8 +65,8 @@
                 <a href="#"><i class="fa fa-cog fa-lg"></i> Gerenciar <span class="arrow"></span></a>
             </li>  
             <ul class="sub-menu collapse" id="service">
-                <li><a href="PesquisaRetirarKitController">Retirar Kit</a></li>
-                <li><a href="PesquisaResultadoCorridaController">Resultado Corridas </a></li>
+                <li><a href="ManterRetirarKitController?acao=escolherCorrida">Retirar Kit</a></li>
+                <li><a href="ManterResultadoCorridaController?acao=escolherCorrida">Resultado Corridas </a></li>
                 <li><a href="ManterPagamentoController?acao=escolherCorrida"> Pagamento</a></li>
 
             </ul>

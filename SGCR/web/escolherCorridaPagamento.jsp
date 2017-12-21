@@ -14,10 +14,14 @@
         <title>Gerenciar Pagamento</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAtleta.jsp" %>
+        <%@ include file = "layout/menuOrganizador.jsp" %>
 
-        <div class="container corpo">
-            <center>  <h1>Manter Pagamento</h1> </center> <br>
+        <div class="container-fluid corpo corpo-adm">
+            <ul class="breadcrumb">
+                <li><a href="PesquisaHomeController">Dashboard</a></li>
+                <li>Manter Pagamento</li>
+            </ul>
+            <center><h2>Manter Pagamento</h2> </center> <br>
 
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
@@ -33,17 +37,17 @@
                             </div>
                             <div class="panel-footer">
                                 <a style="text-decoration: none" href="ManterPagamentoController?acao=prepararPagamento&corridaId=<c:out value="${corrida.id}"/>">
-                                     <button class="btn btn-block btn-success">  Gerenciar Pagamento  </button> 
-                                 </a>   
+                                    <button class="btn btn-block btn-success">  Gerenciar Pagamento  </button> 
+                                </a>   
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-               
+
             </div>
         </div>
-        
+
         <%@ include file = "layout/rodape.jsp" %>
-        
+
     </body>
 </html>

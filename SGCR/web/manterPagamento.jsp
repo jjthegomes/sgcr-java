@@ -10,28 +10,28 @@
 
 <!DOCTYPE html><html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <%@ include file = "layout/head.jsp" %>
         <title>Gerenciar Pagamento</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
     </head>
     <body>
-        <div class="container">
-            <h1>Manter Pagamento</h1>
+        <%@ include file = "layout/menuOrganizador.jsp" %>
 
-            <table class="table">
+        <div class="container-fluid corpo corpo-adm">
+            <ul class="breadcrumb">
+                <li><a href="PesquisaHomeController">Dashboard</a></li>
+                <li><a href="ManterPagamentoController?acao=escolherCorrida">Manter Pagamento</a></li>
+                <li class="active">${corrida.nome}</li> 
+            </ul>
+            <center> <h2>Manter Pagamento</h2></center>
+
+            <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
                         <th>Valor</th>
-                        <th>Ação</th>
+                        <th class="table-action">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,23 +41,21 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td><c:out value="${inscricao.lote.preco}" /></td>
-                            <td><a style="text-decoration: none" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>">
-                        <button class="btn btn-success">  Pagar </button> 
-                                </a></td>                      
-                    </tr>
-                </c:forEach>
+                            <td class="table-action">
+                                <a class="btn btn-success btn-xs" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>">
+                                    Pagar 
+                                </a>
+                            </td>                      
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
 
-            <form action="ManterPagamentoController?acao=escolherCorrida" method="post">
+<!--            <form action="ManterPagamentoController?acao=escolherCorrida" method="post">
                 <button type="submit" name="btnIncluir">Manter Pagamento</button>
-            </form>
-            <a href="index.jsp">Menu</a>
+            </form>-->
         </div>
 
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+        <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

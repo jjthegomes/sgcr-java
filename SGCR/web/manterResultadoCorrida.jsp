@@ -15,7 +15,7 @@
     </head>
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
-        <div class="container">
+        <div class="container-fluid corpo corpo-adm">
             <h2>Manter Resultado</h2>
             <h3>${corrida.nome}</h3>
 
@@ -73,7 +73,6 @@
 
             <form action="ManterResultadoCorridaController?acao=escolherCorrida" method="post">
                 <button type="submit" class="btn btn-success" name="btnIncluir" value="Incluir">Manter Resultado Corrida</button>
-                <a href="index.jsp" class="btn btn-primary">Menu</a>
             </form>
         </div>
         <%@ include file = "layout/rodape.jsp" %>
