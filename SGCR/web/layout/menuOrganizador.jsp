@@ -24,9 +24,9 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nome Organizador<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Organizador</li>
-                        <li><a href="#">Editar Dados</a></li>
-                        <li><a href="#">Criar Corrida</a></li>
-                        <li><a href="#">Editar Corridas</a></li>
+                        <li><a href="PesquisaOrganizadorController">Editar Dados</a></li>
+                        <li><a href="ManterCorridaController?acao=prepararIncluir">Criar Corrida</a></li>
+                        <li><a href="PesquisaCorridaController">Editar Corridas</a></li>
                         <li><a href="#">Importar Dados</a></li>
                         <li><a href="#">Gerar Relatórios</a></li>
                         <li class="divider"></li>

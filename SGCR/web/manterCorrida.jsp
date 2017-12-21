@@ -21,7 +21,7 @@
     <body>
         <%@ include file = "layout/menuOrganizador.jsp" %>
 
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
                 <li class="active">${operacao} Corrida</li>

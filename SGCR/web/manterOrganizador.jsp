@@ -19,13 +19,18 @@
     </head>
     <body>
 
-        <%@ include file = "layout/menu.jsp" %>
+        <%@ include file = "layout/menuAdministrador.jsp" %>
 
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
+            <ul class="breadcrumb">
+                <li><a href="index.jsp">Home</a></li>
+                <li class="active"> ${operacao} Organizador</li>
+            </ul>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">${operacao} Organizador </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"> ${operacao} Organizador</div>
+                        
                         <div class="panel-body">
                             <form action="ManterOrganizadorController?acao=confirmar${operacao}" method="post" name="frmManterOrganizador">
                                 <div class="col-md-12">

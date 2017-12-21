@@ -23,10 +23,9 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrador<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Administrador</li>
-                        <li class="active"><a href="#">Minha Conta</a></li>
-                        <li><a href="#">Criar Ranking</a></li>
-                        <li><a href="#">Alterar Ranking</a></li>
-                        <li><a href="#">Bloquear Usuário</a></li>
+                        <li class="active"><a href="PesquisaAdministradorController">Minha Conta</a></li>
+                        <li><a href="ManterRankingController?acao=prepararIncluir">Criar Ranking</a></li>
+                        <li><a href="PesquisaRankingController">Alterar Ranking</a></li>
                         <li><a href="#">Gerar Relatórios</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Sair</a></li>

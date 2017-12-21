@@ -19,17 +19,16 @@
         
         <%@ include file = "layout/menuAdministrador.jsp" %>
         
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
                 <li class="active">${operacao} Produto</li>
             </ul>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">${operacao} Produto</div>
                         <div class="panel-body">
-                            <p><label class="label label-primary" >Digite suas informações abaixo:</label></p>
                             <form action="ManterProdutoController?acao=confirmar${operacao}" method="post" name="frmManterProduto" >
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -54,7 +53,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">
-                                                <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                                <a href="PesquisaProdutoController" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
                                             </div>
                                             <div class="col-md-6">
                                                 <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >

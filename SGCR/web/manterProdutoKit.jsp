@@ -19,17 +19,16 @@
 
         <%@ include file = "layout/menuOrganizador.jsp" %>
 
-        <div class="container corpo">
+        <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
                 <li class="active">${operacao} Produto Kit</li>
             </ul>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">${operacao} Produto Kit</div>
                         <div class="panel-body">
-                            <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -75,7 +74,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6">
-                                            <a href="index.jsp" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            <a href="PesquisaProdutoKitController" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
