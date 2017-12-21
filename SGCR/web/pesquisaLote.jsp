@@ -15,7 +15,7 @@
         <title>Pesquisa de Lote</title>
     </head>
     <body>
-        <%@ include file = "layout/menuOrganizador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
         <div class="container-fluid corpo corpo-adm">
 
             <h1>Pesquisa Lote</h1>

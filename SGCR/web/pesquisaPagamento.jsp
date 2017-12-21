@@ -15,7 +15,7 @@
         <title>Pesquisa de Pagamento</title>
     </head>
     <body>
-        <%@ include file = "layout/menuOrganizador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
           <div class="container-fluid corpo corpo-adm">
             <h2>Pesquisa Pagamento</h2>
             <table class="table table-hover table-responsive">

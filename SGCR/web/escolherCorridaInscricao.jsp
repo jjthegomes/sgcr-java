@@ -15,7 +15,7 @@
         <title>Corridas</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAtleta.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container corpo">
             <div class="row">

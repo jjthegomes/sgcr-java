@@ -34,8 +34,12 @@ public class Administrador extends Usuario {
     public void excluir() throws ClassNotFoundException, SQLException {
         AdministradorDAO.excluir(this);
     }
-    
-     public static Administrador obterAdministrador(int id) throws ClassNotFoundException {
+
+    public static Administrador obterAdministrador(int id) throws ClassNotFoundException {
         return AdministradorDAO.obterAdministrador(id);
+    }
+    
+    public static Administrador logar(String email, String senha) throws ClassNotFoundException {
+        return AdministradorDAO.logar(email, senha);
     }
 }

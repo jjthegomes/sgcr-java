@@ -14,7 +14,7 @@
         <title>Pesquisa Inscrição</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
 

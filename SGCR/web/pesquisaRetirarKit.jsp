@@ -9,17 +9,12 @@
 
 <!DOCTYPE html><html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <%@ include file = "layout/head.jsp" %>
         <title>Pesquisa Retirar Kit</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="public/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/estilo.css">
     </head>
     <body>
+        <%@ include file = "layout/menu.jsp" %>
+        
         <div class="container">
             <h2>Pesquisa Retirar Kit</h2>
 
@@ -53,9 +48,6 @@
             <a href="index.jsp">Menu</a>
         </div>
 
-        <!-- Bootstrap JS and jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-        <script type="text/javascript" src="public/bootstrap/js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+        <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

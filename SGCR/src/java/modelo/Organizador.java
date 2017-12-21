@@ -35,4 +35,7 @@ public class Organizador extends UsuarioComum{
         return OrganizadorDAO.obterOrganizador(id);
     }
     
+    public static Organizador logar(String email, String senha) throws ClassNotFoundException {
+        return OrganizadorDAO.logar(email, senha);
+    }
 }

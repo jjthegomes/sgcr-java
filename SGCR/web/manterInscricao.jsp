@@ -17,7 +17,7 @@
     </head>
     <body>
 
-        <%@ include file = "layout/menuAtleta.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
             <div class="container corpo">

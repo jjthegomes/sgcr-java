@@ -14,7 +14,7 @@
         <title>Pesquisa de Organizador</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
             <h2>Pesquisa Organizador</h2>

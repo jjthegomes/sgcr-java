@@ -188,25 +188,26 @@ public class AtletaDAO {
             comando.setString(1, email);
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
-            rs.first();
-            atleta = new Atleta(rs.getString("apelido"),
-                    rs.getString("tamanho_camisa"),
-                    rs.getString("nome"),
-                    rs.getString("data_nascimento"),
-                    rs.getString("sexo"),
-                    rs.getString("cpf"),
-                    rs.getString("cep"),
-                    rs.getString("logradouro"),
-                    rs.getString("bairro"),
-                    rs.getString("complemento"),
-                    rs.getString("numero"),
-                    rs.getString("cidade"),
-                    rs.getString("estado"),
-                    rs.getString("telefone"),
-                    rs.getString("celular"),
-                    rs.getInt("id"),
-                    rs.getString("email"),
-                    rs.getString("senha"));
+            if (rs.first()) {
+                atleta = new Atleta(rs.getString("apelido"),
+                        rs.getString("tamanho_camisa"),
+                        rs.getString("nome"),
+                        rs.getString("data_nascimento"),
+                        rs.getString("sexo"),
+                        rs.getString("cpf"),
+                        rs.getString("cep"),
+                        rs.getString("logradouro"),
+                        rs.getString("bairro"),
+                        rs.getString("complemento"),
+                        rs.getString("numero"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("senha"));
+            }
 
             comando.close();
             conexao.close();
