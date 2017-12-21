@@ -21,7 +21,7 @@
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      
-                        <div class="panel panel-info mouse-up" id="corrida${corrida.id}" onmouseover="mouseOver('corrida${corrida.id}')" >
+                        <div class="panel panel-info mouse-up" id="corrida${corrida.id}" >
                             <div class="panel-heading">${corrida.nome}</div>
                             <div class="panel-body corrida-info">
                                 <div class="corrida-info-conteudo">

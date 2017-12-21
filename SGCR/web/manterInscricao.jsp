@@ -22,7 +22,7 @@
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
             <div class="container corpo">
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="PesquisaHomeController">Home</a></li>
                     <li class="active">${corrida.nome}</li> 
                 </ul>
                 <div class="form-group">
@@ -104,7 +104,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse1" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('cartaoCredito')"</c:if>>
-                                Cartão de Crédito
+                                <i class="fa fa-credit-card"></i> Cartão de Crédito
                             </div>
                         </div>
                         <div id="collapse1" class="panel-collapse collapse in">
@@ -113,7 +113,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group col-md-12">
                                             <label for="idCartaoCredito">Código do Cartão:</label>
-                                            <input type="text" class="form-control pagamentoCartaoCredito" name="idCartaoCredito" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control pagamentoCartaoCredito" name="idCartaoCredito" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nCartao">Número do Cartão:</label>
@@ -170,7 +170,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse2" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('boleto')"</c:if>> 
-                                Boleto
+                                <i class="fa fa-barcode fa-lg"></i> Boleto
                             </div>
                         </div>
                         <div id="collapse2" class="panel-collapse collapse">
@@ -179,7 +179,7 @@
                                     <div class="col-md-10 col-md-offset-1">
                                         <div class="form-group col-md-12">
                                             <label for="idCartaoCredito">Código do Boleto:</label>
-                                            <input type="text" class="form-control pagamentoBoleto" name="idBoleto" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if> />
+                                            <input type="text" class="form-control pagamentoBoleto" name="idBoleto" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> />
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="nomeTitularBoleto">Nome do Titular:</label>

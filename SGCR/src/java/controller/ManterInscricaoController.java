@@ -160,6 +160,7 @@ public class ManterInscricaoController extends HttpServlet {
                     cartaoCredito.gravar();
                 } catch (SQLException | ClassNotFoundException ex) {
                 }
+                request.setAttribute("cartaoCredito", CartaoCredito.obterCartaoCredito(idCartaoCredito));
                 
             } else if (request.getParameter("formaPagamento").equals("boleto")) {
                 int idBoleto = Integer.parseInt(request.getParameter("idBoleto"));
@@ -171,9 +172,18 @@ public class ManterInscricaoController extends HttpServlet {
                     boleto.gravar();
                 } catch (SQLException | ClassNotFoundException ex) {
                 }
+                request.setAttribute("boleto", Boleto.obterBoleto(idBoleto));
             }
             
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
+            request.setAttribute("formaPagamento", request.getParameter("formaPagamento"));
+            request.setAttribute("atleta", Atleta.obterAtleta(atletaId));
+            request.setAttribute("percurso", Percurso.obterPercurso(percursoId));
+            request.setAttribute("kit", Kit.obterKit(kitId,corridaId));
+            request.setAttribute("lote", Lote.obterLote(loteId));
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            request.setAttribute("inscricao", inscricao);
+            
+            RequestDispatcher view = request.getRequestDispatcher("/finalizarInscricao.jsp");
             view.forward(request, response);
         } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {
         }
