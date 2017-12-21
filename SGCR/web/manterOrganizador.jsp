@@ -19,9 +19,9 @@
     </head>
     <body>
 
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
-        <div class="container-fluid corpo corpo-adm">
+        <div class="container corpo">
             <ul class="breadcrumb">
                 <li><a href="dashboard.jsp">Home</a></li>
                 <li class="active"> ${operacao} Organizador</li>

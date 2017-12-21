@@ -1,5 +1,5 @@
 <%-- 
-    Document   : escolherCorridaInscricao
+    Document   : cadastro
     Created on : 12/10/2017, 00:55:23
     Author     : RAJ
 --%>
@@ -16,6 +16,24 @@
     </head>
     <body>
         <%@ include file = "layout/menu.jsp" %>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h2 align="center">Cadastre-se</h2>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="ManterAtletaController?acao=prepararIncluir" style="text-decoration: none" >
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Atleta</button> </a>
+
+                    </div>
+                    <div class="col-md-6">
+                        <a href="ManterOrganizadorController?acao=prepararIncluir" style="text-decoration: none" >
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Organizador</button> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="container corpo">
             <div class="row">

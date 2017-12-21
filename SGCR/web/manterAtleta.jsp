@@ -19,13 +19,16 @@
     <body>
         <%@ include file = "layout/menu.jsp" %>
 
-        <div class="container-fluid corpo corpo-adm">
+        <div class="container corpo">
+             <ul class="breadcrumb">
+                <li><a href="dashboard.jsp">Home</a></li>
+                <li class="active"> ${operacao} Atleta</li>
+            </ul>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">Cadastro de Atleta</div>
                         <div class="panel-body">
-                            <p><label class="label label-primary btn-lg" >Digite suas informações abaixo:</label></p>
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
                                 <div class="form-group">
                                     <label for="Nome">Código:</label>
@@ -143,9 +146,6 @@
             </div>
         </div>
 
-        <a href="index.jsp">Menu</a>
-        <a href="PesquisaAtletaController">Voltar para pesquisa</a>
-        
         <%@ include file = "layout/rodape.jsp" %>
         
     </body>
