@@ -10,17 +10,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Atleta - ${operacao}</title>
         <script type="text/javascript" src="public/js/myscript.js"></script>
-
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="application/javascript" language="javascript"></script>
     </head>
     <body>
         <%@ include file = "layout/menu.jsp" %>
 
         <div class="container corpo">
-             <ul class="breadcrumb">
+            <ul class="breadcrumb">
                 <li><a href="dashboard.jsp">Home</a></li>
                 <li class="active"> ${operacao} Atleta</li>
             </ul>
@@ -31,8 +31,8 @@
                         <div class="panel-body">
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
                                 <div class="form-group">
-                                    <label for="Nome">Código:</label>
-                                    <input type="text" class="form-control" id="nome" name="txtIdAtleta" value="${atleta.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> >
+                                    <label for="id">Código:</label>
+                                    <input type="text" class="form-control" id="id" name="txtIdAtleta" value="${atleta.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> >
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -41,11 +41,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="cpf">CPF:</label>
-                                            <input type="text" class="form-control" id="cpf" placeholder="xxx.xxx.xxx-xx" name="txtCpfAtleta" value="${atleta.cpf}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cpf" placeholder="xxx.xxx.xxx-xx" onkeydown="javascript: fMasc(this, mCPF);" name="txtCpfAtleta" value="${atleta.cpf}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="dtNasc">Data Nascimento:</label>
-                                            <input type="text" class="form-control" id="dtNasc" placeholder="__/__/____"  name="txtDataNascimentoAtleta" value="${atleta.dataNascimento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="dtNasc" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="txtDataNascimentoAtleta" value="${atleta.dataNascimento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="apelido">Apelido:</label>
@@ -63,12 +63,12 @@
 
                                         <div class="form-group">
                                             <label for="cel">Celular</label>
-                                            <input type="tel" class="form-control" id="cel" placeholder="(xx) x xxxx-xxxx" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="tel" class="form-control" id="cel" placeholder="(xx) x xxxx-xxxx" onkeydown="javascript: fMasc(this, mTel);" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                             <!-- <button type="button" class="btn btn-default">ADD</button> -->
                                         </div>
                                         <div class="form-group">
                                             <label for="telefone">Telefone:</label>
-                                            <input type="tel" class="form-control" id="telefone" name="txtTelefoneAtleta" value="${atleta.telefone}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="tel" class="form-control" id="telefone" name="txtTelefoneAtleta" onkeydown="javascript: fMasc(this, mTel);" value="${atleta.telefone}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
 
                                         <div class="form-group">
@@ -124,29 +124,29 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="senha1">Senha:</label>
-                                            <input type="password" class="form-control" id="senha1" name="txtSenhaAtleta" value="${atleta.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="password" class="form-control" id="senha1" name="txtSenhaAtleta" value="${atleta.senha}" autocomplete <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="senha2">Confirmar Senha:</label>
+                                            <input type="password" class="form-control" id="senha2" name="txtSenhaAtleta2" oninput="validaSenha(this)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="agree" id="agree"> Aceito e Concordo com os <a href="#">Termos</a></label>
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="PesquisaAtletaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success"  >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="senha2">Confirmar Senha:</label>
-                                        <input type="password" class="form-control" id="senha2">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox"> Aceito e Concordo com os <a href="#">Termos</a></label>
-                                    </div>
-                                    <div class="form-group">
-                                        <a href="PesquisaAtletaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                        <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <%@ include file = "layout/rodape.jsp" %>
-        
+
     </body>
 </html>

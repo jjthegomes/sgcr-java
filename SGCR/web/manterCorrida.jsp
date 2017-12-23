@@ -60,10 +60,10 @@
                                         </div>                                  
                                         <div class="form-group">
                                             <label for="dtCorrida">Data da Corrida:</label>
-                                            <input type="text" class="form-control" id="dtCorrida" name="txtDataCorrida" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="__/__/____">
+                                            <input type="text" class="form-control" id="dtCorrida" name="txtDataCorrida" onkeypress="mascaraData(this, event)" value="${corrida.data}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="__/__/____">
                                         </div>
                                         <div class="form-group">
-                                            <label for="horario">Horário</label>
+                                            <label for="horario">Horário:</label>
                                             <input type="text" class="form-control" id="horario"name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="hh:mm:ss">            
                                         </div> 
                                     </div>

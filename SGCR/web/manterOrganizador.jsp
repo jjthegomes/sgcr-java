@@ -53,7 +53,7 @@
                                            <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                class="form-control" 
                                                id="dtNasc" 
-                                               placeholder="__/__/____"
+                                               placeholder="__/__/____" onkeypress="mascaraData(this, event)"
                                                />
                                     </div>
                                     <div class="form-group">
@@ -62,15 +62,15 @@
                                            <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                class="form-control"
                                                id="cpf" 
-                                               placeholder="xxx.xxx.xxx-xx"
+                                               placeholder="xxx.xxx.xxx-xx" onkeydown="javascript: fMasc(this, mCPF);"
                                                />
                                     </div>
                                     <div class="form-group">
                                         <label for="cel">Celular</label>
                                         <input type="tel" class="form-control" value="${organizador.celular}" 
                                            <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
-                                               name="txtCelularOrganizador" 
-                                               placeholder="(xx) x xxxx-xxxx" 
+                                               name="txtCelularOrganizador"  
+                                               placeholder="(xx) x xxxx-xxxx" onkeydown="javascript: fMasc(this, mTel);"
                                                id="cel"    
                                                />
                                     </div>
@@ -79,7 +79,7 @@
                                         <input type="tel" class="form-control" value="${organizador.telefone}" 
                                            <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                name="txtTelefoneOrganizador" 
-                                               placeholder="(xx) x xxxx-xxxx" 
+                                               placeholder="(xx) x xxxx-xxxx"  onkeydown="javascript: fMasc(this, mTel);"
                                                id="cel"    
                                                />
                                     </div>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="senha2">Confirmar Senha:</label>
-                                        <input type="password" class="form-control" id="senha2" name="txtSenhaOrganizador2" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        <input type="password" class="form-control" id="senha2" name="txtSenhaOrganizador2" oninput="validaSenha(this)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                     </div>
                                     
                                     <div class="checkbox">
