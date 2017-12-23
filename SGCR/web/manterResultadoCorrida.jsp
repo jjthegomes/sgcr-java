@@ -15,11 +15,17 @@
     </head>
     <body>
         <%@ include file = "layout/menu.jsp" %>
+        
         <div class="container-fluid corpo corpo-adm">
-            <h2>Manter Resultado</h2>
+            <ul class="breadcrumb">
+                <li><a href="dashboard.jsp">Dashboard</a></li>
+                <li><a href="ManterResultadoController?acao=escolherCorrida">Manter Resultado</a></li>
+                <li class="active">${corrida.nome}</li> 
+            </ul>            
+            <center> <h2>Manter Resultado</h2></center>
             <h3>${corrida.nome}</h3>
 
-            <table class="table table-bordered table-responsive table-hover">
+            <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>Código</th>

@@ -34,7 +34,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">${atleta.nome}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Atleta</li>
-                                <li><a href="#">Minha Conta</a></li>
+                                <li><a href="ManterAtletaController?acao=prepararEditar&id=${atleta.id}">Minha Conta</a></li>
                                 <li><a href="#">Minhas Corridas</a></li>
                                 <li class="divider"></li>
                                 <li><a href="LoginController?acao=logout">Sair</a></li>
@@ -63,7 +63,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">${organizador.nome}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Organizador</li>
-                                <li><a href="PesquisaOrganizadorController">Editar Dados</a></li>
+                                <li><a href="ManterOrganizadorController?acao=prepararEditar&id=${organizador.id}">Editar Dados</a></li>
                                 <li><a href="ManterCorridaController?acao=prepararIncluir">Criar Corrida</a></li>
                                 <li><a href="PesquisaCorridaController">Editar Corridas</a></li>
                                 <li><a href="#">Importar Dados</a></li>

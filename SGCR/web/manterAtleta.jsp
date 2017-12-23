@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Cadastro de Atleta</div>
+                        <div class="panel-heading">${operacao} Atleta</div>
                         <div class="panel-body">
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
                                 <div class="form-group">

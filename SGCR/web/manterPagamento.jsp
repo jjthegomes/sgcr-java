@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
     <head>
         <%@ include file = "layout/head.jsp" %>
         <title>Gerenciar Pagamento</title>
@@ -51,9 +51,9 @@
                 </tbody>
             </table>
 
-<!--            <form action="ManterPagamentoController?acao=escolherCorrida" method="post">
-                <button type="submit" name="btnIncluir">Manter Pagamento</button>
-            </form>-->
+            <!--            <form action="ManterPagamentoController?acao=escolherCorrida" method="post">
+                            <button type="submit" name="btnIncluir">Manter Pagamento</button>
+                        </form>-->
         </div>
 
         <%@ include file = "layout/rodape.jsp" %>
