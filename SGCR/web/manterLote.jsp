@@ -13,12 +13,14 @@
     <head>
 
         <%@ include file = "layout/head.jsp" %>
+        <script type="text/javascript" src="public/js/myscript.js"></script>
+
         <title>Manter Lote - ${operacao}</title>
-        
+
     </head>
     <body>
-        
-        <%@ include file = "layout/menuOrganizador.jsp" %>
+
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
@@ -61,25 +63,25 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="dtInicio">Data de Início:</label>
-                                            <input type="text" class="form-control" id="dtInicio" placeholder="__/__/____" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if> >
+                                            <input type="text" class="form-control" id="dtInicio" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if> >
                                         </div>
                                         <div class="form-group">
                                             <label for="dtTermino">Data de Término:</label>
-                                            <input type="text" class="form-control" id="dtTermino" placeholder="__/__/____" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="dtTermino" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="PesquisaLoteController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <a href="PesquisaLoteController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                        <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <%@ include file = "layout/rodape.jsp" %>                            
-                                    
+
     </body>
 </html>

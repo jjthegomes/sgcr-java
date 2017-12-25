@@ -16,7 +16,7 @@
     </head>
     <body>
         
-        <%@ include file = "layout/menuOrganizador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
         <div class="container">
             <h2>Pesquisa Resultado Corridas</h2>
 

@@ -49,9 +49,5 @@ public abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
 
-    public void login(String email, String senha) {
-        System.out.println("Logado");
-    }
 }

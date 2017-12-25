@@ -17,7 +17,7 @@
     </head>
     <body>
         
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
         
         <div class="container corpo">
             <ul class="breadcrumb">

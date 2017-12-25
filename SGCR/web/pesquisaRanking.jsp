@@ -15,7 +15,7 @@
         <title>Pesquisa Ranking</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
         <div class="container-fluid corpo corpo-adm">
             <h1>Pesquisa Ranking</h1>
             <table class="table table-hover table-responsive">

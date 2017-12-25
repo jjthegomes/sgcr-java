@@ -14,6 +14,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<c:choose>
+    <c:when test="${usuario!='administrador' && usuario!='organizador'}">
+        <% response.sendRedirect("/SGCR"); %>
+    </c:when>    
+</c:choose>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -21,7 +27,7 @@
         <title>Dashboard</title>
     </head>
     <body>
-        <%@ include file = "layout/menuAdministrador.jsp" %>
+        <%@ include file = "layout/menu.jsp" %>
 
         <div class="corpo container-fluid corpo-adm">
 <!--            <div class="row">
