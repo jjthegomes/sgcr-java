@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Corrida - ${operacao}</title>
         <script type="text/javascript" src="public/js/myscript.js"></script>
@@ -66,13 +66,13 @@
                                             <label for="horario">Horário:</label>
                                             <input type="text" class="form-control" id="horario"name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="hh:mm:ss">            
                                         </div> 
-                                    </div>
-
-                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
                                             <input type="text" class="form-control" id="cep" name="txtCepCorrida" value="${corrida.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                        </div>                                   
+                                        </div> 
+                                    </div>
+
+                                    <div class="col-md-4">                                       
                                         <div class="form-group">
                                             <label for="estado">Estado:</label>
                                             <input type="text" class="form-control" id="estado" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -89,6 +89,10 @@
                                             <label for="bairro">Bairro:</label>
                                             <input type="text" class="form-control" id="bairro" name="txtBairroCorrida" value="${corrida.bairro}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="numero">Número:</label>
+                                            <input type="text" class="form-control" id="cep" name="txtNumeroCorrida" value="${corrida.numero}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div> 
                                         <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
 
                                     </div>
@@ -107,20 +111,20 @@
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
 
                                             <input type="text" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                        <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
+
         <%@ include file = "layout/rodape.jsp" %>
 
     </body>

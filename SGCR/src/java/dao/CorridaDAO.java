@@ -40,6 +40,7 @@ public class CorridaDAO {
                         rs.getString("banner"),
                         rs.getString("logradouro"),
                         rs.getString("cep"),
+                        rs.getString("numero"),
                         rs.getString("cidade"),
                         rs.getString("estado"),
                         rs.getString("bairro"),
@@ -63,8 +64,8 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO corrida (id, nome, max_pessoa, horario, data, banner, "
-                    + "logradouro, cep, cidade, estado, bairro, descricao, regulamento, organizador_id) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "logradouro, cep, numero, cidade, estado, bairro, descricao, regulamento, organizador_id) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?a)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, corrida.getId());
             comando.setString(2, corrida.getNome());
@@ -74,12 +75,13 @@ public class CorridaDAO {
             comando.setString(6, corrida.getBanner());
             comando.setString(7, corrida.getLogradouro());
             comando.setString(8, corrida.getCep());
-            comando.setString(9, corrida.getCidade());
-            comando.setString(10, corrida.getEstado());
-            comando.setString(11, corrida.getBairro());
-            comando.setString(12, corrida.getDescricao());
-            comando.setString(13, corrida.getRegulamento());
-            comando.setInt(14, corrida.getOrganizador().getId());
+            comando.setString(9, corrida.getNumero());
+            comando.setString(10, corrida.getCidade());
+            comando.setString(11, corrida.getEstado());
+            comando.setString(12, corrida.getBairro());
+            comando.setString(13, corrida.getDescricao());
+            comando.setString(14, corrida.getRegulamento());
+            comando.setInt(15, corrida.getOrganizador().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -111,7 +113,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE corrida SET nome = ?, max_pessoa = ?, horario = ?, data = ?, "
-                    + "banner = ?, logradouro = ?, cep = ?, cidade = ?, estado = ? , bairro = ?, "
+                    + "banner = ?, logradouro = ?, cep = ?, numero = ?, cidade = ?, estado = ? , bairro = ?, "
                     + "descricao = ?, regulamento = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNome());
@@ -121,13 +123,14 @@ public class CorridaDAO {
             comando.setString(5, corrida.getBanner());
             comando.setString(6, corrida.getLogradouro());
             comando.setString(7, corrida.getCep());
-            comando.setString(8, corrida.getCidade());
-            comando.setString(9, corrida.getEstado());
-            comando.setString(10, corrida.getBairro());
-            comando.setString(11, corrida.getDescricao());
-            comando.setString(12, corrida.getRegulamento());
-            comando.setInt(13, corrida.getOrganizador().getId());
-            comando.setInt(14, corrida.getId());
+            comando.setString(8, corrida.getNumero());
+            comando.setString(9, corrida.getCidade());
+            comando.setString(10, corrida.getEstado());
+            comando.setString(11, corrida.getBairro());
+            comando.setString(12, corrida.getDescricao());
+            comando.setString(13, corrida.getRegulamento());
+            comando.setInt(14, corrida.getOrganizador().getId());
+            comando.setInt(15, corrida.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -154,6 +157,7 @@ public class CorridaDAO {
                     rs.getString("banner"),
                     rs.getString("logradouro"),
                     rs.getString("cep"),
+                    rs.getString("numero"),
                     rs.getString("cidade"),
                     rs.getString("estado"),
                     rs.getString("bairro"),
@@ -188,6 +192,7 @@ public class CorridaDAO {
                     rs.getString("banner"),
                     rs.getString("logradouro"),
                     rs.getString("cep"),
+                    rs.getString("numero"),
                     rs.getString("cidade"),
                     rs.getString("estado"),
                     rs.getString("bairro"),

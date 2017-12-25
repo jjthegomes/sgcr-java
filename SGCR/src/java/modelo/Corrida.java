@@ -23,6 +23,7 @@ public class Corrida {
     private String banner;
     private String logradouro;
     private String cep;
+    private String numero;
     private String cidade;
     private String estado;
     private String bairro;
@@ -36,7 +37,9 @@ public class Corrida {
 
     }
 
-    public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro, String cep, String cidade, String estado, String bairro, String descricao, String regulamento, Organizador organizador) {
+    public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro, 
+            String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento, 
+            Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.maxPessoa = maxPessoa;
@@ -45,6 +48,7 @@ public class Corrida {
         this.banner = banner;
         this.logradouro = logradouro;
         this.cep = cep;
+        this.numero = numero;
         this.cidade = cidade;
         this.estado = estado;
         this.bairro = bairro;
@@ -115,6 +119,14 @@ public class Corrida {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getCidade() {
@@ -192,8 +204,8 @@ public class Corrida {
     public static Corrida obterCorrida(int id) throws ClassNotFoundException {
         return CorridaDAO.obterCorrida(id);
     }
-    
-     public static Corrida obterUltimaCorrida(int id) throws ClassNotFoundException {
+
+    public static Corrida obterUltimaCorrida(int id) throws ClassNotFoundException {
         return CorridaDAO.obterUltimaCorrida(id);
     }
 

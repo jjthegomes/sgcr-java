@@ -83,6 +83,7 @@ public class ManterCorridaController extends HttpServlet {
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
+        String numero = request.getParameter("txtNumeroCorrida");
         String cidade = request.getParameter("txtCidadeCorrida");
         String estado = request.getParameter("txtEstadoCorrida");
         String bairro = request.getParameter("txtBairroCorrida");
@@ -94,7 +95,7 @@ public class ManterCorridaController extends HttpServlet {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
 
             Corrida corrida = new Corrida(id, nome, maxPessoa, horario, data,
-                    banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
+                    banner, rua, cep, numero, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.gravar();
             RequestDispatcher view
                     = request.getRequestDispatcher("PesquisaCorridaController");
@@ -133,6 +134,7 @@ public class ManterCorridaController extends HttpServlet {
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
+        String numero = request.getParameter("txtNumeroCorrida");
         String cidade = request.getParameter("txtCidadeCorrida");
         String estado = request.getParameter("txtEstadoCorrida");
         String bairro = request.getParameter("txtBairroCorrida");
@@ -143,7 +145,7 @@ public class ManterCorridaController extends HttpServlet {
         try {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
             Corrida corrida = new Corrida(id, nomeCorrida, maxPessoa, horario, data,
-                    banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
+                    banner, rua, cep, numero, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
@@ -182,6 +184,7 @@ public class ManterCorridaController extends HttpServlet {
         String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
+        String numero = request.getParameter("txtNumeroCorrida");
         String cidade = request.getParameter("txtCidadeCorrida");
         String estado = request.getParameter("txtEstadoCorrida");
         String bairro = request.getParameter("txtBairroCorrida");
@@ -192,7 +195,7 @@ public class ManterCorridaController extends HttpServlet {
         try {
             Organizador organizador = Organizador.obterOrganizador(organizadoresId);
             Corrida corrida = new Corrida(id, nome, maxPessoas, horario, data,
-                    banner, rua, cep, cidade, estado, bairro, descricao, regulamento, organizador);
+                    banner, rua, cep, numero, cidade, estado, bairro, descricao, regulamento, organizador);
             corrida.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
