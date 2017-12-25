@@ -63,8 +63,7 @@
                                             <div class="col-md-6">
                                                 <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
                                             </div>
-                                        </div>
-                                        
+                                        </div>     
                                     </div>
                             </form>
                         </div>
