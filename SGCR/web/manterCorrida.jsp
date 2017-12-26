@@ -113,17 +113,28 @@
                                             <input type="text" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
                                         </div>
                                         <div class="form-group">
-                                            <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                            <label for="optStatus">Status:</label> 
+                                            <div class="radio-inline">
+                                                <label><input type="radio" name="optStatus" value="true" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                                                          <c:if test="${corrida.ativo == 'true'}"> checked</c:if>>Ativo</label>
                                         </div>
+                                        <div class="radio-inline">
+                                            <label><input type="radio" name="optStatus" value="false" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                                                          <c:if test="${corrida.ativo == 'false'}"> checked</c:if>>Desativado</label>
+                                        </div>                                                
                                     </div>
-                                </form>
-                            </div>
-
+                                    <div class="form-group">
+                                        <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                        <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
         <%@ include file = "layout/rodape.jsp" %>
 

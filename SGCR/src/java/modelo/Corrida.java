@@ -29,6 +29,7 @@ public class Corrida {
     private String bairro;
     private String descricao;
     private String regulamento;
+    private boolean ativo;
     private Organizador organizador;
 
     private int organizadorId;
@@ -39,7 +40,7 @@ public class Corrida {
 
     public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro, 
             String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento, 
-            Organizador organizador) {
+            boolean ativo, Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.maxPessoa = maxPessoa;
@@ -55,6 +56,7 @@ public class Corrida {
         this.descricao = descricao;
         this.regulamento = regulamento;
         this.organizador = organizador;
+        this.ativo = ativo;
     }
 
     public int getId() {
@@ -184,6 +186,14 @@ public class Corrida {
     public void setOrganizadorId(int organizadorId) {
         this.organizadorId = organizadorId;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }    
 
     public static List<Corrida> obterCorridas() throws ClassNotFoundException {
         return CorridaDAO.obterCorridas();
