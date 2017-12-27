@@ -25,19 +25,8 @@
                     <li><a href="PesquisaHomeController">Home</a></li>
                     <li class="active">${corrida.nome}</li> 
                 </ul>
-                <div class="form-group">
-                    <label for="txtIdInscricao">Código da Inscrição:</label>
-                    <input type="text" class="form-control" name="txtIdInscricao" value="${inscricao.id}" required <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                    </div>
-                    <div class="form-group">
-                        <label for="atleta">Atleta:</label>
-                        <select name="optAtleta" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                        <option value="0" <c:if test="${inscricao.atleta.id == null}"> selected</c:if>> Selecione um atleta</option>  
-                        <c:forEach items="${atletas}" var="atleta">
-                            <option value="${atleta.id}" <c:if test="${inscricao.atletaId == atleta.id}"> selected</c:if>>${atleta.nome}</option>  
-                        </c:forEach>
-                    </select>
-                </div>                       
+                <input type="hidden" class="form-control" name="hiddenIdInscricao" value="${inscricao.id}" readonly>
+                        
                 <div class="panel panel-primary">
                     <div class="panel-heading">Inscrição</div>
                     <div class="panel-body">

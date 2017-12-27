@@ -44,22 +44,13 @@ INSERT INTO `atleta` (`id`, `nome`, `apelido`, `email`, `senha`, `sexo`, `tamanh
 (9, 'Ian Lucas de Aquino Silvério de Azevedo Prado', 'Ianzim', 'ian@hotmail.com', '123', 'M', 'M', '21/10/1991', '258.741.365-28', '12947591', 'SP', 'Atibaia/', 'Jardim Santa Bárbara ', 'Rua Isabel Pires Antônio ', '75', NULL, '(11)98478-5565', '(11)94257-8524');
 
 --
--- Extraindo dados da tabela `boleto`
+-- Extraindo dados da tabela `organizador`
 --
 
-INSERT INTO `boleto` (`id`, `codigo_barra`, `data_emissao`, `data_vencimento`, `nome_titular`, `cpf_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
-(1, '345484634648', '22/11/2017', '22/12/2017', 'Ângela Dantas de Macedo Aragão', '452.478.963-25', 16, 2),
-(2, '54369465631456314', '22/10/2017', '23/11/2017', 'Rodolfo Duarte Martins Strognoff', '365.874.569-82', 17, 2),
-(3, '47494746964645', '22/11/2017', '22/11/2017', 'Ian Lucas de Aquino Silvério de Azevedo Prado', '258.741.365-28', 18, 3);
-
---
--- Extraindo dados da tabela `cartao_credito`
---
-
-INSERT INTO `cartao_credito` (`id`, `numero`, `codigo_seguranca`, `validade`, `nome_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
-(10, '1', '245', '10/2019', 'Fausto Silva', 13, 3),
-(11, '2', '584', '10/2025', 'Maria da Graça Meneguel', 14, 1),
-(12, '3', '753', '10/2023', 'Ian Lucas de Aquino Silvério de Azevedo Prado', 15, 1);
+INSERT INTO `organizador` (`id`, `nome`, `email`, `senha`, `sexo`, `data_nascimento`, `cpf`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `complemento`, `telefone`, `celular`) VALUES
+(1, 'Marcelo Alvares de Castro', 'marcelo@hotmail.com', '123', 'M', '07/06/1980', '147.896.523-65', '36458796', 'TO', 'Arueira', 'Flores Altas', 'Avenida das Pedras', '753', NULL, '(45)87965-2356', '(45)98752-1456'),
+(2, 'Laura Marques de Mello Alcântara ', 'laura@hotmail.com', '123', 'F', '12/10/1985', '458.796.325-41', '21456987', 'SP', 'São Paulo', 'Jardins', 'Rua Presidente Arthur Bernardes', '456', NULL, '(11)85479-6325', '(11)87459-6325'),
+(3, 'Frederico Lavinas Gonçalves Damas', 'frederico@hotmail.com', '123', 'M', '09/06/1990', '112.547.896-35', '36236587', 'MG', 'Tocantins de Minas', 'Roseiral', 'Rua Condessa do Rio Novo', '658', NULL, '(32)23547-8965', '(32)54789-6558');
 
 --
 -- Extraindo dados da tabela `corrida`
@@ -71,25 +62,13 @@ INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, 
 (3, 'Corrida Contra Violência Infantil', '07:00:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', 'Futuramente será postado', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, 3);
 
 --
--- Extraindo dados da tabela `inscricao`
---
-
-INSERT INTO `inscricao` (`id`, `corrida_id`, `data_compra`, `numero_peito`, `pago`, `kit_retirado`, `tempo_largada`, `tempo_chegada`, `atleta_id`, `percurso_id`, `lote_id`, `kit_id`) VALUES
-(13, 3, '26/10/2017', NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2),
-(14, 1, '20/11/2017', NULL, NULL, NULL, NULL, NULL, 2, 2, 2, 3),
-(15, 1, '11/12/2017', NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 4),
-(16, 2, '04/01/2018', NULL, NULL, NULL, NULL, NULL, 7, 1, 5, 3),
-(17, 2, '06/01/2018', NULL, NULL, NULL, NULL, NULL, 8, 3, 6, 4),
-(18, 3, '22/01/2018', NULL, NULL, NULL, NULL, NULL, 9, 3, 8, 4);
-
---
 -- Extraindo dados da tabela `kit`
 --
 
 INSERT INTO `kit` (`id`, `nome`, `imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`) VALUES
 (2, 'VIP', NULL, 'Retornável', '21/01/2018', '02/02/2018'),
-(3, 'Premio', NULL, 'Reciclavel', '21/01/2018', '02/02/2018'),
-(4, 'Básico', NULL, 'Reciclavel', '21/01/2018', '02/02/2018');
+(3, 'Premio', NULL, 'Descartável', '21/01/2018', '02/02/2018'),
+(4, 'Básico', NULL, 'Descartável', '21/01/2018', '02/02/2018');
 
 --
 -- Extraindo dados da tabela `lote`
@@ -106,14 +85,7 @@ INSERT INTO `lote` (`id`, `tipo`, `preco`, `data_inicio`, `data_final`, `corrida
 (8, '2º Lote', 50, '23/11/2017', '23/12/2017', 3),
 (9, '3º Lote', 70, '24/12/2017', '15/02/2018', 3);
 
---
--- Extraindo dados da tabela `organizador`
---
 
-INSERT INTO `organizador` (`id`, `nome`, `email`, `senha`, `sexo`, `data_nascimento`, `cpf`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `complemento`, `telefone`, `celular`) VALUES
-(1, 'Marcelo Alvares de Castro', 'marcelo@hotmail.com', '123', 'M', '07/06/1980', '147.896.523-65', '36458796', 'TO', 'Arueira', 'Flores Altas', 'Avenida das Pedras', '753', NULL, '(45)87965-2356', '(45)98752-1456'),
-(2, 'Laura Marques de Mello Alcântara ', 'laura@hotmail.com', '123', 'F', '12/10/1985', '458.796.325-41', '21456987', 'SP', 'São Paulo', 'Jardins', 'Rua Presidente Arthur Bernardes', '456', NULL, '(11)85479-6325', '(11)87459-6325'),
-(3, 'Frederico Lavinas Gonçalves Damas', 'frederico@hotmail.com', '123', 'M', '09/06/1990', '112.547.896-35', '36236587', 'MG', 'Tocantins de Minas', 'Roseiral', 'Rua Condessa do Rio Novo', '658', NULL, '(32)23547-8965', '(32)54789-6558');
 
 --
 -- Extraindo dados da tabela `percurso`
@@ -123,21 +95,6 @@ INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `descricao`) VALUES
 (1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes'),
 (2, NULL, 10, 'Percurso Intermediário.   '),
 (3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes. ');
-
---
--- Extraindo dados da tabela `pontuacao`
---
-
-INSERT INTO `pontuacao` (`id`, `ranking_id`, `pontuacao`) VALUES
-(1, 1, 50),
-(2, 2, 70),
-(3, 1, 25),
-(4, 2, 50),
-(5, 1, 15),
-(6, 2, 25),
-(7, 1, 5),
-(8, 2, 15),
-(9, 2, 5);
 
 --
 -- Extraindo dados da tabela `produto`
@@ -159,6 +116,51 @@ INSERT INTO `ranking` (`id`, `nome`, `intervalo_faixa_etaria`, `idade_inicial`, 
 (1, 'Juiz de Fora', 5, 10, 1),
 (2, 'Rio de Janeiro', 7, 5, 2);
 COMMIT;
+
+--
+-- Extraindo dados da tabela `pontuacao`
+--
+
+INSERT INTO `pontuacao` (`id`, `ranking_id`, `pontuacao`) VALUES
+(1, 1, 50),
+(2, 2, 70),
+(3, 1, 25),
+(4, 2, 50),
+(5, 1, 15),
+(6, 2, 25),
+(7, 1, 5),
+(8, 2, 15),
+(9, 2, 5);
+
+--
+-- Extraindo dados da tabela `inscricao`
+--
+
+INSERT INTO `inscricao` (`id`, `corrida_id`, `data_compra`, `numero_peito`, `pago`, `kit_retirado`, `tempo_largada`, `tempo_chegada`, `atleta_id`, `percurso_id`, `lote_id`, `kit_id`) VALUES
+(13, 3, '26/10/2017', NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2),
+(14, 1, '20/11/2017', NULL, NULL, NULL, NULL, NULL, 2, 2, 2, 3),
+(15, 1, '11/12/2017', NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 4),
+(16, 2, '04/01/2018', NULL, NULL, NULL, NULL, NULL, 7, 1, 5, 3),
+(17, 2, '06/01/2018', NULL, NULL, NULL, NULL, NULL, 8, 3, 6, 4),
+(18, 3, '22/01/2018', NULL, NULL, NULL, NULL, NULL, 9, 3, 8, 4);
+
+--
+-- Extraindo dados da tabela `boleto`
+--
+
+INSERT INTO `boleto` (`id`, `codigo_barra`, `data_emissao`, `data_vencimento`, `nome_titular`, `cpf_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
+(1, '345482', '22/11/2017', '22/12/2017', 'Ângela Dantas de Macedo Aragão', '452.478.963-25', 16, 2),
+(2, '456314', '22/10/2017', '23/11/2017', 'Rodolfo Duarte Martins Strognoff', '365.874.569-82', 17, 2),
+(3, '474645', '22/11/2017', '22/11/2017', 'Ian Lucas de Aquino Silvério de Azevedo Prado', '258.741.365-28', 18, 3);
+
+--
+-- Extraindo dados da tabela `cartao_credito`
+--
+
+INSERT INTO `cartao_credito` (`id`, `numero`, `codigo_seguranca`, `validade`, `nome_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
+(10, '1', '245', '10/2019', 'Fausto Silva', 13, 3),
+(11, '2', '584', '10/2025', 'Maria da Graça Meneguel', 14, 1),
+(12, '3', '753', '10/2023', 'Ian Lucas de Aquino Silvério de Azevedo Prado', 15, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
