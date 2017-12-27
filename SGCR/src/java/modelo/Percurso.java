@@ -17,24 +17,22 @@ public class Percurso {
 
     private int id;
     private String imagem;
+    private String descricao;
     private Double quilometragem;
-    private Corrida corrida;
 
-    private int corridaId;
-
-    public Percurso(int id, String imagem, Double quilometragem, Corrida corrida) {
+    public Percurso(int id, String imagem, String descricao, Double quilometragem) {
         this.id = id;
         this.imagem = imagem;
+        this.descricao = descricao;
         this.quilometragem = quilometragem;
-        this.corrida = corrida;
     }
 
-    public Percurso(String imagem, Double quilometragem, Corrida corrida) {
+    public Percurso(String imagem, String descricao, Double quilometragem) {
         this.imagem = imagem;
+        this.descricao = descricao;
         this.quilometragem = quilometragem;
-        this.corrida = corrida;
     }
-    
+        
     public int getId() {
         return id;
     }
@@ -51,28 +49,20 @@ public class Percurso {
         this.imagem = imagem;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }        
+
     public Double getQuilometragem() {
         return quilometragem;
     }
 
     public void setQuilometragem(Double quilometragem) {
         this.quilometragem = quilometragem;
-    }
-
-    public Corrida getCorrida() {
-        return corrida;
-    }
-
-    public void setCorrida(Corrida corrida) {
-        this.corrida = corrida;
-    }
-
-    public int getCorridaId() {
-        return corridaId;
-    }
-
-    public void setCorridaId(int corridaId) {
-        this.corridaId = corridaId;
     }
 
     public static List<Percurso> obterPercursos() throws ClassNotFoundException {

@@ -28,7 +28,6 @@
                         <th>Preço</th>
                         <th>Data Inicio</th>
                         <th>Data Final</th>
-                        <th>Quantidade</th>
 
                         <th colspan="2" class="table-action">Ação</th>
                     </tr>
@@ -42,7 +41,6 @@
                             <td><c:out value="${lote.preco}" /> </td>
                             <td><c:out value="${lote.dataInicio}" /> </td>
                             <td><c:out value="${lote.dataFinal}" /> </td>
-                            <td><c:out value="${lote.quantidade}" /> </td>
                             <td class="table-action"><a href="ManterLoteController?acao=prepararEditar&id=<c:out value="${lote.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Editar</a> </td>
                             <td class="table-action"><a href="ManterLoteController?acao=prepararExcluir&id=<c:out value="${lote.id}"/>" class="btn-danger btn-block btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</a> </td>
                         </tr>

@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Corrida;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
 import modelo.Pontuacao;
 import modelo.Ranking;
 
@@ -36,31 +36,32 @@ public class ManterPontuacaoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        String acao= request.getParameter("acao");
-        if(acao.equals("prepararIncluir")){
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararIncluir")) {
             prepararIncluir(request, response);
-        }else{
+        } else {
             if (acao.equals("confirmarIncluir")) {
-                confirmarIncluir(request,response);
-            }else {
+                confirmarIncluir(request, response);
+            } else {
                 if (acao.equals("prepararExcluir")) {
                     prepararExcluir(request, response);
-                }else {
+                } else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
-                    }else {
+                    } else {
                         if (acao.equals("prepararEditar")) {
                             prepararEditar(request, response);
-                        }else{
+                        } else {
                             if (acao.equals("confirmarEditar")) {
                                 confirmarEditar(request, response);
                             }
                         }
                     }
                 }
+            }
         }
     }
-    }
+
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
@@ -78,7 +79,7 @@ public class ManterPontuacaoController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-    
+
     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
@@ -96,15 +97,15 @@ public class ManterPontuacaoController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-    
+
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-         int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
+        int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
         int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-        
+
         int idRanking = Integer.parseInt(request.getParameter("optRanking"));
         Ranking ranking = Ranking.obterRanking(idRanking);
-        
-        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,ranking);
+
+        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao, ranking);
         try {
             pontuacao.excluir();
 
@@ -117,15 +118,15 @@ public class ManterPontuacaoController extends HttpServlet {
         } catch (ServletException ex) {
         }
     }
-    
+
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-         int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
+        int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
         int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-        
+
         int idRanking = Integer.parseInt(request.getParameter("optRanking"));
         Ranking ranking = Ranking.obterRanking(idRanking);
-        
-        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao,ranking);
+
+        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao, ranking);
         try {
             pontuacao.alterar();
 
@@ -139,39 +140,39 @@ public class ManterPontuacaoController extends HttpServlet {
         }
     }
 
-    
-    
-    
-    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response){
-        try{
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("rankings", Ranking.obterRankings());
             RequestDispatcher view = request.getRequestDispatcher("/manterPontuacao.jsp");
             view.forward(request, response);
-            
-        }catch(ServletException ex){
-        }catch(IOException ex){
-        }catch (ClassNotFoundException ex){
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
     }
-    
+
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-       int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
-       int rankingId = Integer.parseInt(request.getParameter("optRanking"));
-       try {
-           Ranking ranking = null;
-           
-               ranking = Ranking.obterRanking(rankingId);
-        
-           Pontuacao pontuacao = new Pontuacao(valorPontuacao,ranking); 
-       pontuacao.gravar();
-       RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
-       view.forward(request,response);  
-    }catch (IOException ex){
-    }catch(SQLException ex){
-    }catch(ClassNotFoundException ex){
-    }catch (ServletException ex){
-    }
+        int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
+        int rankingId = Integer.parseInt(request.getParameter("optRanking"));
+        HttpSession session = request.getSession(true);
+        Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+        try {
+            Ranking ranking = null;
+
+            ranking = Ranking.obterRanking(rankingId);
+
+            Pontuacao pontuacao = new Pontuacao(valorPontuacao, ranking);
+            pontuacao.gravar();
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
+            view.forward(request, response);
+        } catch (IOException ex) {
+        } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+        } catch (ServletException ex) {
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -224,7 +225,5 @@ public class ManterPontuacaoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

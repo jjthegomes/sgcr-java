@@ -10,15 +10,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Pontuação</title>
-        
+
     </head>
     <body>
-        
+
         <%@ include file = "layout/menu.jsp" %>
-        
+
         <div class="container corpo">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
@@ -31,21 +31,23 @@
                         <div class="panel-body">
                             <p><button class="btn btn-basic btn-info" >Digite suas informações abaixo:</button></p>
                             <form action="ManterPontuacaoController?acao=confirmar${operacao}" method="post" name="frmManterPontuacao" >
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="codigoRank">Ranking:</label>
-                                            <select class="form-control" name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
-                                                <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
-                                                <c:forEach items="${rankings}" var="ranking">
-                                                    <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
-                                                </c:forEach>
-                                            </select>
-                                        </div>                                       
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="pontuacao">Pontuação:</label>
-                                            <td><input type="text" class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <div class="col-md-6">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdPontuacao" value="${pontuacao.id}" readonly />
+
+                                    <div class="form-group">
+                                        <label for="codigoRank">Ranking:</label>
+                                        <select class="form-control" name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                                            <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
+                                            <c:forEach items="${rankings}" var="ranking">
+                                                <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
+                                            </c:forEach>
+                                        </select>
+                                    </div>                                       
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pontuacao">Pontuação:</label>
+                                        <td><input type="text" class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">
@@ -56,12 +58,12 @@
                                             </div>
                                         </div>
                                     </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>       
+            </div>       
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

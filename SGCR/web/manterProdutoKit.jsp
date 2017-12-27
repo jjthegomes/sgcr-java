@@ -10,10 +10,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter ProdutoKit</title>
-        
+
     </head>
     <body>
 
@@ -31,6 +31,8 @@
                         <div class="panel-body">
                             <form action="ManterProdutoKitController?acao=confirmar${operacao}" method="post" name="frmManterProdutoKit" >
                                 <div class="col-md-6">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdProdutoKit" value="${produtoKit.id}" readonly />
+
                                     <div class="form-group">
                                         <label for="codigoCorrida">Corrida:</label>
                                         <select class="form-control" id="codigoCorrida" name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
@@ -49,11 +51,11 @@
                                             </c:forEach>
                                         </select>
                                     </div>                                    
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="codigoPro">Produto:</label>
-                                            <select class="form-control" id="codigoPro" name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="codigoPro">Produto:</label>
+                                        <select class="form-control" id="codigoPro" name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
                                             <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> Selecione um Produto</option>  
                                             <c:forEach items="${produtos}" var="produto">
                                                 <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
@@ -67,24 +69,24 @@
                                         <div class="form-group">
                                             <label for="valor">Valor:</label>
                                             <input type="text" class="form-control" id="valor" name="txtProdutoValor" value="${produtoKit.valor}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-6">
-                                            <a href="PesquisaProdutoKitController" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <a href="PesquisaProdutoKitController" style="text-decoration: none" ><button type="button" class="btn btn-danger btn-block">Cancelar</button> </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success btn-block" >
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-                                    
+
         <%@ include file = "layout/rodape.jsp" %>
-    
+
     </body>
 </html>

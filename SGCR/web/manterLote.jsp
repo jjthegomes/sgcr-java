@@ -52,10 +52,6 @@
                                         <input type="text" class="form-control" id="tipoLote" placeholder="" name="txtTipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <label for="quant">Quantidade:</label>
-                                            <input type="text" class="form-control" id="quant" placeholder="" name="txtQuantidadeLote" value="${lote.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="preco">Preço:</label>
                                             <input type="text" class="form-control" id="preco" placeholder="R$" name="txtPrecoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>

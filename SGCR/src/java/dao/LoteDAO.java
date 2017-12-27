@@ -32,7 +32,6 @@ public class LoteDAO {
                         rs.getFloat("preco"),
                         rs.getString("data_inicio"),
                         rs.getString("data_final"),
-                        rs.getInt("quantidade"),
                         null);
                 lote.setCorridaId(rs.getInt("corrida_id"));
                 lote.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
@@ -61,7 +60,6 @@ public class LoteDAO {
                         rs.getFloat("preco"),
                         rs.getString("data_inicio"),
                         rs.getString("data_final"),
-                        rs.getInt("quantidade"),
                         null);
                 lote.setCorridaId(rs.getInt("corrida_id"));
                 lotes.add(lote);
@@ -78,16 +76,15 @@ public class LoteDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO lote (id, tipo, preco, data_inicio, data_final, quantidade, "
-                    + "corrida_id) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO lote (id, tipo, preco, data_inicio, data_final, "
+                    + "corrida_id) VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, lote.getId());
             comando.setString(2, lote.getTipo());
             comando.setDouble(3, lote.getPreco());
             comando.setString(4, lote.getDataInicio());
             comando.setString(5, lote.getDataFinal());
-            comando.setInt(6, lote.getQuantidade());
-            comando.setInt(7, lote.getCorrida().getId());
+            comando.setInt(6, lote.getCorrida().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -119,15 +116,14 @@ public class LoteDAO {
         try {
             conexao = BD.getConexao();
             String sql = "UPDATE lote SET tipo = ?, preco = ?, data_inicio = ?, "
-                    + "data_final = ?, quantidade = ?, corrida_id = ? WHERE id = ?";            
+                    + "data_final = ?, corrida_id = ? WHERE id = ?";            
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, lote.getTipo());
             comando.setDouble(2, lote.getPreco());
             comando.setString(3, lote.getDataInicio());
             comando.setString(4, lote.getDataFinal());
-            comando.setInt(5, lote.getQuantidade());
-            comando.setInt(6, lote.getCorrida().getId());
-            comando.setInt(7, lote.getId());
+            comando.setInt(5, lote.getCorrida().getId());
+            comando.setInt(6, lote.getId());
 
             comando.execute();
             comando.close();
@@ -153,7 +149,6 @@ public class LoteDAO {
                     rs.getDouble("preco"),
                     rs.getString("data_inicio"),
                     rs.getString("data_final"),
-                    rs.getInt("quantidade"),
                     null);
             lote.setCorridaId(rs.getInt("corrida_id"));
         } catch (SQLException e) {

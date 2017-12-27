@@ -15,18 +15,16 @@ public class Lote {
     private double preco;
     private String dataInicio;
     private String dataFinal;
-    private int quantidade;
     private Corrida corrida;
 
     private int corridaId;
 
-    public Lote(int id, String tipo, double preco, String dataInicio, String dataFinal, int quantidade, Corrida corrida) {
+    public Lote(int id, String tipo, double preco, String dataInicio, String dataFinal, Corrida corrida) {
         this.id = id;
         this.tipo = tipo;
         this.preco = preco;
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
-        this.quantidade = quantidade;
         this.corrida = corrida;
     }
 
@@ -68,14 +66,6 @@ public class Lote {
 
     public void setDataFinal(String dataFinal) {
         this.dataFinal = dataFinal;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public Corrida getCorrida() {
