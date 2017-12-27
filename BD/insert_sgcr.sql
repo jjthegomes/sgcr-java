@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Nov-2017 às 00:32
--- Versão do servidor: 10.1.26-MariaDB
+-- Generation Time: 27-Dez-2017 às 18:36
+-- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -21,537 +21,143 @@ SET time_zone = "+00:00";
 --
 -- Database: `sgcr`
 --
-CREATE DATABASE IF NOT EXISTS `sgcr` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `sgcr`;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `administrador`
---
-
-CREATE TABLE `administrador` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(60) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `administrador`
 --
 
 INSERT INTO `administrador` (`id`, `nome`, `email`, `senha`) VALUES
-(1, 'Jonas Gomes', 'adm1@gmail.com', '123123'),
-(2, 'Rafael Lana', 'adm2@email.com', '123123'),
-(3, 'Arielesco Altino', 'adm3@gmail.com', '123123');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `atleta`
---
-
-CREATE TABLE `atleta` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `apelido` varchar(45) DEFAULT NULL,
-  `email` varchar(45) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `sexo` varchar(1) NOT NULL,
-  `tamanho_camisa` varchar(2) NOT NULL,
-  `data_nascimento` varchar(10) NOT NULL,
-  `cpf` varchar(11) NOT NULL,
-  `cep` varchar(8) NOT NULL,
-  `estado` varchar(45) NOT NULL,
-  `cidade` varchar(45) NOT NULL,
-  `bairro` varchar(45) NOT NULL,
-  `logradouro` varchar(45) NOT NULL,
-  `numero` varchar(6) NOT NULL,
-  `complemento` varchar(80) DEFAULT NULL,
-  `telefone` varchar(11) NOT NULL,
-  `celular` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'Arielson Souza', 'arielson@hotmail.com', '123'),
+(2, 'Rafael Lana', 'rafael@hotmail.com', '123'),
+(5, 'Jonas Silva', 'jonas@hotmail.com', '123');
 
 --
 -- Extraindo dados da tabela `atleta`
 --
 
 INSERT INTO `atleta` (`id`, `nome`, `apelido`, `email`, `senha`, `sexo`, `tamanho_camisa`, `data_nascimento`, `cpf`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `complemento`, `telefone`, `celular`) VALUES
-(1, 'Dorival Junior', 'Dori', 'dorival@gmail.com', '123123', 'M', 'M', '1998-08-20', '12353849699', '36031574', 'Minas Gerais', 'Juiz de Fora', 'Fabrica', 'Bernardo Mascarenhas', '12', 'n/a', '32329898', '99987952'),
-(2, 'Jackson Nunes', 'Jack', 'jack@gmail.com', '123123', 'M', 'G', '1998-09-15', '12345678996', '36541574', 'Rio de Janeiro', 'Barra Mansa', 'Mansa', 'Perto do mar', '678', 'ap 234', '32456987', '99987600'),
-(3, 'Camila Rezende', 'Camis', 'camis@gmail.com', '123123', 'F', 'P', '1990-12-25', '15473849699', '36541574', 'Sao Paulo', 'Sao Paulo', 'Das Cruzes', 'Rua das Placas', '23', 'ap 201', '32456987', '99875536');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `boleto`
---
-
-CREATE TABLE `boleto` (
-  `id` int(11) NOT NULL,
-  `codigo_barra` varchar(45) NOT NULL,
-  `data_emissao` varchar(10) NOT NULL,
-  `data_vencimento` varchar(10) NOT NULL,
-  `nome_titular` varchar(45) NOT NULL,
-  `cpf_titular` varchar(11) NOT NULL,
-  `inscricao_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+(1, 'Fausto Silva', 'Faustão', 'fausto@hotmail.com', '123', 'M', 'G', '12/01/1954', '123.654.876-32', '25789452', 'RJ', 'Rio de Janeiro', 'Urca', '15 de novembro', '1356', NULL, '(21)95898-7414', '(21)92582-7841'),
+(2, 'Maria da Graça Meneghel', 'Xuxa', 'maria@hotmail.con', '123', 'F', 'P', '05/03/1968', '235.648.791-56', '36016789', 'CE', 'Piau', 'Ladeira', 'Marechal Hermes', '5489', 'Beco', '(35)48759-8412', '(35)84526-3147'),
+(3, 'Inês Brasil', 'Nenê', 'ines@hotmail.com', '123', 'F', 'M', '03/11/1979', '236.541.897-52', '35654789', 'RJ', 'Rio de Janeiro', 'São Gonçalo', 'Rua Princesa Isabel ', '123', '', '(21)54789-6325', '(21)94456-8721'),
+(7, 'Ângela Dantas de Macedo Aragão ', 'Gê', 'angela@hotmail.om', '123', 'F', 'P', '21/11/1995', '452.478.963-25', '24737484', 'RJ', 'São Gonçalo', 'Eliane', 'Estrada Santa Isabel ', '145', NULL, '(21)92145-8796', '(21)96884-5415'),
+(8, 'Rodolfo Duarte Martins Strognoff', NULL, 'rodolfo@hotmail.com', '123', 'M', 'G', '05/04/1986', '365.874.569-82', '16010250', 'SP', 'Araçatuba', 'Centro ', 'Rua Princesa Isabel ', '85', NULL, '(11)98547-1236', '(11)96587-4523'),
+(9, 'Ian Lucas de Aquino Silvério de Azevedo Prado', 'Ianzim', 'ian@hotmail.com', '123', 'M', 'M', '21/10/1991', '258.741.365-28', '12947591', 'SP', 'Atibaia/', 'Jardim Santa Bárbara ', 'Rua Isabel Pires Antônio ', '75', NULL, '(11)98478-5565', '(11)94257-8524');
 
 --
--- Estrutura da tabela `cartao_credito`
+-- Extraindo dados da tabela `boleto`
 --
 
-CREATE TABLE `cartao_credito` (
-  `id` int(11) NOT NULL,
-  `numero` varchar(16) NOT NULL,
-  `codigo_seguranca` varchar(3) NOT NULL,
-  `validade` varchar(5) NOT NULL,
-  `nome_titular` varchar(45) NOT NULL,
-  `inscricao_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+INSERT INTO `boleto` (`id`, `codigo_barra`, `data_emissao`, `data_vencimento`, `nome_titular`, `cpf_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
+(1, '345484634648', '22/11/2017', '22/12/2017', 'Ângela Dantas de Macedo Aragão', '452.478.963-25', 16, 2),
+(2, '54369465631456314', '22/10/2017', '23/11/2017', 'Rodolfo Duarte Martins Strognoff', '365.874.569-82', 17, 2),
+(3, '47494746964645', '22/11/2017', '22/11/2017', 'Ian Lucas de Aquino Silvério de Azevedo Prado', '258.741.365-28', 18, 3);
 
 --
--- Estrutura da tabela `corrida`
+-- Extraindo dados da tabela `cartao_credito`
 --
 
-CREATE TABLE `corrida` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `horario` varchar(5) NOT NULL,
-  `data` varchar(8) NOT NULL,
-  `max_pessoa` int(11) NOT NULL,
-  `banner` varchar(255) DEFAULT NULL,
-  `descricao` varchar(45) DEFAULT NULL,
-  `regulamento` varchar(255) DEFAULT NULL,
-  `cep` varchar(8) NOT NULL,
-  `estado` varchar(45) NOT NULL,
-  `cidade` varchar(45) NOT NULL,
-  `bairro` varchar(45) NOT NULL,
-  `logradouro` varchar(45) NOT NULL,
-  `organizador_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `cartao_credito` (`id`, `numero`, `codigo_seguranca`, `validade`, `nome_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
+(10, '1', '245', '10/2019', 'Fausto Silva', 13, 3),
+(11, '2', '584', '10/2025', 'Maria da Graça Meneguel', 14, 1),
+(12, '3', '753', '10/2023', 'Ian Lucas de Aquino Silvério de Azevedo Prado', 15, 1);
 
 --
 -- Extraindo dados da tabela `corrida`
 --
 
-INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, `descricao`, `regulamento`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `organizador_id`) VALUES
-(1, 'Corrida da Paz', '22:38', '18-12-17', 250, 'caminho da img', 'Paz a todos na Terra', 'consultar site', '36031524', 'Minas Gerais', 'Juiz de Fora', 'Morto', 'Das Flores', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `corrida_ranking`
---
-
-CREATE TABLE `corrida_ranking` (
-  `id` int(11) NOT NULL,
-  `corrida_id` int(11) NOT NULL,
-  `ranking_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, `descricao`, `regulamento`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `edicao`, `ativo`, `organizador_id`) VALUES
+(1, 'Corrida da Paz', '08:00:00', '21/03/2018', 2000, NULL, 'A Corrida da Paz tem como abjetivo além de promover a saúde dos participantes, conscientizar sobre o valor da paz mundial. Venha se divertir em Paz.', NULL, '28016200', 'RJ', 'Campos dos Goytacazes', 'Vila da Rainha', 'Alameda Demerval Crespo', '145', NULL, 1, 1),
+(2, 'Corrida Outubro Rosa', '08:00:00', '22/04/2018', 3000, NULL, 'A corrida Outubro Rosa tem como objetivo promover a conscientização da importância do exame e diagnostico assim como a prevenção contra a doença.   ', 'Futuramente será postado', '29155070', 'ES', 'Cariacica', 'Bela Vista ', 'Rua Juiz de Fora ', '150', 1, 1, 2),
+(3, 'Corrida Contra Violência Infantil', '07:00:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', 'Futuramente será postado', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, 3);
 
 --
--- Estrutura da tabela `inscricao`
+-- Extraindo dados da tabela `inscricao`
 --
 
-CREATE TABLE `inscricao` (
-  `id` int(11) NOT NULL,
-  `data_compra` varchar(10) NOT NULL,
-  `numero_peito` int(11) NOT NULL,
-  `pago` tinyint(1) DEFAULT NULL,
-  `kit_retirado` tinyint(1) DEFAULT NULL,
-  `tempo_largada` varchar(8) DEFAULT NULL,
-  `tempo_chegada` varchar(8) DEFAULT NULL,
-  `percurso_id` int(11) NOT NULL,
-  `atleta_id` int(11) NOT NULL,
-  `kit_id` int(11) NOT NULL,
-  `kit_corrida_id` int(11) NOT NULL,
-  `lote_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `kit`
---
-
-CREATE TABLE `kit` (
-  `id` int(11) NOT NULL,
-  `corrida_id` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
-  `tipo_chip` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `inscricao` (`id`, `corrida_id`, `data_compra`, `numero_peito`, `pago`, `kit_retirado`, `tempo_largada`, `tempo_chegada`, `atleta_id`, `percurso_id`, `lote_id`, `kit_id`) VALUES
+(13, 3, '26/10/2017', NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2),
+(14, 1, '20/11/2017', NULL, NULL, NULL, NULL, NULL, 2, 2, 2, 3),
+(15, 1, '11/12/2017', NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 4),
+(16, 2, '04/01/2018', NULL, NULL, NULL, NULL, NULL, 7, 1, 5, 3),
+(17, 2, '06/01/2018', NULL, NULL, NULL, NULL, NULL, 8, 3, 6, 4),
+(18, 3, '22/01/2018', NULL, NULL, NULL, NULL, NULL, 9, 3, 8, 4);
 
 --
 -- Extraindo dados da tabela `kit`
 --
 
-INSERT INTO `kit` (`id`, `corrida_id`, `nome`, `quantidade`, `imagem`, `tipo_chip`) VALUES
-(1, 1, 'KIT VIP', 150, 'caminho da imagem', 'Descartável');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `lote`
---
-
-CREATE TABLE `lote` (
-  `id` int(11) NOT NULL,
-  `tipo` varchar(45) NOT NULL,
-  `preco` double NOT NULL,
-  `data_inicio` varchar(19) NOT NULL,
-  `data_final` varchar(19) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  `corrida_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `kit` (`id`, `nome`, `imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`) VALUES
+(2, 'VIP', NULL, 'Retornável', '21/01/2018', '02/02/2018'),
+(3, 'Premio', NULL, 'Reciclavel', '21/01/2018', '02/02/2018'),
+(4, 'Básico', NULL, 'Reciclavel', '21/01/2018', '02/02/2018');
 
 --
 -- Extraindo dados da tabela `lote`
 --
 
-INSERT INTO `lote` (`id`, `tipo`, `preco`, `data_inicio`, `data_final`, `quantidade`, `corrida_id`) VALUES
-(1, 'VIP', 260, '2017-02-56', '2017-06-10', 30, 1),
-(2, 'Unico', 53, '2017-05-10', '2017-06-10', 200, 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `organizador`
---
-
-CREATE TABLE `organizador` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `sexo` varchar(1) NOT NULL,
-  `data_nascimento` varchar(10) NOT NULL,
-  `cpf` varchar(11) NOT NULL,
-  `cep` varchar(8) NOT NULL,
-  `estado` varchar(45) NOT NULL,
-  `cidade` varchar(45) NOT NULL,
-  `bairro` varchar(45) NOT NULL,
-  `logradouro` varchar(45) NOT NULL,
-  `numero` varchar(6) NOT NULL,
-  `complemento` varchar(80) DEFAULT NULL,
-  `telefone` varchar(11) DEFAULT NULL,
-  `celular` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `lote` (`id`, `tipo`, `preco`, `data_inicio`, `data_final`, `corrida_id`) VALUES
+(1, '1º Lote ', 25, '21/09/2017', '21/11/2017', 1),
+(2, '2º Lote', 50, '22/11/2017', '22/01/2018', 1),
+(3, '3º Lote', 70, '23/01/2018', '10/03/2018', 1),
+(4, '1º Lote ', 25, '22/10/2017', '22/12/2017', 2),
+(5, '2º Lote', 50, '23/12/2017', '23/02/2018', 2),
+(6, '3º Lote', 70, '24/02/2018', '15/04/2018', 2),
+(7, '1º Lote', 25, '22/09/2017', '22/11/2017', 3),
+(8, '2º Lote', 50, '23/11/2017', '23/12/2017', 3),
+(9, '3º Lote', 70, '24/12/2017', '15/02/2018', 3);
 
 --
 -- Extraindo dados da tabela `organizador`
 --
 
 INSERT INTO `organizador` (`id`, `nome`, `email`, `senha`, `sexo`, `data_nascimento`, `cpf`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `complemento`, `telefone`, `celular`) VALUES
-(1, 'Jhon', 'Minas Gerais', 'M', 'M', '1998-10-01', '1235384654', '36031369', 'Minas Gerais', 'Juiz de Fora', 'Sao Geraldo', 'Rua das Pedras', '131', 'clube', '32332686', '999822421'),
-(2, 'Sara', 'Minas Gerais', 'F', 'F', '1998-02-10', '1235384654', '36031369', 'Minas Gerais', 'Juiz de Fora', 'Pedregulho', 'Rua das Pedras', '775', 'Perto da pedra', '32332686', '999822421');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `percurso`
---
-
-CREATE TABLE `percurso` (
-  `id` int(11) NOT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
-  `quilometragem` double NOT NULL,
-  `corrida_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'Marcelo Alvares de Castro', 'marcelo@hotmail.com', '123', 'M', '07/06/1980', '147.896.523-65', '36458796', 'TO', 'Arueira', 'Flores Altas', 'Avenida das Pedras', '753', NULL, '(45)87965-2356', '(45)98752-1456'),
+(2, 'Laura Marques de Mello Alcântara ', 'laura@hotmail.com', '123', 'F', '12/10/1985', '458.796.325-41', '21456987', 'SP', 'São Paulo', 'Jardins', 'Rua Presidente Arthur Bernardes', '456', NULL, '(11)85479-6325', '(11)87459-6325'),
+(3, 'Frederico Lavinas Gonçalves Damas', 'frederico@hotmail.com', '123', 'M', '09/06/1990', '112.547.896-35', '36236587', 'MG', 'Tocantins de Minas', 'Roseiral', 'Rua Condessa do Rio Novo', '658', NULL, '(32)23547-8965', '(32)54789-6558');
 
 --
 -- Extraindo dados da tabela `percurso`
 --
 
-INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `corrida_id`) VALUES
-(1, 'caminho da imagem', 12, 1),
-(2, 'caminho da imagem', 25, 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `pontuacao`
---
-
-CREATE TABLE `pontuacao` (
-  `id` int(11) NOT NULL,
-  `ranking_id` int(11) NOT NULL,
-  `pontuacao` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `descricao`) VALUES
+(1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes'),
+(2, NULL, 10, 'Percurso Intermediário.   '),
+(3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes. ');
 
 --
 -- Extraindo dados da tabela `pontuacao`
 --
 
 INSERT INTO `pontuacao` (`id`, `ranking_id`, `pontuacao`) VALUES
-(1, 1, 10),
-(2, 2, 10);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `produto`
---
-
-CREATE TABLE `produto` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(80) NOT NULL,
-  `administrador_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 1, 50),
+(2, 2, 70),
+(3, 1, 25),
+(4, 2, 50),
+(5, 1, 15),
+(6, 2, 25),
+(7, 1, 5),
+(8, 2, 15),
+(9, 2, 5);
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `administrador_id`) VALUES
-(1, 'Camiseta', 1),
-(2, 'Bone', 2),
-(3, 'Shortin', 3);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `produto_kit`
---
-
-CREATE TABLE `produto_kit` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(155) NOT NULL,
-  `valor` double(6,2) NOT NULL,
-  `produto_id` int(11) NOT NULL,
-  `kit_id` int(11) NOT NULL,
-  `kit_corrida_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `produto_kit`
---
-
-INSERT INTO `produto_kit` (`id`, `descricao`, `valor`, `produto_id`, `kit_id`, `kit_corrida_id`) VALUES
-(1, 'Camisa branca', 30.00, 1, 1, 1),
-(2, 'Bone preto', 10.00, 2, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `ranking`
---
-
-CREATE TABLE `ranking` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `intervalo_faixa_etaria` int(11) DEFAULT NULL,
-  `administrador_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'Boné Masculino', 1),
+(2, 'Short Masculino', 5),
+(3, 'Camisa Masculina', 2),
+(4, 'Camisa Feminina', 5),
+(5, 'Boné Feminino', 2),
+(6, 'Short Feminino', 1);
 
 --
 -- Extraindo dados da tabela `ranking`
 --
 
-INSERT INTO `ranking` (`id`, `nome`, `intervalo_faixa_etaria`, `administrador_id`) VALUES
-(1, 'Masculino', 10, 2),
-(2, 'Feminino', 5, 3);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `administrador`
---
-ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `atleta`
---
-ALTER TABLE `atleta`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `boleto`
---
-ALTER TABLE `boleto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_boleto_inscricao1_idx` (`inscricao_id`);
-
---
--- Indexes for table `cartao_credito`
---
-ALTER TABLE `cartao_credito`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_cartao_credito_inscricao1_idx` (`inscricao_id`);
-
---
--- Indexes for table `corrida`
---
-ALTER TABLE `corrida`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_corridas_organizadores1_idx` (`organizador_id`);
-
---
--- Indexes for table `corrida_ranking`
---
-ALTER TABLE `corrida_ranking`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_corrida_ranking_corridas1_idx` (`corrida_id`),
-  ADD KEY `fk_corrida_ranking_rankings1_idx` (`ranking_id`);
-
---
--- Indexes for table `inscricao`
---
-ALTER TABLE `inscricao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_inscricao_atleta1_idx` (`atleta_id`),
-  ADD KEY `fk_inscricoes_percursos1_idx` (`percurso_id`),
-  ADD KEY `fk_inscricao_kit1_idx` (`kit_id`,`kit_corrida_id`),
-  ADD KEY `fk_inscricao_lote1_idx` (`lote_id`);
-
---
--- Indexes for table `kit`
---
-ALTER TABLE `kit`
-  ADD PRIMARY KEY (`id`,`corrida_id`),
-  ADD KEY `fk_kits_corridas1_idx` (`corrida_id`);
-
---
--- Indexes for table `lote`
---
-ALTER TABLE `lote`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_ingressos_corridas1_idx` (`corrida_id`);
-
---
--- Indexes for table `organizador`
---
-ALTER TABLE `organizador`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `percurso`
---
-ALTER TABLE `percurso`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_percursos_corridas1_idx` (`corrida_id`);
-
---
--- Indexes for table `pontuacao`
---
-ALTER TABLE `pontuacao`
-  ADD PRIMARY KEY (`id`,`ranking_id`),
-  ADD KEY `fk_pontuacao_ranking1_idx` (`ranking_id`);
-
---
--- Indexes for table `produto`
---
-ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_produto_administrador1_idx` (`administrador_id`);
-
---
--- Indexes for table `produto_kit`
---
-ALTER TABLE `produto_kit`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_produtos_kit_produto1_idx` (`produto_id`),
-  ADD KEY `fk_produto_kit_kit1_idx` (`kit_id`,`kit_corrida_id`);
-
---
--- Indexes for table `ranking`
---
-ALTER TABLE `ranking`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_rankings_administrador1_idx` (`administrador_id`);
-
---
--- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `boleto`
---
-ALTER TABLE `boleto`
-  ADD CONSTRAINT `fk_boleto_inscricao1` FOREIGN KEY (`inscricao_id`) REFERENCES `inscricao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `cartao_credito`
---
-ALTER TABLE `cartao_credito`
-  ADD CONSTRAINT `fk_cartao_credito_inscricao1` FOREIGN KEY (`inscricao_id`) REFERENCES `inscricao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `corrida`
---
-ALTER TABLE `corrida`
-  ADD CONSTRAINT `fk_corridas_organizadores1` FOREIGN KEY (`organizador_id`) REFERENCES `organizador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `corrida_ranking`
---
-ALTER TABLE `corrida_ranking`
-  ADD CONSTRAINT `fk_corrida_ranking_corridas1` FOREIGN KEY (`corrida_id`) REFERENCES `corrida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_corrida_ranking_rankings1` FOREIGN KEY (`ranking_id`) REFERENCES `ranking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `inscricao`
---
-ALTER TABLE `inscricao`
-  ADD CONSTRAINT `fk_inscricao_atleta1` FOREIGN KEY (`atleta_id`) REFERENCES `atleta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inscricao_kit1` FOREIGN KEY (`kit_id`,`kit_corrida_id`) REFERENCES `kit` (`id`, `corrida_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_inscricao_lote1` FOREIGN KEY (`lote_id`) REFERENCES `lote` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_inscricoes_percursos1` FOREIGN KEY (`percurso_id`) REFERENCES `percurso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `kit`
---
-ALTER TABLE `kit`
-  ADD CONSTRAINT `fk_kits_corridas1` FOREIGN KEY (`corrida_id`) REFERENCES `corrida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `lote`
---
-ALTER TABLE `lote`
-  ADD CONSTRAINT `fk_ingressos_corridas1` FOREIGN KEY (`corrida_id`) REFERENCES `corrida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `percurso`
---
-ALTER TABLE `percurso`
-  ADD CONSTRAINT `fk_percursos_corridas1` FOREIGN KEY (`corrida_id`) REFERENCES `corrida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `pontuacao`
---
-ALTER TABLE `pontuacao`
-  ADD CONSTRAINT `fk_pontuacao_ranking1` FOREIGN KEY (`ranking_id`) REFERENCES `ranking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `produto`
---
-ALTER TABLE `produto`
-  ADD CONSTRAINT `fk_produto_administrador1` FOREIGN KEY (`administrador_id`) REFERENCES `administrador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `produto_kit`
---
-ALTER TABLE `produto_kit`
-  ADD CONSTRAINT `fk_produto_kit_kit1` FOREIGN KEY (`kit_id`,`kit_corrida_id`) REFERENCES `kit` (`id`, `corrida_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_produtos_kit_produto1` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `ranking`
---
-ALTER TABLE `ranking`
-  ADD CONSTRAINT `fk_rankings_administrador1` FOREIGN KEY (`administrador_id`) REFERENCES `administrador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+INSERT INTO `ranking` (`id`, `nome`, `intervalo_faixa_etaria`, `idade_inicial`, `administrador_id`) VALUES
+(1, 'Juiz de Fora', 5, 10, 1),
+(2, 'Rio de Janeiro', 7, 5, 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
