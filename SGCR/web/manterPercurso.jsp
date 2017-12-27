@@ -35,27 +35,18 @@
                                     <input type="hidden" class="form-control" id="codigo" name="hiddenIdPercurso" value="${percurso.id}" readonly />
 
                                     <div class="form-group">
-                                        <label for="nomeKit">Corrida:</label>
-                                        <select name="optCorrida" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            <option value="0" <c:if test="${percurso.corrida.corridaId == null}"> selected</c:if>> Selecione uma corrida</option>  
-                                            <c:forEach items="${corridas}" var="corrida">
-                                                <option value="${corrida.id}" <c:if test="${percurso.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
-                                            </c:forEach>
-                                        </select>
-                                    </div>            
-                                    <div class="form-group">
                                         <label for="numQuilometragemPercurso">Quilometragem:</label>
                                         <input type="number" class="form-control" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
-                                    </div>
 
-                                    <div  class="col-md-6">
                                         <div class="form-group">
                                             <label for="fileImagemPercurso">Imagem:</label>
                                             <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
                                             <input type="text" class="form-control" name="fileImagemPercurso" value="${percurso.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div> 
+                                    </div>
+                                    <div class="col-md-6"> 
 
                                         <div class="form-group">
                                             <label for="descricaoPercurso">Descrição:</label>                                         
@@ -64,7 +55,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-6">
-                                                <a href="PesquisaKitController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Cancelar</div></a>
+                                                <a href="PesquisaPercursoController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Cancelar</div></a>
                                             </div>
 
                                             <div class="col-sm-6">
