@@ -10,16 +10,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Ranking</title>
-        
+
     </head>
 
     <body>
-        
+
         <%@ include file = "layout/menu.jsp" %>
-        
+
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
@@ -31,21 +31,23 @@
                         <div class="panel-heading">${operacao} Ranking</div>
                         <div class="panel-body">
                             <form action="ManterRankingController?acao=confirmar${operacao}" method="post" name="frmManterRanking">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdRanking" value="${ranking.id}" readonly />
+
+                                    <div class="form-group">
                                         <label for="codigo">Administrador:</label>
-                                            <select  class="form-control" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
-                                                <c:forEach items="${administradores}" var="administrador">
+                                        <select  class="form-control" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                            <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
+                                            <c:forEach items="${administradores}" var="administrador">
                                                 <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
-                                                </c:forEach>
-                                            </select>
-                                        </div>                                       
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="nome">Nome:</label>
-                                            <input type="text" id="nome" class="form-control" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            </c:forEach>
+                                        </select>
+                                    </div>                                       
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nome">Nome:</label>
+                                        <input type="text" id="nome" class="form-control" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="FaixaEtaria">Intervalo de Faixa Etaria:</label>
@@ -60,12 +62,12 @@
                                             </div>
                                         </div>     
                                     </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

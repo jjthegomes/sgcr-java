@@ -13,8 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Corrida;
 import modelo.Inscricao;
+import modelo.Organizador;
 
 /**
  *
@@ -43,7 +45,7 @@ public class ManterResultadoCorridaController extends HttpServlet {
             escolherCorrida(request, response);
         }
     }
-    
+
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
@@ -59,16 +61,19 @@ public class ManterResultadoCorridaController extends HttpServlet {
     }
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(true);
+        Organizador organizador = (Organizador) session.getAttribute("organizador");
+
         try {
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             List<Inscricao> inscricoes = Inscricao.obterInscricoes(corridaId);
             for (Inscricao inscricao : inscricoes) {
-                inscricao.setTempoLargada(request.getParameter("tempoLargada"+inscricao.getId()));
-                inscricao.setTempoChegada(request.getParameter("tempoChegada"+inscricao.getId()));
+                inscricao.setTempoLargada(request.getParameter("tempoLargada" + inscricao.getId()));
+                inscricao.setTempoChegada(request.getParameter("tempoChegada" + inscricao.getId()));
             }
-             
+
             Inscricao.atualizarResultadoCorrida(inscricoes);
-            
+
             RequestDispatcher view = request.getRequestDispatcher("ManterResultadoCorridaController?acao=escolherCorrida");
             view.forward(request, response);
         } catch (IOException ex) {
@@ -77,7 +82,7 @@ public class ManterResultadoCorridaController extends HttpServlet {
         } catch (SQLException ex) {
         }
     }
-    
+
     private void escolherCorrida(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("corridas", Corrida.obterCorridas());

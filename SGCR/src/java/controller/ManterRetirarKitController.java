@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Atleta;
 import modelo.Corrida;
 import modelo.Inscricao;
 
@@ -45,7 +46,7 @@ public class ManterRetirarKitController extends HttpServlet {
             escolherCorrida(request, response);
         }
     }
-    
+
     public void prepararRetirarKit(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
@@ -61,10 +62,12 @@ public class ManterRetirarKitController extends HttpServlet {
     }
 
     private void confirmarRetirarKit(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
-        int id = Integer.parseInt(request.getParameter("id"));        
-        Inscricao inscricao = Inscricao.obterInscricao(id);        
+        int id = Integer.parseInt(request.getParameter("id"));
+        Inscricao inscricao = Inscricao.obterInscricao(id);
         inscricao.setKitRetirado(true);
-        
+        HttpSession session = request.getSession(true);
+        Atleta atleta = (Atleta) session.getAttribute("atleta");
+
         try {
             inscricao.retirarKit();
             RequestDispatcher view = request.getRequestDispatcher("ManterRetirarKitController?acao=escolherCorrida");

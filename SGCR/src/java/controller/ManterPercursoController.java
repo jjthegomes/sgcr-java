@@ -12,7 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Corrida;
+import modelo.Organizador;
 import modelo.Percurso;
 
 /**
@@ -116,12 +118,15 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
-        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
+        String descricao = request.getParameter("descricaoPercurso");
+
+        HttpSession session = request.getSession(true);
+        Organizador organizador = (Organizador) session.getAttribute("organizador");
+
         try {
-            Corrida corrida = null;
-            corrida = Corrida.obterCorrida(corridaId);
-            Percurso percurso = new Percurso(imagem, numQuilometragem, corrida);
+            Percurso percurso = new Percurso(imagem, descricao, numQuilometragem);
             percurso.gravar();
+
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
             view.forward(request, response);
         } catch (IOException ex) {
@@ -134,9 +139,10 @@ public class ManterPercursoController extends HttpServlet {
     private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
-            request.setAttribute("corridas", Corrida.obterCorridas());
+
             int idPercurso = Integer.parseInt(request.getParameter("id"));
             Percurso percurso = Percurso.obterPercurso(idPercurso);
+
             request.setAttribute("percurso", percurso);
             RequestDispatcher view = request.getRequestDispatcher("/manterPercurso.jsp");
             view.forward(request, response);
@@ -152,8 +158,10 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
+        String descricao = request.getParameter("descricaoPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
-        Percurso percurso = new Percurso(id, imagem, numQuilometragem, null);
+
+        Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem);
         try {
             percurso.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -168,9 +176,10 @@ public class ManterPercursoController extends HttpServlet {
     private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            request.setAttribute("corridas", Corrida.obterCorridas());
+
             int idPercurso = Integer.parseInt(request.getParameter("id"));
             Percurso percurso = Percurso.obterPercurso(idPercurso);
+
             request.setAttribute("percurso", percurso);
             RequestDispatcher view = request.getRequestDispatcher("/manterPercurso.jsp");
             view.forward(request, response);
@@ -187,12 +196,12 @@ public class ManterPercursoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
-        int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
-        
+        String descricao = request.getParameter("descricaoPercurso");
+
         try {
-            Corrida corrida = Corrida.obterCorrida(corridaId);
-            Percurso percurso = new Percurso(id, imagem, numQuilometragem, corrida);
+            Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem);
             percurso.alterar();
+
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
             view.forward(request, response);
         } catch (IOException ex) {

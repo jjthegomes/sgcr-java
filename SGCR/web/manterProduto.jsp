@@ -10,15 +10,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Produto</title>
-        
+
     </head>
     <body>
-        
+
         <%@ include file = "layout/menu.jsp" %>
-        
+
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="index.jsp">Home</a></li>
@@ -30,8 +30,10 @@
                         <div class="panel-heading">${operacao} Produto</div>
                         <div class="panel-body">
                             <form action="ManterProdutoController?acao=confirmar${operacao}" method="post" name="frmManterProduto" >
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+                                <div class="col-md-6">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdProduto" value="${produto.id}" readonly />
+
+                                    <div class="form-group">
                                         <label for="codigoAdm">Administrador:</label>
                                         <select class="form-control" id="codigoAdm" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                             <option value="0" <c:if test="${produto.administrador.id == null}"> selected</c:if>> </option>  
@@ -39,12 +41,12 @@
                                                 <option value="${administrador.id}" <c:if test="${produto.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
                                             </c:forEach>
                                         </select>
-                                        </div>                                      
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="nome">Nome:</label>
-                                            <input type="text" id="nome" class="form-control" name="txtNome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                    </div>                                      
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nome">Nome:</label>
+                                        <input type="text" id="nome" class="form-control" name="txtNome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">
@@ -55,12 +57,12 @@
                                             </div>
                                         </div>
                                     </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>
 </html>

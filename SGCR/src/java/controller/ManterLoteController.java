@@ -65,12 +65,11 @@ public class ManterLoteController extends HttpServlet {
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");
         String dataFinal = request.getParameter("txtDataFinalLote");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
             Corrida corrida = Corrida.obterCorrida(corridasId);
-            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, corrida);
+            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal,  corrida);
             ingresso.gravar();
 
             RequestDispatcher view
@@ -86,7 +85,6 @@ public class ManterLoteController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            //Para chave estrangeira
             request.setAttribute("corridas", Corrida.obterCorridas());
             RequestDispatcher view
                     = request.getRequestDispatcher("/manterLote.jsp");
@@ -95,7 +93,6 @@ public class ManterLoteController extends HttpServlet {
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
         }
-        //catch(ClassNotFoundException ex){ }
     }
     
       public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
@@ -122,12 +119,11 @@ public class ManterLoteController extends HttpServlet {
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");
         String dataFinal = request.getParameter("txtDataFinalLote");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
         int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
             Corrida corrida = Corrida.obterCorrida(corridasId);
-            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, corrida);
+            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, corrida);
 
             ingresso.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaLoteController");
@@ -164,12 +160,9 @@ public class ManterLoteController extends HttpServlet {
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");
         String dataFinal = request.getParameter("txtDataFinalLote");
-        int quantidade = Integer.parseInt(request.getParameter("txtQuantidadeLote"));
-        int corridasId = Integer.parseInt(request.getParameter("optCorrida"));
 
         try {
-            //Corrida corrida = Corrida.obterCorrida(corridasId);
-            Lote lote = new Lote(id, tipo, preco, dataInicio, dataFinal, quantidade, null);
+            Lote lote = new Lote(id, tipo, preco, dataInicio, dataFinal, null);
 
             lote.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaLoteController");

@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Administrador;
 import modelo.Ranking;
 
@@ -47,10 +47,10 @@ public class ManterRankingController extends HttpServlet {
                 } else {
                     if (acao.equals("confirmarExcluir")) {
                         confirmarExcluir(request, response);
-                    }else {
+                    } else {
                         if (acao.equals("prepararEditar")) {
                             prepararEditar(request, response);
-                        }else{
+                        } else {
                             if (acao.equals("confirmarEditar")) {
                                 confirmarEditar(request, response);
                             }
@@ -74,7 +74,7 @@ public class ManterRankingController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-    
+
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
@@ -110,13 +110,12 @@ public class ManterRankingController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
+
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("txtIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
-        //int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
 
-        //Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
         Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, null);
         try {
             ranking.excluir();
@@ -138,7 +137,7 @@ public class ManterRankingController extends HttpServlet {
         int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
 
         Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
-        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria,administrador);
+        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, administrador);
         try {
             ranking.alterar();
 
@@ -156,9 +155,11 @@ public class ManterRankingController extends HttpServlet {
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
         int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+
+        HttpSession session = request.getSession(true);
+        Administrador administrador = (Administrador) session.getAttribute("administrador");
+
         try {
-            Administrador administrador = null;
-            administrador = Administrador.obterAdministrador(administradorRanking);
 
             Ranking ranking = new Ranking(nomeRanking, intervaloFaixaEtaria, administrador);
             ranking.gravar();
