@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Atleta;
 import modelo.Boleto;
 import modelo.CartaoCredito;
@@ -136,9 +137,11 @@ public class ManterInscricaoController extends HttpServlet {
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         int loteId = Integer.parseInt(request.getParameter("optLote"));
-
+        
+        HttpSession session = request.getSession(true);
+        Atleta atleta = (Atleta) session.getAttribute("atleta");
+        
         try {
-            Atleta atleta = Atleta.obterAtleta(atletaId);
             Percurso percurso = Percurso.obterPercurso(percursoId);
             Kit kit = Kit.obterKit(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
