@@ -34,7 +34,7 @@
                                     <div class="form-group">
                                         <label for="codigoCorrida">Corrida:</label>
                                         <select class="form-control" id="codigoCorrida" name="optCorrida" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                                            <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> </option>  
+                                            <option value="0" <c:if test="${produtoKit.corrida.id == null}"> selected</c:if>> Selecione uma Corrida</option>  
                                             <c:forEach items="${corridas}" var="corrida">
                                                 <option value="${corrida.id}" <c:if test="${produtoKit.corridaId == corrida.id}"> selected</c:if>>${corrida.nome}</option>  
                                             </c:forEach>
@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label for="codigoKit">Kit:</label>
                                         <select class="form-control" id="codigoKit" name="optKit" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                                            <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>> </option>  
+                                            <option value="0" <c:if test="${produtoKit.kit.id == null}"> selected</c:if>>Selecione um Kit </option>  
                                             <c:forEach items="${kits}" var="kit">
                                                 <option value="${kit.id}" <c:if test="${produtoKit.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
                                             </c:forEach>
@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <label for="codigoPro">Produto:</label>
                                             <select class="form-control" id="codigoPro" name="optProduto" <c:if test="${operacao == 'Excluir'}">disabled</c:if>>
-                                            <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> </option>  
+                                            <option value="0" <c:if test="${produtoKit.produto.id == null}"> selected</c:if>> Selecione um Produto</option>  
                                             <c:forEach items="${produtos}" var="produto">
                                                 <option value="${produto.id}" <c:if test="${produtoKit.produtoId == produto.id}"> selected</c:if>>${produto.nome}</option>  
                                             </c:forEach>
