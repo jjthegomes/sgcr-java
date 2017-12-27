@@ -26,6 +26,11 @@ public class Produto {
         this.administrador = administrador;
     }
 
+    public Produto(String nome, Administrador administrador) {
+        this.nome = nome;
+        this.administrador = administrador;
+    }        
+
     public int getId() {
         return id;
     }

@@ -26,11 +26,10 @@ public class ProdutoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "insert into produto (id, nome, administrador_id) values(?,?,?)";
+            String sql = "insert into produto (nome, administrador_id) values(?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, produto.getId());
-            comando.setString(2, produto.getNome());
-            comando.setInt(3, produto.getAdministrador().getId());
+            comando.setString(1, produto.getNome());
+            comando.setInt(2, produto.getAdministrador().getId());
             comando.execute();
             comando.close();
             conexao.close();

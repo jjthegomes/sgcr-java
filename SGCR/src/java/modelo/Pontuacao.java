@@ -26,6 +26,11 @@ public class Pontuacao {
         this.ranking = ranking;
     }
 
+    public Pontuacao(int pontuacao, Ranking ranking){
+        this.pontuacao = pontuacao;
+        this.ranking = ranking;
+    }
+    
     public int getId() {
         return id;
     }

@@ -40,12 +40,7 @@
                                                 <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
                                                 </c:forEach>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="codigo">Código:</label>
-                                            <input type="text" class="form-control" name="txtIdRanking" value="${ranking.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                        </div>
-            
+                                        </div>                                       
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">

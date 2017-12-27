@@ -102,9 +102,6 @@ public class ManterProdutoController extends HttpServlet {
           int id = Integer.parseInt(request.getParameter("txtIdProduto"));
         String nomeProduto = request.getParameter("txtNome");
     
-        //int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
-
-        //Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
         Produto produto = new Produto(id, nomeProduto, null);
         try {
             produto.excluir();
@@ -153,7 +150,6 @@ public class ManterProdutoController extends HttpServlet {
     }
     
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdProduto"));
         String nomeProduto= request.getParameter("txtNome");
         int idAdministrador = Integer.parseInt(request.getParameter("optAdministrador"));
         try {
@@ -161,7 +157,7 @@ public class ManterProdutoController extends HttpServlet {
 
             administrador = Administrador.obterAdministrador(idAdministrador);
 
-            Produto produto = new Produto(id, nomeProduto, administrador);
+            Produto produto = new Produto(nomeProduto, administrador);
             produto.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoController");
             view.forward(request, response);

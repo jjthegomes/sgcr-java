@@ -47,7 +47,6 @@ public class ManterPagamentoController extends HttpServlet {
 
     public void prepararPagamento(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
-            //LOGICA AQUI!
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("inscricoes", Inscricao.obterInscricoesNaoPagas(corridaId));
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));

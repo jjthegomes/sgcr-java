@@ -114,14 +114,13 @@ public class ManterPercursoController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdPercurso"));
         String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         int corridaId = Integer.parseInt(request.getParameter("optCorrida"));
         try {
             Corrida corrida = null;
             corrida = Corrida.obterCorrida(corridaId);
-            Percurso percurso = new Percurso(id, imagem, numQuilometragem, corrida);
+            Percurso percurso = new Percurso(imagem, numQuilometragem, corrida);
             percurso.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
             view.forward(request, response);

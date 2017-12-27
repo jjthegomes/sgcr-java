@@ -33,6 +33,14 @@ public class ProdutoKit {
         this.corrida = corrida;
     }
 
+    public ProdutoKit(String descricao, Double valor, Kit kit, Produto produto, Corrida corrida) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.kit = kit;
+        this.produto = produto;
+        this.corrida = corrida;
+    }
+    
     public int getId() {
         return id;
     }

@@ -22,7 +22,7 @@
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th>Codigo</th>
+                        <th>Código</th>
                         <th>Organizador</th>
                         <th>Nome</th>
                         <th>Horario</th>

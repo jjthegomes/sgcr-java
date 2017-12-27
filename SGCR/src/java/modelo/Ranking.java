@@ -24,6 +24,12 @@ public class Ranking {
         this.administrador = administrador;
     }
 
+    public Ranking(String nome, int intervaloFaixaEtaria, Administrador administrador) {
+        this.nome = nome;
+        this.intervaloFaixaEtaria = intervaloFaixaEtaria;
+        this.administrador = administrador;
+    }  
+
     public int getId() {
         return id;
     }

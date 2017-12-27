@@ -30,13 +30,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">Manter Percurso - ${operacao}</div>
                         <div class="panel-body">
-                            <form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="codigo">Código:</label>
-                                        <input type="text" class="form-control" id="codigo" name="txtIdPercurso" value="${percurso.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> >
-                                    </div>
-                                </div>
+                            <form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">                               
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label for="nomeKit">Corrida:</label>

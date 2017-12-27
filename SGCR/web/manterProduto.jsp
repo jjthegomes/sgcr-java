@@ -39,16 +39,11 @@
                                                 <option value="${administrador.id}" <c:if test="${produto.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
                                             </c:forEach>
                                         </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="codigo">Código:</label>
-                                            <input type="text" id="codigo" class="form-control" name="txtIdProduto" value="${produto.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                        </div>
-                                        
+                                        </div>                                      
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="nome">Nome</label>
+                                            <label for="nome">Nome:</label>
                                             <input type="text" id="nome" class="form-control" name="txtNome" value="${produto.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">

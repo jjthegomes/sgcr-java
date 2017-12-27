@@ -29,6 +29,12 @@ public class Percurso {
         this.corrida = corrida;
     }
 
+    public Percurso(String imagem, Double quilometragem, Corrida corrida) {
+        this.imagem = imagem;
+        this.quilometragem = quilometragem;
+        this.corrida = corrida;
+    }
+    
     public int getId() {
         return id;
     }
