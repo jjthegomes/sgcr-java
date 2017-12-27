@@ -32,8 +32,8 @@ public class Boleto extends Pagamento {
         this.cpfTitular = cpfTitular;
     }
     
-    public Boleto(int id, String nomeTitular, String cpfTitular, Inscricao inscricao) {
-        super(id, inscricao);
+    public Boleto(String nomeTitular, String cpfTitular, Inscricao inscricao) {
+        super(inscricao);
         this.nomeTitular = nomeTitular;
         this.cpfTitular = cpfTitular;
 

@@ -10,11 +10,11 @@
 
 <c:choose>
     <c:when test="${atleta == null && organizador == null && administrador == null && usuario != null}">
-        <% //response.sendRedirect("/SGCR/LoginController?acao=logout"); %>
+        <% response.sendRedirect("/SGCR/LoginController?acao=logout"); %>
     </c:when>    
 </c:choose>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="background-color: #2e353d;">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="background-color: #2e353d; ">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

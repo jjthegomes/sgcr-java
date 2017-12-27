@@ -26,7 +26,7 @@
                     <li class="active">${corrida.nome}</li> 
                 </ul>
                 <input type="hidden" class="form-control" name="hiddenIdInscricao" value="${inscricao.id}" readonly>
-                        
+
                 <div class="panel panel-primary">
                     <div class="panel-heading">Inscrição</div>
                     <div class="panel-body">
@@ -61,14 +61,14 @@
                                                     </c:forEach>
                                                 </div>
                                             </div>
-                                            
-<!--                                            <label for="percurso">Percurso:</label>
-                                            <select name="optPercurso" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                <option value="0" <c:if test="${inscricao.percurso.id == null}"> selected</c:if>> Selecione um percurso</option>  
-                                                <c:forEach items="${percursos}" var="percurso">
-                                                    <option value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> selected</c:if>>${percurso.corrida.nome} - ${percurso.quilometragem}km</option>  
-                                                </c:forEach>
-                                            </select>-->
+
+                                            <!--                                            <label for="percurso">Percurso:</label>
+                                                                                        <select name="optPercurso" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                                            <option value="0" <c:if test="${inscricao.percurso.id == null}"> selected</c:if>> Selecione um percurso</option>  
+                                            <c:forEach items="${percursos}" var="percurso">
+                                                <option value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> selected</c:if>>${percurso.corrida.nome} - ${percurso.quilometragem}km</option>  
+                                            </c:forEach>
+                                        </select>-->
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
@@ -87,14 +87,14 @@
                                                     </c:forEach>
                                                 </div>
                                             </div>
-                                            
-<!--                                            <label for="kit">Kit:</label>
-                                            <select name="optKit" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
-                                                <c:forEach items="${kits}" var="kit">
-                                                    <option value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
-                                                </c:forEach>
-                                            </select>-->
+
+                                            <!--                                            <label for="kit">Kit:</label>
+                                                                                        <select name="optKit" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                                            <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
+                                            <c:forEach items="${kits}" var="kit">
+                                                <option value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
+                                            </c:forEach>
+                                        </select>-->
                                         </div>
                                     </div>
                                 </div>
@@ -134,10 +134,8 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group col-md-12">
-                                                <label for="idCartaoCredito">Código do Cartão:</label>
-                                                <input type="text" class="form-control pagamentoCartaoCredito" name="idCartaoCredito" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                            </div>
+                                            <input type="hidden" class="form-control pagamentoCartaoCredito" name="hiddenIdCartaoCredito" readonly />
+
                                             <div class="form-group col-md-6">
                                                 <label for="nCartao">Número do Cartão:</label>
                                                 <input type="text" class="form-control pagamentoCartaoCredito" name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
@@ -200,10 +198,8 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group col-md-12">
-                                                <label for="idCartaoCredito">Código do Boleto:</label>
-                                                <input type="text" class="form-control pagamentoBoleto" name="idBoleto" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> />
-                                            </div>
+                                            <input type="hidden" class="form-control pagamentoBoleto" name="hiddenIdBoleto" readonly />
+
                                             <div class="form-group col-md-6">
                                                 <label for="nomeTitularBoleto">Nome do Titular:</label>
                                                 <input type="text" class="form-control pagamentoBoleto" name="nomeTitularBoleto" id="nomeTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>

@@ -18,6 +18,10 @@ public abstract class Pagamento {
         this.id = id;
         this.inscricao = inscricao;
     }
+    
+    Pagamento(Inscricao inscricao) {
+        this.inscricao = inscricao;
+    }
 
     public int getId() {
         return id;

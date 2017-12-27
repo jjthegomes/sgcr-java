@@ -43,8 +43,7 @@ public class Inscricao {
         this.lote = lote;
     }
 
-    public Inscricao(int id, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
-        this.id = id;
+    public Inscricao(Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;

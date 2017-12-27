@@ -26,6 +26,14 @@ public class CartaoCredito extends Pagamento {
         this.validade = validade;
         this.nomeTitular = nomeTitular;
     }
+    
+    public CartaoCredito(String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao) {
+        super(inscricao);
+        this.numero = numero;
+        this.codigoSeguranca = codigoSeguranca;
+        this.validade = validade;
+        this.nomeTitular = nomeTitular;
+    }
 
     public String getNumero() {
         return numero;

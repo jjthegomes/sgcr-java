@@ -60,8 +60,6 @@ public class ManterAtletaController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Incluir");
-            //Para chave estrangeira
-            //request.setAttribute("atletas", Administrador.obterAdministradores());
             RequestDispatcher view
                     = request.getRequestDispatcher("/manterAtleta.jsp");
             view.forward(request, response);

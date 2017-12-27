@@ -130,9 +130,7 @@ public class ManterInscricaoController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
         int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-
         int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
@@ -146,11 +144,10 @@ public class ManterInscricaoController extends HttpServlet {
             Kit kit = Kit.obterKit(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(id, atleta, percurso, kit, lote);
+            Inscricao inscricao = new Inscricao(atleta, percurso, kit, lote);
             inscricao.gravar();
             
             if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
-                int idCartaoCredito = Integer.parseInt(request.getParameter("idCartaoCredito"));
                 String numeroCartaoCredito = request.getParameter("numeroCartaoCredito");
                 String nomeTitularCartaoCredito = request.getParameter("nomeTitularCartaoCredito");
                 String codigoSegurancaCartaoCredito = request.getParameter("codigoSegurancaCartaoCredito");
@@ -159,23 +156,21 @@ public class ManterInscricaoController extends HttpServlet {
                 String dataValidadeCartaoCredito = mesValidadeCartaoCredito + "/" + anoValidadeCartaoCredito;
 
                 try {
-                    CartaoCredito cartaoCredito = new CartaoCredito(idCartaoCredito, numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao);
+                    CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao);
                     cartaoCredito.gravar();
+                    request.setAttribute("cartaoCredito", cartaoCredito);
                 } catch (SQLException | ClassNotFoundException ex) {
                 }
-                request.setAttribute("cartaoCredito", CartaoCredito.obterCartaoCredito(idCartaoCredito));
-                
             } else if (request.getParameter("formaPagamento").equals("boleto")) {
-                int idBoleto = Integer.parseInt(request.getParameter("idBoleto"));
                 String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
                 String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
                 
                 try {
-                    Boleto boleto = new Boleto(idBoleto, nomeTitularBoleto, cpfTitularBoleto, inscricao);
+                    Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao);
                     boleto.gravar();
+                    request.setAttribute("boleto", boleto);
                 } catch (SQLException | ClassNotFoundException ex) {
                 }
-                request.setAttribute("boleto", Boleto.obterBoleto(idBoleto));
             }
             
             request.setAttribute("formaPagamento", request.getParameter("formaPagamento"));
@@ -219,7 +214,7 @@ public class ManterInscricaoController extends HttpServlet {
     }
 
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdInscricao"));
         String dataCompra = request.getParameter("txtDataCompraInscricao");
         String numeroPeito = request.getParameter("txtNumeroPeitoInscricao");
         Boolean pago = Boolean.parseBoolean(request.getParameter("optPago"));
@@ -267,7 +262,7 @@ public class ManterInscricaoController extends HttpServlet {
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdInscricao"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdInscricao"));
 
         try {
             Inscricao thisInscricao = Inscricao.obterInscricao(id);
