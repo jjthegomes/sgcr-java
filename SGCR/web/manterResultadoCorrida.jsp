@@ -28,7 +28,6 @@
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
@@ -40,12 +39,11 @@
                 <form action="ManterResultadoCorridaController?acao=confirmarIncluir&corridaId=${corrida.id}" method="post">
                     <c:forEach items="${inscricoes}" var="inscricao">
                         <tr <c:if test="${inscricao.tempoChegada == ''}"> class="danger" </c:if>>
-                            <td><c:out value="${inscricao.id}" /></td>    
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td>
-                                <label class="sr-only" for="tempoLargada">Tempo</label>
+                                <label class="sr-only" for="tempoLargada">Tempo:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                                     <input type="text" class="form-control" id="tempoLargada" name="tempoLargada${inscricao.id}" placeholder="00:00:00" maxlength="8" size="2"
@@ -54,7 +52,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <label class="sr-only" for="tempoChegada">Tempo</label>
+                                    <label class="sr-only" for="tempoChegada">Tempo:</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                                         <input type="text" class="form-control" id="tempoChegada" name="tempoChegada${inscricao.id}" placeholder="00:00:00" maxlength="8" size="2"

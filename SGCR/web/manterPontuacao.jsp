@@ -40,15 +40,11 @@
                                                     <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
                                                 </c:forEach>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="codigo">Código:</label>
-                                            <input type="text" id="codigo" class="form-control" name="txtIdPontuacao" value="${pontuacao.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                        </div>
+                                        </div>                                       
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="pontuacao">Pontuação</label>
+                                            <label for="pontuacao">Pontuação:</label>
                                             <td><input type="text" class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">

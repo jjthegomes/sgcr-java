@@ -27,14 +27,13 @@ public class ProdutoKitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO produto_kit (id, descricao, valor, produto_id, kit_id,kit_corrida_id) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO produto_kit (descricao, valor, produto_id, kit_id,kit_corrida_id) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, produtoKit.getId());
-            comando.setString(2, produtoKit.getDescricao());
-            comando.setDouble(3, produtoKit.getValor());
-            comando.setInt(4, produtoKit.getProduto().getId());
-            comando.setInt(5, produtoKit.getKit().getId());
-            comando.setInt(6, produtoKit.getCorrida().getId());
+            comando.setString(1, produtoKit.getDescricao());
+            comando.setDouble(2, produtoKit.getValor());
+            comando.setInt(3, produtoKit.getProduto().getId());
+            comando.setInt(4, produtoKit.getKit().getId());
+            comando.setInt(5, produtoKit.getCorrida().getId());
 
             comando.execute();
             comando.close();

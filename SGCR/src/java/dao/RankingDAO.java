@@ -26,13 +26,12 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ranking (id, nome, intervalo_faixa_etaria, administrador_id) "
-                    + "VALUES (?,?,?,?)";
+            String sql = "INSERT INTO ranking (nome, intervalo_faixa_etaria, administrador_id) "
+                    + "VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, ranking.getId());
-            comando.setString(2, ranking.getNome());
-            comando.setInt(3, ranking.getIntervaloFaixaEtaria());
-            comando.setInt(4, ranking.getAdministrador().getId());
+            comando.setString(1, ranking.getNome());
+            comando.setInt(2, ranking.getIntervaloFaixaEtaria());
+            comando.setInt(3, ranking.getAdministrador().getId());
             comando.execute();
             comando.close();
             conexao.close();

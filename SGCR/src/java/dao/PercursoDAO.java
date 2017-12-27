@@ -79,7 +79,7 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO percurso (id, imagem, quilometragem, corrida_id) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO percurso (imagem, quilometragem, corrida_id) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setInt(1, percurso.getId());
             comando.setString(2, percurso.getImagem());

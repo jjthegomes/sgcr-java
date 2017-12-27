@@ -153,16 +153,14 @@ public class ManterRankingController extends HttpServlet {
     }
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("txtIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
         int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
         try {
             Administrador administrador = null;
-
             administrador = Administrador.obterAdministrador(administradorRanking);
 
-            Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, administrador);
+            Ranking ranking = new Ranking(nomeRanking, intervaloFaixaEtaria, administrador);
             ranking.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
             view.forward(request, response);

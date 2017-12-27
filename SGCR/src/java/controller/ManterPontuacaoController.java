@@ -156,7 +156,6 @@ public class ManterPontuacaoController extends HttpServlet {
     }
     
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-       int id = Integer.parseInt(request.getParameter("txtIdPontuacao"));
        int valorPontuacao = Integer.parseInt(request.getParameter("txtPontuacao"));
        int rankingId = Integer.parseInt(request.getParameter("optRanking"));
        try {
@@ -164,7 +163,7 @@ public class ManterPontuacaoController extends HttpServlet {
            
                ranking = Ranking.obterRanking(rankingId);
         
-           Pontuacao pontuacao = new Pontuacao(id,valorPontuacao,ranking); 
+           Pontuacao pontuacao = new Pontuacao(valorPontuacao,ranking); 
        pontuacao.gravar();
        RequestDispatcher view = request.getRequestDispatcher("PesquisaPontuacaoController");
        view.forward(request,response);  

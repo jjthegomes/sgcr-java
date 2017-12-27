@@ -55,15 +55,14 @@ public class BoletoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO boleto (id, codigo_barra, data_emissao, data_vencimento, nome_titular, cpf_titular, inscricao_id) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO boleto (codigo_barra, data_emissao, data_vencimento, nome_titular, cpf_titular, inscricao_id) VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, boleto.getId());
-            comando.setString(2, boleto.getCodigoBarra());
-            comando.setString(3, boleto.getDataEmissao());
-            comando.setString(4, boleto.getDataVencimento());
-            comando.setString(5, boleto.getNomeTitular());
-            comando.setString(6, boleto.getCpfTitular());
-            comando.setInt(7, boleto.getInscricao().getId());
+            comando.setString(1, boleto.getCodigoBarra());
+            comando.setString(2, boleto.getDataEmissao());
+            comando.setString(3, boleto.getDataVencimento());
+            comando.setString(4, boleto.getNomeTitular());
+            comando.setString(5, boleto.getCpfTitular());
+            comando.setInt(6, boleto.getInscricao().getId());
 
             comando.execute();
             comando.close();

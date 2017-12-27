@@ -163,7 +163,6 @@ public class ManterProdutoKitController extends HttpServlet {
         }
     }
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response){
-       int id = Integer.parseInt(request.getParameter("txtIdProduto"));
        String nome =  request.getParameter("txtDescricao");
        double valor = Double.parseDouble(request.getParameter("txtProdutoValor"));
        int idKit = Integer.parseInt(request.getParameter("optKit"));
@@ -178,7 +177,7 @@ public class ManterProdutoKitController extends HttpServlet {
                produto = Produto.obterProduto(idProduto);
                corrida = Corrida.obterCorrida(idCorrida);
         
-           ProdutoKit produtoKit = new ProdutoKit(id,nome,valor,kit,produto,corrida); 
+           ProdutoKit produtoKit = new ProdutoKit(nome,valor,kit,produto,corrida); 
        produtoKit.gravar();
        RequestDispatcher view = request.getRequestDispatcher("PesquisaProdutoKitController");
        view.forward(request,response);  

@@ -26,11 +26,10 @@ public class PontuacaoDAO {
         Connection conexao = null;
         try{
             conexao = BD.getConexao();
-            String sql= "INSERT INTO pontuacao (id, pontuacao, ranking_id) VALUES (?,?,?)";
+            String sql= "INSERT INTO pontuacao (pontuacao, ranking_id) VALUES (?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1,pontuacao.getId());
-            comando.setInt(2,pontuacao.getPontuacao());
-            comando.setInt(3,pontuacao.getRanking().getId());
+            comando.setInt(1,pontuacao.getPontuacao());
+            comando.setInt(2,pontuacao.getRanking().getId());
             comando.execute();
             comando.close();
             conexao.close();

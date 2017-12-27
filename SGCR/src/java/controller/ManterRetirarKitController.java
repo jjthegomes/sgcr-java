@@ -48,7 +48,6 @@ public class ManterRetirarKitController extends HttpServlet {
     
     public void prepararRetirarKit(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
-            //LOGICA AQUI!
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("inscricoes", Inscricao.obterInscricoesPagas(corridaId));
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
@@ -62,10 +61,8 @@ public class ManterRetirarKitController extends HttpServlet {
     }
 
     private void confirmarRetirarKit(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        
-        Inscricao inscricao = Inscricao.obterInscricao(id);
-        
+        int id = Integer.parseInt(request.getParameter("id"));        
+        Inscricao inscricao = Inscricao.obterInscricao(id);        
         inscricao.setKitRetirado(true);
         
         try {

@@ -48,11 +48,7 @@
                                                 <option value="${kit.id}" <c:if test="${produtoKit.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
                                             </c:forEach>
                                         </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="codigo">Código:</label>
-                                        <input type="text" class="form-control" id="codigo" name="txtIdProduto" value="${produtoKit.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                        </div> 
+                                    </div>                                    
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -65,7 +61,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="descricao">Descrição</label>
+                                        <label for="descricao">Descrição:</label>
                                         <input type="text" class="form-control" id="descricao" name="txtDescricao" value="${produtoKit.descricao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
