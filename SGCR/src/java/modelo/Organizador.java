@@ -15,6 +15,10 @@ public class Organizador extends UsuarioComum{
         super(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);
     }
     
+    public Organizador(String nome, String dataNascimento, String sexo, String cpf, String cep, String logradouro, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, String email, String senha) {
+        super(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, email, senha);
+    }
+    
     public static List<Organizador> obterOrganizadores() throws ClassNotFoundException{
         return OrganizadorDAO.obterOrganizadores();
     }

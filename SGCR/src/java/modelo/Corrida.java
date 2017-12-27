@@ -29,6 +29,7 @@ public class Corrida {
     private String bairro;
     private String descricao;
     private String regulamento;
+    private String edicao;
     private boolean ativo;
     private Organizador organizador;
 
@@ -40,7 +41,7 @@ public class Corrida {
 
     public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro, 
             String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento, 
-            boolean ativo, Organizador organizador) {
+            String edicao, boolean ativo, Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.maxPessoa = maxPessoa;
@@ -56,6 +57,28 @@ public class Corrida {
         this.descricao = descricao;
         this.regulamento = regulamento;
         this.organizador = organizador;
+        this.edicao = edicao;
+        this.ativo = ativo;
+    }
+    
+    public Corrida(String nome, int maxPessoa, String horario, String data, String banner, String logradouro, 
+            String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento, 
+            String edicao, boolean ativo, Organizador organizador) {
+        this.nome = nome;
+        this.maxPessoa = maxPessoa;
+        this.horario = horario;
+        this.data = data;
+        this.banner = banner;
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.bairro = bairro;
+        this.descricao = descricao;
+        this.regulamento = regulamento;
+        this.organizador = organizador;
+        this.edicao = edicao;
         this.ativo = ativo;
     }
 
@@ -171,6 +194,22 @@ public class Corrida {
         this.regulamento = regulamento;
     }
 
+    public String getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+    
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    } 
+
     public Organizador getOrganizador() {
         return organizador;
     }
@@ -185,15 +224,7 @@ public class Corrida {
 
     public void setOrganizadorId(int organizadorId) {
         this.organizadorId = organizadorId;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }    
+    }  
 
     public static List<Corrida> obterCorridas() throws ClassNotFoundException {
         return CorridaDAO.obterCorridas();

@@ -13,8 +13,8 @@
 
         <%@ include file = "layout/head.jsp" %>
         <title>Manter Atleta - ${operacao}</title>
-        <script type="text/javascript" src="public/js/myscript.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="application/javascript" language="javascript"></script>
+        <script src="public/js/myscript.js"></script>
+
     </head>
     <body>
         <%@ include file = "layout/menu.jsp" %>
@@ -30,14 +30,11 @@
                         <div class="panel-heading">${operacao} Atleta</div>
                         <div class="panel-body">
                             <form action="ManterAtletaController?acao=confirmar${operacao}" method="post" name="frmManterAtleta">
-                                <div class="form-group">
-                                    <label for="id">Código:</label>
-                                    <input type="text" class="form-control" id="id" name="txtIdAtleta" value="${atleta.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> >
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="Nome">Nome Completo:</label>
-                                            <input type="text" class="form-control" id="nome" name="txtNomeAtleta" value="${atleta.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> >
+                                <div class="col-md-4">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdAtleta" value="${atleta.id}" readonly />
+                                    <div class="form-group">
+                                        <label for="Nome">Nome Completo:</label>
+                                        <input type="text" class="form-control" id="nome" name="txtNomeAtleta" value="${atleta.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> >
                                         </div>
                                         <div class="form-group">
                                             <label for="cpf">CPF:</label>
@@ -64,7 +61,6 @@
                                         <div class="form-group">
                                             <label for="cel">Celular</label>
                                             <input type="tel" class="form-control" id="cel" placeholder="(xx) x xxxx-xxxx" onkeydown="javascript: fMasc(this, mTel);" name="txtCelularAtleta" value="${atleta.celular}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                            <!-- <button type="button" class="btn btn-default">ADD</button> -->
                                         </div>
                                         <div class="form-group">
                                             <label for="telefone">Telefone:</label>
@@ -74,19 +70,17 @@
                                         <div class="form-group">
                                             <label for="sexo">Sexo:</label> <br>
                                             <div class="radio-inline">
-                                                <label><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                                                          <c:if test="${atleta.sexo == 'M'}"> checked</c:if>>Masculino</label>
+                                                <label><input type="radio" name="txtSexoAtleta" value="M" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${atleta.sexo == 'M'}"> checked</c:if>>Masculino</label>
                                             </div>
                                             <div class="radio-inline">
-                                                <label><input type="radio" name="txtSexoAtleta" value="F"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                                                          <c:if test="${atleta.sexo == 'F'}"> checked</c:if>>Feminino</label>
+                                                    <label><input type="radio" name="txtSexoAtleta" value="F"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> <c:if test="${atleta.sexo == 'F'}"> checked</c:if>>Feminino</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                <input type="text" class="form-control" id="cep" name="txtCepAtleta" value="${atleta.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="cidade">Cidade:</label>
@@ -116,8 +110,6 @@
 
                                     </div>
                                     <div class="col-md-4">
-
-
                                         <div class="form-group">
                                             <label for="email">E-mail:</label>
                                             <input type="email" class="form-control" id="email" name="txtEmailAtleta" value="${atleta.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -139,7 +131,6 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

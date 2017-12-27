@@ -69,13 +69,11 @@ public class ManterAdministradorController extends HttpServlet {
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdAdministrador"));
         String nome = request.getParameter("txtNomeAdministrador");
         String email = request.getParameter("txtEmailAdministrador");
         String senha = request.getParameter("txtSenhaAdministrador");
-        //int coordenador = Integer.parseInt(request.getParameter("optCoordenador"));
         try {
-            Administrador administrador = new Administrador(id, nome, email, senha);
+            Administrador administrador = new Administrador(nome, email, senha);
             administrador.gravar();
             RequestDispatcher view
                     = request.getRequestDispatcher("PesquisaAdministradorController");
@@ -102,7 +100,7 @@ public class ManterAdministradorController extends HttpServlet {
     }
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdAdministrador"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdAdministrador"));
         String nome = request.getParameter("txtNomeAdministrador");
         String email = request.getParameter("txtEmailAdministrador");
         String senha = request.getParameter("txtSenhaAdministrador");
@@ -134,7 +132,7 @@ public class ManterAdministradorController extends HttpServlet {
     }
 
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdAdministrador"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdAdministrador"));
         String nome = request.getParameter("txtNomeAdministrador");
         String email = request.getParameter("txtEmailAdministrador");
         String senha = request.getParameter("txtSenhaAdministrador");

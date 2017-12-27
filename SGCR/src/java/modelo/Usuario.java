@@ -17,6 +17,12 @@ public abstract class Usuario {
         this.email = email;
         this.senha = senha;
     }
+    
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 
     public int getId() {
         return id;

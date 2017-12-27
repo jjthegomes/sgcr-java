@@ -32,27 +32,16 @@
                         <div class="panel-heading">${operacao} Corrida</div>
                         <div class="panel-body">
                             <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida"> 
-
-                                <div class="form-group">
-                                    <label for="idCorrida">Código:</label>
-                                    <input type="text" class="form-control" id="codigo" name="txtIdCorrida" value="${corrida.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if> placeholder="Código">
-                                    </div>
-                                    <div class="form-group">                                   
-                                        <select name="optOrganizador" class="form-control" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                        <option value="0" <c:if test="${corrida.organizador.id== null}"> selected</c:if>>Selecione um Organizador</option>  
-                                        <c:forEach items="${organizadores}" var="organizador">
-                                            <option value="${organizador.id}" <c:if test="${corrida.organizadorId == organizador.id}"> selected</c:if>>${organizador.nome}</option>  
-                                        </c:forEach>
-                                    </select>
-                                </div>           
                                 <div class="col-md-4">
+                                    <input type="hidden" class="form-control" id="codigo" name="hiddenIdCorrida" value="${corrida.id}" readonly />
+                                    <input type="hidden" class="form-control" id="edicao" name="hiddenEdicao" value="${corrida.edicao}" readonly />
                                     <div class="form-group">
                                         <label for="nomeCorrida">Nome:</label>
-                                        <input type="text" class="form-control" id="nomeCorrida" name="txtNomeCorrida" value="${corrida.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="Título do evento">
+                                        <input type="text" class="form-control" id="nomeCorrida" name="txtNomeCorrida" value="${corrida.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
                                         </div>
                                         <div class="form-group">
                                             <label for="descricao">Descrição:</label>
-                                            <input type="text" class="form-control" id="descricao" name="txtDescricaoCorrida" value="${corrida.descricao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="Descrição da corrida">            
+                                            <input type="text" class="form-control" id="descricao" name="txtDescricaoCorrida" value="${corrida.descricao}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> >            
                                         </div>
                                         <div class="form-group ">
                                             <label for="numeroDePessoas">Numero Máximo de Pessoas:</label>
@@ -72,7 +61,7 @@
                                         </div> 
                                     </div>
 
-                                    <div class="col-md-4">                                       
+                                    <div class="col-md-4" style>                                       
                                         <div class="form-group">
                                             <label for="estado">Estado:</label>
                                             <input type="text" class="form-control" id="estado" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -91,7 +80,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="numero">Número:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtNumeroCorrida" value="${corrida.numero}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="numero" name="txtNumeroCorrida" value="${corrida.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div> 
                                         <div><input name="ibge" type="hidden" id="ibge" size="8"/><br/></div>
 
@@ -117,24 +106,23 @@
                                             <div class="radio-inline">
                                                 <label><input type="radio" name="optStatus" value="true" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
                                                           <c:if test="${corrida.ativo == 'true'}"> checked</c:if>>Ativo</label>
-                                        </div>
-                                        <div class="radio-inline">
-                                            <label><input type="radio" name="optStatus" value="false" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                                            </div>
+                                            <div class="radio-inline">
+                                                <label><input type="radio" name="optStatus" value="false" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
                                                           <c:if test="${corrida.ativo == 'false'}"> checked</c:if>>Desativado</label>
-                                        </div>                                                
+                                            </div>                                                
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                        <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
 
         <%@ include file = "layout/rodape.jsp" %>
 

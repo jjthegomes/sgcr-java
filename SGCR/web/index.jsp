@@ -40,19 +40,16 @@
                             <div class="panel-footer">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a style="text-decoration: none" href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>">
-
-                                            <button class="btn btn-block btn-success"> Inscrever </button> 
-
+                                        <a href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>" class="btn btn-block btn-success">
+                                            Inscrever
                                         </a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a style="text-decoration: none" href=""href="ManterInscricaoController?acao=informacao&corridaId=<c:out value="${corrida.id}"/>">
-                                        <button class="btn btn-block btn-success"> informações </button> 
+                                        <a href="ManterInscricaoController?acao=informacao&corridaId=<c:out value="${corrida.id}"/>" class="btn btn-block btn-default">
+                                            Informações 
+                                        </a>
                                     </div>
                                 </div>
-
-
                             </div>  
                         </div>
                     </div>

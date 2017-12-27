@@ -18,7 +18,7 @@ public class AtletaDAO {
     public static List<Atleta> obterAtletas() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Atleta> atletas = new ArrayList<Atleta>();
+        List<Atleta> atletas = new ArrayList<>();
 
         try {
             conexao = BD.getConexao();
@@ -58,28 +58,27 @@ public class AtletaDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO atleta (id, nome, apelido, email, senha, sexo, tamanho_camisa, data_nascimento, "
+            String sql = "INSERT INTO atleta (nome, apelido, email, senha, sexo, tamanho_camisa, data_nascimento, "
                     + "cpf, cep, estado, cidade, bairro, logradouro, numero, complemento, telefone, celular) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, atleta.getId());
-            comando.setString(2, atleta.getNome());
-            comando.setString(3, atleta.getApelido());
-            comando.setString(4, atleta.getEmail());
-            comando.setString(5, atleta.getSenha());
-            comando.setString(6, atleta.getSexo());
-            comando.setString(7, atleta.getTamanhoCamisa());
-            comando.setString(8, atleta.getDataNascimento());
-            comando.setString(9, atleta.getCpf());
-            comando.setString(10, atleta.getCep());
-            comando.setString(11, atleta.getEstado());
-            comando.setString(12, atleta.getCidade());
-            comando.setString(13, atleta.getBairro());
-            comando.setString(14, atleta.getLogradouro());
-            comando.setString(15, atleta.getNumero());
-            comando.setString(16, atleta.getComplemento());
-            comando.setString(17, atleta.getTelefone());
-            comando.setString(18, atleta.getCelular());
+            comando.setString(1, atleta.getNome());
+            comando.setString(2, atleta.getApelido());
+            comando.setString(3, atleta.getEmail());
+            comando.setString(4, atleta.getSenha());
+            comando.setString(5, atleta.getSexo());
+            comando.setString(6, atleta.getTamanhoCamisa());
+            comando.setString(7, atleta.getDataNascimento());
+            comando.setString(8, atleta.getCpf());
+            comando.setString(9, atleta.getCep());
+            comando.setString(10, atleta.getEstado());
+            comando.setString(11, atleta.getCidade());
+            comando.setString(12, atleta.getBairro());
+            comando.setString(13, atleta.getLogradouro());
+            comando.setString(14, atleta.getNumero());
+            comando.setString(15, atleta.getComplemento());
+            comando.setString(16, atleta.getTelefone());
+            comando.setString(17, atleta.getCelular());
             comando.execute();
             comando.close();
             conexao.close();

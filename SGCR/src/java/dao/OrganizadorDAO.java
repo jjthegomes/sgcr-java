@@ -63,30 +63,29 @@ public class OrganizadorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO organizador (id,nome,email,senha,sexo,data_nascimento,"
+            String sql = "INSERT INTO organizador (nome,email,senha,sexo,data_nascimento,"
                     + "cpf,cep,cidade,estado,logradouro,bairro,numero,complemento, telefone,celular) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, organizador.getId());
-            comando.setString(2, organizador.getNome());
-            comando.setString(3, organizador.getEmail());
-            comando.setString(4, organizador.getSenha());
-            comando.setString(5, organizador.getSexo());
-            comando.setString(6, organizador.getDataNascimento());
-            comando.setString(7, organizador.getCpf());
-            comando.setString(8, organizador.getCep());
-            comando.setString(9, organizador.getCidade());
-            comando.setString(10, organizador.getEstado());
-            comando.setString(11, organizador.getLogradouro());
-            comando.setString(12, organizador.getBairro());
-            comando.setString(13, organizador.getNumero());
+            comando.setString(1, organizador.getNome());
+            comando.setString(2, organizador.getEmail());
+            comando.setString(3, organizador.getSenha());
+            comando.setString(4, organizador.getSexo());
+            comando.setString(5, organizador.getDataNascimento());
+            comando.setString(6, organizador.getCpf());
+            comando.setString(7, organizador.getCep());
+            comando.setString(8, organizador.getCidade());
+            comando.setString(9, organizador.getEstado());
+            comando.setString(10, organizador.getLogradouro());
+            comando.setString(11, organizador.getBairro());
+            comando.setString(12, organizador.getNumero());
             if (organizador.getComplemento() == null) {
-                comando.setNull(14, Types.NULL);
+                comando.setNull(13, Types.NULL);
             } else {
-                comando.setString(14, organizador.getComplemento());
+                comando.setString(13, organizador.getComplemento());
             }
-            comando.setString(15, organizador.getTelefone());
-            comando.setString(16, organizador.getCelular());
+            comando.setString(14, organizador.getTelefone());
+            comando.setString(15, organizador.getCelular());
 
             comando.execute();
             comando.close();

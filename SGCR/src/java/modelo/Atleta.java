@@ -18,7 +18,13 @@ public class Atleta extends UsuarioComum {
         this.apelido = apelido;
         this.tamanhoCamisa = tamanhoCamisa;
     }
-
+    
+    public Atleta(String apelido, String tamanhoCamisa, String nome, String dataNascimento, String sexo, String cpf, String cep, String rua, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, String email, String senha) {
+        super(nome, dataNascimento, sexo, cpf, cep, rua, bairro, complemento, numero, cidade, estado, telefone, celular, email, senha);
+        this.apelido = apelido;
+        this.tamanhoCamisa = tamanhoCamisa;
+    }
+    
     public String getApelido() {
         return apelido;
     }

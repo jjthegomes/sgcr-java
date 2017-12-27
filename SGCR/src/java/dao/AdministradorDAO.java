@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Administrador;
-import modelo.Usuario;
 
 /**
  *
@@ -19,7 +18,7 @@ public class AdministradorDAO {
     public static List<Administrador> obterAdministradores() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Administrador> administradores = new ArrayList<Administrador>();
+        List<Administrador> administradores = new ArrayList<>();
 
         try {
             conexao = BD.getConexao();
@@ -45,12 +44,11 @@ public class AdministradorDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO administrador (id, nome, email, senha) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO administrador (nome, email, senha) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, administrador.getId());
-            comando.setString(2, administrador.getNome());
-            comando.setString(3, administrador.getEmail());
-            comando.setString(4, administrador.getSenha());
+            comando.setString(1, administrador.getNome());
+            comando.setString(2, administrador.getEmail());
+            comando.setString(3, administrador.getSenha());
      
             comando.execute();
             comando.close();

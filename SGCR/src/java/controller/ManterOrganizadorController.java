@@ -105,7 +105,6 @@ public class ManterOrganizadorController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
         String nome = request.getParameter("txtNomeOrganizador");
         String email = request.getParameter("txtEmailOrganizador");
         String senha = request.getParameter("txtSenhaOrganizador");
@@ -123,7 +122,7 @@ public class ManterOrganizadorController extends HttpServlet {
         String celular = request.getParameter("txtCelularOrganizador");
 
         try {
-            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);
+            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, email, senha);
             organizador.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaOrganizadorController");
             view.forward(request, response);
@@ -153,7 +152,7 @@ public class ManterOrganizadorController extends HttpServlet {
     }
     
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdOrganizador"));
         String nome = request.getParameter("txtNomeOrganizador");
         String email = request.getParameter("txtEmailOrganizador");
         String senha = request.getParameter("txtSenhaOrganizador");
@@ -200,7 +199,7 @@ public class ManterOrganizadorController extends HttpServlet {
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdOrganizador"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdOrganizador"));
         String nome = request.getParameter("txtNomeOrganizador");
         String email = request.getParameter("txtEmailOrganizador");
         String senha = request.getParameter("txtSenhaOrganizador");

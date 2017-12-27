@@ -29,9 +29,7 @@
                             <form action="ManterAdministradorController?acao=confirmar${operacao}" method="post" name="frmManterAdministrador"> 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="codigo">Código:</label>
-                                        <input type="text" class="form-control" id="codigo" name="txtIdAdministrador" value="${administrador.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                        </div>
+                                        <input type="hidden" class="form-control" id="codigo" name="hiddenIdAdministrador" value="${administrador.id}" readonly />
                                         <div class="form-group">
                                             <label for="nomeAdmin">Nome Completo:</label>
                                             <input type="text"  class="form-control" id="nomeAdmin" name="txtNomeAdministrador" value="${administrador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>

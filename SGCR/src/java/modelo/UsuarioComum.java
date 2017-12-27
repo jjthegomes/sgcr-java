@@ -35,6 +35,22 @@ public abstract class UsuarioComum extends Usuario{
         this.telefone = telefone;
         this.celular = celular;
     }
+    
+    public UsuarioComum(String nome, String dataNascimento, String sexo, String cpf, String cep, String logradouro, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, String email, String senha) {
+        super(nome, email, senha);
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.complemento = complemento;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.telefone = telefone;
+        this.celular = celular;
+    }
 
     public String getDataNascimento() {
         return dataNascimento;

@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,13 +68,11 @@ public class ManterAtletaController extends HttpServlet {
         } catch (ServletException ex) {
         } catch (IOException ex) {
         }
-        //catch(ClassNotFoundException ex){ }
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         String apelido = request.getParameter("txtApelidoAtleta");
         String tamanhoCamisa = request.getParameter("optTamanhoCamisa");
-
         String nome = request.getParameter("txtNomeAtleta");
         String dataNascimento = request.getParameter("txtDataNascimentoAtleta");
         String sexo = request.getParameter("txtSexoAtleta");
@@ -89,8 +86,6 @@ public class ManterAtletaController extends HttpServlet {
         String estado = request.getParameter("txtEstadoAtleta");
         String telefone = request.getParameter("txtTelefoneAtleta");
         String celular = request.getParameter("txtCelularAtleta");
-
-        int id = Integer.parseInt(request.getParameter("txtIdAtleta"));
         String email = request.getParameter("txtEmailAtleta");
         String senha = request.getParameter("txtSenhaAtleta");
 
@@ -98,7 +93,7 @@ public class ManterAtletaController extends HttpServlet {
 
             Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,
                     sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
-                    telefone, celular, id, email, senha);
+                    telefone, celular, email, senha);
                 atleta.gravar();
             RequestDispatcher view
                     = request.getRequestDispatcher("PesquisaAtletaController");
@@ -113,8 +108,6 @@ public class ManterAtletaController extends HttpServlet {
      public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Excluir");
-            //Para chave estrangeira
-            //request.setAttribute("administradores", Administrador.obterAdministradores());
             int id = Integer.parseInt(request.getParameter("id"));
 
             Atleta atleta = Atleta.obterAtleta(id);
@@ -146,7 +139,7 @@ public class ManterAtletaController extends HttpServlet {
         String telefone = request.getParameter("txtTelefoneAtleta");
         String celular = request.getParameter("txtCelularAtleta");
 
-        int id = Integer.parseInt(request.getParameter("txtIdAtleta"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdAtleta"));
         String email = request.getParameter("txtEmailAtleta");
         String senha = request.getParameter("txtSenhaAtleta");
 
@@ -168,8 +161,6 @@ public class ManterAtletaController extends HttpServlet {
     public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setAttribute("operacao", "Editar");
-            //Para chave estrangeira
-            //request.setAttribute("administradores", Administrador.obterAdministradores());
             int id = Integer.parseInt(request.getParameter("id"));
 
             Atleta atleta = Atleta.obterAtleta(id);
@@ -201,7 +192,7 @@ public class ManterAtletaController extends HttpServlet {
         String telefone = request.getParameter("txtTelefoneAtleta");
         String celular = request.getParameter("txtCelularAtleta");
 
-        int id = Integer.parseInt(request.getParameter("txtIdAtleta"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdAtleta"));
         String email = request.getParameter("txtEmailAtleta");
         String senha = request.getParameter("txtSenhaAtleta");
 
