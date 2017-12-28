@@ -11,25 +11,34 @@ import java.util.List;
 public class Kit {
     private int id;
     private String nome;
-    private int quantidade;
     private String imagem;
     private String tipoChip;
-    private String dataRetirada;
-    private Corrida corrida;
+    private String dataInicioRetirada;
+    private String dataFinalRetirada;
+    private Organizador organizador;
 
-    private int corridaId;
+    private int organizadorId;
 
     public Kit() {
     }
 
-    public Kit(int id, String nome, int quantidade, String imagem, String tipoChip, String dataRetirada, Corrida corrida) {
+    public Kit(int id, String nome, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
         this.id = id;
         this.nome = nome;
-        this.quantidade = quantidade;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
-        this.dataRetirada = dataRetirada;
-        this.corrida = corrida;
+        this.dataInicioRetirada = dataInicioRetirada;
+        this.dataFinalRetirada = dataFinalRetirada;
+        this.organizador = organizador;
+    }
+    
+    public Kit(String nome, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
+        this.nome = nome;
+        this.imagem = imagem;
+        this.tipoChip = tipoChip;
+        this.dataInicioRetirada = dataInicioRetirada;
+        this.dataFinalRetirada = dataFinalRetirada;
+        this.organizador = organizador;
     }
 
     public int getId() {
@@ -46,14 +55,6 @@ public class Kit {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
     
     public String getImagem() {
@@ -72,36 +73,44 @@ public class Kit {
         this.tipoChip = tipoChip;
     }
 
-    public String getDataRetirada() {
-        return dataRetirada;
+    public String getDataInicioRetirada() {
+        return dataInicioRetirada;
     }
 
-    public void setDataRetirada(String dataRetirada) {
-        this.dataRetirada = dataRetirada;
+    public void setDataInicioRetirada(String dataInicioRetirada) {
+        this.dataInicioRetirada = dataInicioRetirada;
+    }
+
+    public String getDataFinalRetirada() {
+        return dataFinalRetirada;
+    }
+
+    public void setDataFinalRetirada(String dataFinalRetirada) {
+        this.dataFinalRetirada = dataFinalRetirada;
     }
     
-    public Corrida getCorrida() {
-        return corrida;
+    public Organizador getOrganizador() {
+        return organizador;
     }
 
-    public void setCorrida(Corrida corrida) {
-        this.corrida = corrida;
+    public void setOrganizador(Organizador organizador) {
+        this.organizador = organizador;
     }
 
-    public int getCorridaId() {
-        return corridaId;
+    public int getOrganizadorId() {
+        return organizadorId;
     }
 
-    public void setCorridaId(int corridaId) {
-        this.corridaId = corridaId;
+    public void setOrganizadorId(int organizadorId) {
+        this.organizadorId = organizadorId;
     }
 
     public static List<Kit> obterKits() throws ClassNotFoundException {
         return KitDAO.obterKits();
     }
     
-    public static List<Kit> obterKits(int corridaId) throws ClassNotFoundException {
-        return KitDAO.obterKits(corridaId);
+    public static List<Kit> obterKits(int organizadorId) throws ClassNotFoundException {
+        return KitDAO.obterKits(organizadorId);
     }
     
     public void gravar() throws SQLException, ClassNotFoundException {
@@ -116,7 +125,11 @@ public class Kit {
         KitDAO.excluir(this);
     }
     
-    public static Kit obterKit(int id, int corridaId) throws ClassNotFoundException {
-        return KitDAO.obterKit(id, corridaId);
+    public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
+        return KitDAO.obterKit(id, organizadorId);
+    }
+    
+    public static Kit obterKitCorrida(int kitId, int corridaId) {
+        return KitDAO.obterKitCorrida(id, corridaId);
     }
 }

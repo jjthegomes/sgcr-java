@@ -76,15 +76,14 @@ public class LoteDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO lote (id, tipo, preco, data_inicio, data_final, "
-                    + "corrida_id) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO lote (tipo, preco, data_inicio, data_final, "
+                    + "corrida_id) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, lote.getId());
-            comando.setString(2, lote.getTipo());
-            comando.setDouble(3, lote.getPreco());
-            comando.setString(4, lote.getDataInicio());
-            comando.setString(5, lote.getDataFinal());
-            comando.setInt(6, lote.getCorrida().getId());
+            comando.setString(1, lote.getTipo());
+            comando.setDouble(2, lote.getPreco());
+            comando.setString(3, lote.getDataInicio());
+            comando.setString(4, lote.getDataFinal());
+            comando.setInt(5, lote.getCorrida().getId());
             comando.execute();
             comando.close();
             conexao.close();

@@ -27,6 +27,14 @@ public class Lote {
         this.dataFinal = dataFinal;
         this.corrida = corrida;
     }
+    
+    public Lote(String tipo, double preco, String dataInicio, String dataFinal, Corrida corrida) {
+        this.tipo = tipo;
+        this.preco = preco;
+        this.dataInicio = dataInicio;
+        this.dataFinal = dataFinal;
+        this.corrida = corrida;
+    }
 
     public int getId() {
         return id;

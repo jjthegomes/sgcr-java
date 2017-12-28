@@ -33,10 +33,9 @@
                         <div class="panel-heading"> ${operacao} Lote</div>
                         <div class="panel-body">
                             <form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote"> 
+                                <input type="hidden" class="form-control" id="codigo" name="hiddenIdLote" value="${lote.id}" readonly />
+                                
                                 <div class="form-group">
-                                    <label for="idLote">Código:</label>
-                                    <input type="text" class="form-control" id="codigo" name="txtIdLote" value="${lote.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                    </div>
                                     <div class="form-group">                                   
                                         <select name="optCorrida" class="form-control" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         <option value="0" <c:if test="${lote.corrida.id== null}"> selected</c:if>>Selecione uma Corrida:</option>  

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Corrida;
 import modelo.Kit;
+import modelo.Organizador;
 
 /**
  *
@@ -28,13 +28,13 @@ public class KitDAO {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
                         rs.getString("nome"),
-                        rs.getInt("quantidade"),
                         rs.getString("imagem"), 
                         rs.getString("tipo_chip"),
-                        rs.getString("data_retirada"),
+                        rs.getString("data_inicio_retirada"),
+                        rs.getString("data_final_retirada"),
                         null);
-                kit.setCorridaId(rs.getInt("corrida_id"));
-                kit.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
+                kit.setOrganizadorId(rs.getInt("organizador_id"));
+                kit.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
                 kits.add(kit);
             }
         } catch (SQLException e) {
@@ -45,25 +45,25 @@ public class KitDAO {
         return kits;
     }
     
-    public static List<Kit> obterKits(int corridaId) throws ClassNotFoundException  {
+    public static List<Kit> obterKits(int organizadorId) throws ClassNotFoundException  {
         Connection conexao = null;
         Statement comando = null;
         List<Kit> kits = new ArrayList<Kit>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE corrida_id = "+corridaId);
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE organizador_id = "+organizadorId);
             
             while (rs.next()) {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
                         rs.getString("nome"),
-                        rs.getInt("quantidade"),
                         rs.getString("imagem"), 
                         rs.getString("tipo_chip"),
-                        rs.getString("data_retirada"),
+                        rs.getString("data_inicio_retirada"),
+                        rs.getString("data_final_retirada"),
                         null);
-                kit.setCorridaId(rs.getInt("corrida_id"));
+                kit.setOrganizadorId(rs.getInt("organizador_id"));
                 kits.add(kit);
             }
         } catch (SQLException e) {
@@ -78,15 +78,14 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (id, nome, quantidade, imagem, tipo_chip, data_retirada, corrida_id) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO kit (nome, imagem, tipo_chip, data_inicio_retirada, data_final_retirada, organizador_id) VALUES (?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, kit.getId());
-            comando.setString(2, kit.getNome());
-            comando.setInt(3, kit.getQuantidade());
-            comando.setString(4, kit.getImagem());
-            comando.setString(5, kit.getTipoChip());
-            comando.setString(6, kit.getDataRetirada());
-            comando.setInt(7, kit.getCorrida().getId());
+            comando.setString(1, kit.getNome());
+            comando.setString(2, kit.getImagem());
+            comando.setString(3, kit.getTipoChip());
+            comando.setString(4, kit.getDataInicioRetirada());
+            comando.setString(5, kit.getDataFinalRetirada());
+            comando.setInt(6, kit.getOrganizador().getId());
 
             comando.execute();
             comando.close();
@@ -100,14 +99,14 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE kit SET nome = ?, quantidade = ?, imagem = ?, tipo_chip = ?, data_retirada = ?, corrida_id = ?  WHERE id = ?";
+            String sql = "UPDATE kit SET nome = ?, imagem = ?, tipo_chip = ?, data_inicio_retirada = ?, data_final_retirada = ?, organizador_id = ?  WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
-            comando.setInt(2, kit.getQuantidade());
-            comando.setString(3, kit.getImagem());
-            comando.setString(4, kit.getTipoChip());
-            comando.setString(5, kit.getDataRetirada());
-            comando.setInt(6, kit.getCorrida().getId());
+            comando.setString(2, kit.getImagem());
+            comando.setString(3, kit.getTipoChip());
+            comando.setString(4, kit.getDataInicioRetirada());
+            comando.setString(5, kit.getDataFinalRetirada());
+            comando.setInt(6, kit.getOrganizador().getId());
             comando.setInt(7, kit.getId());
             comando.execute();
             comando.close();
@@ -134,24 +133,50 @@ public class KitDAO {
         }
     }
     
-    public static Kit obterKit(int id, int corridaId) throws ClassNotFoundException {
+    public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         Kit kit = null;
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id + " AND corrida_id = " + corridaId);
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id + " AND organizador_id = " + organizadorId);
             rs.first();
             kit = new Kit (
                     rs.getInt("id"), 
                     rs.getString("nome"),
-                    rs.getInt("quantidade"),
                     rs.getString("imagem"), 
                     rs.getString("tipo_chip"),
-                    rs.getString("data_retirada"),
+                    rs.getString("data_inicio_retirada"),
+                    rs.getString("data_final_retirada"),
                     null);
-            kit.setCorridaId(rs.getInt("corrida_id"));
+            kit.setOrganizadorId(rs.getInt("organizador_id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return kit;
+    }
+    
+    public static Kit obterKitCorrida(int id, int corridaId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Kit kit = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit INNER JOIN kit_corrida ON kit.id = kit_corrida.kit_id WHERE kit_corrida.corrida_id = " + corridaId);
+            rs.first();
+            kit = new Kit (
+                    rs.getInt("id"), 
+                    rs.getString("nome"),
+                    rs.getString("imagem"), 
+                    rs.getString("tipo_chip"),
+                    rs.getString("data_inicio_retirada"),
+                    rs.getString("data_final_retirada"),
+                    null);
+            kit.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

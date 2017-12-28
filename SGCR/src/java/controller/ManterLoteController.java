@@ -60,7 +60,6 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdLote"));
         String tipo = request.getParameter("txtTipoLote");
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");
@@ -69,7 +68,7 @@ public class ManterLoteController extends HttpServlet {
 
         try {
             Corrida corrida = Corrida.obterCorrida(corridasId);
-            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal,  corrida);
+            Lote ingresso = new Lote(tipo, preco, dataInicio, dataFinal,  corrida);
             ingresso.gravar();
 
             RequestDispatcher view
@@ -114,7 +113,7 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdLote"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdLote"));
         String tipo = request.getParameter("txtTipoLote");
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");
@@ -155,7 +154,7 @@ public class ManterLoteController extends HttpServlet {
     }
 
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("txtIdLote"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdLote"));
         String tipo = request.getParameter("txtTipoLote");
         double preco = Double.parseDouble(request.getParameter("txtPrecoLote"));
         String dataInicio = request.getParameter("txtDataInicioLote");

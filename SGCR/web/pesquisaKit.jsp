@@ -22,11 +22,8 @@
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Corrida</th>
                         <th>Nome</th>
-                        <th>Data da retirada</th>
-                        <th>Imagem</th>
+                        <th>Período de retirada</th>
                         <th>Tipo Chip</th>
                         <th colspan="2" class="table-action">Ação</th> 
                     </tr>
@@ -34,19 +31,16 @@
                 <tbody>
                     <c:forEach items="${kits}" var="kit">
                         <tr>
-                            <td><c:out value="${kit.id}" /></td>
-                            <td><c:out value="${kit.corrida.nome}" /></td>
                             <td><c:out value="${kit.nome}" /></td>
-                            <td><c:out value="${kit.dataRetirada}" /></td>
-                            <td><c:out value="${kit.imagem}" /></td>
+                            <td><c:out value="${kit.dataInicioRetirada}" /> - <c:out value="${kit.dataFinalRetirada}" /></td>
                             <td><c:out value="${kit.tipoChip}" /></td>
                             <td class="table-action">
-                                <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-primary btn-block btn-xs">
+                                <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>" class="btn btn-primary btn-block btn-xs">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar
                                 </a> 
                             </td>
                             <td class="table-action">
-                                <a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>&corridaId=<c:out value="${kit.corridaId}"/>" class="btn btn-danger btn-block btn-xs">
+                                <a href="ManterKitController?acao=prepararExcluir&id=<c:out value="${kit.id}"/>" class="btn btn-danger btn-block btn-xs">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Excluir
                                 </a> 
                             </td>
