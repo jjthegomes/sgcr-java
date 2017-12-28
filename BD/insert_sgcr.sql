@@ -65,11 +65,16 @@ INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, 
 -- Extraindo dados da tabela `kit`
 --
 
-INSERT INTO `kit` (`id`, `nome`, `imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`) VALUES
-(2, 'VIP', NULL, 'Retornável', '21/01/2018', '02/02/2018'),
-(3, 'Premio', NULL, 'Descartável', '21/01/2018', '02/02/2018'),
-(4, 'Básico', NULL, 'Descartável', '21/01/2018', '02/02/2018');
+INSERT INTO `kit` (`id`, `nome`, `imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`, `organizador_id`) VALUES
+(1, 'VIP', NULL, 'Retornável', '21/01/2018', '02/02/2018', 1),
+(2, 'Premio', NULL, 'Descartável', '21/01/2018', '02/02/2018', 2),
+(3, 'Básico', NULL, 'Descartável', '21/01/2018', '02/02/2018', 3);
 
+
+INSERT INTO `kit_corrida` (`corrida_id`, `kit_id`) VALUES
+(1,1),
+(2,2),
+(3,3); 
 --
 -- Extraindo dados da tabela `lote`
 --
@@ -91,10 +96,16 @@ INSERT INTO `lote` (`id`, `tipo`, `preco`, `data_inicio`, `data_final`, `corrida
 -- Extraindo dados da tabela `percurso`
 --
 
-INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `descricao`) VALUES
-(1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes'),
-(2, NULL, 10, 'Percurso Intermediário.   '),
-(3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes. ');
+INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `descricao`, `organizador_id`) VALUES
+(1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes',1),
+(2, NULL, 10, 'Percurso Intermediário.', 2),
+(3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes.', 3);
+
+
+INSERT INTO `percurso_corrida` (`corrida_id`, `percurso_id`) VALUES
+(1,1),
+(2,2),
+(3,3); 
 
 --
 -- Extraindo dados da tabela `produto`
@@ -137,12 +148,12 @@ INSERT INTO `pontuacao` (`id`, `ranking_id`, `pontuacao`) VALUES
 --
 
 INSERT INTO `inscricao` (`id`, `corrida_id`, `data_compra`, `numero_peito`, `pago`, `kit_retirado`, `tempo_largada`, `tempo_chegada`, `atleta_id`, `percurso_id`, `lote_id`, `kit_id`) VALUES
-(13, 3, '26/10/2017', NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2),
-(14, 1, '20/11/2017', NULL, NULL, NULL, NULL, NULL, 2, 2, 2, 3),
-(15, 1, '11/12/2017', NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 4),
-(16, 2, '04/01/2018', NULL, NULL, NULL, NULL, NULL, 7, 1, 5, 3),
-(17, 2, '06/01/2018', NULL, NULL, NULL, NULL, NULL, 8, 3, 6, 4),
-(18, 3, '22/01/2018', NULL, NULL, NULL, NULL, NULL, 9, 3, 8, 4);
+(13, 3, '26/10/2017', NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 1),
+(14, 1, '20/11/2017', NULL, NULL, NULL, NULL, NULL, 2, 2, 2, 2),
+(15, 1, '11/12/2017', NULL, NULL, NULL, NULL, NULL, 3, 3, 3, 3),
+(16, 2, '04/01/2018', NULL, NULL, NULL, NULL, NULL, 7, 1, 5, 2),
+(17, 2, '06/01/2018', NULL, NULL, NULL, NULL, NULL, 8, 3, 6, 3),
+(18, 3, '22/01/2018', NULL, NULL, NULL, NULL, NULL, 9, 3, 8, 3);
 
 --
 -- Extraindo dados da tabela `boleto`
