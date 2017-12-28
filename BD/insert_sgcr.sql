@@ -173,6 +173,21 @@ INSERT INTO `cartao_credito` (`id`, `numero`, `codigo_seguranca`, `validade`, `n
 (11, '2', '584', '10/2025', 'Maria da Graça Meneguel', 14, 1),
 (12, '3', '753', '10/2023', 'Ian Lucas de Aquino Silvério de Azevedo Prado', 15, 1);
 
+--
+-- Extraindo dados da tabela `produto_kit`
+--
+
+INSERT INTO produto_kit (id, descricao, valor, produto_id, kit_id) VALUES
+(1, 'Azul', 35.00, 1, 1),
+(2, 'Azul', 45.00, 2, 1),
+(3, 'Azul', 75.00, 3, 1),
+(4, 'Amarelo', 65.00, 4, 2),
+(5, 'Amarelo', 25.00, 5, 2),
+(6, 'Amarelo', 50.00, 6, 2),
+(7, 'Vermelho', 15.00, 1, 3),
+(8, 'Vermelho', 25.00, 2, 3),
+(9, 'Vermelho', 35.00, 3, 3);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
