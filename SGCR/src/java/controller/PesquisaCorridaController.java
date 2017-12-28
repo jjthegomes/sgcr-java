@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Corrida;
+import modelo.Organizador;
 
 /**
  *
@@ -30,13 +32,15 @@ public class PesquisaCorridaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try{
-       request.setAttribute("corridas", Corrida.obterCorridas());
-                RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorrida.jsp");
-                view.forward(request, response);
-            }
-        catch (ClassNotFoundException ex){
+        try {
+            HttpSession session = request.getSession(true);
+            Organizador organizador = (Organizador) session.getAttribute("organizador");
             
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorrida.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

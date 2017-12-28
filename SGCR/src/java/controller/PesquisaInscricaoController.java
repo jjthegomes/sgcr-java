@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Atleta;
 import modelo.Inscricao;
 
 /**
@@ -32,11 +34,14 @@ public class PesquisaInscricaoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            request.setAttribute("inscricoes", Inscricao.obterInscricoes());
+            HttpSession session = request.getSession(true);
+            Atleta atleta = (Atleta) session.getAttribute("atleta");
+
+            request.setAttribute("inscricoes", Inscricao.obterInscricoesAtleta(atleta.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaInscricao.jsp");
             view.forward(request, response);
-        } catch(ClassNotFoundException ex) {
-            
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

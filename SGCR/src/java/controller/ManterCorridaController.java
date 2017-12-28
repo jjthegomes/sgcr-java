@@ -71,7 +71,6 @@ public class ManterCorridaController extends HttpServlet {
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
         }
-        //catch(ClassNotFoundException ex){ }
     }
 
     public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {

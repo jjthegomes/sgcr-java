@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
 import modelo.Ranking;
 
 /**
@@ -33,12 +35,14 @@ public class PesquisaRankingController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            request.setAttribute("rankings", Ranking.obterRankings());
-                RequestDispatcher view = request.getRequestDispatcher("/pesquisaRanking.jsp");
-                view.forward(request, response);
-        }
-        catch (ClassNotFoundException ex){
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
             
+            request.setAttribute("rankings", Ranking.obterRankings(administrador.getId()));
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRanking.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

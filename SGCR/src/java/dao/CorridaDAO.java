@@ -61,6 +61,45 @@ public class CorridaDAO {
         return corridas;
     }
 
+    public static List<Corrida> obterCorridas(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Corrida> corridas = new ArrayList<>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE organizador_id = " + id);
+
+            while (rs.next()) {
+                Corrida corrida = new Corrida(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("max_pessoa"),
+                        rs.getString("horario"),
+                        rs.getString("data"),
+                        rs.getString("banner"),
+                        rs.getString("logradouro"),
+                        rs.getString("cep"),
+                        rs.getString("numero"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("bairro"),
+                        rs.getString("descricao"),
+                        rs.getString("regulamento"),
+                        rs.getString("edicao"),
+                        rs.getBoolean("ativo"),
+                        null);
+                corrida.setOrganizadorId(id);
+                corrida.setOrganizador(Organizador.obterOrganizador(id));
+                corridas.add(corrida);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return corridas;
+    }
     public static void gravar(Corrida corrida) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         try {

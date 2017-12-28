@@ -19,7 +19,7 @@
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="dashboard.jsp">Dashboard</a></li>
-                <li><a href="ManterResultadoController?acao=escolherCorrida">Manter Resultado</a></li>
+                <li><a href="ManterResultadoCorridaController?acao=escolherCorrida">Manter Resultado</a></li>
                 <li class="active">${corrida.nome}</li> 
             </ul>            
             <center> <h2>Manter Resultado</h2></center>

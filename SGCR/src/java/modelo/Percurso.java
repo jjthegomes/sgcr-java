@@ -32,7 +32,7 @@ public class Percurso {
         this.descricao = descricao;
         this.quilometragem = quilometragem;
     }
-        
+
     public int getId() {
         return id;
     }
@@ -55,7 +55,7 @@ public class Percurso {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }        
+    }
 
     public Double getQuilometragem() {
         return quilometragem;
@@ -69,8 +69,8 @@ public class Percurso {
         return PercursoDAO.obterPercursos();
     }
 
-    public static List<Percurso> obterPercursos(int corridaId) throws ClassNotFoundException {
-        return PercursoDAO.obterPercursos(corridaId);
+    public static List<Percurso> obterPercursos(int organizadorId) throws ClassNotFoundException {
+        return PercursoDAO.obterPercursos(organizadorId);
     }
 
     public void gravar() throws SQLException, ClassNotFoundException {

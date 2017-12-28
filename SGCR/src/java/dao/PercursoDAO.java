@@ -12,7 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Corrida;
+import static jdk.nashorn.internal.runtime.Debug.id;
+import modelo.Organizador;
 import modelo.Percurso;
 
 /**
@@ -46,14 +47,14 @@ public class PercursoDAO {
         return percursos;
     }
 
-    public static List<Percurso> obterPercursos(int corridaId) throws ClassNotFoundException {
+    public static List<Percurso> obterPercursos(int id) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         List<Percurso> percursos = new ArrayList<>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE corrida_id = " + corridaId);
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE organizador_id = " + id);
 
             while (rs.next()) {
                 Percurso percurso = new Percurso(
@@ -61,7 +62,7 @@ public class PercursoDAO {
                         rs.getString("imagem"),
                         rs.getString("descricao"),
                         rs.getDouble("quilometragem"));
-              
+
                 percursos.add(percurso);
             }
         } catch (SQLException e) {

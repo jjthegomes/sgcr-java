@@ -78,6 +78,11 @@ public class Produto {
     public static List<Produto> obterProdutos() throws ClassNotFoundException{
         return ProdutoDAO.obterProdutos();
     }
+    
+     public static List<Produto> obterProdutos(int administradorId) throws ClassNotFoundException{
+        return ProdutoDAO.obterProdutos(administradorId);
+    }
+     
     public static Produto obterProduto(int id) throws ClassNotFoundException{
         return ProdutoDAO.obterProduto(id);
     }

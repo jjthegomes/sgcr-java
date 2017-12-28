@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Organizador;
 import modelo.Percurso;
 
 /**
@@ -33,11 +35,14 @@ public class PesquisaPercursoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-           request.setAttribute("percursos", Percurso.obterPercursos());
-                RequestDispatcher view = request.getRequestDispatcher("/pesquisaPercurso.jsp");
-                view.forward(request, response);
-        } catch(ClassNotFoundException ex) {
-            
+            HttpSession session = request.getSession(true);
+            Organizador organizador = (Organizador) session.getAttribute("organizador");
+
+            request.setAttribute("percursos", Percurso.obterPercursos(organizador.getId()));
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaPercurso.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+
         }
     }
 

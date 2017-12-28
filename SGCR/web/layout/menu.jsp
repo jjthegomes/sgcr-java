@@ -41,7 +41,7 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Atleta</li>
                                 <li><a href="ManterAtletaController?acao=prepararEditar&id=${atleta.id}">Minha Conta</a></li>
-                                <li><a href="#">Minhas Corridas</a></li>
+                                <li><a href="PesquisaInscricaoController">Minhas Corridas</a></li>
                                 <li class="divider"></li>
                                 <li><a href="LoginController?acao=logout">Sair</a></li>
                             </ul>
@@ -114,14 +114,8 @@
                     </li>
                     <li><a href="PesquisaAdministradorController"><i class="fa fa-lock fa-lg"></i> Administrador</a></li>
                     <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
-                    <li><a href="PesquisaCorridaController"><i class="fa fa-map-marker fa-lg"></i> Corrida</a></li>
-                    <li><a href="PesquisaPercursoController"><i class="fa fa-map fa-lg"></i> Percurso</a></li>
-                    <li><a href="PesquisaKitController"><i class="fa fa-shopping-bag fa-lg"></i> Kit</a></li>
-                    <li><a href="PesquisaProdutoKitController"><i class="fa fa-cubes fa-lg"></i> Produto Kit</a></li>
                     <li><a href="PesquisaProdutoController"><i class="fa fa-cube fa-lg"></i> Produto</a></li>
                     <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
-                    <li><a href="PesquisaInscricaoController"><i class="fa fa-calendar fa-lg"></i> Inscrição</a></li>
-                    <li><a href="PesquisaLoteController"><i class="fa fa-ticket fa-lg"></i> Lote</a></li>
                     <li><a href="PesquisaRankingController"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
                 </ul>
             </div>

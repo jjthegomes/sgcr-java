@@ -89,6 +89,10 @@ public class Ranking {
     public static List<Ranking> obterRankings() throws ClassNotFoundException{
         return RankingDAO.obterRankings();
     }
+     public static List<Ranking> obterRankings(int administradorId) throws ClassNotFoundException{
+        return RankingDAO.obterRankings(administradorId);
+    }
+     
     public static Ranking obterRanking(int id) throws ClassNotFoundException{
         return RankingDAO.obterRanking(id);
     }

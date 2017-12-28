@@ -126,6 +126,33 @@ public class RankingDAO {
         return rankings;
     }
 
+    public static List<Ranking> obterRankings(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Ranking> rankings = new ArrayList<Ranking>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM ranking where administrador_id = " + id);
+
+            while (rs.next()) {
+                Ranking ranking = new Ranking(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("intervalo_faixa_etaria"),
+                        null);
+                ranking.setAdministradorId(id);
+                ranking.setAdministrador(Administrador.obterAdministrador(id));
+                rankings.add(ranking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return rankings;
+    }
+    
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

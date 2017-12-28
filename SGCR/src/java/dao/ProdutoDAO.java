@@ -119,6 +119,32 @@ public class ProdutoDAO {
         }
         return produtos;
     }
+    
+     public static List<Produto> obterProdutos(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Produto> produtos = new ArrayList<Produto>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM produto where administrador_id = " + id);
+
+            while (rs.next()) {
+                Produto produto = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        null);
+                produto.setAdministradorId(id);
+                produto.setAdministrador(Administrador.obterAdministrador(id));
+                produtos.add(produto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return produtos;
+    }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
