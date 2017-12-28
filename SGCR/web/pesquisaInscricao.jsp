@@ -38,8 +38,8 @@
                             <td><c:out value="${inscricao.dataCompra}" /></td>
                             <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
                             <td><c:out value="${inscricao.kit.nome}" /></td>
-                           <!-- <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Editar</a> </td>
-                            <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.kit.corridaId}"/>">Excluir</a> </td>
+                           <!-- <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.corridaId}"/>">Editar</a> </td>
+                            <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.corridaId}"/>">Excluir</a> </td>
                            -->
                            </tr>
                     </c:forEach>

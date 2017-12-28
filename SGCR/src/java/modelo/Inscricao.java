@@ -12,6 +12,8 @@ import java.util.List;
 public class Inscricao {
 
     private int id;
+    private int corridaId;
+    private Corrida corrida;
     private String dataCompra;
     private String numeroPeito;
     private boolean pago;
@@ -26,11 +28,11 @@ public class Inscricao {
     private int atletaId;
     private int percursoId;
     private int kitId;
-    private int kitCorridaId;
     private int loteId;
 
-    public Inscricao(int id, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
+    public Inscricao(int id, Corrida corrida, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
         this.id = id;
+        this.corrida = corrida;
         this.dataCompra = dataCompra;
         this.numeroPeito = numeroPeito;
         this.pago = pago;
@@ -43,7 +45,7 @@ public class Inscricao {
         this.lote = lote;
     }
 
-    public Inscricao(Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
+    public Inscricao(Corrida corrida, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;
@@ -162,12 +164,20 @@ public class Inscricao {
         this.kitId = kitId;
     }
 
-    public int getKitCorridaId() {
-        return kitCorridaId;
+    public int getCorridaId() {
+        return corridaId;
     }
 
-    public void setKitCorridaId(int kitCorridaId) {
-        this.kitCorridaId = kitCorridaId;
+    public void setCorridaId(int kitCorridaId) {
+        this.corridaId = corridaId;
+    }
+
+    public Corrida getCorrida() {
+        return corrida;
+    }
+
+    public void setCorrida(Corrida corrida) {
+        this.corrida = corrida;
     }
 
     public Lote getLote() {

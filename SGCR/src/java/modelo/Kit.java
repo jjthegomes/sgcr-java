@@ -125,6 +125,10 @@ public class Kit {
         KitDAO.excluir(this);
     }
     
+    public static Kit obterKit(int id) throws ClassNotFoundException {
+        return KitDAO.obterKit(id);
+    }
+    
     public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
         return KitDAO.obterKit(id, organizadorId);
     }

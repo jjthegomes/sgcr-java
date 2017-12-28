@@ -32,17 +32,39 @@ public class PesquisaInscricaoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+
+        if (session.getAttribute("administrador") != null && session.getAttribute("usuario") == "administrador") {
+            obterInscricoes(request, response);
+        } else if (session.getAttribute("atleta") != null && session.getAttribute("usuario") == "atleta") {
+            obterInscricoesAtleta(request, response);
+        } else if (session.getAttribute("organizador") != null && session.getAttribute("usuario") == "organizador") {
+            obterInscricoes(request, response);
+        }
+    }
+
+    public void obterInscricoes(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("inscricoes", Inscricao.obterInscricoes());
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaInscricao.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException | ServletException | IOException ex) {
+        }
+    }
+
+    public void obterInscricoesAtleta(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession(true);
             Atleta atleta = (Atleta) session.getAttribute("atleta");
-
             request.setAttribute("inscricoes", Inscricao.obterInscricoesAtleta(atleta.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaInscricao.jsp");
             view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-
+        } catch (ClassNotFoundException | ServletException | IOException ex) {
         }
+    }
+
+    public void obterInscricoesOrganizador(HttpServletRequest request, HttpServletResponse response) {
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

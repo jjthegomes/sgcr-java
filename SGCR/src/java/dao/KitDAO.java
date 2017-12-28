@@ -133,6 +133,32 @@ public class KitDAO {
         }
     }
     
+    public static Kit obterKit(int id) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Kit kit = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE id = " + id);
+            rs.first();
+            kit = new Kit (
+                    rs.getInt("id"), 
+                    rs.getString("nome"),
+                    rs.getString("imagem"), 
+                    rs.getString("tipo_chip"),
+                    rs.getString("data_inicio_retirada"),
+                    rs.getString("data_final_retirada"),
+                    null);
+            kit.setOrganizadorId(rs.getInt("organizador_id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return kit;
+    }
+    
     public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;

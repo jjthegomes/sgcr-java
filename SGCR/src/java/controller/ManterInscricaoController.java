@@ -136,15 +136,16 @@ public class ManterInscricaoController extends HttpServlet {
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         int loteId = Integer.parseInt(request.getParameter("optLote"));
         
-        HttpSession session = request.getSession(true);
-        Atleta atleta = (Atleta) session.getAttribute("atleta");
-        
         try {
+            Corrida corrida = Corrida.obterCorrida(corridaId);
+            HttpSession session = request.getSession(true);
+            Atleta atleta = (Atleta) session.getAttribute("atleta");
             Percurso percurso = Percurso.obterPercurso(percursoId);
-            Kit kit = Kit.obterKit(kitId, corridaId);
+            
+            Kit kit = Kit.obterKitCorrida(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(atleta, percurso, kit, lote);
+            Inscricao inscricao = new Inscricao(corrida, atleta, percurso, kit, lote);
             inscricao.gravar();
             
             if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
@@ -222,7 +223,7 @@ public class ManterInscricaoController extends HttpServlet {
         String tempoLargada = request.getParameter("txtTempoLargada");
         String tempoChegada = request.getParameter("txtTempoChegada");
 
-        Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null, null);
+        Inscricao inscricao = new Inscricao(id, null, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null, null);
 
         try {
             inscricao.excluir();
@@ -292,7 +293,7 @@ public class ManterInscricaoController extends HttpServlet {
             Kit kit = Kit.obterKit(kitId, corridaId);
             Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(id, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);
+            Inscricao inscricao = new Inscricao(id, null, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);
             inscricao.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaInscricaoController");
             view.forward(request, response);
