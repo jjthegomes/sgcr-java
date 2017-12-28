@@ -34,42 +34,40 @@
                             <form action="ManterKitController?acao=confirmar${operacao}" method="post" name="frmManterKit">
                                 <div class="col-md-12">
                                     <input type="hidden" class="form-control" id="codigo" name="hiddenIdKit" value="${kit.id}" readonly />
+                                    <div  class="col-md-6">    
                                         <div class="form-group">
                                             <label for="nomeKit">Nome:</label>
                                             <input type="text" class="form-control" id="txtNomeKit" name="txtNomeKit" placeholder="Nome (Ex: VIP, Normal, Único)" value="${kit.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
                                             </div>            
-                                            <div class="form-group">
-                                                <label for="numQuantidadeKit">Quantidade</label>
-                                                <input type="number" class="form-control" name="numQuantidadeKit" value="${kit.quantidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                            </div>
                                         </div>
 
-                                        <div  class="col-md-6">
+                                        <div  class="col-md-6">  
                                             <div class="form-group">
                                                 <label for="fileImagemKit">Imagem </label>
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                                                 <!-- Nao permir valores maiores que 4194304 (4MB) -->
                                                 <input type="txt" class="form-control" name="fileImagemKit" value="${kit.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                            </div> 
-                                            <div class="form-group">
-                                                <label for="optTipoChip">Tipo do Chip</label>
-                                                <select name="optTipoChip" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                <option value="Descartável" <c:if test="${kit.tipoChip == 'Descartável'}"> selected</c:if>>Descartável</option>
-                                                <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="numQuantidadeKit">Data de Retirada</label>
-                                                <input type="text" class="form-control" name="txtDataRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <a href="PesquisaKitController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Cancelar</div></a>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="optTipoChip">Tipo do Chip</label>
+                                            <select name="optTipoChip" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                            <option value="Descartável" <c:if test="${kit.tipoChip == 'Descartável'}"> selected</c:if>>Descartável</option>
+                                            <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="numQuantidadeKit">Data de Retirada</label>
+                                            <input type="text" class="form-control" name="txtDataRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <a href="PesquisaKitController" style="text-decoration: none;"><div class="btn btn-danger btn-block" >Cancelar</div></a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
