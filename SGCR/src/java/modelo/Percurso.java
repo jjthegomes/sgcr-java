@@ -19,18 +19,23 @@ public class Percurso {
     private String imagem;
     private String descricao;
     private Double quilometragem;
+    private Organizador organizador;
 
-    public Percurso(int id, String imagem, String descricao, Double quilometragem) {
+    private int organizadorId;
+
+    public Percurso(int id, String imagem, String descricao, Double quilometragem, Organizador organizador) {
         this.id = id;
         this.imagem = imagem;
         this.descricao = descricao;
         this.quilometragem = quilometragem;
+        this.organizador = organizador;
     }
 
-    public Percurso(String imagem, String descricao, Double quilometragem) {
+    public Percurso(String imagem, String descricao, Double quilometragem, Organizador organizador) {
         this.imagem = imagem;
         this.descricao = descricao;
         this.quilometragem = quilometragem;
+        this.organizador = organizador;
     }
 
     public int getId() {
@@ -65,6 +70,22 @@ public class Percurso {
         this.quilometragem = quilometragem;
     }
 
+    public Organizador getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Organizador organizador) {
+        this.organizador = organizador;
+    }
+
+    public int getOrganizadorId() {
+        return organizadorId;
+    }
+
+    public void setOrganizadorId(int organizadorId) {
+        this.organizadorId = organizadorId;
+    }
+    
     public static List<Percurso> obterPercursos() throws ClassNotFoundException {
         return PercursoDAO.obterPercursos();
     }
@@ -87,5 +108,9 @@ public class Percurso {
 
     public static Percurso obterPercurso(int id) throws ClassNotFoundException {
         return PercursoDAO.obterPercurso(id);
+    }
+    
+    public static Percurso obterPercursoCorrida(int corridaId) throws ClassNotFoundException {
+        return PercursoDAO.obterPercursoCorrida(corridaId);
     }
 }

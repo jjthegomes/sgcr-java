@@ -62,13 +62,13 @@
                                                 </div>
                                             </div>
 
-                                            <!--                                            <label for="percurso">Percurso:</label>
+                                                                                        <label for="percurso">Percurso:</label>
                                                                                         <select name="optPercurso" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                                                             <option value="0" <c:if test="${inscricao.percurso.id == null}"> selected</c:if>> Selecione um percurso</option>  
                                             <c:forEach items="${percursos}" var="percurso">
                                                 <option value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> selected</c:if>>${percurso.corrida.nome} - ${percurso.quilometragem}km</option>  
                                             </c:forEach>
-                                        </select>-->
+                                        </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
@@ -88,13 +88,13 @@
                                                 </div>
                                             </div>
 
-                                            <!--                                            <label for="kit">Kit:</label>
-                                                                                        <select name="optKit" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                                                            <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
+                                            <label for="kit">Kit:</label>
+                                            <select name="optKit" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                            <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
                                             <c:forEach items="${kits}" var="kit">
                                                 <option value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
                                             </c:forEach>
-                                        </select>-->
+                                        </select>
                                         </div>
                                     </div>
                                 </div>

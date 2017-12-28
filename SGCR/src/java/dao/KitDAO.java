@@ -185,7 +185,7 @@ public class KitDAO {
         return kit;
     }
     
-    public static Kit obterKitCorrida(int id, int corridaId) throws ClassNotFoundException {
+    public static Kit obterKitCorrida(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
         Kit kit = null;

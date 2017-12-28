@@ -124,7 +124,7 @@ public class ManterPercursoController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Percurso percurso = new Percurso(imagem, descricao, numQuilometragem);
+            Percurso percurso = new Percurso(imagem, descricao, numQuilometragem, organizador);
             percurso.gravar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -160,8 +160,11 @@ public class ManterPercursoController extends HttpServlet {
         String imagem = request.getParameter("fileImagemPercurso");
         String descricao = request.getParameter("descricaoPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
-
-        Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem);
+        
+        HttpSession session = request.getSession(true);
+        Organizador organizador = (Organizador) session.getAttribute("organizador");
+        
+        Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem, organizador);
         try {
             percurso.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -197,9 +200,12 @@ public class ManterPercursoController extends HttpServlet {
         String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         String descricao = request.getParameter("descricaoPercurso");
-
+        
+        HttpSession session = request.getSession(true);
+        Organizador organizador = (Organizador) session.getAttribute("organizador");
+        
         try {
-            Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem);
+            Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem, organizador);
             percurso.alterar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");

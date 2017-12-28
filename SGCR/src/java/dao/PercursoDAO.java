@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import static jdk.nashorn.internal.runtime.Debug.id;
-import modelo.Organizador;
 import modelo.Percurso;
 
 /**
@@ -36,7 +34,9 @@ public class PercursoDAO {
                         rs.getInt("id"),
                         rs.getString("imagem"),
                         rs.getString("descricao"),
-                        rs.getDouble("quilometragem"));
+                        rs.getDouble("quilometragem"),
+                        null);
+                percurso.setOrganizadorId(rs.getInt("organizador_id"));
                 percursos.add(percurso);
             }
         } catch (SQLException e) {
@@ -61,7 +61,9 @@ public class PercursoDAO {
                         rs.getInt("id"),
                         rs.getString("imagem"),
                         rs.getString("descricao"),
-                        rs.getDouble("quilometragem"));
+                        rs.getDouble("quilometragem"),
+                        null);
+                percurso.setOrganizadorId(rs.getInt("organizador_id"));
 
                 percursos.add(percurso);
             }
@@ -141,7 +143,33 @@ public class PercursoDAO {
                     rs.getInt("id"),
                     rs.getString("imagem"),
                     rs.getString("descricao"),
-                    rs.getDouble("quilometragem"));
+                    rs.getDouble("quilometragem"),
+                    null);
+            percurso.setOrganizadorId(rs.getInt("organizador_id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return percurso;
+    }
+
+    public static Percurso obterPercursoCorrida(int corridaId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Percurso percurso = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso INNER JOIN percurso_corrida ON percurso.id = percurso_corrida.percurso_id WHERE percurso_corrida.corrida_id = " + corridaId);
+            rs.first();
+            percurso = new Percurso(
+                    rs.getInt("id"),
+                    rs.getString("imagem"),
+                    rs.getString("descricao"),
+                    rs.getDouble("quilometragem"),
+                    null);
+            percurso.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
