@@ -73,12 +73,12 @@ INSERT INTO `kit` (`id`, `nome`, `descricao`,`imagem`, `tipo_chip`, `data_inicio
 (5, 'Intermediário', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento)', NULL, 'Descartável', '21/01/2018', '01/02/2018', 1);
 
 
-INSERT INTO `kit_corrida` (`corrida_id`, `kit_id`) VALUES
-(1, 1),
-(1, 4),
-(1, 5),
-(2, 2),
-(3, 3);
+INSERT INTO `kit_corrida` (`corrida_id`, `kit_id`, `preco`) VALUES
+(1, 1, 90.50),
+(1, 4, 120.50),
+(1, 5, 75),
+(2, 2, 97),
+(3, 3, 112.75);
 --
 -- Extraindo dados da tabela `lote`
 --
