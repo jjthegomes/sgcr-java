@@ -42,7 +42,7 @@
                                         </div>
                                         <div  class="col-md-6">  
                                             <div class="form-group">
-                                                <label for="fileImagemKit">Imagem</label>
+                                                <label for="fileImagemKit">Imagem:</label>
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                                                 <!-- Nao permir valores maiores que 4194304 (4MB) -->
                                                 <input type="text" class="form-control" name="fileImagemKit" value="${kit.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div  class="col-md-6">  
                                             <div class="form-group">
-                                                <label for="optTipoChip">Tipo do Chip</label>
+                                                <label for="optTipoChip">Tipo do Chip:</label>
                                                 <select name="optTipoChip" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                 <option value="Descartável" <c:if test="${kit.tipoChip == 'Descartável'}"> selected</c:if>>Descartável</option>
                                                 <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
@@ -62,18 +62,23 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="txtDataRetiradaKit">Data Início Retirada</label>
-                                                        <input type="text" maxlength="10" class="form-control" name="txtDataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataInicioRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                        <input type="text" maxlength="10" class="form-control" name="txtDataInicioRetiradaKit" placeholder="__/__/____" onkeypress="mascaraData(this, event)" value="${kit.dataInicioRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="txtDataRetiradaKit">Data Final Retirada</label>
-                                                        <input type="text" maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                        <input type="text" maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" placeholder="__/__/____" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="col-md-6">  
+                                            <div class="form-group">
+                                                <label for="descricaoKit">Descrição:</label>
+                                                <input type="text" class="form-control" id="txtDescricaoKit" name="txtDescricaoKit" placeholder="Descrição (Ex: Camiseta x, boné y...)" value="${kit.descricao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
+                                            </div>            
+                                        </div>
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-6">

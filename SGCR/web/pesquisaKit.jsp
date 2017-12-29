@@ -23,6 +23,7 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Descrição</th>
                         <th>Período de retirada</th>
                         <th>Tipo Chip</th>
                         <th colspan="2" class="table-action">Ação</th> 
@@ -32,6 +33,7 @@
                     <c:forEach items="${kits}" var="kit">
                         <tr>
                             <td><c:out value="${kit.nome}" /></td>
+                            <td><c:out value="${kit.descricao}" /></td>
                             <td><c:out value="${kit.dataInicioRetirada}" /> - <c:out value="${kit.dataFinalRetirada}" /></td>
                             <td><c:out value="${kit.tipoChip}" /></td>
                             <td class="table-action">
