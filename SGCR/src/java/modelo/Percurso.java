@@ -110,7 +110,7 @@ public class Percurso {
         return PercursoDAO.obterPercurso(id);
     }
     
-    public static Percurso obterPercursoCorrida(int corridaId) throws ClassNotFoundException {
-        return PercursoDAO.obterPercursoCorrida(corridaId);
+    public static List<Percurso> obterPercursosCorrida(int corridaId) throws ClassNotFoundException {
+        return PercursoDAO.obterPercursosCorrida(corridaId);
     }
 }

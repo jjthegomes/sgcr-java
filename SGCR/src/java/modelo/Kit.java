@@ -133,7 +133,7 @@ public class Kit {
         return KitDAO.obterKit(id, organizadorId);
     }
     
-    public static Kit obterKitCorrida(int corridaId) throws ClassNotFoundException {
-        return KitDAO.obterKitCorrida(corridaId);
+    public static List<Kit> obterKitsCorrida(int corridaId) throws ClassNotFoundException {
+        return KitDAO.obterKitsCorrida(corridaId);
     }
 }

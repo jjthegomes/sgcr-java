@@ -153,31 +153,35 @@ public class PercursoDAO {
         }
         return percurso;
     }
-
-    public static Percurso obterPercursoCorrida(int corridaId) throws ClassNotFoundException {
+    
+    public static List<Percurso> obterPercursosCorrida(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        Percurso percurso = null;
+        List<Percurso> percursos = new ArrayList<>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM percurso INNER JOIN percurso_corrida ON percurso.id = percurso_corrida.percurso_id WHERE percurso_corrida.corrida_id = " + corridaId);
-            rs.first();
-            percurso = new Percurso(
-                    rs.getInt("id"),
-                    rs.getString("imagem"),
-                    rs.getString("descricao"),
-                    rs.getDouble("quilometragem"),
-                    null);
-            percurso.setOrganizadorId(rs.getInt("organizador_id"));
+
+            while (rs.next()) {
+                Percurso percurso = new Percurso(
+                        rs.getInt("id"),
+                        rs.getString("imagem"),
+                        rs.getString("descricao"),
+                        rs.getDouble("quilometragem"),
+                        null);
+                percurso.setOrganizadorId(rs.getInt("organizador_id"));
+
+                percursos.add(percurso);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return percurso;
+        return percursos;
     }
-
+    
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {
