@@ -26,12 +26,14 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO ranking (nome, intervalo_faixa_etaria, administrador_id) "
-                    + "VALUES (?,?,?)";
+            String sql = "INSERT INTO ranking (nome, intervalo_faixa_etaria, idade_inicial, administrador_id) "
+                    + "VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ranking.getNome());
             comando.setInt(2, ranking.getIntervaloFaixaEtaria());
-            comando.setInt(3, ranking.getAdministrador().getId());
+            comando.setInt(3, ranking.getIdadeInicial());
+            comando.setInt(4, ranking.getAdministrador().getId());
+
             comando.execute();
             comando.close();
             conexao.close();
@@ -45,13 +47,14 @@ public class RankingDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE ranking SET nome = ?, intervalo_faixa_etaria = ?, administrador_id = ? "
+            String sql = "UPDATE ranking SET nome = ?, intervalo_faixa_etaria = ?, idade_inicial = ?, administrador_id = ? "
                     + "WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, ranking.getNome());
             comando.setInt(2, ranking.getIntervaloFaixaEtaria());
-            comando.setInt(3, ranking.getAdministrador().getId());
-            comando.setInt(4, ranking.getId());
+            comando.setInt(3, ranking.getIdadeInicial());
+            comando.setInt(4, ranking.getAdministrador().getId());
+            comando.setInt(5, ranking.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -89,6 +92,7 @@ public class RankingDAO {
             ranking = new Ranking(rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getInt("intervalo_faixa_etaria"),
+                    rs.getInt("idade_inicial"),
                     null);
             ranking.setAdministradorId(rs.getInt("administrador_id"));
         } catch (SQLException e) {
@@ -113,6 +117,7 @@ public class RankingDAO {
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getInt("intervalo_faixa_etaria"),
+                        rs.getInt("idade_inicial"),
                         null);
                 ranking.setAdministradorId(rs.getInt("administrador_id"));
                 ranking.setAdministrador(Administrador.obterAdministrador(rs.getInt("administrador_id")));
@@ -140,6 +145,7 @@ public class RankingDAO {
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getInt("intervalo_faixa_etaria"),
+                        rs.getInt("idade_inicial"),
                         null);
                 ranking.setAdministradorId(id);
                 ranking.setAdministrador(Administrador.obterAdministrador(id));
@@ -152,7 +158,7 @@ public class RankingDAO {
         }
         return rankings;
     }
-    
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

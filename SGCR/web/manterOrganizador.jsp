@@ -37,7 +37,7 @@
                                     <div class="col-md-4">   
                                         <div class="form-group">
                                             <label for="Nome">Nome Completo:</label>
-                                            <input type="text" name="txtNomeOrganizador" class="form-control" value="${organizador.nome}" 
+                                            <input type="text" name="txtNomeOrganizador" class="form-control" required value="${organizador.nome}" 
                                                <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                    id="nome"
                                                    />
@@ -48,7 +48,7 @@
                                                <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                    class="form-control" 
                                                    id="dtNasc" 
-                                                   placeholder="__/__/____" onkeypress="mascaraData(this, event)"
+                                                   placeholder="__/__/____" required onkeypress="mascaraData(this, event)"
                                                    />
                                         </div>
                                         <div class="form-group">
@@ -57,15 +57,15 @@
                                                <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                    class="form-control"
                                                    id="cpf" 
-                                                   placeholder="xxx.xxx.xxx-xx" onkeydown="javascript: fMasc(this, mCPF);"
+                                                   placeholder="xxx.xxx.xxx-xx" required onkeydown="javascript: fMasc(this, mCPF);"
                                                    />
                                         </div>
                                         <div class="form-group">
-                                            <label for="cel">Celular</label>
+                                            <label for="cel">Celular:</label>
                                             <input type="tel" class="form-control" value="${organizador.celular}" 
                                                <c:if test="${operacao == 'Excluir'}"> readonly</c:if>
                                                    name="txtCelularOrganizador"  
-                                                   placeholder="(xx) x xxxx-xxxx" onkeydown="javascript: fMasc(this, mTel);"
+                                                   placeholder="(xx) x xxxx-xxxx" required onkeydown="javascript: fMasc(this, mTel);"
                                                    id="cel"    
                                                    />
                                         </div>
@@ -82,7 +82,7 @@
                                             <label for="sexo">Sexo:</label> <br>
                                             <div class="radio-inline">
                                                 <label>
-                                                    <input type="radio" name="radioSexoOrganizador" value="M" 
+                                                    <input type="radio" name="radioSexoOrganizador" value="M" required
                                                     <c:if test="${operacao == 'Excluir'}"> disabled</c:if> 
                                                     <c:if test="${organizador.sexo == 'M'}"> checked</c:if>
                                                         />
@@ -91,7 +91,7 @@
                                             </div>
                                             <div class="radio-inline">
                                                 <label>
-                                                    <input type="radio" name="radioSexoOrganizador" value="F"  
+                                                    <input type="radio" name="radioSexoOrganizador" value="F"  required
                                                     <c:if test="${operacao == 'Excluir'}"> disabled</c:if> 
                                                     <c:if test="${organizador.sexo == 'F'}"> checked</c:if>
                                                         />
@@ -104,27 +104,27 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="cep">CEP:</label>
-                                            <input type="text" class="form-control" id="cep" name="txtCepOrganizador" value="${organizador.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cep" name="txtCepOrganizador" value="${organizador.cep}" required onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="cidade">Cidade:</label>
-                                            <input type="text" class="form-control" id="cidade" name="txtCidadeOrganizador" value="${organizador.cidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="cidade" name="txtCidadeOrganizador" value="${organizador.cidade}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="estado">Estado:</label>
-                                            <input type="text" class="form-control" id="estado" name="txtEstadoOrganizador" value="${organizador.estado}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="estado" name="txtEstadoOrganizador" value="${organizador.estado}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="rua">Logradouro:</label>
-                                            <input type="text" class="form-control" id="logradouro" name="txtLogradouroOrganizador" value="${organizador.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="logradouro" name="txtLogradouroOrganizador" value="${organizador.logradouro}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="bairro">Bairro:</label>
-                                            <input type="text" class="form-control" id="bairro" name="txtBairroOrganizador" value="${organizador.bairro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="bairro" name="txtBairroOrganizador" value="${organizador.bairro}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="numero">Número:</label>
-                                            <input type="text" class="form-control" id="numero" name="txtNumeroOrganizador" value="${organizador.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="text" class="form-control" id="numero" name="txtNumeroOrganizador" value="${organizador.numero}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="complemento">Complemento:</label>
@@ -137,19 +137,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="email">E-mail:</label>
-                                            <input type="email" class="form-control" id="email" name="txtEmailOrganizador" value="${organizador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="email" class="form-control" id="email" name="txtEmailOrganizador" value="${organizador.email}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="senha1">Senha:</label>
-                                            <input type="password" class="form-control" id="senha1" name="txtSenhaOrganizador" value="${organizador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="password" class="form-control" id="senha1" name="txtSenhaOrganizador" value="${organizador.senha}" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="senha2">Confirmar Senha:</label>
-                                            <input type="password" class="form-control" id="senha2" name="txtSenhaOrganizador2" oninput="validaSenha(this)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="password" class="form-control" id="senha2" name="txtSenhaOrganizador2" oninput="validaSenha(this)" required <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
 
                                         <div class="checkbox">
-                                            <label><input type="checkbox"> Aceito e Concordo com os <a href="#">Termos</a></label>
+                                            <label><input type="checkbox" name="agree" id="agree" required> Aceito e Concordo com os <a href="#">Termos</a></label>
                                         </div>
                                         <div class="form-group">
                                             <a href="PesquisaOrganizadorController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>

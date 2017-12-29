@@ -36,7 +36,7 @@
 
                                     <div class="form-group">
                                         <label for="codigoRank">Ranking:</label>
-                                        <select class="form-control" name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                                        <select class="form-control" required name="optRanking" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
                                             <option value="0" <c:if test="${pontuacao.ranking.id == null}">selected</c:if>> </option>  
                                             <c:forEach items="${rankings}" var="ranking">
                                                 <option value="${ranking.id}" <c:if test="${pontuacao.rankingId == ranking.id}"> selected</c:if>>${ranking.nome}</option>  
@@ -47,7 +47,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="pontuacao">Pontuação:</label>
-                                        <td><input type="text" class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        <td><input type="text" required class="form-control" id="pontuaca" name="txtPontuacao" value="${pontuacao.pontuacao}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">

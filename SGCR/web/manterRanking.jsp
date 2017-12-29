@@ -35,23 +35,16 @@
                                     <input type="hidden" class="form-control" id="codigo" name="hiddenIdRanking" value="${ranking.id}" readonly />
 
                                     <div class="form-group">
-                                        <label for="codigo">Administrador:</label>
-                                        <select  class="form-control" name="optAdministrador" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            <option value="0" <c:if test="${ranking.administrador.id == null}"> selected</c:if>> </option>  
-                                            <c:forEach items="${administradores}" var="administrador">
-                                                <option value="${administrador.id}" <c:if test="${ranking.administradorId == administrador.id}"> selected</c:if>>${administrador.nome}</option>  
-                                            </c:forEach>
-                                        </select>
-                                    </div>                                       
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label for="nome">Nome:</label>
-                                        <input type="text" id="nome" class="form-control" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        <input type="text" required id="nome" class="form-control" name="txtNomeRanking" value="${ranking.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <label for="FaixaEtaria">Intervalo de Faixa Etaria:</label>
-                                            <input type="text" class="form-control" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <label for="FaixaEtaria">Intervalo de Faixa Etária:</label>
+                                            <input type="text" required class="form-control" id="FaixaEtaria" name="txtIntervaloFaixaEtaria" value="${ranking.intervaloFaixaEtaria}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="IdadeInicial">Idade Inicial:</label>
+                                            <input type="text" class="form-control" id="IdadeInicial" name="txtIdadeInicial" value="${ranking.idadeInicial}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">

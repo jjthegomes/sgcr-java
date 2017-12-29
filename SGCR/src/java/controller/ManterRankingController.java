@@ -112,11 +112,15 @@ public class ManterRankingController extends HttpServlet {
     }
 
     public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-        int id = Integer.parseInt(request.getParameter("txtIdRanking"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
+        int idadeInicial = Integer.parseInt(request.getParameter("txtIdadeInicial"));
 
-        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, null);
+        HttpSession session = request.getSession(true);
+        Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);
         try {
             ranking.excluir();
 
@@ -131,13 +135,15 @@ public class ManterRankingController extends HttpServlet {
     }
 
     public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-        int id = Integer.parseInt(request.getParameter("txtIdRanking"));
+        int id = Integer.parseInt(request.getParameter("hiddenIdRanking"));
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
-        int idAdministradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+        int idadeInicial = Integer.parseInt(request.getParameter("txtIdadeInicial"));
 
-        Administrador administrador = Administrador.obterAdministrador(idAdministradorRanking);
-        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, administrador);
+        HttpSession session = request.getSession(true);
+        Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);
         try {
             ranking.alterar();
 
@@ -154,14 +160,14 @@ public class ManterRankingController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
         String nomeRanking = request.getParameter("txtNomeRanking");
         int intervaloFaixaEtaria = Integer.parseInt(request.getParameter("txtIntervaloFaixaEtaria"));
-        int administradorRanking = Integer.parseInt(request.getParameter("optAdministrador"));
+        int idadeInicial = Integer.parseInt(request.getParameter("txtIdadeInicial"));
 
         HttpSession session = request.getSession(true);
         Administrador administrador = (Administrador) session.getAttribute("administrador");
 
         try {
 
-            Ranking ranking = new Ranking(nomeRanking, intervaloFaixaEtaria, administrador);
+            Ranking ranking = new Ranking(nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);
             ranking.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
             view.forward(request, response);
