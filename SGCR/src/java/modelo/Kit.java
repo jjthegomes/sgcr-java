@@ -19,11 +19,10 @@ public class Kit {
     private Organizador organizador;
 
     private int organizadorId;
+    
+    private double preco;
 
-    public Kit() {
-    }
-
-    public Kit(int id, String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
+    public Kit(int id, String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador, Double preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -32,9 +31,10 @@ public class Kit {
         this.dataInicioRetirada = dataInicioRetirada;
         this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
+        this.preco = preco;
     }
     
-    public Kit(String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
+    public Kit(String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador, Double preco) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
@@ -42,6 +42,7 @@ public class Kit {
         this.dataInicioRetirada = dataInicioRetirada;
         this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
+        this.preco = preco;
     }
 
     public int getId() {
@@ -114,6 +115,14 @@ public class Kit {
 
     public void setOrganizadorId(int organizadorId) {
         this.organizadorId = organizadorId;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
     public static List<Kit> obterKits() throws ClassNotFoundException {

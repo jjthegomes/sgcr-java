@@ -213,3 +213,29 @@ body {
 .table-action {
     text-align: center !important;
 }
+
+.info-corrida {
+    margin-bottom: 20px;
+}
+
+.info-corrida i {
+    /*border: solid 1px red;*/
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.info-corrida p, .preco-total p {
+    margin: 0 !important;
+}
+
+.preco-total .div-preco {
+    padding: 50px;
+    border: dashed 2px #555;
+    opacity: .4;
+}
+
+.preco-total p {
+    text-align: center;
+}

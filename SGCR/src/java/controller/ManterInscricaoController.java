@@ -66,8 +66,8 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("corridaId", corridaId);
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("atletas", Atleta.obterAtletas());
-            request.setAttribute("percursos", Percurso.obterPercursoCorrida(corridaId));
-            request.setAttribute("kits", Kit.obterKitCorrida(corridaId));
+            request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
+            request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
             request.setAttribute("lotes", Lote.obterLotes(corridaId));
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
 
@@ -142,7 +142,7 @@ public class ManterInscricaoController extends HttpServlet {
             Atleta atleta = (Atleta) session.getAttribute("atleta");
             Percurso percurso = Percurso.obterPercurso(percursoId);
             
-            Kit kit = Kit.obterKitCorrida(corridaId);
+            Kit kit = Kit.obterKit(kitId);
             Lote lote = Lote.obterLote(loteId);
 
             Inscricao inscricao = new Inscricao(corrida, atleta, percurso, kit, lote);

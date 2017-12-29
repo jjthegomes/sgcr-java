@@ -35,74 +35,69 @@
                                 <div class="panel panel-info">
                                     <div class="panel-heading">Informações da Corrida</div>
                                     <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <h4>${corrida.nome} - ${corrida.cidade}, ${corrida.estado}</h4>
-                                            <h4>${corrida.data}, ${corrida.horario}</h4>
-                                            <h3>Descrição:</h3>
-                                            <p>${corrida.descricao}</p>
-                                            <h3>Local:</h3>
-                                            <p>${corrida.logradouro}, bairro ${corrida.bairro}</p>
-                                            <br/>
+                                        <div class="col-md-12 info-corrida">
+                                            <div class="row">
+                                                <h3 class="col-md-12"> ${corrida.nome}</h3>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <p class="col-md-12"><i class="fa fa-map-marker fa-2x"></i>${corrida.cidade}, ${corrida.estado}, ${corrida.logradouro}, bairro ${corrida.bairro}</p>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <p class="col-md-12"><i class="fa fa-calendar-o fa-2x"></i>${corrida.data} às ${corrida.horario}</p>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <p class="col-md-12"><i class="fa fa-fa fa-2x"></i>${corrida.descricao}</p>
+                                            </div>
+                                            <hr>
                                         </div>
+
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">Percurso</div>
+                                                <div class="panel-heading"><i class="fa fa-map"></i> Percurso</div>
                                                 <div class="panel-body">
                                                     <c:forEach items="${percursos}" var="percurso">  
                                                         <div class="panel panel-success radio">
-                                                            <!--<div class="panel-heading">Disponível</div>-->
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
-                                                                    Percurso ${percurso.corrida.nome} - ${percurso.quilometragem}km
+                                                                    <p><b>${percurso.quilometragem}km</b></p>
+                                                                    ${percurso.descricao}
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </c:forEach>
                                                 </div>
                                             </div>
-
-                                                                                        <label for="percurso">Percurso:</label>
-                                                                                        <select name="optPercurso" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                                                            <option value="0" <c:if test="${inscricao.percurso.id == null}"> selected</c:if>> Selecione um percurso</option>  
-                                            <c:forEach items="${percursos}" var="percurso">
-                                                <option value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> selected</c:if>>${percurso.corrida.nome} - ${percurso.quilometragem}km</option>  
-                                            </c:forEach>
-                                        </select>
                                         </div>
+
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">Kit</div>
+                                                <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
                                                 <div class="panel-body">
                                                     <c:forEach items="${kits}" var="kit">  
                                                         <div class="panel panel-success radio">
-                                                            <!--<div class="panel-heading">Disponível</div>-->
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
-                                                                    ${kit.nome}
+                                                                    <p><b>${kit.nome}</b></p>
+                                                                    ${kit.descricao}
+                                                                    <p><b>${kit.preco}</b></p>
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </c:forEach>
                                                 </div>
                                             </div>
-
-                                            <label for="kit">Kit:</label>
-                                            <select name="optKit" class="form-control" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            <option value="0" <c:if test="${inscricao.kit.id == null}"> selected</c:if>> Selecione um kit</option>  
-                                            <c:forEach items="${kits}" var="kit">
-                                                <option value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> selected</c:if>>${kit.nome}</option>  
-                                            </c:forEach>
-                                        </select>
                                         </div>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Lote</div>
+                                    <div class="panel-heading"><i class="fa fa-ticket"></i> Lote</div>
                                     <div class="panel-body">
                                         <c:forEach items="${lotes}" var="lote">  
                                             <div class="panel panel-success radio">
@@ -118,102 +113,124 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Forma de Pagamento</h4>
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse1" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('cartaoCredito')"</c:if>>
-                                    <i class="fa fa-credit-card"></i> Cartão de Crédito
-                                </div>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            <input type="hidden" class="form-control pagamentoCartaoCredito" name="hiddenIdCartaoCredito" readonly />
-
-                                            <div class="form-group col-md-6">
-                                                <label for="nCartao">Número do Cartão:</label>
-                                                <input type="text" class="form-control pagamentoCartaoCredito" name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="nomeTitularCartao">Nome impresso no cartão:</label>
-                                                <input type="text" class="form-control pagamentoCartaoCredito" name="nomeTitularCartaoCredito" placeholder="Nome" id="nomeTitularCartao" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            </div>
-                                            <div class="form-group  col-md-3">
-                                                <label for="cSeguranca">Código de Segurança:</label>
-                                                <input type="text" class="form-control pagamentoCartaoCredito" name="codigoSegurancaCartaoCredito" placeholder="000" id="cSeguranca" maxlength="3" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            </div>
-                                            <div class="form-group col-md-9">
-                                                <label for="dtValidade">Data de Validade:</label>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <select class="form-control pagamentoCartaoCredito" id="mesValidade" name="mesValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                            <option hidden>Mês</option>
-                                                            <option value="1">01</option>
-                                                            <option value="2">02</option>
-                                                            <option value="3">03</option>
-                                                            <option value="4">04</option>
-                                                            <option value="5">05</option>
-                                                            <option value="6">06</option>
-                                                            <option value="7">07</option>
-                                                            <option value="8">08</option>
-                                                            <option value="9">09</option>
-                                                            <option value="10">10</option>
-                                                            <option value="11">11</option>
-                                                            <option value="12">12</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <select class="form-control pagamentoCartaoCredito" id="anoValidade" name="anoValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                            <option hidden>Ano</option>
-                                                        <c:forEach items="${anos}" var="ano">  
-                                                            <option value="${ano}">${ano}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading"><i class="fa fa-money"></i> Total</div>
+                                    <div class="panel-body preco-total">
+                                        <div class="div-preco">
+                                            <p id="precoTotal">
+                                                Nenhum item selecionado!
+                                            </p>
                                         </div>
-                                        <c:if test="${operacao != 'Excluir'}">
-                                            <div class="form-group col-md-6 col-md-offset-3">
-                                                <button type="submit" class="btn btn-success btn-block pagamentoCartaoCredito" name="formaPagamento" value="cartaoCredito">Pagar Com Cartão</button>
-                                            </div>
-                                        </c:if>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="panel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <div style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse2" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('boleto')"</c:if>> 
-                                    <i class="fa fa-barcode fa-lg"></i> Boleto
-                                </div>
+                            <div>
+                                Forma de Pagamento
                             </div>
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('cartaoCredito')"</c:if>><a data-toggle="tab" href="#cartaoCredito"><i class="fa fa-credit-card"></i> Cartão de crédito</a></li>
+                                <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('boleto')"</c:if>><a data-toggle="tab" href="#boleto"><i class="fa fa-barcode fa-lg"></i> Boleto</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="cartaoCredito" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+                                                <div class="form-group col-md-12">
+                                                    <h3><i class="fa fa-credit-card"></i> Cartão de crédito</h3>
+                                                </div>                                            
+                                                <input type="hidden" class="form-control pagamentoCartaoCredito" name="hiddenIdCartaoCredito" readonly />
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="nCartao">Número do Cartão:</label>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="nomeTitularCartao">Nome impresso no cartão:</label>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="nomeTitularCartaoCredito" placeholder="Nome" id="nomeTitularCartao" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                </div>
+                                                <div class="form-group  col-md-3">
+                                                    <label for="cSeguranca">Código de Segurança:</label>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="codigoSegurancaCartaoCredito" placeholder="000" id="cSeguranca" maxlength="3" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                </div>
+                                                <div class="form-group col-md-9">
+                                                    <label for="dtValidade">Data de Validade:</label>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <select class="form-control pagamentoCartaoCredito" id="mesValidade" name="mesValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                <option hidden>Mês</option>
+                                                                <option value="1">01</option>
+                                                                <option value="2">02</option>
+                                                                <option value="3">03</option>
+                                                                <option value="4">04</option>
+                                                                <option value="5">05</option>
+                                                                <option value="6">06</option>
+                                                                <option value="7">07</option>
+                                                                <option value="8">08</option>
+                                                                <option value="9">09</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <select class="form-control pagamentoCartaoCredito" id="anoValidade" name="anoValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                <option hidden>Ano</option>
+                                                            <c:forEach items="${anos}" var="ano">  
+                                                                <option value="${ano}">${ano}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <c:if test="${operacao != 'Excluir'}">
+                                                <div class="form-group col-md-6 col-md-offset-3">
+                                                    <button type="submit" class="btn btn-success btn-block pagamentoCartaoCredito" name="formaPagamento" value="cartaoCredito">Pagar Com Cartão</button>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="boleto" class="tab-pane fade">
+
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
+                                            <div class="form-group col-md-12">
+                                                <h3><i class="fa fa-barcode"></i> Boleto</h3>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <p><i class="fa fa-print"></i> Imprima o boleto e pague no banco</p>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <p><i class="fa fa-calendar-o"></i> O prazo de validade do boleto é de 1 dia útil</p>
+                                            </div>
                                             <input type="hidden" class="form-control pagamentoBoleto" name="hiddenIdBoleto" readonly />
 
                                             <div class="form-group col-md-6">
                                                 <label for="nomeTitularBoleto">Nome do Titular:</label>
                                                 <input type="text" class="form-control pagamentoBoleto" name="nomeTitularBoleto" id="nomeTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="cpfTitularBoleto">CPF do Titular:</label>
-                                                <input type="text" class="form-control pagamentoBoleto" name="cpfTitularBoleto" id="cpfTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                            </div>
-                                        <c:if test="${operacao != 'Excluir'}">
-                                            <div class="form-group col-md-6 col-md-offset-3">
-                                                <button type="submit" class="btn btn-success btn-block pagamentoBoleto" name="formaPagamento" value="boleto">Pagar Com Boleto</button>
-                                            </div>
-                                        </c:if>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="cpfTitularBoleto">CPF do Titular:</label>
+                                                    <input type="text" class="form-control pagamentoBoleto" name="cpfTitularBoleto" id="cpfTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                </div>
+                                            <c:if test="${operacao != 'Excluir'}">
+                                                <div class="form-group col-md-6 col-md-offset-3">
+                                                    <button type="submit" class="btn btn-success btn-block pagamentoBoleto" name="formaPagamento" value="boleto">Pagar Com Boleto</button>
+                                                </div>
+                                            </c:if>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
