@@ -65,16 +65,20 @@ INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, 
 -- Extraindo dados da tabela `kit`
 --
 
-INSERT INTO `kit` (`id`, `nome`, `imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`, `organizador_id`) VALUES
-(1, 'VIP', NULL, 'Retornável', '21/01/2018', '02/02/2018', 1),
-(2, 'Premio', NULL, 'Descartável', '21/01/2018', '02/02/2018', 2),
-(3, 'Básico', NULL, 'Descartável', '21/01/2018', '02/02/2018', 3);
+INSERT INTO `kit` (`id`, `nome`, `descricao`,`imagem`, `tipo_chip`, `data_inicio_retirada`, `data_final_retirada`, `organizador_id`) VALUES
+(1, 'VIP', 'Camiseta regata, sacola, boné e medalha (pós evento) + pochete maratona', NULL, 'Retornável', '21/01/2018', '02/02/2018', 1),
+(2, 'Premio', 'Camiseta regata, sacola, boné e medalha (pós evento) + porta número de peito.', NULL, 'Descartável', '21/01/2018', '02/02/2018', 2),
+(3, 'Básico', 'Camiseta regata, sacola, boné e medalha (pós evento)', NULL, 'Descartável', '21/01/2018', '02/02/2018', 3),
+(4, 'Básico', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento) + jaqueta', NULL, 'Descartável', '21/01/2018', '01/02/2018', 1),
+(5, 'Intermediário', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento)', NULL, 'Descartável', '21/01/2018', '01/02/2018', 1);
 
 
 INSERT INTO `kit_corrida` (`corrida_id`, `kit_id`) VALUES
-(1,1),
-(2,2),
-(3,3); 
+(1, 1),
+(1, 4),
+(1, 5),
+(2, 2),
+(3, 3);
 --
 -- Extraindo dados da tabela `lote`
 --
@@ -97,27 +101,31 @@ INSERT INTO `lote` (`id`, `tipo`, `preco`, `data_inicio`, `data_final`, `corrida
 --
 
 INSERT INTO `percurso` (`id`, `imagem`, `quilometragem`, `descricao`, `organizador_id`) VALUES
-(1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes',1),
+(1, NULL, 3, 'Percurso pequeno. Ideal para corredores iniciantes', 1),
 (2, NULL, 10, 'Percurso Intermediário.', 2),
-(3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes.', 3);
+(3, NULL, 20, 'Percurso Longo. Ideal para corredores experientes.', 3),
+(4, NULL, 10, 'Percurso normal para pessoas que gostam de correr, tudo de bom', 1),
+(5, NULL, 22, 'Percurso longo, especial para atletas profissionais', 1);
 
 
 INSERT INTO `percurso_corrida` (`corrida_id`, `percurso_id`) VALUES
-(1,1),
-(2,2),
-(3,3); 
+(1, 1),
+(1, 4),
+(1, 5),
+(2, 2),
+(3, 3);
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`id`, `nome`, `administrador_id`) VALUES
-(1, 'Boné Masculino', 1),
-(2, 'Short Masculino', 5),
-(3, 'Camisa Masculina', 2),
-(4, 'Camisa Feminina', 5),
-(5, 'Boné Feminino', 2),
-(6, 'Short Feminino', 1);
+-- INSERT INTO `produto` (`id`, `nome`, `administrador_id`) VALUES
+-- (1, 'Boné Masculino', 1),
+-- (2, 'Short Masculino', 5),
+-- (3, 'Camisa Masculina', 2),
+-- (4, 'Camisa Feminina', 5),
+-- (5, 'Boné Feminino', 2),
+-- (6, 'Short Feminino', 1);
 
 --
 -- Extraindo dados da tabela `ranking`
@@ -177,16 +185,16 @@ INSERT INTO `cartao_credito` (`id`, `numero`, `codigo_seguranca`, `validade`, `n
 -- Extraindo dados da tabela `produto_kit`
 --
 
-INSERT INTO produto_kit (id, descricao, valor, produto_id, kit_id) VALUES
-(1, 'Azul', 35.00, 1, 1),
-(2, 'Azul', 45.00, 2, 1),
-(3, 'Azul', 75.00, 3, 1),
-(4, 'Amarelo', 65.00, 4, 2),
-(5, 'Amarelo', 25.00, 5, 2),
-(6, 'Amarelo', 50.00, 6, 2),
-(7, 'Vermelho', 15.00, 1, 3),
-(8, 'Vermelho', 25.00, 2, 3),
-(9, 'Vermelho', 35.00, 3, 3);
+-- INSERT INTO produto_kit (id, descricao, valor, produto_id, kit_id) VALUES
+-- (1, 'Azul', 35.00, 1, 1),
+-- (2, 'Azul', 45.00, 2, 1),
+-- (3, 'Azul', 75.00, 3, 1),
+-- (4, 'Amarelo', 65.00, 4, 2),
+-- (5, 'Amarelo', 25.00, 5, 2),
+-- (6, 'Amarelo', 50.00, 6, 2),
+-- (7, 'Vermelho', 15.00, 1, 3),
+-- (8, 'Vermelho', 25.00, 2, 3),
+-- (9, 'Vermelho', 35.00, 3, 3);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
