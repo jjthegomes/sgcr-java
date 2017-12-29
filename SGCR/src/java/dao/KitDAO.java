@@ -28,6 +28,7 @@ public class KitDAO {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
                         rs.getString("nome"),
+                        rs.getString("descricao"),
                         rs.getString("imagem"), 
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
@@ -58,6 +59,7 @@ public class KitDAO {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
                         rs.getString("nome"),
+                        rs.getString("descricao"),
                         rs.getString("imagem"), 
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
@@ -78,14 +80,15 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (nome, imagem, tipo_chip, data_inicio_retirada, data_final_retirada, organizador_id) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO kit (nome, descricao, imagem, tipo_chip, data_inicio_retirada, data_final_retirada, organizador_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
-            comando.setString(2, kit.getImagem());
-            comando.setString(3, kit.getTipoChip());
-            comando.setString(4, kit.getDataInicioRetirada());
-            comando.setString(5, kit.getDataFinalRetirada());
-            comando.setInt(6, kit.getOrganizador().getId());
+            comando.setString(2, kit.getDescricao());
+            comando.setString(3, kit.getImagem());
+            comando.setString(4, kit.getTipoChip());
+            comando.setString(5, kit.getDataInicioRetirada());
+            comando.setString(6, kit.getDataFinalRetirada());
+            comando.setInt(7, kit.getOrganizador().getId());
 
             comando.execute();
             comando.close();
@@ -99,15 +102,16 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE kit SET nome = ?, imagem = ?, tipo_chip = ?, data_inicio_retirada = ?, data_final_retirada = ?, organizador_id = ?  WHERE id = ?";
+            String sql = "UPDATE kit SET nome = ?, descricao = ?, imagem = ?, tipo_chip = ?, data_inicio_retirada = ?, data_final_retirada = ?, organizador_id = ?  WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
-            comando.setString(2, kit.getImagem());
-            comando.setString(3, kit.getTipoChip());
-            comando.setString(4, kit.getDataInicioRetirada());
-            comando.setString(5, kit.getDataFinalRetirada());
-            comando.setInt(6, kit.getOrganizador().getId());
-            comando.setInt(7, kit.getId());
+            comando.setString(2, kit.getDescricao());
+            comando.setString(3, kit.getImagem());
+            comando.setString(4, kit.getTipoChip());
+            comando.setString(5, kit.getDataInicioRetirada());
+            comando.setString(6, kit.getDataFinalRetirada());
+            comando.setInt(7, kit.getOrganizador().getId());
+            comando.setInt(8, kit.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -145,6 +149,7 @@ public class KitDAO {
             kit = new Kit (
                     rs.getInt("id"), 
                     rs.getString("nome"),
+                    rs.getString("descricao"),
                     rs.getString("imagem"), 
                     rs.getString("tipo_chip"),
                     rs.getString("data_inicio_retirada"),
@@ -171,6 +176,7 @@ public class KitDAO {
             kit = new Kit (
                     rs.getInt("id"), 
                     rs.getString("nome"),
+                    rs.getString("descricao"),
                     rs.getString("imagem"), 
                     rs.getString("tipo_chip"),
                     rs.getString("data_inicio_retirada"),
@@ -198,6 +204,7 @@ public class KitDAO {
                 Kit kit = new Kit(
                         rs.getInt("id"), 
                         rs.getString("nome"),
+                        rs.getString("descricao"),
                         rs.getString("imagem"), 
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
