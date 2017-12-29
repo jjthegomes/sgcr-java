@@ -147,3 +147,47 @@ function readOnly(){
     document.getElementById("read").disabled = false;
     
 }
+function limparImportarKit(){
+    //Limpa campos de importar kit
+    document.getElementById("kit").value = "";
+    document.getElementById("nomeKit").value = "";
+    document.getElementById("produtosKit").value = "";
+    document.getElementById("valorKit").value = "";
+}
+
+function limparImportarPercurso(){
+    //Limpa campos de importar kit
+    document.getElementById("percurso").value = "";
+    document.getElementById("quilometragem").value = "";
+    document.getElementById("descricao").value = "";
+}
+function confimarSalvarCorrida(){
+    var nome = document.getElementById("nomeCorrida");
+    var descricao = document.getElementById("descricao");
+    var numeroPessoas = document.getElementById("numeroDePessoas");
+    var DtCorrida = document.getElementById("dtCorrida");
+    var horario = document.getElementById("horario");
+    var cep = document.getElementById("cep");
+    var estado = document.getElementById("estado");
+    var cidade = document.getElementById("cidade");
+    var logradouro = document.getElementById("logradouro");
+    var bairro = document.getElementById("bairro");
+    var numero = document.getElementById("numero");
+    var regulamento = document.getElementById("regulamento");
+    var banner = document.getElementById("banner");
+    var ativo = document.getElementById("ativo");
+    var desativado = document.getElementById("desativado");
+    var radio ="";
+    if((ativo.checked == false) && desativado.checked == false){
+        radio = "";
+    }
+    
+     
+    if((nome.value || descricao.value || numeroPessoas.value || 
+     DtCorrida.value || horario.value || cep.value ||
+     estado.value || cidade.value || logradouro.value ||
+     bairro.value || numero.value || regulamento.value ||
+     banner.value || radio) == ""){
+        alert("Atenção: Algum campo obrigatório não foi preechido !");
+     }  
+}

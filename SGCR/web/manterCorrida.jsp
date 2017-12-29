@@ -91,7 +91,7 @@
                                             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" /> 
                                              <input type="file"> -->
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
-                                            <input type="text" class="form-control" id="regulamento" name="txtRegulamentoCorrida" value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="file" class="form-control" id="regulamento" name="txtRegulamentoCorrida" value="4194304 value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
                                             <label for="banner">Banner: </label>
@@ -99,22 +99,23 @@
                                             <input type="file" > -->
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
 
-                                            <input type="text" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
+                                            <input type="file" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
                                         </div>
                                         <div class="form-group">
                                             <label for="optStatus">Status:</label> 
                                             <div class="radio-inline">
-                                                <label><input type="radio" name="optStatus" value="true" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                                                <label><input type="radio" id="ativo" name="optStatus" value="true" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
                                                           <c:if test="${corrida.ativo == 'true'}"> checked</c:if>>Ativo</label>
                                             </div>
                                             <div class="radio-inline">
-                                                <label><input type="radio" name="optStatus" value="false" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
-                                                          <c:if test="${corrida.ativo == 'false'}"> checked</c:if>>Desativado</label>
+                                                <label><input type="radio" id="desativado" name="optStatus" value="false" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> 
+                                                          <c:if test="${corrida.ativo == 'false'}">checked</c:if>>Desativado</label>
                                             </div>                                                
                                         </div>
                                         <div class="form-group">
                                             <a href="PesquisaCorridaController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
                                             <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                            <input type="button" onclick="confimarSalvarCorrida()" name="btnConfirmar" value="Teste" class="btn btn-success" >
                                         </div>
                                     </div>
                                 </form>
@@ -123,20 +124,69 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-12">
+                    
+                 <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Inportar Kit</div>
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="form-group">                                   
+                                        <select id="kit" name="optKit" class="form-control" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                                            <option value="0" <c:if test="${kit.id== null}"> selected</c:if>>Selecione uma Corrida:</option>  
+                                            <c:forEach items="${kits}" var="kit">
+                                                <option value="${kit.id}">${kit.nome}</option>  
+                                            </c:forEach>
+                                            <option value="0">Kit 1</option>
+                                            <option value="0" >Kit 2</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div  class="col-md-12">    
+                                        <div class="form-group">
+                                            <label for="nomeKit">Nome:</label>
+                                            <input type="text" class="form-control" id="nomeKit" name="nomeKit" placeholder="Nome" />
+                                        </div>            
+                                    </div>
+                                    <div  class="col-md-12">    
+                                        <div class="form-group">
+                                            <label for="produtosKit">Produtos:</label>
+                                            <input type="text" class="form-control" id="produtosKit" name="produtosKit" placeholder="Produtos"/>
+                                        </div>            
+                                    </div>
+                                    <div  class="col-md-12">    
+                                        <div class="form-group">
+                                            <label for="valorKit">Valor:</label>
+                                            <input type="text" class="form-control" id="valorKit" name="precoKit" placeholder="Preço"/>
+                                        </div>            
+                                    </div>
+                                    <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button onclick="limparImportarKit()" class="btn btn-danger btn-block" >Cancelar</button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-6">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Manter Kit - ${operacao}</div>
+                        <div class="panel-heading">${operacao} Kit </div>
                         <div class="panel-body">
                             <form action="ManterKitController?acao=confirmar${operacao}" method="post" name="frmManterKit">
                                 <div class="col-md-12">
                                     <input type="hidden" class="form-control" id="codigo" name="hiddenIdKit" value="${kit.id}" readonly />
-                                    <div  class="col-md-6">    
+                                    <div  class="col-md-12">    
                                         <div class="form-group">
                                             <label for="nomeKit">Nome:</label>
                                             <input type="text" class="form-control" id="txtNomeKit" name="txtNomeKit" placeholder="Nome (Ex: VIP, Normal, Único)" value="${kit.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
                                             </div>            
                                         </div>
-                                        <div  class="col-md-6">  
+                                        <div  class="col-md-12">  
                                             <div class="form-group">
                                                 <label for="fileImagemKit">Imagem</label>
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
@@ -144,7 +194,7 @@
                                                 <input type="text" class="form-control" name="fileImagemKit" value="${kit.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                             </div>
                                         </div>
-                                        <div  class="col-md-6">  
+                                        <div  class="col-md-12">  
                                             <div class="form-group">
                                                 <label for="optTipoChip">Tipo do Chip</label>
                                                 <select name="optTipoChip" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
@@ -155,13 +205,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="txtDataRetiradaKit">Data Início Retirada</label>
                                                         <input type="text" maxlength="10" class="form-control" name="txtDataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataInicioRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="txtDataRetiradaKit">Data Final Retirada</label>
                                                         <input type="text" maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -169,8 +219,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <a href="PesquisaKitController" class="btn btn-danger btn-block" >Cancelar</a>
@@ -181,7 +230,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                    </form>                             
                             </div>
                         </div>
                     </div>
@@ -235,7 +284,47 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Importar Percurso</div>
+                        <div class="panel-body">
+                            <div class="form-group">                                   
+                                <select id="percurso" name="optKit" class="form-control" <c:if test="${operacao == 'Excluir'}">readonly</c:if>>
+                                    <option value="0" <c:if test="${percusso.id== null}"> selected</c:if>>Selecione um Percurso:</option>  
+                                    <c:forEach items="${percursos}" var="percurso">
+                                        <option value="${percurso.id}">${percurso.id}</option>  
+                                    </c:forEach>
+                                    <option value="0">Percurso 1</option>
+                                    <option value="0">Percurso 2</option>
+                                </select>
+                            </div>
+                                    <div  class="col-md-12">    
+                                        <div class="form-group">
+                                            <label for="quilometragem">Quilometragem:</label>
+                                            <input type="text" class="form-control" id="quilometragem" name="quilometragem" placeholder="Quilometragem" disabled="true"/>
+                                        </div>            
+                                    </div>
+                                    <div  class="col-md-12">    
+                                        <div class="form-group">
+                                            <label for="descricao">Descrição:</label>
+                                            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição"/>
+                                        </div>            
+                                    </div>
+                                    <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button onclick="limparImportarKit()" class="btn btn-danger btn-block" >Cancelar</button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Confirmar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">Manter Percurso - ${operacao}</div>
                         <div class="panel-body">
