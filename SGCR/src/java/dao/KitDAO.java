@@ -185,30 +185,33 @@ public class KitDAO {
         return kit;
     }
     
-    public static Kit obterKitCorrida(int corridaId) throws ClassNotFoundException {
+    public static List<Kit> obterKitsCorrida(int corridaId) throws ClassNotFoundException  {
         Connection conexao = null;
         Statement comando = null;
-        Kit kit = null;
+        List<Kit> kits = new ArrayList<Kit>();
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM kit INNER JOIN kit_corrida ON kit.id = kit_corrida.kit_id WHERE kit_corrida.corrida_id = " + corridaId);
-            rs.first();
-            kit = new Kit (
-                    rs.getInt("id"), 
-                    rs.getString("nome"),
-                    rs.getString("imagem"), 
-                    rs.getString("tipo_chip"),
-                    rs.getString("data_inicio_retirada"),
-                    rs.getString("data_final_retirada"),
-                    null);
-            kit.setOrganizadorId(rs.getInt("organizador_id"));
+            
+            while (rs.next()) {
+                Kit kit = new Kit(
+                        rs.getInt("id"), 
+                        rs.getString("nome"),
+                        rs.getString("imagem"), 
+                        rs.getString("tipo_chip"),
+                        rs.getString("data_inicio_retirada"),
+                        rs.getString("data_final_retirada"),
+                        null);
+                kit.setOrganizadorId(rs.getInt("organizador_id"));
+                kits.add(kit);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
-        return kit;
+        return kits;
     }
     
     public static void fecharConexao(Connection conexao, Statement comando) {
