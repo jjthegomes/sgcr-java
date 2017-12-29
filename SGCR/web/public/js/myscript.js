@@ -162,32 +162,36 @@ function limparImportarPercurso(){
     document.getElementById("descricao").value = "";
 }
 function confimarSalvarCorrida(){
-    var nome = document.getElementById("nomeCorrida");
-    var descricao = document.getElementById("descricao");
-    var numeroPessoas = document.getElementById("numeroDePessoas");
-    var DtCorrida = document.getElementById("dtCorrida");
-    var horario = document.getElementById("horario");
-    var cep = document.getElementById("cep");
-    var estado = document.getElementById("estado");
-    var cidade = document.getElementById("cidade");
-    var logradouro = document.getElementById("logradouro");
-    var bairro = document.getElementById("bairro");
-    var numero = document.getElementById("numero");
-    var regulamento = document.getElementById("regulamento");
-    var banner = document.getElementById("banner");
+    var nome = document.getElementById("nomeCorrida").value.length;
+    var descricao = document.getElementById("descricao").value.length;
+    var numeroPessoas = document.getElementById("numeroDePessoas").value.length;
+    var DtCorrida = document.getElementById("dtCorrida").value.length;
+    var horario = document.getElementById("horario").value.length;
+    var cep = document.getElementById("cep").value.length;
+    var estado = document.getElementById("estado").value.length;
+    var cidade = document.getElementById("cidade").value.length;
+    var logradouro = document.getElementById("logradouro").value.length;
+    var bairro = document.getElementById("bairro").value.length;
+    var numero = document.getElementById("numero").value.length;
+    var regulamento = document.getElementById("regulamento").value;
+    var banner = document.getElementById("banner").value;
     var ativo = document.getElementById("ativo");
     var desativado = document.getElementById("desativado");
-    var radio ="";
+    var file;
+    if((banner.length || regulamento.length)== 0){
+        file=0;
+    }
+    var radio = 1;
     if((ativo.checked == false) && desativado.checked == false){
-        radio = "";
+        radio = 0;
     }
     
      
-    if((nome.value || descricao.value || numeroPessoas.value || 
-     DtCorrida.value || horario.value || cep.value ||
-     estado.value || cidade.value || logradouro.value ||
-     bairro.value || numero.value || regulamento.value ||
-     banner.value || radio) == ""){
+    if((nome == 0 || descricao == 0 || numeroPessoas==0 || 
+     DtCorrida==0 || horario==0 || cep==0 ||
+     estado==0 || cidade==0 || logradouro==0 ||
+     bairro==0 || numero==0 
+     || file == 0 || radio ==0)){
         alert("Atenção: Algum campo obrigatório não foi preechido !");
      }  
 }
