@@ -32,15 +32,15 @@
                                         <input type="hidden" class="form-control" id="codigo" name="hiddenIdAdministrador" value="${administrador.id}" readonly />
                                         <div class="form-group">
                                             <label for="nomeAdmin">Nome Completo:</label>
-                                            <input type="text"  class="form-control" id="nomeAdmin" name="txtNomeAdministrador" value="${administrador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                                            <input type="text" required class="form-control" id="nomeAdmin" name="txtNomeAdministrador" value="${administrador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                                         </div>
                                         <div class="form-group">
                                             <label for="emailAdmin">Email: </label>
-                                            <input type="text" class="form-control" id="emailAdmin" name="txtEmailAdministrador" value="${administrador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                                            <input type="text" required class="form-control" id="emailAdmin" name="txtEmailAdministrador" value="${administrador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                                         </div>
                                         <div class="form-group">
                                             <label for="senhaAdmin">Senha:</label>
-                                            <input type="password" class="form-control" id="senhaAdmin" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="password" required class="form-control" id="senhaAdmin" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
 
                                         <div class="form-group">

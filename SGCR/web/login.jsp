@@ -38,11 +38,11 @@
                             <form action="LoginController?acao=logar" method="post" name="frmManterAtleta">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" data-dismiss="alert" aria-label="close">
+                                    <input type="email" required class="form-control" placeholder="email@gmail.com" id="email" name="email" data-dismiss="alert" aria-label="close">
                                 </div>
                                 <div class="form-group">
                                     <label for="senha">Senha:</label>
-                                    <input type="password" class="form-control" id="senha" name="senha">
+                                    <input type="password" required class="form-control" placeholder="******" id="senha" name="senha">
                                 </div>
                                 <div class="form-group">
                                     <div class="radio-inline">

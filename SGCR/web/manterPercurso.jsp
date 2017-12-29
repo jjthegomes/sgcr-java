@@ -36,7 +36,7 @@
 
                                     <div class="form-group">
                                         <label for="numQuilometragemPercurso">Quilometragem:</label>
-                                        <input type="number" class="form-control" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                        <input type="number"  required class="form-control" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
 
                                         <div class="form-group">
