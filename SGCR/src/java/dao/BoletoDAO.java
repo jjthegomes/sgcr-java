@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Boleto;
+import modelo.Corrida;
 import modelo.Inscricao;
 
 /**
@@ -24,7 +25,7 @@ public class BoletoDAO {
     public static List<Boleto> obterBoletos() throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
-        List<Boleto> Boletos = new ArrayList<Boleto>();
+        List<Boleto> Boletos = new ArrayList<>();
 
         try {
             conexao = BD.getConexao();
@@ -38,9 +39,12 @@ public class BoletoDAO {
                         rs.getString("data_vencimento"),
                         rs.getString("nome_titular"),
                         rs.getString("cpf_titular"),
+                        null,
                         null);
                 boleto.setInscricaoId(rs.getInt("inscricao_id"));
                 boleto.setInscricao(Inscricao.obterInscricao(boleto.getInscricaoId()));
+                boleto.setInscricaoCorridaId(rs.getInt("inscricao_corrida_id"));
+                boleto.setInscricaoCorrida(Corrida.obterCorrida(boleto.getInscricaoCorridaId()));
                 Boletos.add(boleto);
             }
         } catch (SQLException e) {
@@ -55,7 +59,7 @@ public class BoletoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO boleto (codigo_barra, data_emissao, data_vencimento, nome_titular, cpf_titular, inscricao_id) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO boleto (codigo_barra, data_emissao, data_vencimento, nome_titular, cpf_titular, inscricao_id, inscricao_corrida_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, boleto.getCodigoBarra());
             comando.setString(2, boleto.getDataEmissao());
@@ -63,6 +67,7 @@ public class BoletoDAO {
             comando.setString(4, boleto.getNomeTitular());
             comando.setString(5, boleto.getCpfTitular());
             comando.setInt(6, boleto.getInscricao().getId());
+            comando.setInt(7, boleto.getInscricaoCorrida().getId());
 
             comando.execute();
             comando.close();
@@ -77,7 +82,7 @@ public class BoletoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE boleto SET codigo_barra = ?, data_emissao = ?, data_vencimento = ?, nome_titular = ?, cpf_titular = ?, inscricao_id = ? WHERE id = ?";
+            String sql = "UPDATE boleto SET codigo_barra = ?, data_emissao = ?, data_vencimento = ?, nome_titular = ?, cpf_titular = ?, inscricao_id = ?, inscricao_corrida_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, boleto.getCodigoBarra());
             comando.setString(2, boleto.getDataEmissao());
@@ -85,7 +90,8 @@ public class BoletoDAO {
             comando.setString(4, boleto.getNomeTitular());
             comando.setString(5, boleto.getCpfTitular());
             comando.setInt(6, boleto.getInscricao().getId());
-            comando.setInt(7, boleto.getId());
+            comando.setInt(7, boleto.getInscricaoCorrida().getId());
+            comando.setInt(8, boleto.getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -128,8 +134,10 @@ public class BoletoDAO {
                     rs.getString("data_vencimento"),
                     rs.getString("nome_titular"),
                     rs.getString("cpf_titular"),
+                    null,
                     null);
             boleto.setInscricaoId(rs.getInt("inscricao_id"));
+            boleto.setInscricaoCorridaId(rs.getInt("inscricao_corrida_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

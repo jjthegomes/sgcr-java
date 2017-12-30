@@ -23,8 +23,8 @@ public class Boleto extends Pagamento {
     private String nomeTitular;
     private String cpfTitular;
     
-    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular, Inscricao inscricao) {
-        super(id, inscricao);
+    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+        super(id, inscricao, inscricaoCorrida);
         this.codigoBarra = codigoBarra;
         this.dataEmissao = dataEmissao;
         this.dataVencimento = dataVencimento;
@@ -32,8 +32,8 @@ public class Boleto extends Pagamento {
         this.cpfTitular = cpfTitular;
     }
     
-    public Boleto(String nomeTitular, String cpfTitular, Inscricao inscricao) {
-        super(inscricao);
+    public Boleto(String nomeTitular, String cpfTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+        super(inscricao, inscricaoCorrida);
         this.nomeTitular = nomeTitular;
         this.cpfTitular = cpfTitular;
 

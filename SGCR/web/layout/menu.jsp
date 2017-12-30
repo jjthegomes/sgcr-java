@@ -90,7 +90,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control" name="busca" placeholder="Busca" size="40">
+                        <input type="text" class="form-control" name="busca" placeholder="Buscar corridas" size="40">
                     </div>
                 </div>
             </form>

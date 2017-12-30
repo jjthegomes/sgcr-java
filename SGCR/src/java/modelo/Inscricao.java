@@ -46,6 +46,7 @@ public class Inscricao {
     }
 
     public Inscricao(Corrida corrida, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {
+        this.corrida = corrida;
         this.atleta = atleta;
         this.percurso = percurso;
         this.kit = kit;
@@ -230,6 +231,10 @@ public class Inscricao {
 
     public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricao(id);
+    }
+    
+    public static Inscricao obterUltimaInscricaoAtleta(int atletaId) throws ClassNotFoundException {
+        return InscricaoDAO.obterUltimaInscricaoAtleta(atletaId);
     }
 
     public void retirarKit() throws SQLException, ClassNotFoundException {

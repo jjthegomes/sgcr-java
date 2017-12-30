@@ -19,16 +19,16 @@ public class CartaoCredito extends Pagamento {
     private String validade;
     private String nomeTitular;
 
-    public CartaoCredito(int id, String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao) {
-        super(id, inscricao);
+    public CartaoCredito(int id, String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+        super(id, inscricao, inscricaoCorrida);
         this.numero = numero;
         this.codigoSeguranca = codigoSeguranca;
         this.validade = validade;
         this.nomeTitular = nomeTitular;
     }
     
-    public CartaoCredito(String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao) {
-        super(inscricao);
+    public CartaoCredito(String numero, String codigoSeguranca, String validade, String nomeTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+        super(inscricao, inscricaoCorrida);
         this.numero = numero;
         this.codigoSeguranca = codigoSeguranca;
         this.validade = validade;

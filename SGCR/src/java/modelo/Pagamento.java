@@ -10,17 +10,22 @@ package modelo;
  * @author rafael
  */
 public abstract class Pagamento {
+
     private int id;
     private Inscricao inscricao;
+    private Corrida inscricaoCorrida;
     private int inscricaoId;
-    
-    Pagamento(int id, Inscricao inscricao) {
+    private int inscricaoCorridaId;
+
+    Pagamento(int id, Inscricao inscricao, Corrida inscricaoCorrida) {
         this.id = id;
         this.inscricao = inscricao;
+        this.inscricaoCorrida = inscricaoCorrida;
     }
-    
-    Pagamento(Inscricao inscricao) {
+
+    Pagamento(Inscricao inscricao, Corrida inscricaoCorrida) {
         this.inscricao = inscricao;
+        this.inscricaoCorrida = inscricaoCorrida;
     }
 
     public int getId() {
@@ -30,7 +35,7 @@ public abstract class Pagamento {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public Inscricao getInscricao() {
         return inscricao;
     }
@@ -46,6 +51,22 @@ public abstract class Pagamento {
     public void setInscricaoId(int inscricaoId) {
         this.inscricaoId = inscricaoId;
     }
+
+    public int getInscricaoCorridaId() {
+        return inscricaoCorridaId;
+    }
+
+    public void setInscricaoCorridaId(int inscricaoCorridaId) {
+        this.inscricaoCorridaId = inscricaoCorridaId;
+    }
+
+    public Corrida getInscricaoCorrida() {
+        return inscricaoCorrida;
+    }
+
+    public void setInscricaoCorrida(Corrida inscricaoCorrida) {
+        this.inscricaoCorrida = inscricaoCorrida;
+    }
     
     public abstract void confirmarPagamento();
-    }
+}

@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <a href="ManterInscricaoController?acao=prepararIncluir&corridaId=<c:out value="${corrida.id}"/>" class="btn btn-block btn-success">
-                                            Inscrever
+                                            Inscrever-se
                                         </a>
                                     </div>
                                     <div class="col-md-6">

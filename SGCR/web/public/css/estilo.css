@@ -215,7 +215,7 @@ body {
 }
 
 .info-corrida {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .info-corrida i {
@@ -230,12 +230,29 @@ body {
     margin: 0 !important;
 }
 
-.preco-total .div-preco {
-    padding: 50px;
+.preco-total #divPrecoTotal {
+    padding: 60px 10px;
     border: dashed 2px #555;
     opacity: .4;
 }
 
-.preco-total p {
+.preco-total {
     text-align: center;
+}
+
+#tabelaPreco table {
+    margin: 0;
+}
+
+#tabelaPreco td, #tabelaPreco th{
+    margin: 0;
+    padding: 8px 15px;
+}
+
+#tabelaPreco th {
+    font-size: 16px;
+}
+
+#tabelaPreco {
+    margin: -15px;
 }

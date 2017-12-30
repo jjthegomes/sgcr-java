@@ -131,7 +131,6 @@ public class ManterInscricaoController extends HttpServlet {
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-        int atletaId = Integer.parseInt(request.getParameter("optAtleta"));
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         int loteId = Integer.parseInt(request.getParameter("optLote"));
@@ -157,7 +156,8 @@ public class ManterInscricaoController extends HttpServlet {
                 String dataValidadeCartaoCredito = mesValidadeCartaoCredito + "/" + anoValidadeCartaoCredito;
 
                 try {
-                    CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao);
+                    inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
+                    CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao, corrida);
                     cartaoCredito.gravar();
                     request.setAttribute("cartaoCredito", cartaoCredito);
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -167,7 +167,8 @@ public class ManterInscricaoController extends HttpServlet {
                 String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
                 
                 try {
-                    Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao);
+                    inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
+                    Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao, corrida);
                     boleto.gravar();
                     request.setAttribute("boleto", boleto);
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -175,11 +176,11 @@ public class ManterInscricaoController extends HttpServlet {
             }
             
             request.setAttribute("formaPagamento", request.getParameter("formaPagamento"));
-            request.setAttribute("atleta", Atleta.obterAtleta(atletaId));
-            request.setAttribute("percurso", Percurso.obterPercurso(percursoId));
-            request.setAttribute("kit", Kit.obterKit(kitId,corridaId));
-            request.setAttribute("lote", Lote.obterLote(loteId));
-            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            request.setAttribute("atleta", atleta);
+            request.setAttribute("percurso", percurso);
+            request.setAttribute("kit", kit);
+            request.setAttribute("lote", lote);
+            request.setAttribute("corrida", corrida);
             request.setAttribute("inscricao", inscricao);
             
             RequestDispatcher view = request.getRequestDispatcher("/finalizarInscricao.jsp");
@@ -314,5 +315,4 @@ public class ManterInscricaoController extends HttpServlet {
         } catch (ServletException ex) {
         }
     }
-
 }

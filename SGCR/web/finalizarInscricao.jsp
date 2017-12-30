@@ -45,12 +45,12 @@
                             </div>
                             <div class="panel panel-info radio">
                                 <div class="panel-body">
-                                    <b>Percurso: </b> ${percurso.quilometragem}km
+                                    <b>Percurso: </b> ${percurso.descricao} - ${percurso.quilometragem}km
                                 </div>
                             </div>
                             <div class="panel panel-info radio">
                                 <div class="panel-body">
-                                    <b>Kit: </b> ${kit.nome}
+                                    <b>Kit: </b> ${kit.nome} - ${kit.descricao}
                                 </div>
                             </div>
                         </div>

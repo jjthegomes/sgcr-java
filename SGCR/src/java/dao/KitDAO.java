@@ -106,15 +106,11 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (nome, descricao, imagem, tipo_chip, data_inicio_retirada, data_final_retirada, organizador_id) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO kit_corrida (corrida_id, kit_id, preco) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, kit.getNome());
-            comando.setString(2, kit.getDescricao());
-            comando.setString(3, kit.getImagem());
-            comando.setString(4, kit.getTipoChip());
-            comando.setString(5, kit.getDataInicioRetirada());
-            comando.setString(6, kit.getDataFinalRetirada());
-            comando.setInt(7, kit.getOrganizador().getId());
+            comando.setInt(1, corrida.getId());
+            comando.setInt(2, kit.getId());
+            comando.setDouble(3, kit.getPreco());
 
             comando.execute();
             comando.close();

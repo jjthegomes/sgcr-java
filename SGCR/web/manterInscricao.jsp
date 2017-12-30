@@ -17,6 +17,53 @@
     </head>
     <body>
 
+        <script>
+            var precoTotal = 0;
+            var precoLote = 0;
+            var precoKit = 0;
+            function atualizaPrecoLote(preco, nome) {
+                precoLote = preco;
+                precoTotal = parseFloat(precoLote) + parseFloat(precoKit);
+                var mostraPrecoLote = document.getElementById("precoLote");
+                var mostraNomeLote = document.getElementById("nomeLote");
+                var mostraPrecoTotal = document.getElementById("precoTotal");
+                var divPrecoTotal = document.getElementById("divPrecoTotal");
+
+                divPrecoTotal.style.opacity = "1";
+                divPrecoTotal.style.border = "none";
+                divPrecoTotal.style.padding = "0px";
+
+                mostraPrecoLote.innerHTML = "R$ " + precoLote;
+                mostraNomeLote.innerHTML = nome;
+                mostraPrecoTotal.innerHTML = "R$ " + precoTotal;
+
+                document.getElementById("infoLote").style.display = "table-row";
+                document.getElementById("tabelaPreco").style.display = "block";
+                document.getElementById("infoVazio").style.display = "none";
+            }
+
+            function atualizaPrecoKit(preco, nome) {
+                precoKit = preco;
+                precoTotal = parseFloat(precoLote) + parseFloat(precoKit);
+                var mostraPrecoKit = document.getElementById("precoKit");
+                var mostraNomeKit = document.getElementById("nomeKit");
+                var mostraPrecoTotal = document.getElementById("precoTotal");
+                var divPrecoTotal = document.getElementById("divPrecoTotal");
+
+                divPrecoTotal.style.opacity = "1";
+                divPrecoTotal.style.border = "none";
+                divPrecoTotal.style.padding = "0px";
+
+                mostraPrecoKit.innerHTML = "R$ " + precoKit;
+                mostraNomeKit.innerHTML = nome;
+                mostraPrecoTotal.innerHTML = "R$ " + precoTotal;
+
+                document.getElementById("infoKit").style.display = "table-row";
+                document.getElementById("tabelaPreco").style.display = "block";
+                document.getElementById("infoVazio").style.display = "none";
+            }
+        </script>
+
         <%@ include file = "layout/menu.jsp" %>
 
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
@@ -53,7 +100,26 @@
                                             </div>
                                             <hr>
                                         </div>
-
+                                            
+                                        <div class="form-group col-md-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
+                                                <div class="panel-body">
+                                                    <c:forEach items="${kits}" var="kit">  
+                                                        <div class="panel panel-success radio col-md-12">
+                                                            <label>
+                                                                <div class="panel-body">
+                                                                    <input type="radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
+                                                                    <p><b>${kit.nome} - R$ ${kit.preco}</b></p>
+                                                                    ${kit.descricao}
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-map"></i> Percurso</div>
@@ -65,26 +131,6 @@
                                                                     <input type="radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
                                                                     <p><b>${percurso.quilometragem}km</b></p>
                                                                     ${percurso.descricao}
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
-                                                <div class="panel-body">
-                                                    <c:forEach items="${kits}" var="kit">  
-                                                        <div class="panel panel-success radio">
-                                                            <label>
-                                                                <div class="panel-body">
-                                                                    <input type="radio" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
-                                                                    <p><b>${kit.nome}</b></p>
-                                                                    ${kit.descricao}
-                                                                    <p><b>${kit.preco}</b></p>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -104,7 +150,7 @@
                                                 <div class="panel-heading">Disponível</div>
                                                 <label>
                                                     <div class="panel-body">
-                                                        <input type="radio" name="optLote" required value="${lote.id}" <c:if test="${inscricao.loteId == lote.id}"> checked</c:if>/>
+                                                        <input type="radio" onchange="atualizaPrecoLote(${lote.preco}, '${lote.tipo}')" name="optLote" required value="${lote.id}" <c:if test="${inscricao.loteId == lote.id}"> checked</c:if>/>
                                                         Lote ${lote.tipo}: R$ ${lote.preco} até dia ${lote.dataFinal}
                                                     </div>
                                                 </label>
@@ -117,8 +163,35 @@
                                 <div class="panel panel-success">
                                     <div class="panel-heading"><i class="fa fa-money"></i> Total</div>
                                     <div class="panel-body preco-total">
-                                        <div class="div-preco">
-                                            <p id="precoTotal">
+                                        <div id="divPrecoTotal">
+                                            <div id="tabelaPreco" style="display: none">
+                                                <table class="table table-hover table-striped table-responsive table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Preço</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="text-align: left">
+                                                        <tr id="infoLote" style="display: none">
+                                                            <td id="nomeLote"></td>
+                                                            <td id="precoLote"></td>
+                                                        <tr>
+                                                        <tr id="infoKit" style="display: none">
+                                                            <td id="nomeKit"></td>
+                                                            <td id="precoKit"></td>
+                                                        <tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr id="infoTotal">
+                                                            <th>Total</th>
+                                                            <th id="precoTotal"></th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+
+                                            <p id="infoVazio">
                                                 Nenhum item selecionado!
                                             </p>
                                         </div>
@@ -201,7 +274,6 @@
                                     </div>
                                 </div>
                                 <div id="boleto" class="tab-pane fade">
-
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
                                             <div class="form-group col-md-12">
