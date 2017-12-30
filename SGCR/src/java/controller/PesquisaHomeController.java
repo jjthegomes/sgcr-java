@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +32,10 @@ public class PesquisaHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException, ClassNotFoundException {
+        String busca = request.getParameter("busca");
+        if(busca == null){
+            response.setContentType("text/html;charset=UTF-8");
         try {
             request.setAttribute("corridas", Corrida.obterCorridas());
             RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
@@ -39,6 +43,20 @@ public class PesquisaHomeController extends HttpServlet {
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
         } catch (ServletException ex) {
+        }
+            
+        }else {
+            buscar(request,response);
+        }
+    }
+    public void buscar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        try {
+            String nome = request.getParameter("busca") ; 
+            nome = nome.toLowerCase();
+            request.setAttribute("corridas",Corrida.buscaCorridas(nome));
+            RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
         }
     }
 
@@ -54,7 +72,11 @@ public class PesquisaHomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,7 +90,11 @@ public class PesquisaHomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

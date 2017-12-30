@@ -82,7 +82,7 @@
                 </c:when>
             </c:choose>
 
-            <form class="navbar-form navbar-right">
+            <form action="PesquisaHomeController" method="get" class="navbar-form navbar-right">
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-btn">
@@ -90,7 +90,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control" placeholder="Busca" size="40">
+                        <input type="text" class="form-control" name="busca" placeholder="Busca" size="40">
                     </div>
                 </div>
             </form>

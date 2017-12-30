@@ -87,19 +87,19 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="regulamento">Regulamento: </label>
+                                           <!-- <label  for="regulamento">Regulamento: </label>-->
                                             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" /> 
                                              <input type="file"> -->
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
-                                            <input type="file" class="form-control" id="regulamento" name="txtRegulamentoCorrida" value="4194304 value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            <input type="hidden" class="form-control" id="regulamento" name="txtRegulamentoCorrida" value="4194304 value="${corrida.regulamento}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
                                         <div class="form-group">
-                                            <label for="banner">Banner: </label>
+                                            <!--<label for="banner">Banner: </label>-->
                                             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                                             <input type="file" > -->
                                             <!-- Nao permir valores maiores que 4194304 (4MB) -->
 
-                                            <input type="file" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
+                                            <input type="hidden" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
                                         </div>
                                         <div class="form-group">
                                             <label for="optStatus">Status:</label> 
@@ -155,8 +155,8 @@
                                     </div>
                                     <div  class="col-md-12">    
                                         <div class="form-group">
-                                            <label for="valorKit">Valor:</label>
-                                            <input type="text" class="form-control" id="valorKit" name="precoKit" placeholder="Preço"/>
+                                            <label for="valorKit">Preço:</label>
+                                            <input type="text" class="form-control" id="precoKit" name="precoKit" placeholder="Preço"/>
                                         </div>            
                                     </div>
                                     <div class="col-sm-12">
@@ -215,6 +215,16 @@
                                                     <div class="form-group">
                                                         <label for="txtDataRetiradaKit">Data Final Retirada</label>
                                                         <input type="text" maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="txtPrecoKit">Preço:</label>
+                                                        <input type="text" maxlength="10" class="form-control" name="txtPrecoKit" placeholder="R$" value="${kit.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +311,7 @@
                                     <div  class="col-md-12">    
                                         <div class="form-group">
                                             <label for="quilometragem">Quilometragem:</label>
-                                            <input type="text" class="form-control" id="quilometragem" name="quilometragem" placeholder="Quilometragem" disabled="true"/>
+                                            <input type="text" class="form-control" id="quilometragem" name="quilometragem" placeholder="Quilometragem" />
                                         </div>            
                                     </div>
                                     <div  class="col-md-12">    
@@ -326,7 +336,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Manter Percurso - ${operacao}</div>
+                        <div class="panel-heading">${operacao} Percurso</div>
                         <div class="panel-body">
                             <form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">                               
                                 <div class="col-md-6"> 

@@ -259,6 +259,45 @@ public class CorridaDAO {
         }
         return null;
     }
+    public static List<Corrida> buscaCorridas(String nome) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Corrida> corridas = new ArrayList<>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE LOWER(nome) LIKE '%"+nome+"%'" );
+
+            while (rs.next()) {
+                Corrida corrida = new Corrida(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("max_pessoa"),
+                        rs.getString("horario"),
+                        rs.getString("data"),
+                        rs.getString("banner"),
+                        rs.getString("logradouro"),
+                        rs.getString("cep"),
+                        rs.getString("numero"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("bairro"),
+                        rs.getString("descricao"),
+                        rs.getString("regulamento"),
+                        rs.getString("edicao"),
+                        rs.getBoolean("ativo"),
+                        null);
+                corrida.setOrganizadorId(rs.getInt("organizador_id"));
+                corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
+                corridas.add(corrida);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return corridas;
+    }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
