@@ -56,8 +56,8 @@ public abstract class Usuario {
         this.senha = senha;
     }
     
-    public boolean isLogado() {
-        return this != null;
+    public static boolean isLogado(Usuario usuario) {
+        return usuario != null;
     }
 
 }

@@ -35,6 +35,14 @@
                             </div>
                         </div>
                     </c:when>    
+                    <c:when test="${mensagemAviso!=null}">
+                        <div class="col-md-12">
+                            <div class="alert alert-info alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <i class="fa fa-hand-stop-o"></i> ${mensagemAviso}
+                            </div>
+                        </div>
+                    </c:when>    
                 </c:choose>
 
                 <c:forEach items="${corridas}" var="corrida">

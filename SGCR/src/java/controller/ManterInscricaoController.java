@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Usuario;
 import modelo.Atleta;
 import modelo.Boleto;
 import modelo.CartaoCredito;
@@ -65,53 +66,59 @@ public class ManterInscricaoController extends HttpServlet {
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(true);
         Atleta atleta = (Atleta) session.getAttribute("atleta");
-        
-        if(!atleta.isLogado()) {
+
+        if (!Usuario.isLogado(atleta)) {
             try {
-                response.sendRedirect("/SGCR/");
-            } catch (IOException ex) {}
-        }
-        
-        try {
-            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-            Corrida corrida = Corrida.obterCorrida(corridaId);
+                request.setAttribute("mensagemAviso", "Você precisa estar logado para se inscrever em uma corrida.");
+                RequestDispatcher view = request.getRequestDispatcher("/PesquisaHomeController");
+                view.forward(request, response);
+//                response.sendRedirect("/SGCR/");
+            } catch (IOException ex) {
+            } catch (ServletException ex) {
+            }
             
+        } else {
 
-            if (Inscricao.atletaEstaInscrito(atleta, corrida)) {
-                request.setAttribute("mensagemAlerta", "Você já está inscrito nessa corrida.");
-            }
-
-            request.setAttribute("corridaId", corridaId);
-            request.setAttribute("operacao", "Incluir");
-//            request.setAttribute("atletas", Atleta.obterAtletas());
-            request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
-            request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
-            request.setAttribute("lotes", Lote.obterLotes(corridaId));
-            request.setAttribute("corrida", corrida);
-
-            Calendar hoje = Calendar.getInstance();
-            ArrayList<Integer> anos = new ArrayList();
-            anos.add(hoje.get(Calendar.YEAR));
-            for (int i = anos.get(0) + 1; i < anos.get(0) + 15; i++) {
-                anos.add(i);
-            }
-            request.setAttribute("anos", anos);
-
-            RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
-            view.forward(request, response);
-        } catch (ServletException ex) {
-
-        } catch (IOException ex) {
-
-        } catch (ClassNotFoundException ex) {
-
-        } catch (SQLException ex) {
-
-        } catch (NullPointerException ex) {
             try {
-                response.sendRedirect("/SGCR/");
-            } catch (IOException ex1) {
+                int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+                Corrida corrida = Corrida.obterCorrida(corridaId);
 
+                if (Inscricao.atletaEstaInscrito(atleta, corrida)) {
+                    request.setAttribute("mensagemAlerta", "Você já está inscrito nessa corrida.");
+                }
+
+                request.setAttribute("corridaId", corridaId);
+                request.setAttribute("operacao", "Incluir");
+//            request.setAttribute("atletas", Atleta.obterAtletas());
+                request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
+                request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
+                request.setAttribute("lotes", Lote.obterLotes(corridaId));
+                request.setAttribute("corrida", corrida);
+
+                Calendar hoje = Calendar.getInstance();
+                ArrayList<Integer> anos = new ArrayList();
+                anos.add(hoje.get(Calendar.YEAR));
+                for (int i = anos.get(0) + 1; i < anos.get(0) + 15; i++) {
+                    anos.add(i);
+                }
+                request.setAttribute("anos", anos);
+
+                RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
+                view.forward(request, response);
+            } catch (ServletException ex) {
+
+            } catch (IOException ex) {
+
+            } catch (ClassNotFoundException ex) {
+
+            } catch (SQLException ex) {
+
+            } catch (NullPointerException ex) {
+                try {
+                    response.sendRedirect("/SGCR/");
+                } catch (IOException ex1) {
+
+                }
             }
         }
     }
