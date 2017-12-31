@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -61,15 +63,31 @@ public class ManterInscricaoController extends HttpServlet {
     }
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(true);
+        Atleta atleta = (Atleta) session.getAttribute("atleta");
+        
+        if(!atleta.isLogado()) {
+            try {
+                response.sendRedirect("/SGCR/");
+            } catch (IOException ex) {}
+        }
+        
         try {
             int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+            Corrida corrida = Corrida.obterCorrida(corridaId);
+            
+
+            if (Inscricao.atletaEstaInscrito(atleta, corrida)) {
+                request.setAttribute("mensagemAlerta", "Você já está inscrito nessa corrida.");
+            }
+
             request.setAttribute("corridaId", corridaId);
             request.setAttribute("operacao", "Incluir");
-            request.setAttribute("atletas", Atleta.obterAtletas());
+//            request.setAttribute("atletas", Atleta.obterAtletas());
             request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
             request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
             request.setAttribute("lotes", Lote.obterLotes(corridaId));
-            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            request.setAttribute("corrida", corrida);
 
             Calendar hoje = Calendar.getInstance();
             ArrayList<Integer> anos = new ArrayList();
@@ -87,6 +105,14 @@ public class ManterInscricaoController extends HttpServlet {
 
         } catch (ClassNotFoundException ex) {
 
+        } catch (SQLException ex) {
+
+        } catch (NullPointerException ex) {
+            try {
+                response.sendRedirect("/SGCR/");
+            } catch (IOException ex1) {
+
+            }
         }
     }
 
@@ -134,57 +160,67 @@ public class ManterInscricaoController extends HttpServlet {
         int percursoId = Integer.parseInt(request.getParameter("optPercurso"));
         int kitId = Integer.parseInt(request.getParameter("optKit"));
         int loteId = Integer.parseInt(request.getParameter("optLote"));
-        
+
         try {
             Corrida corrida = Corrida.obterCorrida(corridaId);
             HttpSession session = request.getSession(true);
             Atleta atleta = (Atleta) session.getAttribute("atleta");
-            Percurso percurso = Percurso.obterPercurso(percursoId);
-            
-            Kit kit = Kit.obterKit(kitId);
-            Lote lote = Lote.obterLote(loteId);
 
-            Inscricao inscricao = new Inscricao(corrida, atleta, percurso, kit, lote);
-            inscricao.gravar();
-            
-            if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
-                String numeroCartaoCredito = request.getParameter("numeroCartaoCredito");
-                String nomeTitularCartaoCredito = request.getParameter("nomeTitularCartaoCredito");
-                String codigoSegurancaCartaoCredito = request.getParameter("codigoSegurancaCartaoCredito");
-                String mesValidadeCartaoCredito = request.getParameter("mesValidadeCartaoCredito");
-                String anoValidadeCartaoCredito = request.getParameter("anoValidadeCartaoCredito");
-                String dataValidadeCartaoCredito = mesValidadeCartaoCredito + "/" + anoValidadeCartaoCredito;
+            if (!Inscricao.atletaEstaInscrito(atleta, corrida)) {
 
-                try {
-                    inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
-                    CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao, corrida);
-                    cartaoCredito.gravar();
-                    request.setAttribute("cartaoCredito", cartaoCredito);
-                } catch (SQLException | ClassNotFoundException ex) {
+                Percurso percurso = Percurso.obterPercurso(percursoId);
+
+                Kit kit = Kit.obterKit(kitId);
+                Lote lote = Lote.obterLote(loteId);
+
+                Inscricao inscricao = new Inscricao(corrida, atleta, percurso, kit, lote);
+                inscricao.gravar();
+
+                if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
+                    String numeroCartaoCredito = request.getParameter("numeroCartaoCredito");
+                    String nomeTitularCartaoCredito = request.getParameter("nomeTitularCartaoCredito");
+                    String codigoSegurancaCartaoCredito = request.getParameter("codigoSegurancaCartaoCredito");
+                    String mesValidadeCartaoCredito = request.getParameter("mesValidadeCartaoCredito");
+                    String anoValidadeCartaoCredito = request.getParameter("anoValidadeCartaoCredito");
+                    String dataValidadeCartaoCredito = mesValidadeCartaoCredito + "/" + anoValidadeCartaoCredito;
+
+                    try {
+                        inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
+                        CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao, corrida);
+                        cartaoCredito.gravar();
+                        request.setAttribute("cartaoCredito", cartaoCredito);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                    }
+                } else if (request.getParameter("formaPagamento").equals("boleto")) {
+                    String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
+                    String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
+
+                    try {
+                        inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
+                        Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao, corrida);
+                        boleto.gravar();
+                        request.setAttribute("boleto", boleto);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                    }
                 }
-            } else if (request.getParameter("formaPagamento").equals("boleto")) {
-                String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
-                String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
-                
-                try {
-                    inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
-                    Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao, corrida);
-                    boleto.gravar();
-                    request.setAttribute("boleto", boleto);
-                } catch (SQLException | ClassNotFoundException ex) {
-                }
+
+                request.setAttribute("formaPagamento", request.getParameter("formaPagamento"));
+                request.setAttribute("atleta", atleta);
+                request.setAttribute("percurso", percurso);
+                request.setAttribute("kit", kit);
+                request.setAttribute("lote", lote);
+                request.setAttribute("corrida", corrida);
+                request.setAttribute("inscricao", inscricao);
+
+                RequestDispatcher view = request.getRequestDispatcher("/finalizarInscricao.jsp");
+
+                view.forward(request, response);
+            } else {
+                request.setAttribute("mensagemErro", "Não foi possível concluir sua inscrição, você já está inscrito nessa corrida.");
+                RequestDispatcher view = request.getRequestDispatcher("PesquisaHomeController");
+                view.forward(request, response);
             }
-            
-            request.setAttribute("formaPagamento", request.getParameter("formaPagamento"));
-            request.setAttribute("atleta", atleta);
-            request.setAttribute("percurso", percurso);
-            request.setAttribute("kit", kit);
-            request.setAttribute("lote", lote);
-            request.setAttribute("corrida", corrida);
-            request.setAttribute("inscricao", inscricao);
-            
-            RequestDispatcher view = request.getRequestDispatcher("/finalizarInscricao.jsp");
-            view.forward(request, response);
+
         } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {
         }
     }

@@ -244,6 +244,10 @@ public class Inscricao {
     public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException {
         InscricaoDAO.atualizarResultadoCorrida(inscricoes);
     }
+    
+    public static boolean atletaEstaInscrito(Atleta atleta,Corrida corrida) throws SQLException, ClassNotFoundException {
+        return InscricaoDAO.atletaEstaInscrito(atleta,corrida);
+    }
 
     public void pagarInscricao() throws SQLException, ClassNotFoundException {
         InscricaoDAO.pagarInscricao(this);

@@ -55,5 +55,9 @@ public abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public boolean isLogado() {
+        return this != null;
+    }
 
 }

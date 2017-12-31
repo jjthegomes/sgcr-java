@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="modelo.Corrida"%>
 
 <!DOCTYPE html>
 <html>
@@ -72,6 +71,16 @@
                     <li><a href="PesquisaHomeController">Home</a></li>
                     <li class="active">${corrida.nome}</li> 
                 </ul>
+
+                <c:choose>
+                    <c:when test="${mensagemAlerta!=null}">
+                        <div class="alert alert-warning alert-dismissable fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <i class="fa fa-warning"></i> ${mensagemAlerta}
+                        </div>
+                    </c:when>    
+                </c:choose>
+
                 <input type="hidden" class="form-control" name="hiddenIdInscricao" value="${inscricao.id}" readonly>
 
                 <div class="panel panel-primary">
@@ -100,7 +109,7 @@
                                             </div>
                                             <hr>
                                         </div>
-                                            
+
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
@@ -119,7 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            
+
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-map"></i> Percurso</div>
@@ -265,11 +274,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <c:if test="${operacao != 'Excluir'}">
-                                                <div class="form-group col-md-6 col-md-offset-3">
-                                                    <button type="submit" class="btn btn-success btn-block pagamentoCartaoCredito" name="formaPagamento" value="cartaoCredito">Pagar Com Cartão</button>
-                                                </div>
-                                            </c:if>
+                                            <c:choose>
+                                                <c:when test="${mensagemAlerta==null}">
+                                                    <c:if test="${operacao != 'Excluir'}">
+                                                        <div class="form-group col-md-6 col-md-offset-3">
+                                                            <button type="submit" class="btn btn-success btn-block pagamentoCartaoCredito" name="formaPagamento" value="cartaoCredito">Pagar Com Cartão</button>
+                                                        </div>
+                                                    </c:if>
+                                                </c:when>    
+                                            </c:choose>
+
                                         </div>
                                     </div>
                                 </div>
@@ -295,14 +309,17 @@
                                                     <label for="cpfTitularBoleto">CPF do Titular:</label>
                                                     <input type="text" class="form-control pagamentoBoleto" name="cpfTitularBoleto" id="cpfTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                 </div>
-                                            <c:if test="${operacao != 'Excluir'}">
-                                                <div class="form-group col-md-6 col-md-offset-3">
-                                                    <button type="submit" class="btn btn-success btn-block pagamentoBoleto" name="formaPagamento" value="boleto">Pagar Com Boleto</button>
-                                                </div>
-                                            </c:if>
+                                            <c:choose>
+                                                <c:when test="${mensagemAlerta==null}">
+                                                    <c:if test="${operacao != 'Excluir'}">
+                                                        <div class="form-group col-md-6 col-md-offset-3">
+                                                            <button type="submit" class="btn btn-success btn-block pagamentoBoleto" name="formaPagamento" value="boleto">Pagar Com Boleto</button>
+                                                        </div>
+                                                    </c:if>
+                                                </c:when>    
+                                            </c:choose>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

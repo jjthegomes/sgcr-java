@@ -49,7 +49,7 @@ public class InscricaoDAO {
                 inscricao.setAtletaId(rs.getInt("atleta_id"));
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
-                
+
                 inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
@@ -94,7 +94,7 @@ public class InscricaoDAO {
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setCorridaId(rs.getInt("corrida_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
-                
+
                 inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
@@ -139,7 +139,7 @@ public class InscricaoDAO {
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setCorridaId(rs.getInt("corrida_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
-                
+
                 inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
@@ -155,7 +155,6 @@ public class InscricaoDAO {
         return inscricoes;
     }
 
-    
     public static List<Inscricao> obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -170,7 +169,7 @@ public class InscricaoDAO {
 
                 Inscricao inscricao = new Inscricao(
                         rs.getInt("id"),
-                        null, 
+                        null,
                         rs.getString("data_compra"),
                         rs.getString("numero_peito"),
                         rs.getBoolean("pago"),
@@ -186,7 +185,7 @@ public class InscricaoDAO {
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setCorridaId(rs.getInt("corrida_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
-                
+
                 inscricao.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
@@ -232,7 +231,7 @@ public class InscricaoDAO {
                 inscricao.setKitId(rs.getInt("kit_id"));
                 inscricao.setCorridaId(rs.getInt("corrida_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
-                
+
                 inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
@@ -333,24 +332,24 @@ public class InscricaoDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE id = " + id);
             rs.first();
             inscricao = new Inscricao(
-                        rs.getInt("id"),
-                        null,
-                        rs.getString("data_compra"),
-                        rs.getString("numero_peito"),
-                        rs.getBoolean("pago"),
-                        rs.getBoolean("kit_retirado"),
-                        rs.getString("tempo_largada"),
-                        rs.getString("tempo_chegada"),
-                        null,
-                        null,
-                        null,
-                        null);
-                inscricao.setPercursoId(rs.getInt("percurso_id"));
-                inscricao.setAtletaId(rs.getInt("atleta_id"));
-                inscricao.setKitId(rs.getInt("kit_id"));
-                inscricao.setCorridaId(rs.getInt("corrida_id"));
-                inscricao.setLoteId(rs.getInt("lote_id"));
-                
+                    rs.getInt("id"),
+                    null,
+                    rs.getString("data_compra"),
+                    rs.getString("numero_peito"),
+                    rs.getBoolean("pago"),
+                    rs.getBoolean("kit_retirado"),
+                    rs.getString("tempo_largada"),
+                    rs.getString("tempo_chegada"),
+                    null,
+                    null,
+                    null,
+                    null);
+            inscricao.setPercursoId(rs.getInt("percurso_id"));
+            inscricao.setAtletaId(rs.getInt("atleta_id"));
+            inscricao.setKitId(rs.getInt("kit_id"));
+            inscricao.setCorridaId(rs.getInt("corrida_id"));
+            inscricao.setLoteId(rs.getInt("lote_id"));
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -358,7 +357,7 @@ public class InscricaoDAO {
         }
         return inscricao;
     }
-    
+
     public static Inscricao obterUltimaInscricaoAtleta(int atletaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -369,30 +368,54 @@ public class InscricaoDAO {
             ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE atleta_id = " + atletaId);
             rs.last();
             inscricao = new Inscricao(
-                        rs.getInt("id"),
-                        null,
-                        rs.getString("data_compra"),
-                        rs.getString("numero_peito"),
-                        rs.getBoolean("pago"),
-                        rs.getBoolean("kit_retirado"),
-                        rs.getString("tempo_largada"),
-                        rs.getString("tempo_chegada"),
-                        null,
-                        null,
-                        null,
-                        null);
-                inscricao.setPercursoId(rs.getInt("percurso_id"));
-                inscricao.setAtletaId(rs.getInt("atleta_id"));
-                inscricao.setKitId(rs.getInt("kit_id"));
-                inscricao.setCorridaId(rs.getInt("corrida_id"));
-                inscricao.setLoteId(rs.getInt("lote_id"));
-                
+                    rs.getInt("id"),
+                    null,
+                    rs.getString("data_compra"),
+                    rs.getString("numero_peito"),
+                    rs.getBoolean("pago"),
+                    rs.getBoolean("kit_retirado"),
+                    rs.getString("tempo_largada"),
+                    rs.getString("tempo_chegada"),
+                    null,
+                    null,
+                    null,
+                    null);
+            inscricao.setPercursoId(rs.getInt("percurso_id"));
+            inscricao.setAtletaId(rs.getInt("atleta_id"));
+            inscricao.setKitId(rs.getInt("kit_id"));
+            inscricao.setCorridaId(rs.getInt("corrida_id"));
+            inscricao.setLoteId(rs.getInt("lote_id"));
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao(conexao, comando);
         }
         return inscricao;
+    }
+
+    public static boolean atletaEstaInscrito(Atleta atleta, Corrida corrida) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        boolean estaInscrito = false;
+        int inscrito = 0;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT COUNT(*) as inscrito FROM inscricao WHERE atleta_id = " + atleta.getId() + " AND corrida_id = " + corrida.getId());
+            rs.first();
+            inscrito = rs.getInt("inscrito");
+            if (inscrito >= 1) {
+                estaInscrito = true;
+            } else {
+                estaInscrito = false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return estaInscrito;
     }
 
     public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws ClassNotFoundException, SQLException {

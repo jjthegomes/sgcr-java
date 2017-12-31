@@ -10,7 +10,8 @@
 
 <c:choose>
     <c:when test="${usuario=='administrador' || usuario=='organizador'}">
-        <% response.sendRedirect("dashboard.jsp"); %>
+        <% response.sendRedirect("dashboard.jsp");
+        %>
     </c:when>    
 </c:choose>
 
@@ -25,6 +26,17 @@
 
         <div class="container corpo">
             <div class="row">
+                <c:choose>
+                    <c:when test="${mensagemErro!=null}">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Ops!</strong> ${mensagemErro}
+                            </div>
+                        </div>
+                    </c:when>    
+                </c:choose>
+
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      
                         <div class="panel panel-info mouse-up" id="corrida${corrida.id}" >
