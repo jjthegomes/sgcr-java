@@ -256,3 +256,7 @@ body {
 #tabelaPreco {
     margin: -15px;
 }
+
+.panel-config div {
+    padding: 20px 0;
+}

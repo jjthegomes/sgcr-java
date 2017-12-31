@@ -113,28 +113,29 @@
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
-                                                <div class="panel-body">
+                                                <!--<div class="panel-body">-->
                                                     <c:forEach items="${kits}" var="kit">  
-                                                        <div class="panel panel-success radio col-md-12">
+                                                        <div class="panel panel-default radio col-md-12 panel-config">
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
                                                                     <p><b>${kit.nome} - R$ ${kit.preco}</b></p>
                                                                     ${kit.descricao}
+                                                                    <br><b>Retirada:</b> ${kit.dataInicioRetirada} - ${kit.dataFinalRetirada}
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </c:forEach>
-                                                </div>
+                                                <!--</div>-->
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-map"></i> Percurso</div>
-                                                <div class="panel-body">
+                                                <!--<div class="panel-body">-->
                                                     <c:forEach items="${percursos}" var="percurso">  
-                                                        <div class="panel panel-success radio">
+                                                        <div class="panel panel-default radio col-md-12 panel-config">
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
@@ -144,7 +145,7 @@
                                                             </label>
                                                         </div>
                                                     </c:forEach>
-                                                </div>
+                                                <!--</div>-->
                                             </div>
                                         </div>
                                     </div> 
