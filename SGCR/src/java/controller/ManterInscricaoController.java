@@ -72,7 +72,6 @@ public class ManterInscricaoController extends HttpServlet {
                 request.setAttribute("mensagemAviso", "Você precisa estar logado para se inscrever em uma corrida.");
                 RequestDispatcher view = request.getRequestDispatcher("/PesquisaHomeController");
                 view.forward(request, response);
-//                response.sendRedirect("/SGCR/");
             } catch (IOException ex) {
             } catch (ServletException ex) {
             }
@@ -89,7 +88,6 @@ public class ManterInscricaoController extends HttpServlet {
 
                 request.setAttribute("corridaId", corridaId);
                 request.setAttribute("operacao", "Incluir");
-//            request.setAttribute("atletas", Atleta.obterAtletas());
                 request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
                 request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
                 request.setAttribute("lotes", Lote.obterLotes(corridaId));
@@ -218,6 +216,7 @@ public class ManterInscricaoController extends HttpServlet {
                 request.setAttribute("lote", lote);
                 request.setAttribute("corrida", corrida);
                 request.setAttribute("inscricao", inscricao);
+                request.setAttribute("precoTotal", lote.getPreco() + kit.getPreco());
 
                 RequestDispatcher view = request.getRequestDispatcher("/finalizarInscricao.jsp");
 

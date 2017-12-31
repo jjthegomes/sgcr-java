@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="panel panel-info radio">
                                 <div class="panel-body">
-                                    <b>Total: </b> R$ ${lote.preco}
+                                    <b>Total: </b> R$ ${precoTotal}
                                 </div>
                             </div>
                             <div class="panel panel-info radio">
