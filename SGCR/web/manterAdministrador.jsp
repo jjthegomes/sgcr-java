@@ -33,19 +33,20 @@
                                         <div class="form-group">
                                             <label for="nomeAdmin">Nome Completo:</label>
                                             <input type="text" required class="form-control" id="nomeAdmin" name="txtNomeAdministrador" value="${administrador.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="emailAdmin">Email: </label>
-                                            <input type="text" required class="form-control" id="emailAdmin" name="txtEmailAdministrador" value="${administrador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="senhaAdmin">Senha:</label>
-                                            <input type="password" required class="form-control" id="senhaAdmin" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                        </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="emailAdmin">Email: </label>
+                                                <input type="text" required class="form-control" id="emailAdmin" name="txtEmailAdministrador" value="${administrador.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="senhaAdmin">Senha:</label>
+                                                <input type="password" required class="form-control" id="senhaAdmin" name="txtSenhaAdministrador" value="${administrador.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <a href="PesquisaAdministradorController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
-                                            <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                            <div class="form-group">
+                                                <a href="PesquisaAdministradorController" style="text-decoration: none" ><button type="button" class="btn btn-danger">Cancelar</button> </a>
+                                                <input type="submit" name="btnConfirmar" value="Confirmar" class="btn btn-success" >
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -53,9 +54,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-        <%@ include file = "layout/rodape.jsp" %>   
+            <%@ include file = "layout/rodape.jsp" %>   
 
     </body>
 </html>
