@@ -209,8 +209,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                                            
+                    </div>                                         
                 </div>  
                 <c:if test="${operacao == 'Excluir'}">
                     <div class="form-group col-md-6 col-md-offset-3">

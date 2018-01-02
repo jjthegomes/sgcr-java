@@ -254,6 +254,7 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("corridaId", corridaId);
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
 
+            
             Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
             request.setAttribute("inscricao", inscricao);
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
