@@ -260,3 +260,18 @@ body {
 .panel-config div {
     padding: 20px 0;
 }
+
+.lista-kits {
+    height: 180px;
+    overflow: auto;
+}
+textarea {
+    resize: vertical;
+    max-height: 500px;
+}
+
+.div-vazia {
+    padding: 25px 10px;
+    border: dashed 2px #555;
+    opacity: .4;
+}
