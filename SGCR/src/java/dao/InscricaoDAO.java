@@ -143,7 +143,7 @@ public class InscricaoDAO {
                 inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
-                inscricao.setKit(Kit.obterKit(rs.getInt("kit_id"), rs.getInt("kit_corrida_id")));
+                inscricao.setKit(Kit.obterKit(rs.getInt("kit_id")));
                 inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
                 inscricoes.add(inscricao);
             }
