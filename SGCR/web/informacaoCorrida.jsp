@@ -210,7 +210,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                                            
+                </div>  
                 <c:if test="${operacao == 'Excluir'}">
                     <div class="form-group col-md-6 col-md-offset-3">
                         <button type="submit" class="btn btn-success btn-block" value="Confirmar">Confirmar</button>
