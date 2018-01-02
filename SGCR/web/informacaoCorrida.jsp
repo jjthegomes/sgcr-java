@@ -12,7 +12,7 @@
 <html>
     <head>
         <%@ include file = "layout/head.jsp" %>
-        <title>Inscrição</title>
+        <title>Informação</title>
     </head>
     <body>
 
