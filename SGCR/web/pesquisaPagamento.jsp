@@ -24,7 +24,6 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
-                        <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +34,6 @@
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
-                            <td><c:out value="${inscricao.lote.preco}" /></td>
-
                         </tr>
                     </c:forEach>
                 </form>
