@@ -209,7 +209,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE corrida_id = " + corridaId
                     + " and pago =" + false);
             while (rs.next()) {
 
