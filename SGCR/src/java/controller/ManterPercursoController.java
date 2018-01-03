@@ -124,7 +124,7 @@ public class ManterPercursoController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Percurso percurso = new Percurso(imagem, descricao, numQuilometragem, organizador);
+            Percurso percurso = new Percurso(imagem, numQuilometragem, descricao, organizador);
             percurso.gravar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -164,7 +164,7 @@ public class ManterPercursoController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
-        Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem, organizador);
+        Percurso percurso = new Percurso(id, imagem, numQuilometragem, descricao, organizador);
         try {
             percurso.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -205,7 +205,7 @@ public class ManterPercursoController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
         try {
-            Percurso percurso = new Percurso(id, imagem, descricao, numQuilometragem, organizador);
+            Percurso percurso = new Percurso(id, imagem, numQuilometragem, descricao, organizador);
             percurso.alterar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");

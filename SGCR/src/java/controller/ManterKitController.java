@@ -118,13 +118,12 @@ public class ManterKitController extends HttpServlet {
         String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
-        Double preco = Double.parseDouble(request.getParameter("txtPrecoKit"));
 
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Kit kit = new Kit(nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador, preco);
+            Kit kit = new Kit(nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
             kit.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);
@@ -162,9 +161,11 @@ public class ManterKitController extends HttpServlet {
         String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
-        Double preco = Double.parseDouble(request.getParameter("txtPrecoKit"));
         
-        Kit kit = new Kit(id, descricao, nome, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, null, preco);
+        HttpSession session = request.getSession(true);
+        Organizador organizador = (Organizador) session.getAttribute("organizador");
+        
+        Kit kit = new Kit(id, descricao, nome, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
         try {
             kit.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
@@ -203,13 +204,12 @@ public class ManterKitController extends HttpServlet {
         String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
-        Double preco = Double.parseDouble(request.getParameter("txtPrecoKit"));
 
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Kit kit = new Kit(id, nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador, preco);
+            Kit kit = new Kit(id, nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
             kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);

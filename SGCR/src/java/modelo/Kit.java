@@ -9,6 +9,7 @@ import java.util.List;
  * @author RAJ
  */
 public class Kit {
+
     private int id;
     private String nome;
     private String descricao;
@@ -16,13 +17,26 @@ public class Kit {
     private String tipoChip;
     private String dataInicioRetirada;
     private String dataFinalRetirada;
+    private double preco;
     private Organizador organizador;
 
     private int organizadorId;
-    
-    private double preco;
 
-    public Kit(int id, String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador, Double preco) {
+    public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
+            String dataInicioRetirada, String dataFinalRetirada, Double preco, Organizador organizador) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.imagem = imagem;
+        this.tipoChip = tipoChip;
+        this.dataInicioRetirada = dataInicioRetirada;
+        this.dataFinalRetirada = dataFinalRetirada;
+        this.preco = preco;
+        this.organizador = organizador;
+    }
+
+    public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
+            String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -31,10 +45,23 @@ public class Kit {
         this.dataInicioRetirada = dataInicioRetirada;
         this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
-        this.preco = preco;
     }
-    
-    public Kit(String nome, String descricao, String imagem, String tipoChip, String dataInicioRetirada, String dataFinalRetirada, Organizador organizador, Double preco) {
+
+    public Kit(String nome, String descricao, String imagem, String tipoChip,
+            String dataInicioRetirada, String dataFinalRetirada, Double preco, Organizador organizador) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.imagem = imagem;
+        this.tipoChip = tipoChip;
+        this.dataInicioRetirada = dataInicioRetirada;
+        this.dataFinalRetirada = dataFinalRetirada;
+        this.preco = preco;
+        this.organizador = organizador;
+
+    }
+
+    public Kit(String nome, String descricao, String imagem, String tipoChip,
+            String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
@@ -42,7 +69,6 @@ public class Kit {
         this.dataInicioRetirada = dataInicioRetirada;
         this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
-        this.preco = preco;
     }
 
     public int getId() {
@@ -68,7 +94,7 @@ public class Kit {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     public String getImagem() {
         return imagem;
     }
@@ -100,7 +126,7 @@ public class Kit {
     public void setDataFinalRetirada(String dataFinalRetirada) {
         this.dataFinalRetirada = dataFinalRetirada;
     }
-    
+
     public Organizador getOrganizador() {
         return organizador;
     }
@@ -128,11 +154,11 @@ public class Kit {
     public static List<Kit> obterKits() throws ClassNotFoundException {
         return KitDAO.obterKits();
     }
-    
+
     public static List<Kit> obterKits(int organizadorId) throws ClassNotFoundException {
         return KitDAO.obterKits(organizadorId);
     }
-    
+
     public void gravar() throws SQLException, ClassNotFoundException {
         KitDAO.gravar(this);
     }
@@ -140,19 +166,19 @@ public class Kit {
     public void alterar() throws SQLException, ClassNotFoundException {
         KitDAO.alterar(this);
     }
-    
+
     public void excluir() throws SQLException, ClassNotFoundException {
         KitDAO.excluir(this);
     }
-    
+
     public static Kit obterKit(int id) throws ClassNotFoundException {
         return KitDAO.obterKit(id);
     }
-    
+
     public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
         return KitDAO.obterKit(id, organizadorId);
     }
-    
+
     public static List<Kit> obterKitsCorrida(int corridaId) throws ClassNotFoundException {
         return KitDAO.obterKitsCorrida(corridaId);
     }

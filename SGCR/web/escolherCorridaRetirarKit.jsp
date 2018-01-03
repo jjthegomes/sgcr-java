@@ -22,7 +22,7 @@
                 <li><a href="PesquisaHomeController">Dashboard</a></li>
                 <li class="active">Manter Retirada Kit</li>
             </ul>
-            <center><h2>Manter Retirada de Kit</h1></center><br>
+            <center><h1>Manter Retirada de Kit</h1></center><br>
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
                     <div class="col-md-4">                      

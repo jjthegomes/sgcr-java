@@ -21,7 +21,7 @@
                 <li><a href="PesquisaHomeController">Dashboard</a></li>
                 <li>Manter Pagamento</li>
             </ul>
-            <center><h2>Manter Pagamento</h2> </center> <br>
+            <center><h1>Manter Pagamento</h1> </center> <br>
 
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
