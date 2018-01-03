@@ -30,7 +30,6 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
-                        <th>Valor</th>
                         <th class="table-action">Ação</th>
                     </tr>
                 </thead>
@@ -40,7 +39,6 @@
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
-                            <td><c:out value="${inscricao.lote.preco}" /></td>
                             <td class="table-action">
                                 <a class="btn btn-success btn-xs" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>">
                                     Pagar 

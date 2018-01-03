@@ -163,8 +163,8 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId
-                    + " and pago =" + true + " and kit_retirado = " + false);
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE corrida_id = " + corridaId
+                    + " and pago =" + true + " and kit_retirado = 0");
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
@@ -186,7 +186,7 @@ public class InscricaoDAO {
                 inscricao.setCorridaId(rs.getInt("corrida_id"));
                 inscricao.setLoteId(rs.getInt("lote_id"));
 
-                inscricao.setCorrida(Corrida.obterCorrida(rs.getInt("corrida_id")));
+                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
                 inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
                 inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
                 inscricao.setKit(Kit.obterKit(rs.getInt("kit_id")));
