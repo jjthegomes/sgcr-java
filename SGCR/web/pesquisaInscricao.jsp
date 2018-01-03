@@ -34,7 +34,7 @@
                     <c:forEach items="${inscricoes}" var="inscricao">
                         <tr>
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
-                            <td><c:out value="${inscricao.numeroPeito}" /></td>
+                            <td><c:out value="000${inscricao.id}" /></td>
                             <td><c:out value="${inscricao.dataCompra}" /></td>
                             <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
                             <td><c:out value="${inscricao.kit.nome}" /></td>

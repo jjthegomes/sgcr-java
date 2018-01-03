@@ -33,8 +33,8 @@ public class PercursoDAO {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
                         rs.getString("imagem"),
-                        rs.getString("descricao"),
                         rs.getDouble("quilometragem"),
+                        rs.getString("descricao"),
                         null);
                 percurso.setOrganizadorId(rs.getInt("organizador_id"));
                 percursos.add(percurso);
@@ -60,8 +60,8 @@ public class PercursoDAO {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
                         rs.getString("imagem"),
-                        rs.getString("descricao"),
                         rs.getDouble("quilometragem"),
+                        rs.getString("descricao"),
                         null);
                 percurso.setOrganizadorId(rs.getInt("organizador_id"));
 
@@ -79,12 +79,12 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO percurso (imagem, quilometragem, descricao) VALUES (?,?,?)";
+            String sql = "INSERT INTO percurso (imagem, quilometragem, descricao, organizador_id) VALUES (?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, percurso.getId());
-            comando.setString(2, percurso.getImagem());
-            comando.setDouble(3, percurso.getQuilometragem());
-            comando.setString(4, percurso.getDescricao());
+            comando.setString(1, percurso.getImagem());
+            comando.setDouble(2, percurso.getQuilometragem());
+            comando.setString(3, percurso.getDescricao());
+            comando.setInt(4, percurso.getOrganizador().getId());
 
             comando.execute();
             comando.close();
@@ -142,8 +142,8 @@ public class PercursoDAO {
             percurso = new Percurso(
                     rs.getInt("id"),
                     rs.getString("imagem"),
-                    rs.getString("descricao"),
                     rs.getDouble("quilometragem"),
+                    rs.getString("descricao"),
                     null);
             percurso.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
@@ -153,7 +153,7 @@ public class PercursoDAO {
         }
         return percurso;
     }
-    
+
     public static List<Percurso> obterPercursosCorrida(int corridaId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -167,8 +167,8 @@ public class PercursoDAO {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
                         rs.getString("imagem"),
-                        rs.getString("descricao"),
                         rs.getDouble("quilometragem"),
+                        rs.getString("descricao"),
                         null);
                 percurso.setOrganizadorId(rs.getInt("organizador_id"));
 
@@ -181,7 +181,7 @@ public class PercursoDAO {
         }
         return percursos;
     }
-    
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

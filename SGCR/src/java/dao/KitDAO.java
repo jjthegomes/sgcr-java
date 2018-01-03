@@ -35,8 +35,8 @@ public class KitDAO {
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
                         rs.getString("data_final_retirada"),
-                        null,
-                        rs.getDouble("preco"));
+                        rs.getDouble("preco"),
+                        null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
                 kit.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
                 kits.add(kit);
@@ -67,8 +67,8 @@ public class KitDAO {
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
                         rs.getString("data_final_retirada"),
-                        null,
-                        rs.getDouble("preco"));
+                        rs.getDouble("preco"),
+                        null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
                 kits.add(kit);
             }
@@ -176,8 +176,8 @@ public class KitDAO {
                     rs.getString("tipo_chip"),
                     rs.getString("data_inicio_retirada"),
                     rs.getString("data_final_retirada"),
-                    null,
-                    rs.getDouble("preco"));
+                    rs.getDouble("preco"),
+                    null);
             kit.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -204,8 +204,8 @@ public class KitDAO {
                     rs.getString("tipo_chip"),
                     rs.getString("data_inicio_retirada"),
                     rs.getString("data_final_retirada"),
-                    null,
-                    rs.getDouble("preco"));
+                    null
+            );
             kit.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -233,8 +233,8 @@ public class KitDAO {
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
                         rs.getString("data_final_retirada"),
-                        null,
-                        rs.getDouble("preco"));
+                        rs.getDouble("preco"),
+                        null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
                 kits.add(kit);
             }

@@ -24,7 +24,6 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Imagem</th>
                         <th>Descrição</th>
                         <th>Quilometragem</th>
                         <th colspan="2" class="table-action">Ação</th>
@@ -35,7 +34,6 @@
                     <c:forEach items="${percursos}" var="percurso">
                         <tr>
                             <td><c:out value="${percurso.id}" /></td>
-                            <td><c:out value="${percurso.imagem}" /></td>
                             <td><c:out value="${percurso.descricao}" /></td>
                             <td><c:out value="${percurso.quilometragem}" /></td>
                             <td class="table-action"><a href="ManterPercursoController?acao=prepararEditar&id=<c:out value="${percurso.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a> </td>
