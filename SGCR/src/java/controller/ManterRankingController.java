@@ -53,6 +53,10 @@ public class ManterRankingController extends HttpServlet {
                         } else {
                             if (acao.equals("confirmarEditar")) {
                                 confirmarEditar(request, response);
+                            }else {
+                                if (acao.equals("visualizarRanking")) {
+                                    visualizarRanking(request, response);
+                                }
                             }
                         }
                     }
@@ -175,6 +179,19 @@ public class ManterRankingController extends HttpServlet {
         } catch (SQLException ex) {
         } catch (ClassNotFoundException ex) {
         } catch (ServletException ex) {
+        }
+    }
+    
+    public void visualizarRanking(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            //request.setAttribute("operacao", "Incluir");
+            request.setAttribute("administradores", Administrador.obterAdministradores());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRanking.jsp");
+            view.forward(request, response);
+
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
     }
 

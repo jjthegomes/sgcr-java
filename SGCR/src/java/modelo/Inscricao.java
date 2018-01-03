@@ -20,6 +20,7 @@ public class Inscricao {
     private boolean kitRetirado;
     private String tempoLargada;
     private String tempoChegada;
+    private String tempoFinal;
     private Atleta atleta;
     private Percurso percurso;
     private Kit kit;
@@ -83,6 +84,14 @@ public class Inscricao {
 
     public void setNumeroPeito(String numeroPeito) {
         this.numeroPeito = numeroPeito;
+    }
+
+    public String getTempoFinal() {
+        return tempoFinal;
+    }
+
+    public void setTempoFinal(String tempoFinal) {
+        this.tempoFinal = tempoFinal;
     }
 
     public boolean isPago() {
