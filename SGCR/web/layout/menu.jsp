@@ -94,6 +94,10 @@
                     </div>
                 </div>
             </form>
+            <div class="navbar-form navbar-right">
+               <a href="PesquisaRankingController?acao=visualizarClassificacao" style="text-decoration: none" ><button type="button" class="btn btn-link">Classificação</button> </a>
+
+            </div>
         </div>
     </div>
 </nav>

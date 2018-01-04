@@ -11,17 +11,17 @@
 <html lang="pt-br">
     <head>
         <%@ include file = "layout/head.jsp" %>
-        <title>Visualizar Ranking</title>
+        <title>Visualizar Classificação</title>
     </head>
     <body>
         <%@ include file = "layout/menu.jsp" %>
 
-        <div class="container-fluid corpo corpo-adm">
+        <div class="container-fluid corpo corpo-adm col-md-8">
             <ul class="breadcrumb">
-                <li><a href="PesquisaHomeController">Dashboard</a></li>
-                <li>Manter Pagamento</li>
+                <li><a href="PesquisaHomeController">Home</a></li>
+                <li>Visualizar Classificação</li>
             </ul>
-            <center><h2>Manter Pagamento</h2> </center> <br>
+            <center><h2>Visualizar Classificação</h2> </center> <br>
 
             <div class="row">
                 <c:forEach items="${corridas}" var="corrida">
@@ -36,7 +36,7 @@
                                 <p><b>...</b></p>
                             </div>
                             <div class="panel-footer">
-                                <a style="text-decoration: none" href="ManterRankingController?acao=visualizarRanking&corridaId=<c:out value="${corrida.id}"/>">
+                                <a style="text-decoration: none" href="PesquisaRankingController?acao=visualizarClassificacao&corridaId=<c:out value="${corrida.id}"/>">
                                     <button class="btn btn-block btn-success"> Visuzalizar Classificação </button> 
                                 </a>   
                             </div>

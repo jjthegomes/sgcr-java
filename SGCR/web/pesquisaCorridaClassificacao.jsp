@@ -32,14 +32,17 @@
             
             <ul class="nav nav-tabs">
                 <c:forEach items="${percursos}" var="percurso">
-                    <li><a data-toggle="tab" href="#percurso${percurso.id}">Percurso - ${percurso.quilometragem}Km</a></li>
-                <c:forEach>
+                   <!-- <li><a type="button" href="#percurso${percurso.id}">Percurso - ${percurso.quilometragem}Km</a></li>-->
+                    <li><a type="button" href="PesquisaRankingController?acao=visualizarClassificacao&corridaId=<c:out value="${corrida.id}"/>&percursoId=<c:out value="${percurso.id}"/>">
+                          Percurso -${percurso.quilometragem}Km 
+     
+                           </a></li>
+                </c:forEach>
             </ul>
-            <h4>Percurso - ${percurso.quilometragem}</h4>
-            
+           
             <div class="tab-content">
-                <c:forEach items="${percursos}" var="percurso">
-                <div id="#percurso${percurso.id}" class="tab-pane fade">
+                
+                <div id="percurso${percurso.id}" class="tab-pane fade active">
                 <div class="panel-body">
                 <table class="table table-hover table-responsive">
                     <thead>
@@ -52,23 +55,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <%int i = 0;%>
+                <script>
+                    var i = 1;
+                    
+                </script>
+                    
                     <c:forEach items="${inscricoes}" var="inscricao">
-                        <tr>
-                            <td ><%i++;%>${i}</td>
+                        
+                        <tr>                   
+                            <td><script>document.write(i++);</script></td>
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
-                            <td><c:out value="${inscricao.tempoLargada}" /></td>
-                            <td><c:out value="${inscricao.tempoChegada}" /></td>
-                            <td></td>
-                            <td class="table-action"><a href="ManterRankingController?acao=prepararEditar&id=<c:out value="${ranking.id}"/>" class="btn-primary btn-block btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Editar</a> </td>
-                            <td class="table-action"><a href="ManterRankingController?acao=prepararExcluir&id=<c:out value="${ranking.id}"/>"  class="btn-danger btn-block btn-xs"><i class="fa fa-trash" aria-hidden="true"></i> Excluir</a> </td>
+                            <td id="largada"><c:out value="${inscricao.tempoLargada}" /></td>
+                            <td id="chegada"><c:out value="${inscricao.tempoChegada}" /></td>
+                            <td><c:out value="${inscricao.tempoFinal}" /></td>
+                            <td><script></script></td>
                         </tr>
                     </c:forEach>
                 </tbody>
                     </table>
                     </div>
                 </div>   
-                </c:forEach>
             </div>
             
             <%@ include file = "layout/rodape.jsp" %>

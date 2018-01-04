@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Administrador;
+import modelo.Corrida;
+import modelo.Inscricao;
+import modelo.Percurso;
 import modelo.Ranking;
 
 /**
@@ -32,7 +37,19 @@ public class PesquisaRankingController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
+        String acao = request.getParameter("acao");
+        String id = request.getParameter("corridaId");
+        String percursoId = request.getParameter("percursoId");
+        if(id!= null && percursoId != null){
+            visualizarClassificacaoPercurso(request, response);
+        }else{
+        if(id != null && acao.equals("visualizarClassificacao")){
+            visualizarClassificacaoCorrida(request, response);
+        }else{
+        if(acao.equals("visualizarClassificacao") ){
+            visualizarClassificacao(request, response);
+        }else{
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
@@ -44,7 +61,47 @@ public class PesquisaRankingController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
 
         }
+        }
+        }
+        }
     }
+    public void visualizarClassificacao(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        try {
+            
+            request.setAttribute("corridas",Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaClassificacao.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+        }
+    }
+    
+    public void visualizarClassificacaoCorrida(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        try {
+            
+            int id = Integer.parseInt(request.getParameter("corridaId"));
+            request.setAttribute("inscricoes",Inscricao.obterInscricoes(id));
+            
+            request.setAttribute("percursos",Percurso.obterPercursosCorrida(id));
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+        }
+    }
+    
+    public void visualizarClassificacaoPercurso(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        try {
+            
+            int id = Integer.parseInt(request.getParameter("corridaId"));
+            int percursoId = Integer.parseInt(request.getParameter("percursoId"));
+            request.setAttribute("inscricoes",Inscricao.obterInscricoesCorrida(id,percursoId));
+            
+            request.setAttribute("percursos",Percurso.obterPercursosCorrida(id));
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+        }
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,7 +115,11 @@ public class PesquisaRankingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -72,7 +133,11 @@ public class PesquisaRankingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PesquisaRankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

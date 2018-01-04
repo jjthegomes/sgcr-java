@@ -213,6 +213,10 @@ public class Inscricao {
     public static List<Inscricao> obterInscricoes(int corridaId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes(corridaId);
     }
+    
+    public static List<Inscricao> obterInscricoesCorrida(int corridaId, int percursoId) throws ClassNotFoundException {
+        return InscricaoDAO.obterInscricoesCorrida(corridaId, percursoId);
+    }
 
     public static List<Inscricao> obterInscricoesAtleta(int atletaId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoesAtleta(atletaId);
