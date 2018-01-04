@@ -42,7 +42,7 @@
            
             <div class="tab-content">
                 
-                <div id="percurso${percurso.id}" class="tab-pane fade active">
+                <div class="tab-pane active">
                 <div class="panel-body">
                 <table class="table table-hover table-responsive">
                     <thead>
@@ -56,10 +56,8 @@
                 </thead>
                 <tbody>
                 <script>
-                    var i = 1;
-                    
+                    var i = 1; 
                 </script>
-                    
                     <c:forEach items="${inscricoes}" var="inscricao">
                         
                         <tr>                   
@@ -68,7 +66,6 @@
                             <td id="largada"><c:out value="${inscricao.tempoLargada}" /></td>
                             <td id="chegada"><c:out value="${inscricao.tempoChegada}" /></td>
                             <td><c:out value="${inscricao.tempoFinal}" /></td>
-                            <td><script></script></td>
                         </tr>
                     </c:forEach>
                 </tbody>
