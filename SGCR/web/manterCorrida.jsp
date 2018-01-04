@@ -205,24 +205,52 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="area-kits">
+                                                    <c:choose>
+                                                        <c:when test="${operacao == 'Editar'}">
+                                                            <c:forEach items="${kits}" var="kit">
+                                                                <tr id="kit${kit.id}">
+                                                            <input type="hidden" class="form-control" name="txtNomeKit" id="txtNomeKit${kit.id}" value="${kit.nome}" />
+                                                            <input type="hidden" class="form-control" name="txtPrecoKit" id="txtPrecoKit${kit.id}" value="${kit.preco}" />
+                                                            <input type="hidden" class="form-control" name="txtTipoChipKit" id="txtTipoChipKit${kit.id}" value="${kit.tipoChip}" />
+                                                            <input type="hidden" class="form-control" name="txtDescricaoKit" id="txtDescricaoKit${kit.id}" value="${kit.descricao}" />
+                                                            <input type="hidden" class="form-control" name="txtDataInicioRetiradaKit" id="txtDataInicioRetiradaKit${kit.id}" value="${kit.dataInicioRetirada}" />
+                                                            <input type="hidden" class="form-control" name="txtDataFinalRetiradaKit" id="txtDataFinalRetiradaKit${kit.id}" value="${kit.dataFinalRetirada}" />
 
-                                                    </tbody>
-                                                </table>
-                                                <div class="col-md-12" id="div-vazia-kits">
-                                                    <div class="panel panel-default radio col-md-12 panel-config div-vazia">
-                                                        <div class="panel-body text-center">
-                                                            <span>Pelo menos um <b>kit</b> deve ser criado para que sua corrida possa ser publicada</span>
+
+                                                            <td id="nomeKit${kit.id}"><c:out value="${kit.nome}" /></td>
+                                                            <td id="precoKit${kit.id}"><c:out value="${kit.preco}" /></td>
+                                                            <td id="tipoChipKit${kit.id}"><c:out value="${kit.tipoChip}" /></td>
+
+<!--                                                            <td id="descricaoKit${kit.id}"><c:out value="${kit.descricao}" /></td>
+<td id="dataInicioRetiradaKit${kit.id}"><c:out value="${kit.dataInicioRetirada}" /></td>
+<td id="dataFinalRetiradaKit${kit.id}"><c:out value="${kit.dataFinalRetirada}" /></td>-->
+                                                            <td style="width: 20px;"><a class="btn btn-success btn-xs" onclick="Kit.prepararEditar('${kit.id}')" ><i class="fa fa-pencil"></i></a></td>
+                                                            <td style="width: 20px;"><a class="btn btn-danger btn-xs" onclick="Kit.removeItem('kit${kit.id}')" ><i class="fa fa-trash"></i></a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:when>    
+                                                </c:choose>
+                                                </tbody>
+                                            </table>
+                                            <c:choose>
+                                                <c:when test="${operacao != 'Editar'}">
+                                                    <div class="col-md-12" id="div-vazia-kits">
+                                                        <div class="panel panel-default radio col-md-12 panel-config div-vazia">
+                                                            <div class="panel-body text-center">
+                                                                <span>Pelo menos um <b>kit</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> 
-                                            </div>
-                                            <!--</form>-->
+                                                </c:when>    
+                                            </c:choose>
                                         </div>
+                                        <!--</form>-->
                                     </div>
+                                </div>
 
-                                    <div id="percurso" class="tab-pane fade">
-                                        <div class="panel-body">
-                                            <!--<form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">-->                               
+                                <div id="percurso" class="tab-pane fade">
+                                    <div class="panel-body">
+                                        <!--<form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">-->                               
                                         <div class="row">
                                             <div class="col-md-6">
 
@@ -262,30 +290,49 @@
                                                             <tr>
                                                                 <th>Km</th>
                                                                 <th>Descrição</th>
-                                                                <th></th>
+                                                                <th colspan="2"></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="area-percursos">
+                                                        <c:choose>
+                                                            <c:when test="${operacao == 'Editar'}">
+                                                                <c:forEach items="${percursos}" var="percurso">
+                                                                    <tr id="percurso${percurso.id}">
+                                                                <input type="hidden" class="form-control" name="txtQuilometragemPercurso" id="txtQuilometragemPercurso${percurso.id}" value="${percurso.quilometragem}" />
+                                                                <input type="hidden" class="form-control" name="txtDescricaoPercurso" id="txtDescricaoPercurso${percurso.id}" value="${percurso.descricao}" />
 
-                                                        </tbody>
-                                                    </table>
-                                                    <div class="col-md-12" id="div-vazia-percursos">
-                                                        <div class="panel panel-default radio col-md-12 panel-config div-vazia">
-                                                            <div class="panel-body text-center">
-                                                                <span>Pelo menos um <b>percurso</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                                <td id="quilometragemPercurso${percurso.id}"><c:out value="${percurso.quilometragem}" /></td>
+                                                                <td id="descricaoPercurso${percurso.id}"><c:out value="${percurso.descricao}" /></td>
+                                                                <td style="width: 20px;"><a class="btn btn-success btn-xs" onclick="prepararEditarPercurso('${percurso.id}')" ><i class="fa fa-pencil"></i></a></td>
+                                                                <td style="width: 20px;"><a class="btn btn-danger btn-xs" onclick="Percurso.removeItem('percurso${percurso.id}')" ><i class="fa fa-trash"></i></a></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </c:when>    
+                                                    </c:choose>
+
+                                                    </tbody>
+                                                </table>
+                                                <c:choose>
+                                                    <c:when test="${operacao != 'Editar'}">
+                                                        <div class="col-md-12" id="div-vazia-percursos">
+                                                            <div class="panel panel-default radio col-md-12 panel-config div-vazia">
+                                                                <div class="panel-body text-center">
+                                                                    <span>Pelo menos um <b>percurso</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
+                                                        </div> 
+                                                    </c:when>    
+                                                </c:choose>
                                             </div>
-                                            <!--</form>-->
                                         </div>
+                                        <!--</form>-->
                                     </div>
+                                </div>
 
 
-                                    <div id="lote" class="tab-pane fade">
-                                        <div class="panel-body">
-                                            <!--<form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote">--> 
+                                <div id="lote" class="tab-pane fade">
+                                    <div class="panel-body">
+                                        <!--<form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote">--> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <input type="hidden" class="form-control" id="codigo" name="hiddenIdLote" value="${lote.id}" readonly />
@@ -331,49 +378,70 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="area-lotes">
-
-                                                        </tbody>
-                                                    </table>
-                                                    <div class="col-md-12" id="div-vazia-lotes">
-                                                        <div class="panel panel-default radio col-md-12 panel-config div-vazia">
-                                                            <div class="panel-body text-center">
-                                                                <span>Pelo menos um <b>lote</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                        <c:choose>
+                                                            <c:when test="${operacao == 'Editar'}">
+                                                                <c:forEach items="${lotes}" var="lote">
+                                                                    <tr id="lote${lote.id}">
+                                                                <input type="hidden" name="txtTipoLote" id="txtTipoLote${lote.id}" value="${lote.tipo}" />
+                                                                <input type="hidden" name="txtPreco" id="txtPrecoLote${lote.id}" value="${lote.preco}" />
+                                                                <input type="hidden" name="txtDataInicioLote" id="txtDataInicioLote${lote.id}" value="${lote.dataInicio}" />
+                                                                <input type="hidden" name="txtDataTerminoLote" id="txtDataTerminoLote${lote.id}" value="${lote.dataFinal}" />
+                                                                
+                                                                <td id="tipoLote${lote.id}"><c:out value="${lote.tipo}" /></td>
+                                                                <td id="precoLote${lote.id}"><c:out value="${lote.preco}" /></td>
+                                                                <td style="width: 20px;"><a class="btn btn-success btn-xs" onclick="Lote.prepararEditar('${lote.id}')" ><i class="fa fa-pencil"></i></a></td>
+                                                                <td style="width: 20px;"><a class="btn btn-danger btn-xs" onclick="Lote.removeItem('lote${lote.id}')" ><i class="fa fa-trash"></i></a></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </c:when>    
+                                                    </c:choose>
+                                                    </tbody>
+                                                </table>
+                                                <c:choose>
+                                                    <c:when test="${operacao != 'Editar'}">
+                                                        <div class="col-md-12" id="div-vazia-lotes">
+                                                            <div class="panel panel-default radio col-md-12 panel-config div-vazia">
+                                                                <div class="panel-body text-center">
+                                                                    <span>Pelo menos um <b>lote</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </c:when>    
+                                                </c:choose>
+
+                                            </div>
+                                        </div>
+                                        <!--</form>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2"> 
+                                        <div class="col-md-6"> 
+                                            <div class="form-group">
+                                                <div class="col-md-12"> 
+                                                    <button type="submit" name="btnConfirmar" class="btn btn-info btn-block" style="background-color: #563D7C; border-color: #421a7a;">Salvar como rascunho</button>
                                                 </div>
                                             </div>
-                                            <!--</form>-->
-                                        </div>
+                                        </div>  
+                                        <div class="col-md-6"> 
+                                            <div class="form-group">
+                                                <div class="col-md-12"> 
+                                                    <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Salvar e publicar</button>
+                                                </div>
+                                            </div>
+                                        </div> 
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-2"> 
-                                            <div class="col-md-6"> 
-                                                <div class="form-group">
-                                                    <div class="col-md-12"> 
-                                                        <button type="submit" name="btnConfirmar" class="btn btn-info btn-block" style="background-color: #563D7C; border-color: #421a7a;">Salvar como rascunho</button>
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                            <div class="col-md-6"> 
-                                                <div class="form-group">
-                                                    <div class="col-md-12"> 
-                                                        <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Salvar e publicar</button>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>     
-                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>     
             </div>
         </div>
-    </div>              
+    </div>
+</div>              
 </div>
 
 <%@ include file = "layout/rodape.jsp" %>

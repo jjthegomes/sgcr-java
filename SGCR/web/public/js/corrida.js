@@ -29,7 +29,7 @@ class Kit {
         if (kit.nome.length > 0 && kit.preco > 0 && kit.tipoChip.length > 0 && kit.descricao.length > 0
                 && kit.dataInicioRetirada.length > 0 && kit.dataFinalRetirada.length > 0) {
 
-            document.getElementById("div-vazia-kits").style.display = 'none';
+//            document.getElementById("div-vazia-kits").style.display = 'none';
             kitTr += '<tr id="kit' + kit.id + '">';
             kitTr += '<input type="hidden" name="txtNomeKit" id="txtNomeKit' + kit.id + '" value="' + kit.nome + '" />';
             kitTr += '<input type="hidden" name="txtPrecoKit" id="txtPrecoKit' + kit.id + '" value="' + kit.preco + '" />';
@@ -52,10 +52,24 @@ class Kit {
 
             limpaInputs(Kit.inputs);
         }
-        
+
     }
 
     static prepararEditar(id) {
+        if (typeof arrayKits[id] === "undefined") {
+            var kit = new Kit(
+                    document.getElementById('txtNomeKit' + id).value,
+                    parseFloat(document.getElementById('txtPrecoKit' + id).value),
+                    document.getElementById('txtTipoChipKit' + id).value,
+                    document.getElementById('txtDescricaoKit' + id).value,
+                    document.getElementById('txtDataInicioRetiradaKit' + id).value,
+                    document.getElementById('txtDataFinalRetiradaKit' + id).value);
+
+            kit.id = id;
+            arrayKits[kit.id] = kit;
+            console.log("chegou");
+        }
+
         var kit = arrayKits[id];
         document.getElementById("nomeKit").value = kit.nome;
         document.getElementById("precoKit").value = kit.preco;
@@ -75,7 +89,7 @@ class Kit {
         arrayKits[id].descricao = document.getElementById('descricaoKit').value;
         arrayKits[id].dataInicioRetirada = document.getElementById('dataInicioRetiradaKit').value;
         arrayKits[id].dataFinalRetirada = document.getElementById('dataFinalRetiradaKit').value;
-        
+
         var kit = arrayKits[id];
         document.getElementById("txtNomeKit" + id).value = kit.nome;
         document.getElementById("nomeKit" + id).innerHTML = kit.nome;
@@ -89,7 +103,7 @@ class Kit {
 //        document.getElementById("dataInicioRetiradaKit" + id).innerHTML = kit.dataInicioRetirada;
         document.getElementById("txtDataFinalRetiradaKit" + id).value = kit.dataFinalRetirada;
 //        document.getElementById("dataFinalRetiradaKit" + id).innerHTML = kit.dataFinalRetirada;
-        
+
 
         limpaInputs(Kit.inputs);
 
@@ -105,6 +119,7 @@ class Kit {
     }
 }
 
+var kitInputs = ['nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit', 'dataInicioRetiradaKit', 'dataFinalRetiradaKit'];
 var arrayKits = [];
 
 // -----------------------------------------------------------------------
@@ -125,6 +140,7 @@ class Percurso {
     }
 }
 
+var percursoInputs = ['quilometragemPercurso', 'descricaoPercurso'];
 var arrayPercursos = [];
 
 function criaPercurso() {
@@ -135,7 +151,7 @@ function criaPercurso() {
     var percursoTr = '';
 
     if (percurso.quilometragem > 0 && percurso.descricao.length > 0) {
-        document.getElementById("div-vazia-percursos").style.display = 'none';
+        //document.getElementById("div-vazia-percursos").style.display = 'none';
 
         percursoTr += '<tr id="percurso' + percurso.id + '">';
         percursoTr += '<input type="hidden" class="form-control" name="txtQuilometragemPercurso" id="txtQuilometragemPercurso' + percurso.id + '" value="' + percurso.quilometragem + '" />';
@@ -153,6 +169,12 @@ function criaPercurso() {
 }
 
 function prepararEditarPercurso(percursoId) {
+    if (typeof arrayPercursos[percursoId] === "undefined") {
+        var percurso = new Percurso(parseFloat(document.getElementById('txtQuilometragemPercurso' + percursoId).value), document.getElementById('txtDescricaoPercurso' + percursoId).value);
+        percurso.id = percursoId;
+        arrayPercursos[percurso.id] = percurso;
+    }
+
     var percurso = arrayPercursos[percursoId];
     document.getElementById("quilometragemPercurso").value = percurso.quilometragem;
     document.getElementById("descricaoPercurso").value = percurso.descricao;
@@ -202,7 +224,7 @@ class Lote {
 
         if (lote.tipo.length > 0 && lote.preco > 0 && lote.dataInicio.length > 0 && lote.dataTermino.length > 0) {
 
-            document.getElementById("div-vazia-lotes").style.display = 'none';
+//            document.getElementById("div-vazia-lotes").style.display = 'none';
             loteTr += '<tr id="lote' + lote.id + '">';
             loteTr += '<input type="hidden" name="txtTipoLote" id="txtTipoLote' + lote.id + '" value="' + lote.tipo + '" />';
             loteTr += '<input type="hidden" name="txtPrecoLote" id="txtPrecoLote' + lote.id + '" value="' + lote.preco + '" />';
@@ -225,6 +247,17 @@ class Lote {
     }
 
     static prepararEditar(id) {
+        if (typeof arrayLotes[id] === "undefined") {
+            var lote = new Lote(
+                    document.getElementById('txtTipoLote' + id).value,
+            parseFloat(document.getElementById('txtPrecoLote' + id).value), 
+            document.getElementById('txtDataInicioLote' + id).value,
+            document.getElementById('txtDataTerminoLote' + id).value);
+            
+            lote.id = id;
+            arrayLotes[lote.id] = lote;
+        }
+
         var lote = arrayLotes[id];
         document.getElementById("tipoLote").value = lote.tipo;
         document.getElementById("precoLote").value = lote.preco;
@@ -240,7 +273,7 @@ class Lote {
         arrayLotes[id].preco = parseFloat(document.getElementById('precoLote').value);
         arrayLotes[id].dataInicio = document.getElementById('dataInicioLote').value;
         arrayLotes[id].dataTermino = document.getElementById('dataTerminoLote').value;
-        
+
         var lote = arrayLotes[id];
         document.getElementById("txtTipoLote" + id).value = lote.tipo;
         document.getElementById("tipoLote" + id).innerHTML = lote.tipo;
@@ -265,6 +298,7 @@ class Lote {
     }
 }
 
+var loteInputs = ['tipoLote', 'precoLote', 'dataInicioLote', 'dataTerminoLote'];
 var arrayLotes = [];
 
 // ----------------------------------------
@@ -274,3 +308,15 @@ function limpaInputs(arrayInputs) {
         document.getElementById(arrayInputs[i]).value = "";
     }
 }
+
+//function carregaItens() {
+//    console.log(percursoInputs);
+//    for (var i = 0; i < 3; i++) {
+//        var quilometragem = document.getElementsByName('txtQuilometragemPercurso')[i].value;
+//        var descricao = document.getElementsByName('txtDescricaoPercurso')[i].value;
+//        var percurso = new Percurso(quilometragem, descricao);
+//        arrayPercursos[percurso.id] = percurso;
+//    }
+//}
+//
+//carregaItens();
