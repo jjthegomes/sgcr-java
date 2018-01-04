@@ -33,16 +33,16 @@
                         <div class="panel-heading">${operacao} Corrida</div>
 
                         <ul class="nav nav-tabs">
-                            <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('corrida')"</c:if>><a data-toggle="tab" href="#corrida"><i class="fa fa-map-marker"></i> Corrida</a></li>
+                            <li class="active" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('corrida')"</c:if>><a data-toggle="tab" href="#corrida"><i class="fa fa-map-marker"></i> Corrida</a></li>
                             <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('kit')"</c:if>><a data-toggle="tab" href="#kit"><i class="fa fa-shopping-bag"></i> Kits</a></li>
                             <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('percurso')"</c:if>><a data-toggle="tab" href="#percurso"><i class="fa fa-map"></i> Percursos</a></li>
-                            <li class="active" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('lote')"</c:if>><a data-toggle="tab" href="#lote"><i class="fa fa-ticket"></i> Lotes</a></li>    
+                            <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('lote')"</c:if>><a data-toggle="tab" href="#lote"><i class="fa fa-ticket"></i> Lotes</a></li>    
                             </ul>
                             <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida">
 
                             <div class="tab-content">
 
-                                <div id="corrida" class="tab-pane fade">
+                                <div id="corrida" class="tab-pane fade in active">
                                     <div class="panel-body">
 
                                         <div class="col-md-4">
@@ -283,7 +283,7 @@
                                     </div>
 
 
-                                    <div id="lote" class="tab-pane fade in active">
+                                    <div id="lote" class="tab-pane fade">
                                         <div class="panel-body">
                                             <!--<form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote">--> 
                                         <div class="row">

@@ -253,7 +253,7 @@ public class KitDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM kit INNER JOIN kit_corrida ON kit.id = kit_corrida.kit_id WHERE organizador_id = " + organizadorId);
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit WHERE organizador_id = " + organizadorId);
             rs.last();
             kit = new Kit(
                         rs.getInt("id"),
@@ -263,7 +263,6 @@ public class KitDAO {
                         rs.getString("tipo_chip"),
                         rs.getString("data_inicio_retirada"),
                         rs.getString("data_final_retirada"),
-                        rs.getDouble("preco"),
                         null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
 

@@ -204,7 +204,7 @@ class Lote {
 
             document.getElementById("div-vazia-lotes").style.display = 'none';
             loteTr += '<tr id="lote' + lote.id + '">';
-            loteTr += '<input type="hidden" name="txtTipoLote" id="txtTipoLote' + lote.id + '" value="' + lote.nome + '" />';
+            loteTr += '<input type="hidden" name="txtTipoLote" id="txtTipoLote' + lote.id + '" value="' + lote.tipo + '" />';
             loteTr += '<input type="hidden" name="txtPrecoLote" id="txtPrecoLote' + lote.id + '" value="' + lote.preco + '" />';
             loteTr += '<input type="hidden" name="txtDataInicioLote" id="txtDataInicioLote' + lote.id + '" value="' + lote.dataInicio + '" />';
             loteTr += '<input type="hidden" name="txtDataTerminoLote" id="txtDataTerminoLote' + lote.id + '" value="' + lote.dataTermino + '" />';

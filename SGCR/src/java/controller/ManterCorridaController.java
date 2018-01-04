@@ -128,7 +128,9 @@ public class ManterCorridaController extends HttpServlet {
                 
                 Kit kit = new Kit(nomeKit, descricaoKit, "", tipoChipKit, dataInicioRetiradaKit, dataFinalRetiradaKit, precoKit, organizador);
                 kit.gravar();
-                kit = Kit.obterUltimoKitOrganizador(organizador.getId());
+                Kit kitTemp = Kit.obterUltimoKitOrganizador(organizador.getId());
+                kitTemp.setPreco(kit.getPreco());
+                kit = kitTemp;
                 kit.gravarKitCorrida(corrida);
             }
             
