@@ -275,3 +275,7 @@ textarea {
     border: dashed 2px #555;
     opacity: .4;
 }
+
+textarea {
+    overflow-x: hidden;
+}

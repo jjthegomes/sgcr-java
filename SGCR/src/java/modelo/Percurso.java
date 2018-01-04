@@ -97,6 +97,10 @@ public class Percurso {
     public void gravar() throws SQLException, ClassNotFoundException {
         PercursoDAO.gravar(this);
     }
+    
+    public void gravarPercursoCorrida(Corrida corrida) throws SQLException, ClassNotFoundException {
+        PercursoDAO.gravarPercursoCorrida(this, corrida);
+    }
 
     public void alterar() throws SQLException, ClassNotFoundException {
         PercursoDAO.alterar(this);
@@ -112,5 +116,9 @@ public class Percurso {
 
     public static List<Percurso> obterPercursosCorrida(int corridaId) throws ClassNotFoundException {
         return PercursoDAO.obterPercursosCorrida(corridaId);
+    }
+    
+    public static Percurso obterUltimoPercursoOrganizador(int organizadorId) throws ClassNotFoundException {
+        return PercursoDAO.obterUltimoPercursoOrganizador(organizadorId);
     }
 }

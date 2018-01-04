@@ -35,13 +35,16 @@
                         <ul class="nav nav-tabs">
                             <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('corrida')"</c:if>><a data-toggle="tab" href="#corrida"><i class="fa fa-map-marker"></i> Corrida</a></li>
                             <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('kit')"</c:if>><a data-toggle="tab" href="#kit"><i class="fa fa-shopping-bag"></i> Kits</a></li>
-                            <li class="active" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('percurso')"</c:if>><a data-toggle="tab" href="#percurso"><i class="fa fa-map"></i> Percursos</a></li>
-                            <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('lote')"</c:if>><a data-toggle="tab" href="#lote"><i class="fa fa-ticket"></i> Lotes</a></li>    
+                            <li <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('percurso')"</c:if>><a data-toggle="tab" href="#percurso"><i class="fa fa-map"></i> Percursos</a></li>
+                            <li class="active" <c:if test="${operacao != 'Excluir'}"> onclick="pagamento('lote')"</c:if>><a data-toggle="tab" href="#lote"><i class="fa fa-ticket"></i> Lotes</a></li>    
                             </ul>
+                            <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida">
+
                             <div class="tab-content">
+
                                 <div id="corrida" class="tab-pane fade">
                                     <div class="panel-body">
-                                        <form action="ManterCorridaController?acao=confirmar${operacao}" method="post" name="frmManterCorrida"> 
+
                                         <div class="col-md-4">
                                             <input type="hidden" class="form-control" id="codigo" name="hiddenIdCorrida" value="${corrida.id}" readonly />
                                             <input type="hidden" class="form-control" id="edicao" name="hiddenEdicao" value="${corrida.edicao}" readonly />
@@ -114,31 +117,31 @@
                                                     <input type="hidden" class="form-control" id="banner" name="txtBannerCorrida" value="${corrida.banner}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> > 
                                                 </div>
                                             </div>
-                                        </form>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="kit" class="tab-pane fade">
-                                    <div class="panel-body">
-                                        <form action="ManterKitController?acao=confirmar${operacao}" method="post" name="frmManterKit">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input type="hidden" class="form-control" id="codigo" name="hiddenIdKit" value="${kit.id}" readonly />
-                                                <div  class="col-md-12">   
+
+                                    <div id="kit" class="tab-pane fade">
+                                        <div class="panel-body">
+                                            <!--<form action="ManterKitController?acao=confirmar${operacao}" method="post" name="frmManterKit">-->
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">   
                                                     <div class="form-group">
                                                         <label for="nomeKit">Nome:</label>
-                                                        <input type="text" class="form-control" id="txtNomeKit" name="txtNomeKit" placeholder="Nome (Ex: VIP, Normal, Único)" value="${kit.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
+                                                        <input type="text" class="form-control" id="nomeKit" name="nomeKit" placeholder="Nome (Ex: VIP, Normal, Único)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
                                                         </div>            
                                                     </div>
                                                     <div  class="col-md-6">    
                                                         <div class="form-group">
                                                             <label for="valorKit">Preço:</label>
-                                                            <input type="number" class="form-control" id="precoKit" name="precoKit" placeholder="Preço" value="${kit.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
+                                                            <input type="number" class="form-control" id="precoKit" name="precoKit" placeholder="Preço" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> />
                                                         </div>            
                                                     </div>
                                                     <div class="col-md-6">  
                                                         <div class="form-group">
                                                             <label for="optTipoChip">Tipo do Chip:</label>
-                                                            <select name="optTipoChip" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                            <select name="optTipoChip" id="tipoChipKit" class="form-control" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                             <option value="Descartável" <c:if test="${kit.tipoChip == 'Descartável'}"> selected</c:if>>Descartável</option>
                                                             <option value="Retornável" <c:if test="${kit.tipoChip == 'Retornável'}"> selected</c:if>>Retornável</option>
                                                             </select>
@@ -147,7 +150,7 @@
                                                     <div class="col-md-12">    
                                                         <div class="form-group">
                                                             <label for="descricaoKit">Descrição:</label>
-                                                            <textarea class="form-control" id="descricaoKit" name="descricaoKit" placeholder="Descrição dos produtos que irão compor o kit" rows="4" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>${kit.descricao}</textarea>
+                                                            <textarea class="form-control" id="descricaoKit" name="descricaoKit" placeholder="Descrição dos produtos que irão compor o kit" rows="4" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></textarea>
                                                             <!--<input type="text" class="form-control" id="descricaoKit" name="descricaoKit" placeholder="Descrição"/>-->
                                                         </div>            
                                                     </div>
@@ -165,14 +168,14 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="txtDataRetiradaKit">Data Início Retirada:</label>
-                                                                    <input type="text" maxlength="10" class="form-control" name="txtDataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataInicioRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                                    <label for="dataRetiradaKit">Data Início Retirada:</label>
+                                                                    <input type="text" maxlength="10" id="dataInicioRetiradaKit" class="form-control" name="dataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="txtDataRetiradaKit">Data Final Retirada:</label>
-                                                                    <input type="text" maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                                    <label for="dataRetiradaKit">Data Final Retirada:</label>
+                                                                    <input type="text" maxlength="10" id="dataFinalRetiradaKit" class="form-control" name="dataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -182,30 +185,51 @@
                                                             <!--                                                            <div class="col-sm-6">
                                                                                                                             <a href="PesquisaKitController" class="btn btn-danger btn-block" >Cancelar</a>
                                                                                                                         </div>-->
-                                                            <div class="col-md-offset-3 col-sm-6">
-                                                                <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Adicionar</button>
+                                                            <div class="col-md-offset-3 col-md-6" id="divAdicionaKit">
+                                                                <a class="btn btn-info btn-block" id="adicionaKit" onclick="Kit.adiciona()">Adicionar</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>        
                                             <div class="col-md-6">
+                                                <table class="table table-hover table-responsive">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nome</th>
+                                                            <th>Preço</th>
+                                                            <th>Tipo Chip</th>
+                                                            <!--                                                            <th>Descrição</th>
+                                                                                                                        <th colspan="2">Retirada</th>-->
+                                                            <th colspan="2">
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="area-kits">
 
+                                                    </tbody>
+                                                </table>
+                                                <div class="col-md-12" id="div-vazia-kits">
+                                                    <div class="panel panel-default radio col-md-12 panel-config div-vazia">
+                                                        <div class="panel-body text-center">
+                                                            <span>Pelo menos um <b>kit</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                        </div>
+                                                    </div>
+                                                </div> 
                                             </div>
-                                        </form>
+                                            <!--</form>-->
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div id="percurso" class="tab-pane fade in active">
-                                    <div class="panel-body">
-                                        <form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">                               
+                                    <div id="percurso" class="tab-pane fade">
+                                        <div class="panel-body">
+                                            <!--<form action="ManterPercursoController?acao=confirmar${operacao}" method="post" name="frmManterPercurso">-->                               
                                         <div class="row">
                                             <div class="col-md-6">
 
                                                 <div class="col-md-12"> 
                                                     <div class="form-group">
                                                         <label for="numQuilometragemPercurso">Quilometragem:</label>
-                                                        <input type="number" class="form-control" id="quilometragemPercurso" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                        <input type="number" class="form-control" id="quilometragemPercurso" name="numQuilometragemPercurso" min="0.1" max="999" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                         </div>
                                                     </div>
                                                     <!--                                                    <div class="col-md-12"> 
@@ -226,9 +250,8 @@
                                                     </div>
                                                     <div class="col-md-12"> 
                                                         <div class="form-group">
-                                                            <div class="col-md-offset-3 col-md-6">
-                                                                <a class="btn btn-success btn-block" onclick="criaPercurso('quilometragemPercurso', 'descricaoPercurso')">Adicionar</a>
-                                                                <!--<button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Adicionar</button>-->
+                                                            <div class="col-md-offset-3 col-md-6" id="divCriaPercurso">
+                                                                <a class="btn btn-info btn-block" id="criaPercurso" onclick="criaPercurso()">Adicionar</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -250,80 +273,102 @@
                                                     <div class="col-md-12" id="div-vazia-percursos">
                                                         <div class="panel panel-default radio col-md-12 panel-config div-vazia">
                                                             <div class="panel-body text-center">
-                                                                <span>Pelo menos um percurso deve ser criado para que sua corrida possa ser publicada</span>
+                                                                <span>Pelo menos um <b>percurso</b> deve ser criado para que sua corrida possa ser publicada</span>
                                                             </div>
                                                         </div>
                                                     </div> 
                                                 </div>
                                             </div>
-                                        </form>
+                                            <!--</form>-->
+                                        </div>
                                     </div>
-                                </div>
 
 
-                                <div id="lote" class="tab-pane fade">
-                                    <div class="panel-body">
-                                        <form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote"> 
+                                    <div id="lote" class="tab-pane fade in active">
+                                        <div class="panel-body">
+                                            <!--<form action="ManterLoteController?acao=confirmar${operacao}" method="post" name="frmManterLote">--> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <input type="hidden" class="form-control" id="codigo" name="hiddenIdLote" value="${lote.id}" readonly />
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="tipoLote">Tipo:</label>
-                                                        <input type="text" class="form-control" id="tipoLote" placeholder="" name="txtTipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                        <input type="text" class="form-control" id="tipoLote" placeholder="(Ex: 1º Lote, Inscrição I)" name="tipoLote" value="${lote.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="preco">Preço:</label>
-                                                            <input type="number" class="form-control" id="preco" placeholder="R$" name="txtPrecoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                            <input type="number" class="form-control" id="precoLote" placeholder="R$" name="precoLote" value="${lote.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="dtInicio">Data de Início:</label>
-                                                            <input type="text" class="form-control" id="dtInicio" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="txtDataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if> >
+                                                            <input type="text" class="form-control" id="dataInicioLote" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="dataInicioLote" value="${lote.dataInicio}" <c:if test="${operacao =='Excluir'}"> readonly</c:if> >
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="dtTermino">Data de Término:</label>
-                                                            <input type="text" class="form-control" id="dtTermino" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="txtDataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                                            <input type="text" class="form-control" id="dataTerminoLote" placeholder="__/__/____" onkeypress="mascaraData(this, event)" name="dataFinalLote" value="${lote.dataFinal}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12"> 
                                                         <div class="form-group">
-                                                            <div class="col-md-offset-3 col-sm-6">
-                                                                <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Adicionar</button>
+                                                            <div class="col-md-offset-3 col-md-6" id="divAdicionaLote">
+                                                                <a class="btn btn-info btn-block" id="adicionaLote" onclick="Lote.adiciona()">Adicionar</a>
                                                             </div>
                                                         </div>
                                                     </div>  
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-md-8 col-md-offset-2"> 
-                                        <div class="col-md-6"> 
-                                            <div class="form-group">
-                                                <div class="col-md-12"> 
-                                                    <button type="submit" name="btnConfirmar" class="btn btn-info btn-block">Salvar como rascunho</button>
+                                                <div class="col-md-6">
+                                                    <table class="table table-hover table-responsive">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Preço</th>
+                                                                <th colspan="2"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="area-lotes">
+
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="col-md-12" id="div-vazia-lotes">
+                                                        <div class="panel panel-default radio col-md-12 panel-config div-vazia">
+                                                            <div class="panel-body text-center">
+                                                                <span>Pelo menos um <b>lote</b> deve ser criado para que sua corrida possa ser publicada</span>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
                                                 </div>
                                             </div>
-                                        </div>  
-                                        <div class="col-md-6"> 
-                                            <div class="form-group">
-                                                <div class="col-md-12"> 
-                                                    <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Salvar e publicar</button>
-                                                </div>
-                                            </div>
-                                        </div> 
+                                            <!--</form>-->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2"> 
+                                            <div class="col-md-6"> 
+                                                <div class="form-group">
+                                                    <div class="col-md-12"> 
+                                                        <button type="submit" name="btnConfirmar" class="btn btn-info btn-block" style="background-color: #563D7C; border-color: #421a7a;">Salvar como rascunho</button>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                            <div class="col-md-6"> 
+                                                <div class="form-group">
+                                                    <div class="col-md-12"> 
+                                                        <button type="submit" name="btnConfirmar" class="btn btn-success btn-block">Salvar e publicar</button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>     
                 </div>

@@ -163,6 +163,10 @@ public class Kit {
         KitDAO.gravar(this);
     }
 
+    public void gravarKitCorrida(Corrida corrida) throws SQLException, ClassNotFoundException {
+        KitDAO.gravarKitCorrida(this, corrida);
+    }
+
     public void alterar() throws SQLException, ClassNotFoundException {
         KitDAO.alterar(this);
     }
@@ -181,5 +185,9 @@ public class Kit {
 
     public static List<Kit> obterKitsCorrida(int corridaId) throws ClassNotFoundException {
         return KitDAO.obterKitsCorrida(corridaId);
+    }
+    
+    public static Kit obterUltimoKitOrganizador(int organizadorId) throws ClassNotFoundException {
+        return KitDAO.obterUltimoKitOrganizador(organizadorId);
     }
 }

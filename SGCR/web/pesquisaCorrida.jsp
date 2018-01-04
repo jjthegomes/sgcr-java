@@ -22,10 +22,8 @@
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Organizador</th>
                         <th>Nome</th>
-                        <th>Horario</th>
+                        <th>Horário</th>
                         <th>Data</th>
                         <th>Logradouro</th>
                         <th>Bairro</th>
@@ -36,8 +34,6 @@
                 <tbody>
                     <c:forEach items="${corridas}" var="corrida">
                         <tr>
-                            <td><c:out value="${corrida.id}" /> </td>
-                            <td><c:out value="${corrida.organizador.nome}" /> </td>
                             <td><c:out value="${corrida.nome}" /> </td>
                             <td><c:out value="${corrida.horario}" /> </td>
                             <td><c:out value="${corrida.data}" /> </td>

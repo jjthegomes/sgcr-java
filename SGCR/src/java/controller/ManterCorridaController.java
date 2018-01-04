@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Corrida;
+import modelo.Kit;
+import modelo.Lote;
 import modelo.Organizador;
+import modelo.Percurso;
 
 /**
  *
@@ -62,8 +65,12 @@ public class ManterCorridaController extends HttpServlet {
 
     public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
         try {
+            HttpSession session = request.getSession(true);
+            Organizador organizador = (Organizador) session.getAttribute("organizador");
+
             request.setAttribute("operacao", "Incluir");
             request.setAttribute("organizadores", Organizador.obterOrganizadores());
+
             RequestDispatcher view
                     = request.getRequestDispatcher("/manterCorrida.jsp");
             view.forward(request, response);
@@ -78,7 +85,6 @@ public class ManterCorridaController extends HttpServlet {
         int maxPessoa = Integer.parseInt(request.getParameter("txtMaxPessoaCorrida"));
         String horario = request.getParameter("txtHorarioCorrida");
         String data = request.getParameter("txtDataCorrida");
-        String banner = request.getParameter("txtBannerCorrida");
         String rua = request.getParameter("txtRuaCorrida");
         String cep = request.getParameter("txtCepCorrida");
         String numero = request.getParameter("txtNumeroCorrida");
@@ -86,8 +92,12 @@ public class ManterCorridaController extends HttpServlet {
         String estado = request.getParameter("txtEstadoCorrida");
         String bairro = request.getParameter("txtBairroCorrida");
         String descricao = request.getParameter("txtDescricaoCorrida");
-        String regulamento = request.getParameter("txtRegulamentoCorrida");
+
+//        String banner = request.getParameter("txtBannerCorrida");
+//        String regulamento = request.getParameter("txtRegulamentoCorrida");
+
         String edicao = "1";
+        
         boolean ativo = Boolean.parseBoolean(request.getParameter("txtAtivoCorrida"));
 
         HttpSession session = request.getSession(true);
@@ -95,8 +105,63 @@ public class ManterCorridaController extends HttpServlet {
 
         try {
             Corrida corrida = new Corrida(nome, maxPessoa, horario, data,
-                    banner, rua, cep, numero, cidade, estado, bairro, descricao, regulamento, edicao, ativo, organizador);
+                    "", rua, cep, numero, cidade, estado, bairro, descricao, "", edicao, ativo, organizador);
             corrida.gravar();
+            
+            corrida = Corrida.obterUltimaCorridaOrganizador(organizador.getId());
+            
+            //kit
+            String[] arrayNomeKit = request.getParameterValues("txtNomeKit");
+            String[] arrayPrecoKit = request.getParameterValues("txtPrecoKit");
+            String[] arrayTipoChipKit = request.getParameterValues("txtTipoChipKit");
+            String[] arrayDescricaoKit = request.getParameterValues("txtDescricaoKit");
+            String[] arrayDataInicioRetiradaKit = request.getParameterValues("txtDataFinalRetiradaKit");
+            String[] arrayDataFinalRetiradaKit = request.getParameterValues("txtDataFinalRetiradaKit");
+            
+            for(int i=0; i < arrayNomeKit.length; i++) {
+                String nomeKit = arrayNomeKit[i];
+                Double precoKit = Double.parseDouble(arrayPrecoKit[i]);
+                String tipoChipKit = arrayTipoChipKit[i];
+                String descricaoKit = arrayDescricaoKit[i];
+                String dataInicioRetiradaKit = arrayDataInicioRetiradaKit[i];
+                String dataFinalRetiradaKit = arrayDataFinalRetiradaKit[i];
+                
+                Kit kit = new Kit(nomeKit, descricaoKit, "", tipoChipKit, dataInicioRetiradaKit, dataFinalRetiradaKit, precoKit, organizador);
+                kit.gravar();
+                kit = Kit.obterUltimoKitOrganizador(organizador.getId());
+                kit.gravarKitCorrida(corrida);
+            }
+            
+            //percurso
+            String[] arrayQuilometragemPercurso = request.getParameterValues("txtQuilometragemPercurso");
+            String[] arrayDescricaoPercurso = request.getParameterValues("txtDescricaoPercurso");
+            
+            for(int i=0; i < arrayQuilometragemPercurso.length; i++) {
+                Double quilometragemPercurso = Double.parseDouble(arrayQuilometragemPercurso[i]);
+                String descricaoPercurso = arrayDescricaoPercurso[i];
+                
+                Percurso percurso = new Percurso("", quilometragemPercurso, descricaoPercurso, organizador);
+                percurso.gravar();
+                percurso = Percurso.obterUltimoPercursoOrganizador(organizador.getId());
+                percurso.gravarPercursoCorrida(corrida);
+            }
+            
+            //lote
+            String[] arrayTipoLote = request.getParameterValues("txtTipoLote");
+            String[] arrayPrecoLote = request.getParameterValues("txtPrecoLote");
+            String[] arrayDataInicioLote = request.getParameterValues("txtDataInicioLote");
+            String[] arrayDataTerminoLote = request.getParameterValues("txtDataTerminoLote");
+            
+            for(int i=0; i < arrayTipoLote.length; i++) {
+                String tipoLote = arrayTipoLote[i];
+                Double precoLote = Double.parseDouble(arrayPrecoLote[i]);
+                String dataInicio = arrayDataInicioLote[i];
+                String dataTermino = arrayDataTerminoLote[i];
+                
+                Lote lote = new Lote(tipoLote, precoLote, dataInicio, dataTermino, corrida);
+                lote.gravar();
+            }
+            
             RequestDispatcher view
                     = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
@@ -196,7 +261,7 @@ public class ManterCorridaController extends HttpServlet {
         String regulamento = request.getParameter("txtRegulamentoCorrida");
         String edicao = request.getParameter("hiddenEdicao");
         boolean ativo = Boolean.parseBoolean(request.getParameter("txtAtivoCorrida"));
-        
+
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
@@ -213,7 +278,6 @@ public class ManterCorridaController extends HttpServlet {
 
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Corrida;
 import modelo.Percurso;
 
 /**
@@ -85,6 +86,23 @@ public class PercursoDAO {
             comando.setDouble(2, percurso.getQuilometragem());
             comando.setString(3, percurso.getDescricao());
             comando.setInt(4, percurso.getOrganizador().getId());
+
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
+    public static void gravarPercursoCorrida(Percurso percurso, Corrida corrida) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "INSERT INTO percurso_corrida (corrida_id, percurso_id) VALUES (?,?)";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setInt(1, corrida.getId());
+            comando.setInt(2, percurso.getId());
 
             comando.execute();
             comando.close();
@@ -180,6 +198,31 @@ public class PercursoDAO {
             fecharConexao(conexao, comando);
         }
         return percursos;
+    }
+    
+    public static Percurso obterUltimoPercursoOrganizador(int organizadorId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Percurso percurso = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM percurso WHERE organizador_id = " + organizadorId);
+            rs.last();
+            percurso = new Percurso(
+                        rs.getInt("id"),
+                        rs.getString("imagem"),
+                        rs.getDouble("quilometragem"),
+                        rs.getString("descricao"),
+                        null);
+            percurso.setOrganizadorId(rs.getInt("organizador_id"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return percurso;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {

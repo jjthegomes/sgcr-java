@@ -245,7 +245,36 @@ public class KitDAO {
         }
         return kits;
     }
+    
+    public static Kit obterUltimoKitOrganizador(int organizadorId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Kit kit = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM kit INNER JOIN kit_corrida ON kit.id = kit_corrida.kit_id WHERE organizador_id = " + organizadorId);
+            rs.last();
+            kit = new Kit(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("descricao"),
+                        rs.getString("imagem"),
+                        rs.getString("tipo_chip"),
+                        rs.getString("data_inicio_retirada"),
+                        rs.getString("data_final_retirada"),
+                        rs.getDouble("preco"),
+                        null);
+                kit.setOrganizadorId(rs.getInt("organizador_id"));
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return kit;
+    }
+    
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

@@ -100,6 +100,7 @@ public class CorridaDAO {
         }
         return corridas;
     }
+
     public static void gravar(Corrida corrida) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         try {
@@ -259,6 +260,7 @@ public class CorridaDAO {
         }
         return null;
     }
+
     public static List<Corrida> buscaCorridas(String nome) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -266,7 +268,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE LOWER(nome) LIKE '%"+nome+"%'" );
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE LOWER(nome) LIKE '%" + nome + "%'");
 
             while (rs.next()) {
                 Corrida corrida = new Corrida(
@@ -297,6 +299,43 @@ public class CorridaDAO {
             fecharConexao(conexao, comando);
         }
         return corridas;
+    }
+
+    public static Corrida obterUltimaCorridaOrganizador(int organizadorId) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        Corrida corrida = null;
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM corrida WHERE organizador_id = " + organizadorId);
+            rs.last();
+            corrida = new Corrida(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getInt("max_pessoa"),
+                    rs.getString("horario"),
+                    rs.getString("data"),
+                    rs.getString("banner"),
+                    rs.getString("logradouro"),
+                    rs.getString("cep"),
+                    rs.getString("numero"),
+                    rs.getString("cidade"),
+                    rs.getString("estado"),
+                    rs.getString("bairro"),
+                    rs.getString("descricao"),
+                    rs.getString("regulamento"),
+                    rs.getString("edicao"),
+                    rs.getBoolean("ativo"),
+                    null);
+            corrida.setOrganizadorId(rs.getInt("organizador_id"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return corrida;
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {

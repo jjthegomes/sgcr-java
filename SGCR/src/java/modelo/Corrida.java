@@ -221,7 +221,6 @@ public class Corrida {
     public int getOrganizadorId() {
         return organizadorId;
     }
-    
 
     public void setOrganizadorId(int organizadorId) {
         this.organizadorId = organizadorId;
@@ -250,6 +249,7 @@ public class Corrida {
     public static Corrida obterCorrida(int id) throws ClassNotFoundException {
         return CorridaDAO.obterCorrida(id);
     }
+
     public static List<Corrida> buscaCorridas(String nome) throws ClassNotFoundException {
         return CorridaDAO.buscaCorridas(nome);
     }
@@ -258,4 +258,7 @@ public class Corrida {
         return CorridaDAO.obterUltimaCorrida(id);
     }
 
+    public static Corrida obterUltimaCorridaOrganizador(int organizadorId) throws ClassNotFoundException {
+        return CorridaDAO.obterUltimaCorridaOrganizador(organizadorId);
+    }
 }
