@@ -52,6 +52,7 @@ class Kit {
 
             limpaInputs(Kit.inputs);
         }
+        
     }
 
     static prepararEditar(id) {
