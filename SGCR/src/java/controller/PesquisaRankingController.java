@@ -79,6 +79,7 @@ public class PesquisaRankingController extends HttpServlet {
         try {
             
             int id = Integer.parseInt(request.getParameter("corridaId"));
+            request.setAttribute("corrida", Corrida.obterCorrida(id));
             request.setAttribute("inscricoes",Inscricao.obterInscricoes(id));
             
             request.setAttribute("percursos",Percurso.obterPercursosCorrida(id));
@@ -92,6 +93,7 @@ public class PesquisaRankingController extends HttpServlet {
         try {
             
             int id = Integer.parseInt(request.getParameter("corridaId"));
+            request.setAttribute("corrida", Corrida.obterCorrida(id));
             int percursoId = Integer.parseInt(request.getParameter("percursoId"));
             request.setAttribute("inscricoes",Inscricao.obterInscricoesCorrida(id,percursoId));
             
