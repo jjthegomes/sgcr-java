@@ -25,7 +25,7 @@
                 <li><a href="index.jsp">Home</a></li>
                 <li class="active">Manter Percurso</li>
             </ul>
-            <div class="row">
+            <div class="panel panel-primary">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">Manter Percurso - ${operacao}</div>
