@@ -23,10 +23,12 @@
                 <thead>
                     <tr>
                         <th>Atleta</th>
+                        <th>Corrida</th>
                         <th>Número de Peito</th>
                         <th>Data da Compra</th>
                         <th>Percurso</th>
                         <th>Kit</th>
+
                         <!-- <th colspan="2">Ação</th> -->
                     </tr>
                 </thead>
@@ -34,14 +36,16 @@
                     <c:forEach items="${inscricoes}" var="inscricao">
                         <tr>
                             <td><c:out value="${inscricao.atleta.nome}" /></td>
+                            <td><c:out value="${inscricao.corrida.nome}" /></td>
                             <td><c:out value="000${inscricao.id}" /></td>
                             <td><c:out value="${inscricao.dataCompra}" /></td>
                             <td><c:out value="${inscricao.percurso.quilometragem}km" /></td>
                             <td><c:out value="${inscricao.kit.nome}" /></td>
+
                            <!-- <td><a href="ManterInscricaoController?acao=prepararEditar&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.corridaId}"/>">Editar</a> </td>
                             <td><a href="ManterInscricaoController?acao=prepararExcluir&id=<c:out value="${inscricao.id}"/>&corridaId=<c:out value="${inscricao.corridaId}"/>">Excluir</a> </td>
-                           -->
-                           </tr>
+                            -->
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>

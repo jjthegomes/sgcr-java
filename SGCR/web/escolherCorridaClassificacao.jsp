@@ -16,7 +16,7 @@
     <body>
         <%@ include file = "layout/menu.jsp" %>
 
-        <div class="container-fluid corpo corpo-adm col-md-8">
+        <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
                 <li><a href="PesquisaHomeController">Home</a></li>
                 <li>Visualizar Classificação</li>

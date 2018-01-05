@@ -19,22 +19,20 @@
     <body>
 
         <%@ include file = "layout/menu.jsp" %>
-        <div class="container-fluid corpo corpo-adm col-md-8">
+        <div class="container-fluid corpo corpo-adm">
             
             
             <ul class="breadcrumb">
                 <li><a href="PesquisaHomeController">Home</a></li>
-                <li class="active">Classificação</li>
+                <li><a href="PesquisaRankingController?acao=visualizarClassificacao">Classificação</a></li>
+                <li class="active">${corrida.nome}</li>
             </ul>
-            
-            <h1>Classificação ${corrida.nome}</h1>
-            <br>
             
             <ul class="nav nav-tabs">
                 <c:forEach items="${percursos}" var="percurso">
                    <!-- <li><a type="button" href="#percurso${percurso.id}">Percurso - ${percurso.quilometragem}Km</a></li>-->
                     <li><a type="button" href="PesquisaRankingController?acao=visualizarClassificacao&corridaId=<c:out value="${corrida.id}"/>&percursoId=<c:out value="${percurso.id}"/>">
-                          Percurso -${percurso.quilometragem}Km 
+                          Percurso ${percurso.quilometragem}km 
      
                            </a></li>
                 </c:forEach>
