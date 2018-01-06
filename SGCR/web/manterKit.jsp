@@ -57,22 +57,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="txtDataRetiradaKit">Data Início Retirada:</label>
-                                                        <input type="text" required maxlength="10" class="form-control" name="txtDataInicioRetiradaKit" placeholder="__/__/____" onkeypress="mascaraData(this, event)" value="${kit.dataInicioRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="txtDataRetiradaKit">Data Final Retirada:</label>
-                                                        <input type="text" required maxlength="10" class="form-control" name="txtDataFinalRetiradaKit" placeholder="__/__/____" onkeypress="mascaraData(this, event)" value="${kit.dataFinalRetirada}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-md-6">  
                                             <div class="form-group">
                                                 <label for="descricaoKit">Descrição:</label>

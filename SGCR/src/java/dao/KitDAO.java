@@ -33,8 +33,6 @@ public class KitDAO {
                         rs.getString("descricao"),
                         rs.getString("imagem"),
                         rs.getString("tipo_chip"),
-                        rs.getString("data_inicio_retirada"),
-                        rs.getString("data_final_retirada"),
                         rs.getDouble("preco"),
                         null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
@@ -65,8 +63,6 @@ public class KitDAO {
                         rs.getString("descricao"),
                         rs.getString("imagem"),
                         rs.getString("tipo_chip"),
-                        rs.getString("data_inicio_retirada"),
-                        rs.getString("data_final_retirada"),
                         rs.getDouble("preco"),
                         null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
@@ -84,14 +80,12 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO kit (nome, descricao, imagem, tipo_chip, data_inicio_retirada, data_final_retirada, organizador_id) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO kit (nome, descricao, imagem, tipo_chip, organizador_id) VALUES (?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
             comando.setString(2, kit.getDescricao());
             comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
-            comando.setString(5, kit.getDataInicioRetirada());
-            comando.setString(6, kit.getDataFinalRetirada());
             comando.setInt(7, kit.getOrganizador().getId());
 
             comando.execute();
@@ -124,14 +118,12 @@ public class KitDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE kit SET nome = ?, descricao = ?, imagem = ?, tipo_chip = ?, data_inicio_retirada = ?, data_final_retirada = ?, organizador_id = ?  WHERE id = ?";
+            String sql = "UPDATE kit SET nome = ?, descricao = ?, imagem = ?, tipo_chip = ?, organizador_id = ?  WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, kit.getNome());
             comando.setString(2, kit.getDescricao());
             comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
-            comando.setString(5, kit.getDataInicioRetirada());
-            comando.setString(6, kit.getDataFinalRetirada());
             comando.setInt(7, kit.getOrganizador().getId());
             comando.setInt(8, kit.getId());
             comando.execute();
@@ -174,8 +166,6 @@ public class KitDAO {
                     rs.getString("descricao"),
                     rs.getString("imagem"),
                     rs.getString("tipo_chip"),
-                    rs.getString("data_inicio_retirada"),
-                    rs.getString("data_final_retirada"),
                     rs.getDouble("preco"),
                     null);
             kit.setOrganizadorId(rs.getInt("organizador_id"));
@@ -202,8 +192,6 @@ public class KitDAO {
                     rs.getString("descricao"),
                     rs.getString("imagem"),
                     rs.getString("tipo_chip"),
-                    rs.getString("data_inicio_retirada"),
-                    rs.getString("data_final_retirada"),
                     null
             );
             kit.setOrganizadorId(rs.getInt("organizador_id"));
@@ -231,8 +219,6 @@ public class KitDAO {
                         rs.getString("descricao"),
                         rs.getString("imagem"),
                         rs.getString("tipo_chip"),
-                        rs.getString("data_inicio_retirada"),
-                        rs.getString("data_final_retirada"),
                         rs.getDouble("preco"),
                         null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
@@ -261,8 +247,6 @@ public class KitDAO {
                         rs.getString("descricao"),
                         rs.getString("imagem"),
                         rs.getString("tipo_chip"),
-                        rs.getString("data_inicio_retirada"),
-                        rs.getString("data_final_retirada"),
                         null);
                 kit.setOrganizadorId(rs.getInt("organizador_id"));
 

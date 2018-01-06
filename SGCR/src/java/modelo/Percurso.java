@@ -17,23 +17,20 @@ import java.util.List;
 public class Percurso {
 
     private int id;
-    private String imagem;
     private String descricao;
     private Double quilometragem;
     private Organizador organizador;
 
     private int organizadorId;
 
-    public Percurso(int id, String imagem, Double quilometragem, String descricao, Organizador organizador) {
+    public Percurso(int id, Double quilometragem, String descricao, Organizador organizador) {
         this.id = id;
-        this.imagem = imagem;
         this.quilometragem = quilometragem;
         this.descricao = descricao;
         this.organizador = organizador;
     }
 
-    public Percurso(String imagem, Double quilometragem, String descricao, Organizador organizador) {
-        this.imagem = imagem;
+    public Percurso(Double quilometragem, String descricao, Organizador organizador) {
         this.quilometragem = quilometragem;
         this.descricao = descricao;
         this.organizador = organizador;
@@ -45,14 +42,6 @@ public class Percurso {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
     }
 
     public String getDescricao() {

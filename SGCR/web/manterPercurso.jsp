@@ -39,12 +39,6 @@
                                         <input type="number"  required class="form-control" name="numQuilometragemPercurso" value="${percurso.quilometragem}" step=".1" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="fileImagemPercurso">Imagem:</label>
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                                            <!-- Nao permir valores maiores que 4194304 (4MB) -->
-                                            <input type="text" class="form-control" name="fileImagemPercurso" value="${percurso.imagem}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                        </div> 
                                     </div>
                                     <div class="col-md-6"> 
 

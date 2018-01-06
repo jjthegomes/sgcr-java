@@ -116,7 +116,6 @@ public class ManterPercursoController extends HttpServlet {
     }// </editor-fold>
 
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
-        String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         String descricao = request.getParameter("descricaoPercurso");
 
@@ -124,7 +123,7 @@ public class ManterPercursoController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Percurso percurso = new Percurso(imagem, numQuilometragem, descricao, organizador);
+            Percurso percurso = new Percurso( numQuilometragem, descricao, organizador);
             percurso.gravar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -157,14 +156,13 @@ public class ManterPercursoController extends HttpServlet {
 
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("hiddenIdPercurso"));
-        String imagem = request.getParameter("fileImagemPercurso");
         String descricao = request.getParameter("descricaoPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
-        Percurso percurso = new Percurso(id, imagem, numQuilometragem, descricao, organizador);
+        Percurso percurso = new Percurso(id, numQuilometragem, descricao, organizador);
         try {
             percurso.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
@@ -197,7 +195,6 @@ public class ManterPercursoController extends HttpServlet {
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("hiddenIdPercurso"));
-        String imagem = request.getParameter("fileImagemPercurso");
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         String descricao = request.getParameter("descricaoPercurso");
         
@@ -205,7 +202,7 @@ public class ManterPercursoController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
         try {
-            Percurso percurso = new Percurso(id, imagem, numQuilometragem, descricao, organizador);
+            Percurso percurso = new Percurso(id, numQuilometragem, descricao, organizador);
             percurso.alterar();
 
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");

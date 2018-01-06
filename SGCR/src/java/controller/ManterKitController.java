@@ -114,8 +114,6 @@ public class ManterKitController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         String nome = request.getParameter("txtNomeKit");
         String descricao = request.getParameter("txtDescricaoKit");
-        String dataInicioRetirada = request.getParameter("txtDataInicioRetiradaKit");
-        String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
 
@@ -123,7 +121,7 @@ public class ManterKitController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Kit kit = new Kit(nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
+            Kit kit = new Kit(nome, descricao, imagem, tipoChip, organizador);
             kit.gravar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);
@@ -157,15 +155,13 @@ public class ManterKitController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("hiddenIdKit"));
         String nome = request.getParameter("txtNomeKit");
         String descricao = request.getParameter("txtDescricaoKit");
-        String dataInicioRetirada = request.getParameter("txtDataInicioRetiradaKit");
-        String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
         
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
-        Kit kit = new Kit(id, descricao, nome, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
+        Kit kit = new Kit(id, descricao, nome, imagem, tipoChip, organizador);
         try {
             kit.excluir();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
@@ -200,8 +196,6 @@ public class ManterKitController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("hiddenIdKit"));
         String nome = request.getParameter("txtNomeKit");
         String descricao = request.getParameter("txtDescricaoKit");
-        String dataInicioRetirada = request.getParameter("txtDataInicioRetiradaKit");
-        String dataFinalRetirada = request.getParameter("txtDataFinalRetiradaKit");
         String imagem = request.getParameter("fileImagemKit");
         String tipoChip = request.getParameter("optTipoChip");
 
@@ -209,7 +203,7 @@ public class ManterKitController extends HttpServlet {
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Kit kit = new Kit(id, nome, descricao, imagem, tipoChip, dataInicioRetirada, dataFinalRetirada, organizador);
+            Kit kit = new Kit(id, nome, descricao, imagem, tipoChip, organizador);
             kit.alterar();
             RequestDispatcher view = request.getRequestDispatcher("PesquisaKitController");
             view.forward(request, response);

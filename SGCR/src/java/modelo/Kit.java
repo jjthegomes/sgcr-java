@@ -16,59 +16,49 @@ public class Kit {
     private String descricao;
     private String imagem;
     private String tipoChip;
-    private String dataInicioRetirada;
-    private String dataFinalRetirada;
     private double preco;
     private Organizador organizador;
 
     private int organizadorId;
 
     public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
-            String dataInicioRetirada, String dataFinalRetirada, Double preco, Organizador organizador) {
+             Double preco, Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
-        this.dataInicioRetirada = dataInicioRetirada;
-        this.dataFinalRetirada = dataFinalRetirada;
         this.preco = preco;
         this.organizador = organizador;
     }
 
     public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
-            String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
+             Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
-        this.dataInicioRetirada = dataInicioRetirada;
-        this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
     }
 
     public Kit(String nome, String descricao, String imagem, String tipoChip,
-            String dataInicioRetirada, String dataFinalRetirada, Double preco, Organizador organizador) {
+             Double preco, Organizador organizador) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
-        this.dataInicioRetirada = dataInicioRetirada;
-        this.dataFinalRetirada = dataFinalRetirada;
         this.preco = preco;
         this.organizador = organizador;
 
     }
 
     public Kit(String nome, String descricao, String imagem, String tipoChip,
-            String dataInicioRetirada, String dataFinalRetirada, Organizador organizador) {
+             Organizador organizador) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagem = imagem;
         this.tipoChip = tipoChip;
-        this.dataInicioRetirada = dataInicioRetirada;
-        this.dataFinalRetirada = dataFinalRetirada;
         this.organizador = organizador;
     }
 
@@ -110,22 +100,6 @@ public class Kit {
 
     public void setTipoChip(String tipoChip) {
         this.tipoChip = tipoChip;
-    }
-
-    public String getDataInicioRetirada() {
-        return dataInicioRetirada;
-    }
-
-    public void setDataInicioRetirada(String dataInicioRetirada) {
-        this.dataInicioRetirada = dataInicioRetirada;
-    }
-
-    public String getDataFinalRetirada() {
-        return dataFinalRetirada;
-    }
-
-    public void setDataFinalRetirada(String dataFinalRetirada) {
-        this.dataFinalRetirada = dataFinalRetirada;
     }
 
     public Organizador getOrganizador() {

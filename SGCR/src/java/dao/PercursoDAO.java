@@ -33,7 +33,6 @@ public class PercursoDAO {
             while (rs.next()) {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
-                        rs.getString("imagem"),
                         rs.getDouble("quilometragem"),
                         rs.getString("descricao"),
                         null);
@@ -60,7 +59,6 @@ public class PercursoDAO {
             while (rs.next()) {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
-                        rs.getString("imagem"),
                         rs.getDouble("quilometragem"),
                         rs.getString("descricao"),
                         null);
@@ -80,9 +78,8 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO percurso (imagem, quilometragem, descricao, organizador_id) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO percurso ( quilometragem, descricao, organizador_id) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, percurso.getImagem());
             comando.setDouble(2, percurso.getQuilometragem());
             comando.setString(3, percurso.getDescricao());
             comando.setInt(4, percurso.getOrganizador().getId());
@@ -116,9 +113,8 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "UPDATE percurso SET imagem = ?,quilometragem = ?, descricao = ? WHERE id = ?";
+            String sql = "UPDATE percurso SET quilometragem = ?, descricao = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, percurso.getImagem());
             comando.setDouble(2, percurso.getQuilometragem());
             comando.setString(3, percurso.getDescricao());
             comando.setInt(4, percurso.getId());
@@ -159,7 +155,6 @@ public class PercursoDAO {
             rs.first();
             percurso = new Percurso(
                     rs.getInt("id"),
-                    rs.getString("imagem"),
                     rs.getDouble("quilometragem"),
                     rs.getString("descricao"),
                     null);
@@ -184,7 +179,6 @@ public class PercursoDAO {
             while (rs.next()) {
                 Percurso percurso = new Percurso(
                         rs.getInt("id"),
-                        rs.getString("imagem"),
                         rs.getDouble("quilometragem"),
                         rs.getString("descricao"),
                         null);
@@ -211,7 +205,6 @@ public class PercursoDAO {
             rs.last();
             percurso = new Percurso(
                         rs.getInt("id"),
-                        rs.getString("imagem"),
                         rs.getDouble("quilometragem"),
                         rs.getString("descricao"),
                         null);

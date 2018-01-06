@@ -34,7 +34,6 @@
                         <tr>
                             <td><c:out value="${kit.nome}" /></td>
                             <td><c:out value="${kit.descricao}" /></td>
-                            <td><c:out value="${kit.dataInicioRetirada}" /> - <c:out value="${kit.dataFinalRetirada}" /></td>
                             <td><c:out value="${kit.tipoChip}" /></td>
                             <td class="table-action">
                                 <a href="ManterKitController?acao=prepararEditar&id=<c:out value="${kit.id}"/>" class="btn btn-primary btn-block btn-xs">
