@@ -12,57 +12,10 @@
 <html>
     <head>
         <%@ include file = "layout/head.jsp" %>
+        <script src="public/js/inscricao.js"></script>
         <title>Inscrição</title>
     </head>
     <body>
-
-        <script>
-            var precoTotal = 0;
-            var precoLote = 0;
-            var precoKit = 0;
-            function atualizaPrecoLote(preco, nome) {
-                precoLote = preco;
-                precoTotal = parseFloat(precoLote) + parseFloat(precoKit);
-                var mostraPrecoLote = document.getElementById("precoLote");
-                var mostraNomeLote = document.getElementById("nomeLote");
-                var mostraPrecoTotal = document.getElementById("precoTotal");
-                var divPrecoTotal = document.getElementById("divPrecoTotal");
-
-                divPrecoTotal.style.opacity = "1";
-                divPrecoTotal.style.border = "none";
-                divPrecoTotal.style.padding = "0px";
-
-                mostraPrecoLote.innerHTML = "R$ " + precoLote;
-                mostraNomeLote.innerHTML = nome;
-                mostraPrecoTotal.innerHTML = "R$ " + precoTotal;
-
-                document.getElementById("infoLote").style.display = "table-row";
-                document.getElementById("tabelaPreco").style.display = "block";
-                document.getElementById("infoVazio").style.display = "none";
-            }
-
-            function atualizaPrecoKit(preco, nome) {
-                precoKit = preco;
-                precoTotal = parseFloat(precoLote) + parseFloat(precoKit);
-                var mostraPrecoKit = document.getElementById("precoKit");
-                var mostraNomeKit = document.getElementById("nomeKit");
-                var mostraPrecoTotal = document.getElementById("precoTotal");
-                var divPrecoTotal = document.getElementById("divPrecoTotal");
-
-                divPrecoTotal.style.opacity = "1";
-                divPrecoTotal.style.border = "none";
-                divPrecoTotal.style.padding = "0px";
-
-                mostraPrecoKit.innerHTML = "R$ " + precoKit;
-                mostraNomeKit.innerHTML = nome;
-                mostraPrecoTotal.innerHTML = "R$ " + precoTotal;
-
-                document.getElementById("infoKit").style.display = "table-row";
-                document.getElementById("tabelaPreco").style.display = "block";
-                document.getElementById("infoVazio").style.display = "none";
-            }
-        </script>
-
         <%@ include file = "layout/menu.jsp" %>
 
         <form action="ManterInscricaoController?acao=confirmar${operacao}&corridaId=${corridaId}" method="post" name="frmManterInscricao">
@@ -119,7 +72,7 @@
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
-                                                                    <p><b>${kit.nome} - R$ ${kit.preco}</b></p>
+                                                                    <p><b>${kit.nome} - R$ ${kit.precoFormatado}</b></p>
                                                                     ${kit.descricao}
                                                                     <br><b>Retirada:</b> ${kit.dataInicioRetirada} - ${kit.dataFinalRetirada}
                                                                 </div>
@@ -139,7 +92,7 @@
                                                             <label>
                                                                 <div class="panel-body">
                                                                     <input type="radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
-                                                                    <p><b>${percurso.quilometragem}km</b></p>
+                                                                    <p><b>${percurso.quilometragemFormatada}km</b></p>
                                                                     ${percurso.descricao}
                                                                 </div>
                                                             </label>
@@ -161,7 +114,7 @@
                                                 <label>
                                                     <div class="panel-body">
                                                         <input type="radio" onchange="atualizaPrecoLote(${lote.preco}, '${lote.tipo}')" name="optLote" required value="${lote.id}" <c:if test="${inscricao.loteId == lote.id}"> checked</c:if>/>
-                                                        Lote ${lote.tipo}: R$ ${lote.preco} até dia ${lote.dataFinal}
+                                                        Lote ${lote.tipo}: R$ ${lote.precoFormatado} até dia ${lote.dataFinal}
                                                     </div>
                                                 </label>
                                             </div>

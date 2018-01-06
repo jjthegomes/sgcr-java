@@ -2,6 +2,7 @@ package modelo;
 
 import dao.LoteDAO;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -55,11 +56,17 @@ public class Lote {
     public double getPreco() {
         return preco;
     }
-
+    
+    public String getPrecoFormatado() {
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        String precoFormatado = df.format(this.preco);
+        return precoFormatado;
+    }
+    
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
+    
     public String getDataInicio() {
         return dataInicio;
     }

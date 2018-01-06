@@ -60,7 +60,7 @@ public class ManterInscricaoController extends HttpServlet {
             confirmarEditar(request, response);
         } else if (acao.equals("escolherCorrida")) {
             escolherCorrida(request, response);
-        }else if (acao.equals("informacao")) {
+        } else if (acao.equals("informacao")) {
             informacao(request, response);
         }
     }
@@ -77,7 +77,7 @@ public class ManterInscricaoController extends HttpServlet {
             } catch (IOException ex) {
             } catch (ServletException ex) {
             }
-            
+
         } else {
 
             try {
@@ -193,7 +193,7 @@ public class ManterInscricaoController extends HttpServlet {
                 if (request.getParameter("formaPagamento").equals("cartaoCredito")) {
                     inscricao.setPago(true);
                     inscricao.gravar();
-                    
+
                     String numeroCartaoCredito = request.getParameter("numeroCartaoCredito");
                     String nomeTitularCartaoCredito = request.getParameter("nomeTitularCartaoCredito");
                     String codigoSegurancaCartaoCredito = request.getParameter("codigoSegurancaCartaoCredito");
@@ -210,7 +210,7 @@ public class ManterInscricaoController extends HttpServlet {
                     }
                 } else if (request.getParameter("formaPagamento").equals("boleto")) {
                     inscricao.gravar();
-                    
+
                     String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
                     String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
 
@@ -258,7 +258,6 @@ public class ManterInscricaoController extends HttpServlet {
             request.setAttribute("corridaId", corridaId);
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
 
-            
             Inscricao inscricao = Inscricao.obterInscricao(idInscricao);
             request.setAttribute("inscricao", inscricao);
             RequestDispatcher view = request.getRequestDispatcher("/manterInscricao.jsp");
@@ -372,34 +371,34 @@ public class ManterInscricaoController extends HttpServlet {
         } catch (ServletException ex) {
         }
     }
+
     public void informacao(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-       
-            try {
-                int corridaId = Integer.parseInt(request.getParameter("corridaId"));
-                Corrida corrida = Corrida.obterCorrida(corridaId);
+        try {
+            int corridaId = Integer.parseInt(request.getParameter("corridaId"));
+            Corrida corrida = Corrida.obterCorrida(corridaId);
 
-                request.setAttribute("corridaId", corridaId);
-                request.setAttribute("operacao", "Incluir");
-                request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
-                request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
-                request.setAttribute("lotes", Lote.obterLotes(corridaId));
-                request.setAttribute("corrida", corrida);
+            request.setAttribute("corridaId", corridaId);
+            request.setAttribute("operacao", "Incluir");
+            request.setAttribute("percursos", Percurso.obterPercursosCorrida(corridaId));
+            request.setAttribute("kits", Kit.obterKitsCorrida(corridaId));
+            request.setAttribute("lotes", Lote.obterLotes(corridaId));
+            request.setAttribute("corrida", corrida);
 
-                Calendar hoje = Calendar.getInstance();
-                ArrayList<Integer> anos = new ArrayList();
-                anos.add(hoje.get(Calendar.YEAR));
-                for (int i = anos.get(0) + 1; i < anos.get(0) + 15; i++) {
-                    anos.add(i);
-                }
-                request.setAttribute("anos", anos);
+            Calendar hoje = Calendar.getInstance();
+            ArrayList<Integer> anos = new ArrayList();
+            anos.add(hoje.get(Calendar.YEAR));
+            for (int i = anos.get(0) + 1; i < anos.get(0) + 15; i++) {
+                anos.add(i);
+            }
+            request.setAttribute("anos", anos);
 
-                RequestDispatcher view = request.getRequestDispatcher("/informacaoCorrida.jsp");
-                view.forward(request, response);
-            } catch (ServletException ex) {
+            RequestDispatcher view = request.getRequestDispatcher("/informacaoCorrida.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
 
         } catch (IOException ex) {
 
         }
-            
+
     }
 }

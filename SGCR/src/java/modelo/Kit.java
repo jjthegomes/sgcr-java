@@ -3,6 +3,7 @@ package modelo;
 import dao.KitDAO;
 import java.sql.SQLException;
 import java.util.List;
+import java.text.DecimalFormat;   
 
 /**
  *
@@ -145,6 +146,12 @@ public class Kit {
 
     public double getPreco() {
         return preco;
+    }
+    
+    public String getPrecoFormatado() {
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        String precoFormatado = df.format(this.preco);
+        return precoFormatado;
     }
 
     public void setPreco(double preco) {

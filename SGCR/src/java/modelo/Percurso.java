@@ -7,6 +7,7 @@ package modelo;
 
 import dao.PercursoDAO;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -64,6 +65,12 @@ public class Percurso {
 
     public Double getQuilometragem() {
         return quilometragem;
+    }
+    
+    public String getQuilometragemFormatada() {
+        DecimalFormat df = new DecimalFormat("0.##");
+        String precoFormatado = df.format(this.quilometragem);
+        return precoFormatado;
     }
 
     public void setQuilometragem(Double quilometragem) {
