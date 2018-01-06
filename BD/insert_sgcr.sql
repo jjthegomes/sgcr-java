@@ -56,10 +56,10 @@ INSERT INTO `organizador` (`id`, `nome`, `email`, `senha`, `sexo`, `data_nascime
 -- Extraindo dados da tabela `corrida`
 --
 
-INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, `descricao`, `regulamento`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `edicao`, `ativo`, `organizador_id`) VALUES
-(1, 'Corrida da Paz', '08:00:00', '21/03/2018', 2000, NULL, 'A Corrida da Paz tem como abjetivo além de promover a saúde dos participantes, conscientizar sobre o valor da paz mundial. Venha se divertir em Paz.', NULL, '28016200', 'RJ', 'Campos dos Goytacazes', 'Vila da Rainha', 'Alameda Demerval Crespo', '145', NULL, 1, 1),
-(2, 'Corrida Outubro Rosa', '08:00:00', '22/04/2018', 3000, NULL, 'A corrida Outubro Rosa tem como objetivo promover a conscientização da importância do exame e diagnostico assim como a prevenção contra a doença.   ', 'Futuramente será postado', '29155070', 'ES', 'Cariacica', 'Bela Vista ', 'Rua Juiz de Fora ', '150', 1, 1, 2),
-(3, 'Corrida Contra Violência Infantil', '07:00:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', 'Futuramente será postado', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, 3);
+INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, `descricao`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `edicao`, `ativo`, `organizador_id`) VALUES
+(1, 'Corrida da Paz', '08:00:00', '21/03/2018', 2000, NULL, 'A Corrida da Paz tem como abjetivo além de promover a saúde dos participantes, conscientizar sobre o valor da paz mundial. Venha se divertir em Paz.', '28016200', 'RJ', 'Campos dos Goytacazes', 'Vila da Rainha', 'Alameda Demerval Crespo', '145', NULL, 1, 1),
+(2, 'Corrida Outubro Rosa', '08:00:00', '22/04/2018', 3000, NULL, 'A corrida Outubro Rosa tem como objetivo promover a conscientização da importância do exame e diagnostico assim como a prevenção contra a doença.   ', '29155070', 'ES', 'Cariacica', 'Bela Vista ', 'Rua Juiz de Fora ', '150', 1, 1, 2),
+(3, 'Corrida Contra Violência Infantil', '07:00:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, 3);
 
 --
 -- Extraindo dados da tabela `kit`
@@ -167,11 +167,10 @@ INSERT INTO `inscricao` (`id`, `corrida_id`, `data_compra`, `numero_peito`, `pag
 -- Extraindo dados da tabela `boleto`
 --
 
-INSERT INTO `boleto` (`id`, `codigo_barra`, `data_emissao`, `data_vencimento`, `nome_titular`, `cpf_titular`, `inscricao_id`, `inscricao_corrida_id`) VALUES
-(1, '345482', '22/11/2017', '22/12/2017', 'Ângela Dantas de Macedo Aragão', '452.478.963-25', 16, 2),
-(2, '456314', '22/10/2017', '23/11/2017', 'Rodolfo Duarte Martins Strognoff', '365.874.569-82', 17, 2),
-(3, '474645', '22/11/2017', '22/11/2017', 'Ian Lucas de Aquino Silvério de Azevedo Prado', '258.741.365-28', 18, 3);
-
+INSERT INTO `boleto` (`id`, `codigo_barra`, `data_emissao`, `data_vencimento`, `inscricao_id`, `inscricao_corrida_id`) VALUES
+(1, '345482', '22/11/2017', '22/12/2017', 16, 2),
+(2, '456314', '22/10/2017', '23/11/2017', 17, 2),
+(3, '474645', '22/11/2017', '22/11/2017', 18, 3);
 --
 -- Extraindo dados da tabela `cartao_credito`
 --
