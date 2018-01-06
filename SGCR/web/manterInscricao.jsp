@@ -67,18 +67,20 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
                                                 <!--<div class="panel-body">-->
-                                                    <c:forEach items="${kits}" var="kit">  
-                                                        <div class="panel panel-default radio col-md-12 panel-config">
-                                                            <label>
-                                                                <div class="panel-body">
-                                                                    <input type="radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
-                                                                    <p><b>${kit.nome} - R$ ${kit.precoFormatado}</b></p>
-                                                                    ${kit.descricao}
-                                                                    <br><b>Retirada:</b> ${kit.dataInicioRetirada} - ${kit.dataFinalRetirada}
+                                                <c:forEach items="${kits}" var="kit">  
+                                                    <div class="panel panel-default radio col-md-12 panel-config">
+                                                        <label class="label-kit-inscricao">
+                                                            <div class="panel-body">
+                                                                <div class="div-img-inscricao">
+                                                                    <img src="${kit.imagem}" class="img-kit-inscricao">
                                                                 </div>
-                                                            </label>
-                                                        </div>
-                                                    </c:forEach>
+                                                                <input type="radio" class="option-input radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
+                                                                <p><b>${kit.nome} - R$ ${kit.precoFormatado}</b></p>
+                                                                ${kit.descricao}
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
                                                 <!--</div>-->
                                             </div>
                                         </div>
@@ -87,17 +89,17 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-map"></i> Percurso</div>
                                                 <!--<div class="panel-body">-->
-                                                    <c:forEach items="${percursos}" var="percurso">  
-                                                        <div class="panel panel-default radio col-md-12 panel-config">
-                                                            <label>
-                                                                <div class="panel-body">
-                                                                    <input type="radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
-                                                                    <p><b>${percurso.quilometragemFormatada}km</b></p>
-                                                                    ${percurso.descricao}
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </c:forEach>
+                                                <c:forEach items="${percursos}" var="percurso">  
+                                                    <div class="panel panel-default radio col-md-12 panel-config">
+                                                        <label>
+                                                            <div class="panel-body">
+                                                                <input type="radio" class="option-input radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
+                                                                <p><b>${percurso.quilometragemFormatada}km</b></p>
+                                                                ${percurso.descricao}
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
                                                 <!--</div>-->
                                             </div>
                                         </div>
@@ -188,22 +190,22 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="nCartao">Número do Cartão:</label>
-                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" required name="numeroCartaoCredito" placeholder="xxxx xxxx xxxx xxxx" id="nCartao" maxlength="16" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="nomeTitularCartao">Nome impresso no cartão:</label>
-                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="nomeTitularCartaoCredito" placeholder="Nome" id="nomeTitularCartao" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" required name="nomeTitularCartaoCredito" placeholder="Nome" id="nomeTitularCartao" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                 </div>
                                                 <div class="form-group  col-md-3">
                                                     <label for="cSeguranca">Código de Segurança:</label>
-                                                    <input type="text" class="form-control pagamentoCartaoCredito" name="codigoSegurancaCartaoCredito" placeholder="000" id="cSeguranca" maxlength="3" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                    <input type="text" class="form-control pagamentoCartaoCredito" required name="codigoSegurancaCartaoCredito" placeholder="000" id="cSeguranca" maxlength="3" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                                                 </div>
                                                 <div class="form-group col-md-9">
                                                     <label for="dtValidade">Data de Validade:</label>
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
-                                                            <select class="form-control pagamentoCartaoCredito" id="mesValidade" name="mesValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                                <option hidden>Mês</option>
+                                                            <select class="form-control pagamentoCartaoCredito" reuired id="mesValidade" name="mesValidadeCartaoCredito" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                <option hidden option="">Mês</option>
                                                                 <option value="1">01</option>
                                                                 <option value="2">02</option>
                                                                 <option value="3">03</option>
@@ -219,8 +221,8 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <select class="form-control pagamentoCartaoCredito" id="anoValidade" name="anoValidadeCartaoCredito" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                                <option hidden>Ano</option>
+                                                            <select class="form-control pagamentoCartaoCredito" id="anoValidade" name="anoValidadeCartaoCredito" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                                                                <option hidden option="">Ano</option>
                                                             <c:forEach items="${anos}" var="ano">  
                                                                 <option value="${ano}">${ano}</option>
                                                             </c:forEach>
@@ -251,18 +253,10 @@
                                                 <p><i class="fa fa-print"></i> Imprima o boleto e pague no banco</p>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <p><i class="fa fa-calendar-o"></i> O prazo de validade do boleto é de 1 dia útil</p>
+                                                <p><i class="fa fa-calendar-o"></i> O prazo de validade do boleto é de 2 dias úteis</p>
                                             </div>
                                             <input type="hidden" class="form-control pagamentoBoleto" name="hiddenIdBoleto" readonly />
 
-                                            <div class="form-group col-md-6">
-                                                <label for="nomeTitularBoleto">Nome do Titular:</label>
-                                                <input type="text" class="form-control pagamentoBoleto" name="nomeTitularBoleto" id="nomeTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="cpfTitularBoleto">CPF do Titular:</label>
-                                                    <input type="text" class="form-control pagamentoBoleto" name="cpfTitularBoleto" id="cpfTitularBoleto" <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                                                </div>
                                             <c:choose>
                                                 <c:when test="${mensagemAlerta==null}">
                                                     <c:if test="${operacao != 'Excluir'}">

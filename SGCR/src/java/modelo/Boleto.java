@@ -20,22 +20,16 @@ public class Boleto extends Pagamento {
     private String codigoBarra;
     private String dataEmissao;
     private String dataVencimento;
-    private String nomeTitular;
-    private String cpfTitular;
     
-    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, String nomeTitular, String cpfTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+    public Boleto(int id, String codigoBarra, String dataEmissao, String dataVencimento, Inscricao inscricao, Corrida inscricaoCorrida) {
         super(id, inscricao, inscricaoCorrida);
         this.codigoBarra = codigoBarra;
         this.dataEmissao = dataEmissao;
         this.dataVencimento = dataVencimento;
-        this.nomeTitular = nomeTitular;
-        this.cpfTitular = cpfTitular;
     }
     
-    public Boleto(String nomeTitular, String cpfTitular, Inscricao inscricao, Corrida inscricaoCorrida) {
+    public Boleto(Inscricao inscricao, Corrida inscricaoCorrida) {
         super(inscricao, inscricaoCorrida);
-        this.nomeTitular = nomeTitular;
-        this.cpfTitular = cpfTitular;
 
         Random random = new Random();
         this.codigoBarra = Integer.toString(100000 + random.nextInt(899999));
@@ -66,22 +60,6 @@ public class Boleto extends Pagamento {
 
     public void setDataVencimento(String dataVencimento) {
         this.dataVencimento = dataVencimento;
-    }
-
-    public String getNomeTitular() {
-        return nomeTitular;
-    }
-
-    public void setNomeTitular(String nomeTitular) {
-        this.nomeTitular = nomeTitular;
-    }
-
-    public String getCpfTitular() {
-        return cpfTitular;
-    }
-
-    public void setCpfTitular(String cpfTitular) {
-        this.cpfTitular = cpfTitular;
     }
 
     @Override

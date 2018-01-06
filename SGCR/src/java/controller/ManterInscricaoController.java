@@ -211,12 +211,9 @@ public class ManterInscricaoController extends HttpServlet {
                 } else if (request.getParameter("formaPagamento").equals("boleto")) {
                     inscricao.gravar();
 
-                    String nomeTitularBoleto = request.getParameter("nomeTitularBoleto");
-                    String cpfTitularBoleto = request.getParameter("cpfTitularBoleto");
-
                     try {
                         inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());
-                        Boleto boleto = new Boleto(nomeTitularBoleto, cpfTitularBoleto, inscricao, corrida);
+                        Boleto boleto = new Boleto(inscricao, corrida);
                         boleto.gravar();
                         request.setAttribute("boleto", boleto);
                     } catch (SQLException | ClassNotFoundException ex) {
