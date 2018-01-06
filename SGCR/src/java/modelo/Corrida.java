@@ -28,9 +28,10 @@ public class Corrida {
     private String estado;
     private String bairro;
     private String descricao;
-    private String regulamento;
     private String edicao;
     private boolean ativo;
+    private String dataInicioRetiradaKit;
+    private String dataFinalRetiradaKit;
     private Organizador organizador;
 
     private int organizadorId;
@@ -40,8 +41,8 @@ public class Corrida {
     }
 
     public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro,
-            String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento,
-            String edicao, boolean ativo, Organizador organizador) {
+            String cep, String numero, String cidade, String estado, String bairro, String descricao, String edicao, 
+            boolean ativo, String dataInicioRetiradaKit, String dataFinalRetiradaKit, Organizador organizador) {
         this.id = id;
         this.nome = nome;
         this.maxPessoa = maxPessoa;
@@ -55,15 +56,16 @@ public class Corrida {
         this.estado = estado;
         this.bairro = bairro;
         this.descricao = descricao;
-        this.regulamento = regulamento;
         this.organizador = organizador;
         this.edicao = edicao;
         this.ativo = ativo;
+        this.dataInicioRetiradaKit = dataInicioRetiradaKit;
+        this.dataFinalRetiradaKit = dataFinalRetiradaKit;
     }
 
     public Corrida(String nome, int maxPessoa, String horario, String data, String banner, String logradouro,
-            String cep, String numero, String cidade, String estado, String bairro, String descricao, String regulamento,
-            String edicao, boolean ativo, Organizador organizador) {
+            String cep, String numero, String cidade, String estado, String bairro, String descricao,
+            String edicao, boolean ativo, String dataInicioRetiradaKit, String dataFinalRetiradaKit, Organizador organizador) {
         this.nome = nome;
         this.maxPessoa = maxPessoa;
         this.horario = horario;
@@ -76,10 +78,11 @@ public class Corrida {
         this.estado = estado;
         this.bairro = bairro;
         this.descricao = descricao;
-        this.regulamento = regulamento;
         this.organizador = organizador;
         this.edicao = edicao;
         this.ativo = ativo;
+        this.dataInicioRetiradaKit = dataInicioRetiradaKit;
+        this.dataFinalRetiradaKit = dataFinalRetiradaKit;
     }
 
     public int getId() {
@@ -186,14 +189,6 @@ public class Corrida {
         this.descricao = descricao;
     }
 
-    public String getRegulamento() {
-        return regulamento;
-    }
-
-    public void setRegulamento(String regulamento) {
-        this.regulamento = regulamento;
-    }
-
     public String getEdicao() {
         return edicao;
     }
@@ -208,6 +203,22 @@ public class Corrida {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public String getDataInicioRetiradaKit() {
+        return dataInicioRetiradaKit;
+    }
+
+    public void setDataInicioRetiradaKit(String dataInicioRetiradaKit) {
+        this.dataInicioRetiradaKit = dataInicioRetiradaKit;
+    }
+
+    public String getDataFinalRetiradaKit() {
+        return dataFinalRetiradaKit;
+    }
+
+    public void setDataFinalRetiradaKit(String dataFinalRetiradaKit) {
+        this.dataFinalRetiradaKit = dataFinalRetiradaKit;
     }
 
     public Organizador getOrganizador() {

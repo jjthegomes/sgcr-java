@@ -71,15 +71,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="horario">Horário:</label>
-                                                    <input type="text" class="form-control" id="horario"name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="hh:mm:ss">            
+                                                    <input type="text" class="form-control" id="horario"name="txtHorarioCorrida" value="${corrida.horario}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="hh:mm" maxlength="5">            
                                                 </div> 
+
+                                                <div class="form-group">
+                                                    <label for="dataRetiradaKit">Período de retirada de kits:</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" maxlength="10" id="dataInicioRetiradaKit" class="form-control" name="dataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="__/__/____">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" maxlength="10" id="dataFinalRetiradaKit" class="form-control" name="dataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if> placeholder="__/__/____">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">             
                                                 <div class="form-group">
                                                     <label for="cep">CEP:</label>
                                                     <input type="text" class="form-control" id="cep" name="txtCepCorrida" value="${corrida.cep}" onblur="pesquisacep(this.value);" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                                 </div> 
-                                            </div>
-
-                                            <div class="col-md-4">                                       
                                                 <div class="form-group">
                                                     <label for="estado">Estado:</label>
                                                     <input type="text" class="form-control" id="estado" name="txtEstadoCorrida" value="${corrida.estado}"  <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -106,7 +118,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="descricao">Descrição:</label>
-                                                    <textarea class="form-control" id="descricaoCorrida" name="txtDescricaoCorrida" placeholder="Descrição da corrida" rows="16" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>${corrida.descricao}</textarea>       
+                                                    <textarea class="form-control" id="descricaoCorrida" name="txtDescricaoCorrida" placeholder="Descrição da corrida" rows="20" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>${corrida.descricao}</textarea>       
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -173,22 +185,7 @@
                                                                                                     </div>
                                                                                                 </div>-->
 
-                                                    <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="dataRetiradaKit">Data Início Retirada:</label>
-                                                                    <input type="text" maxlength="10" id="dataInicioRetiradaKit" class="form-control" name="dataInicioRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="dataRetiradaKit">Data Final Retirada:</label>
-                                                                    <input type="text" maxlength="10" id="dataFinalRetiradaKit" class="form-control" name="dataFinalRetiradaKit" onkeypress="mascaraData(this, event)" value="" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="col-sm-12">
                                                         <div class="row">
                                                             <!--                                                            <div class="col-sm-6">
@@ -395,7 +392,7 @@
                                                                 <input type="hidden" name="txtPreco" id="txtPrecoLote${lote.id}" value="${lote.preco}" />
                                                                 <input type="hidden" name="txtDataInicioLote" id="txtDataInicioLote${lote.id}" value="${lote.dataInicio}" />
                                                                 <input type="hidden" name="txtDataTerminoLote" id="txtDataTerminoLote${lote.id}" value="${lote.dataFinal}" />
-                                                                
+
                                                                 <td id="tipoLote${lote.id}"><c:out value="${lote.tipo}" /></td>
                                                                 <td id="precoLote${lote.id}"><c:out value="${lote.preco}" /></td>
                                                                 <td style="width: 20px;"><a class="btn btn-success btn-xs" onclick="Lote.prepararEditar('${lote.id}')" ><i class="fa fa-pencil"></i></a></td>

@@ -45,9 +45,10 @@ public class CorridaDAO {
                         rs.getString("estado"),
                         rs.getString("bairro"),
                         rs.getString("descricao"),
-                        rs.getString("regulamento"),
                         rs.getString("edicao"),
                         rs.getBoolean("ativo"),
+                        rs.getString("data_inicio_retirada_kit"),
+                        rs.getString("data_final_retirada_kit"),
                         null);
                 corrida.setOrganizadorId(rs.getInt("organizador_id"));
                 corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
@@ -85,9 +86,10 @@ public class CorridaDAO {
                         rs.getString("estado"),
                         rs.getString("bairro"),
                         rs.getString("descricao"),
-                        rs.getString("regulamento"),
                         rs.getString("edicao"),
                         rs.getBoolean("ativo"),
+                        rs.getString("data_inicio_retirada_kit"),
+                        rs.getString("data_final_retirada_kit"),
                         null);
                 corrida.setOrganizadorId(id);
                 corrida.setOrganizador(Organizador.obterOrganizador(id));
@@ -106,7 +108,7 @@ public class CorridaDAO {
         try {
             conexao = BD.getConexao();
             String sql = "INSERT INTO corrida (nome, max_pessoa, horario, data, banner, "
-                    + "logradouro, cep, numero, cidade, estado, bairro, descricao, regulamento, edicao, ativo, organizador_id) "
+                    + "logradouro, cep, numero, cidade, estado, bairro, descricao, edicao, ativo, data_inicio_retirada_kit, data_final_retirada_kit, organizador_id) "
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNome());
@@ -121,10 +123,11 @@ public class CorridaDAO {
             comando.setString(10, corrida.getEstado());
             comando.setString(11, corrida.getBairro());
             comando.setString(12, corrida.getDescricao());
-            comando.setString(13, corrida.getRegulamento());
             comando.setString(14, corrida.getEdicao());
             comando.setBoolean(15, corrida.isAtivo());
-            comando.setInt(16, corrida.getOrganizador().getId());
+            comando.setString(16, corrida.getDataInicioRetiradaKit());
+            comando.setString(17, corrida.getDataFinalRetiradaKit());
+            comando.setInt(18, corrida.getOrganizador().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -157,7 +160,7 @@ public class CorridaDAO {
             conexao = BD.getConexao();
             String sql = "UPDATE corrida SET nome = ?, max_pessoa = ?, horario = ?, data = ?, "
                     + "banner = ?, logradouro = ?, cep = ?, numero = ?, cidade = ?, estado = ? , bairro = ?, "
-                    + "descricao = ?, regulamento = ?, edicao = ?, ativo = ?, organizador_id = ? WHERE id = ?";
+                    + "descricao = ?, edicao = ?, ativo = ?, data_inicio_retirada_kit = ?, data_final_retirada_kit = ?, organizador_id = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNome());
             comando.setInt(2, corrida.getMaxPessoa());
@@ -171,9 +174,10 @@ public class CorridaDAO {
             comando.setString(10, corrida.getEstado());
             comando.setString(11, corrida.getBairro());
             comando.setString(12, corrida.getDescricao());
-            comando.setString(13, corrida.getRegulamento());
             comando.setString(14, corrida.getEdicao());
             comando.setBoolean(15, corrida.isAtivo());
+            comando.setString(13, corrida.getDataInicioRetiradaKit());
+            comando.setString(13, corrida.getDataFinalRetiradaKit());
             comando.setInt(16, corrida.getOrganizador().getId());
             comando.setInt(17, corrida.getId());
             comando.execute();
@@ -207,9 +211,10 @@ public class CorridaDAO {
                     rs.getString("estado"),
                     rs.getString("bairro"),
                     rs.getString("descricao"),
-                    rs.getString("regulamento"),
                     rs.getString("edicao"),
                     rs.getBoolean("ativo"),
+                    rs.getString("data_inicio_retirada_kit"),
+                    rs.getString("data_final_retirada_kit"),
                     null);
             corrida.setOrganizadorId(rs.getInt("organizador_id"));
         } catch (SQLException e) {
@@ -244,9 +249,10 @@ public class CorridaDAO {
                         rs.getString("estado"),
                         rs.getString("bairro"),
                         rs.getString("descricao"),
-                        rs.getString("regulamento"),
                         rs.getString("edicao"),
                         rs.getBoolean("ativo"),
+                        rs.getString("data_inicio_retirada_kit"),
+                        rs.getString("data_final_retirada_kit"),
                         null);
                 corrida.setOrganizadorId(rs.getInt("organizador_id"));
                 corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
@@ -285,9 +291,10 @@ public class CorridaDAO {
                         rs.getString("estado"),
                         rs.getString("bairro"),
                         rs.getString("descricao"),
-                        rs.getString("regulamento"),
                         rs.getString("edicao"),
                         rs.getBoolean("ativo"),
+                        rs.getString("data_inicio_retirada_kit"),
+                        rs.getString("data_final_retirada_kit"),
                         null);
                 corrida.setOrganizadorId(rs.getInt("organizador_id"));
                 corrida.setOrganizador(Organizador.obterOrganizador(rs.getInt("organizador_id")));
@@ -324,9 +331,10 @@ public class CorridaDAO {
                     rs.getString("estado"),
                     rs.getString("bairro"),
                     rs.getString("descricao"),
-                    rs.getString("regulamento"),
                     rs.getString("edicao"),
                     rs.getBoolean("ativo"),
+                    rs.getString("data_inicio_retirada_kit"),
+                    rs.getString("data_final_retirada_kit"),
                     null);
             corrida.setOrganizadorId(rs.getInt("organizador_id"));
 

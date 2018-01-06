@@ -28,8 +28,9 @@ class Kit {
 
         if (kit.nome.length > 0 && kit.preco > 0 && kit.tipoChip.length > 0 && kit.descricao.length > 0
                 && kit.dataInicioRetirada.length > 0 && kit.dataFinalRetirada.length > 0) {
-
-//            document.getElementById("div-vazia-kits").style.display = 'none';
+            
+            document.getElementById("div-vazia-kits").style.display = 'none';
+            
             kitTr += '<tr id="kit' + kit.id + '">';
             kitTr += '<input type="hidden" name="txtNomeKit" id="txtNomeKit' + kit.id + '" value="' + kit.nome + '" />';
             kitTr += '<input type="hidden" name="txtPrecoKit" id="txtPrecoKit' + kit.id + '" value="' + kit.preco + '" />';
@@ -122,7 +123,9 @@ class Kit {
 var kitInputs = ['nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit', 'dataInicioRetiradaKit', 'dataFinalRetiradaKit'];
 var arrayKits = [];
 
-// -----------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+
 
 class Percurso {
     constructor(quilometragem, descricao) {
@@ -151,7 +154,7 @@ function criaPercurso() {
     var percursoTr = '';
 
     if (percurso.quilometragem > 0 && percurso.descricao.length > 0) {
-        //document.getElementById("div-vazia-percursos").style.display = 'none';
+        document.getElementById("div-vazia-percursos").style.display = 'none';
 
         percursoTr += '<tr id="percurso' + percurso.id + '">';
         percursoTr += '<input type="hidden" class="form-control" name="txtQuilometragemPercurso" id="txtQuilometragemPercurso' + percurso.id + '" value="' + percurso.quilometragem + '" />';
@@ -224,7 +227,7 @@ class Lote {
 
         if (lote.tipo.length > 0 && lote.preco > 0 && lote.dataInicio.length > 0 && lote.dataTermino.length > 0) {
 
-//            document.getElementById("div-vazia-lotes").style.display = 'none';
+            document.getElementById("div-vazia-lotes").style.display = 'none';
             loteTr += '<tr id="lote' + lote.id + '">';
             loteTr += '<input type="hidden" name="txtTipoLote" id="txtTipoLote' + lote.id + '" value="' + lote.tipo + '" />';
             loteTr += '<input type="hidden" name="txtPrecoLote" id="txtPrecoLote' + lote.id + '" value="' + lote.preco + '" />';
