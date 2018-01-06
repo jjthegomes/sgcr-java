@@ -52,6 +52,7 @@
                             <div class="panel-body corrida-info">
                                 <div class="corrida-info-conteudo">
                                     <p><i class="fa fa-calendar" aria-hidden="true"></i> <span>${corrida.data}</span></p>
+                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i> <span>${corrida.horario}</span></p>
                                     <p>${corrida.descricao}</p>
                                 </div>
                                 <p><b>...</b></p>

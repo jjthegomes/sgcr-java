@@ -24,11 +24,20 @@
 
         <div class="container-fluid corpo corpo-adm">
             <ul class="breadcrumb">
-                <li><a href="index.jsp">Home</a></li>
+                <li><a href="PesquisaCorridaController">Home</a></li>
                 <li class="active">${operacao} Corrida</li>
+                <li class="active">${corrida.nome}</li>
             </ul>
             <div class="row">
                 <div class="col-md-12">
+                    <c:choose>
+                        <c:when test="${operacao=='Excluir'}">
+                            <div class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong><i class="fa fa-exclamation-circle"></i></strong> Ao excluir essa corrida você não poderá reverter essa ação.
+                            </div>
+                        </c:when>    
+                    </c:choose>
                     <div class="panel panel-primary">
                         <div class="panel-heading">${operacao} Corrida</div>
 

@@ -34,9 +34,11 @@ public class PesquisaCorridaController extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession(true);
-            Organizador organizador = (Organizador) session.getAttribute("organizador");
+//            Organizador organizador = (Organizador) session.getAttribute("organizador");;
+//            
+//            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             
-            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
+            request.setAttribute("corridas", Corrida.obterCorridas(1));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorrida.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {

@@ -19,7 +19,7 @@ body {
 }
 
 .corrida-info {
-    height: 150px;
+    height: 180px;
 }
 
 .corrida-info p {
@@ -32,7 +32,7 @@ body {
 }
 
 .corrida-info-conteudo {
-    height: 104px;
+    height: 132px;
     padding: 10px 5px;
     overflow: hidden;
 }

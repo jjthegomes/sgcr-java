@@ -14,7 +14,7 @@
     </c:when>    
 </c:choose>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="background-color: #2e353d; ">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="background-color: #2e353d;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -88,7 +88,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control" name="busca" placeholder="Buscar corridas" size="40">
+                        <input type="text" class="form-control" name="busca" placeholder="Buscar corridas" size="22">
                     </div>
                 </div>
             </form>
@@ -103,8 +103,8 @@
 <c:choose>
     <c:when test="${usuario=='administrador'}">
         <div class="nav-side-menu">
-            <div class="brand">Dashboard</div>
-            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            <div class="brand" style="background-color: #2e353d">Dashboard</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" style="background-color: #2e353d; color: white"></i>
 
             <div class="menu-list">
 
@@ -124,8 +124,8 @@
     </c:when>
     <c:when test="${usuario=='organizador'}">
         <div class="nav-side-menu">
-            <div class="brand">Dashboard</div>
-            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            <div class="brand" style="background-color: #2e353d">Dashboard</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" style="background-color: #2e353d; color: white"></i>
 
             <div class="menu-list">
                 <ul id="menu-content" class="menu-content collapse out">

@@ -12,6 +12,7 @@ import modelo.Corrida;
 import modelo.Inscricao;
 import modelo.Kit;
 import modelo.Lote;
+import modelo.Organizador;
 import modelo.Percurso;
 
 /**
