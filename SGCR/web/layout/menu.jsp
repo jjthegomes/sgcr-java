@@ -54,9 +54,9 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">${administrador.nome}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Administrador</li>
-                                <li class="active"><a href="PesquisaAdministradorController">Minha Conta</a></li>
+                                <li><a href="PesquisaAdministradorController">Minha Conta</a></li>
                                 <li><a href="ManterRankingController?acao=prepararIncluir">Criar Ranking</a></li>
-                                <li><a href="PesquisaRankingController">Alterar Ranking</a></li>
+                                <li><a href="PesquisaRankingController?acao=listaRanking">Alterar Ranking</a></li>
                                 <li class="divider"></li>
                                 <li><a href="LoginController?acao=logout">Sair</a></li>
                             </ul>
@@ -117,7 +117,7 @@
                     <li><a href="PesquisaAdministradorController"><i class="fa fa-lock fa-lg"></i> Administrador</a></li>
                     <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
                     <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
-                    <li><a href="PesquisaRankingController"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
+                    <li><a href="PesquisaRankingController?acao=visualizarRanking"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
                 </ul>
             </div>
         </div>

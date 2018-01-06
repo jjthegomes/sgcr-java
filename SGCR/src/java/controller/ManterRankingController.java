@@ -53,7 +53,7 @@ public class ManterRankingController extends HttpServlet {
                         } else {
                             if (acao.equals("confirmarEditar")) {
                                 confirmarEditar(request, response);
-                            }else {
+                            } else {
                                 if (acao.equals("visualizarRanking")) {
                                     visualizarRanking(request, response);
                                 }
@@ -128,7 +128,7 @@ public class ManterRankingController extends HttpServlet {
         try {
             ranking.excluir();
 
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController?acao=listaRanking");
             view.forward(request, response);
 
         } catch (IOException ex) {
@@ -151,7 +151,7 @@ public class ManterRankingController extends HttpServlet {
         try {
             ranking.alterar();
 
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaRankingController?acao=listaRanking");
             view.forward(request, response);
 
         } catch (IOException ex) {
@@ -181,7 +181,7 @@ public class ManterRankingController extends HttpServlet {
         } catch (ServletException ex) {
         }
     }
-    
+
     public void visualizarRanking(HttpServletRequest request, HttpServletResponse response) {
         try {
             //request.setAttribute("operacao", "Incluir");

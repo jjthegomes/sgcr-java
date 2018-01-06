@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Administrador;
+import modelo.Atleta;
 import modelo.Ranking;
 
 /**
@@ -101,6 +102,42 @@ public class RankingDAO {
             fecharConexao(conexao, comando);
         }
         return ranking;
+    }
+
+    public static List<Ranking> obterRanking() throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Ranking> rankings = new ArrayList<Ranking>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("select inscricao.id,inscricao.atleta_id, tempo_largada, tempo_chegada, \n"
+                    + "(CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) tempo, \n"
+                    + "SUM(( CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )/p.quilometragem)/100) media_pace, p.quilometragem, \n"
+                    + "(CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )/p.quilometragem)/100 pace \n"
+                    + "from inscricao join percurso p on p.id = inscricao.percurso_id WHERE (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) IS NOT null \n"
+                    + "GROUP by inscricao.atleta_id ORDER BY media_pace ASC");
+
+            while (rs.next()) {
+                Ranking ranking = new Ranking(rs.getInt("id"),
+                        null,
+                        rs.getString("tempo_largada"),
+                        rs.getString("tempo_chegada"),
+                        rs.getString("tempo"),
+                        rs.getInt("quilometragem"),
+                        rs.getDouble("media_pace"),
+                        rs.getDouble("pace"));
+
+                ranking.setAtletaId(rs.getInt("atleta_id"));
+                ranking.setAtleta(Atleta.obterAtleta(rs.getInt("atleta_id")));
+                rankings.add(ranking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return rankings;
     }
 
     public static List<Ranking> obterRankings() throws ClassNotFoundException {

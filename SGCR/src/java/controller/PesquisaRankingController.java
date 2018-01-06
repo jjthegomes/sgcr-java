@@ -41,69 +41,85 @@ public class PesquisaRankingController extends HttpServlet {
         String acao = request.getParameter("acao");
         String id = request.getParameter("corridaId");
         String percursoId = request.getParameter("percursoId");
-        if(id!= null && percursoId != null){
+
+        if (id != null && percursoId != null) {
             visualizarClassificacaoPercurso(request, response);
-        }else{
-        if(id != null && acao.equals("visualizarClassificacao")){
+        } else if (id != null && acao.equals("visualizarClassificacao")) {
             visualizarClassificacaoCorrida(request, response);
-        }else{
-        if(acao.equals("visualizarClassificacao") ){
+        } else if (acao.equals("visualizarClassificacao")) {
             visualizarClassificacao(request, response);
-        }else{
+        } else if (acao.equals("visualizarRanking")) {
+            visualizarRanking(request, response);
+        } else if (acao.equals("listaRanking")) {
+            listarRanking(request, response);
+        }
+
+    }
+
+    public void visualizarRanking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
             Administrador administrador = (Administrador) session.getAttribute("administrador");
-            
-            request.setAttribute("rankings", Ranking.obterRankings(administrador.getId()));
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRanking.jsp");
+
+            request.setAttribute("rankings", Ranking.obterRanking());
+            RequestDispatcher view = request.getRequestDispatcher("/escolherRankingClassicacao.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
-
-        }
-        }
-        }
         }
     }
+
+    public void listarRanking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("rankings", Ranking.obterRankings(administrador.getId()));
+            RequestDispatcher view = request.getRequestDispatcher("/escolherRankingClassicacao.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
     public void visualizarClassificacao(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
-            
-            request.setAttribute("corridas",Corrida.obterCorridas());
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
             RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaClassificacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
         }
     }
-    
+
     public void visualizarClassificacaoCorrida(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
-            
+
             int id = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("corrida", Corrida.obterCorrida(id));
-            request.setAttribute("inscricoes",Inscricao.obterInscricoes(id));
-            
-            request.setAttribute("percursos",Percurso.obterPercursosCorrida(id));
+            request.setAttribute("inscricoes", Inscricao.obterInscricoes(id));
+
+            request.setAttribute("percursos", Percurso.obterPercursosCorrida(id));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
         }
     }
-    
+
     public void visualizarClassificacaoPercurso(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         try {
-            
+
             int id = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("corrida", Corrida.obterCorrida(id));
             int percursoId = Integer.parseInt(request.getParameter("percursoId"));
-            request.setAttribute("inscricoes",Inscricao.obterInscricoesCorrida(id,percursoId));
-            
-            request.setAttribute("percursos",Percurso.obterPercursosCorrida(id));
+            request.setAttribute("inscricoes", Inscricao.obterInscricoesCorrida(id, percursoId));
+
+            request.setAttribute("percursos", Percurso.obterPercursosCorrida(id));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

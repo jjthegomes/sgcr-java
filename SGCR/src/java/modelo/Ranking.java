@@ -16,7 +16,16 @@ public class Ranking {
     private int idadeInicial;
     private Administrador administrador;
 
+    private Atleta atleta;
+    private String tempoLargada;
+    private String tempoChegada;
+    private String tempo;
+    private int quilometragem;
+    private double mediaPace;
+    private double pace;
+
     private int administradorId;
+    private int atletaId;
 
     public Ranking(int id, String nome, int intervaloFaixaEtaria, int idadeInicial, Administrador administrador) {
         this.id = id;
@@ -31,6 +40,17 @@ public class Ranking {
         this.intervaloFaixaEtaria = intervaloFaixaEtaria;
         this.administrador = administrador;
         this.idadeInicial = idadeInicial;
+    }
+
+    public Ranking(int id, Atleta atleta, String tempoLargada, String tempoChegada, String tempo, int quilometragem, double mediaPace, double pace) {
+        this.id = id;
+        this.atleta = atleta;
+        this.tempoLargada = tempoLargada;
+        this.tempoChegada = tempoChegada;
+        this.tempo = tempo;
+        this.quilometragem = quilometragem;
+        this.mediaPace = mediaPace;
+        this.pace = pace;
     }
 
     public int getId() {
@@ -81,6 +101,70 @@ public class Ranking {
         this.administradorId = administradorId;
     }
 
+    public Atleta getAtleta() {
+        return atleta;
+    }
+
+    public void setAtleta(Atleta atleta) {
+        this.atleta = atleta;
+    }
+
+    public String getTempoLargada() {
+        return tempoLargada;
+    }
+
+    public void setTempoLargada(String tempoLargada) {
+        this.tempoLargada = tempoLargada;
+    }
+
+    public String getTempoChegada() {
+        return tempoChegada;
+    }
+
+    public void setTempoChegada(String tempoChegada) {
+        this.tempoChegada = tempoChegada;
+    }
+
+    public String getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
+    }
+
+    public int getQuilometragem() {
+        return quilometragem;
+    }
+
+    public void setQuilometragem(int quilometragem) {
+        this.quilometragem = quilometragem;
+    }
+
+    public double getMediaPace() {
+        return mediaPace;
+    }
+
+    public void setMediaPace(double mediaPace) {
+        this.mediaPace = mediaPace;
+    }
+
+    public double getPace() {
+        return pace;
+    }
+
+    public void setPace(double pace) {
+        this.pace = pace;
+    }
+
+    public int getAtletaId() {
+        return atletaId;
+    }
+
+    public void setAtletaId(int atletaId) {
+        this.atletaId = atletaId;
+    }
+
     public void gravar() throws SQLException,
             ClassNotFoundException {
         RankingDAO.gravar(this);
@@ -104,6 +188,10 @@ public class Ranking {
 
     public static Ranking obterRanking(int id) throws ClassNotFoundException {
         return RankingDAO.obterRanking(id);
+    }
+
+    public static List<Ranking> obterRanking() throws ClassNotFoundException {
+        return RankingDAO.obterRanking();
     }
 
 }
