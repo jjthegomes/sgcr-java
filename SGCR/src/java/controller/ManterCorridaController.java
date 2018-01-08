@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -121,19 +122,16 @@ public class ManterCorridaController extends HttpServlet {
 
             corrida = Corrida.obterUltimaCorridaOrganizador(organizador.getId());
 
-//    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-//    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//    InputStream fileContent = filePart.getInputStream();
             //kit
             String[] arrayNomeKit = request.getParameterValues("txtNomeKit");
             String[] arrayPrecoKit = request.getParameterValues("txtPrecoKit");
             String[] arrayTipoChipKit = request.getParameterValues("txtTipoChipKit");
             String[] arrayDescricaoKit = request.getParameterValues("txtDescricaoKit");
 
-            String[] arrayImagemKit = uploadFiles(request, response);
+            ArrayList<String> arrayImagemKit = uploadFiles(request, response);
 
             for (int i = 0; i < arrayNomeKit.length; i++) {
-                String imagemKit = arrayImagemKit[i];
+                String imagemKit = arrayImagemKit.get(i);
                 String nomeKit = arrayNomeKit[i];
                 Double precoKit = Double.parseDouble(arrayPrecoKit[i]);
                 String tipoChipKit = arrayTipoChipKit[i];
@@ -188,20 +186,17 @@ public class ManterCorridaController extends HttpServlet {
         }
     }
 
-    public String[] uploadFiles(HttpServletRequest request, HttpServletResponse response) {
+    public ArrayList uploadFiles(HttpServletRequest request, HttpServletResponse response) {
         /*Identifica se o formulario é do tipo multipart/form-data*/
-        String[] files = null;
+        
+        ArrayList files = new ArrayList();
+        
         if (ServletFileUpload.isMultipartContent(request)) {
             try {
                 /*Faz o parse do request*/
                 List<Part> fileParts = request.getParts().stream().filter(part -> "txtImagemKit".equals(part.getName())).collect(Collectors.toList());
-
                 
-                int i = 0;
                 for (Part filePart : fileParts) {
-//                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//                    InputStream fileContent = filePart.getInputStream();
-
                     Calendar hoje = Calendar.getInstance();
                     String fileName = "IMG-" + hoje.get(Calendar.YEAR) + "-" + (hoje.get(Calendar.MONTH) + 1) + "-" + hoje.get(Calendar.DAY_OF_MONTH) + "_" + hoje.get(Calendar.HOUR_OF_DAY) + "-" + hoje.get(Calendar.MINUTE) + "-" + hoje.get(Calendar.SECOND) + "_" + hoje.get(Calendar.MILLISECOND);
                     String path = "imagesUpload/kit";
@@ -211,25 +206,12 @@ public class ManterCorridaController extends HttpServlet {
                         Files.copy(input, file.toPath());
                     }
                        
-                    files[i] = path + fileName;
-                    i++;
-                    
-//                    filePart.write(request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName);
+                    files.add(path + File.separator + fileName);
                 }
-//                /*Escreve o arquivo na pasta */
-//                for (FileItem item : multiparts) {
-//                    if (!item.isFormField()) {
-//                        Calendar hoje = Calendar.getInstance();
-//                        String fileName = "IMG-" + hoje.get(Calendar.YEAR) + "-" + (hoje.get(Calendar.MONTH) + 1) + "-" + hoje.get(Calendar.DAY_OF_MONTH) + "_" + hoje.get(Calendar.HOUR_OF_DAY) + "-" + hoje.get(Calendar.MINUTE) + "-" + hoje.get(Calendar.SECOND) + "_" + hoje.get(Calendar.MILLISECOND);
-//                        request.setAttribute("caminhoRelativo", request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName);
-//                        item.write(new File(request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName));
-//                    }
-//                }
                 request.setAttribute("message", "Arquivo carregado com sucesso");
             } catch (Exception ex) {
                 request.setAttribute("message", "Upload de arquivo falhou devido a " + ex);
             }
-
         } else {
             request.setAttribute("message", "Desculpe este Servlet lida apenas com pedido de upload de arquivos");
         }

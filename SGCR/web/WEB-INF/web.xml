@@ -128,6 +128,10 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploaderController</servlet-name>
+        <servlet-class>controller.UploaderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploaderController</servlet-name>
+        <url-pattern>/UploaderController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
