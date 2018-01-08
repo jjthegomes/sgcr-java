@@ -30,7 +30,7 @@
             
             <ul class="nav nav-tabs">
                 <c:forEach items="${percursos}" var="percurso">
-                   <!-- <li><a type="button" href="#percurso${percurso.id}">Percurso - ${percurso.quilometragem}Km</a></li>-->
+             
                     <li><a type="button" href="PesquisaRankingController?acao=visualizarClassificacao&corridaId=<c:out value="${corrida.id}"/>&percursoId=<c:out value="${percurso.id}"/>">
                           Percurso ${percurso.quilometragem}km 
      

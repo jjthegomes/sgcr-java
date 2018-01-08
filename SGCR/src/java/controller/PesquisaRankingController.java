@@ -97,7 +97,7 @@ public class PesquisaRankingController extends HttpServlet {
 
             int id = Integer.parseInt(request.getParameter("corridaId"));
             request.setAttribute("corrida", Corrida.obterCorrida(id));
-            request.setAttribute("inscricoes", Inscricao.obterInscricoes(id));
+            
 
             request.setAttribute("percursos", Percurso.obterPercursosCorrida(id));
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
