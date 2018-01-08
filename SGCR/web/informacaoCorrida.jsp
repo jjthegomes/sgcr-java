@@ -25,7 +25,7 @@
                     <li><a href="PesquisaHomeController">Home</a></li>
                     <li class="active">${corrida.nome}</li> 
                 </ul>
-
+              
                 <c:choose>
                     <c:when test="${mensagemAlerta!=null}">
                         <div class="alert alert-warning alert-dismissable fade in">
@@ -107,20 +107,47 @@
                                     </div> 
                                 </div>
                             </div>
+                                            
                             <div class="col-md-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><i class="fa fa-ticket"></i> Lote</div>
                                     <div class="panel-body">
-                                        <c:forEach items="${lotes}" var="lote">  
-                                            <div class="panel panel-success radio">
+                                        
+                                        <c:forEach items="${lotes}" var="lote"> 
+                                            
+                                            <div class="panel panel-success radio " id="lote${lote.id}">
                                                 <div class="panel-heading">Disponível</div>
                                                 <label>
                                                     <div class="panel-body">
                                                         <input type="radio" onchange="atualizaPrecoLote(${lote.preco}, '${lote.tipo}')" name="optLote" required value="${lote.id}" <c:if test="${inscricao.loteId == lote.id}"> checked</c:if>/>
                                                         Lote ${lote.tipo}: R$ ${lote.precoFormatado} até dia ${lote.dataFinal}
+                                                        <input type="hidden" id="dtFinal${lote.id}" value="${lote.dataFinal}"/>
                                                     </div>
                                                 </label>
                                             </div>
+                                                        
+                                                    <script>
+                                              
+                                               
+                                               var datalote =  document.getElementById("dtFinal${lote.id}").value;
+                                               var partesData= datalote.split("/");
+                                               var finalLote =  new Date(partesData[2], partesData[1]-1, partesData[0]);
+                                               
+
+                                                if( finalLote < new Date()){
+                                                    alert(finalLote);
+                                                    var lote = document.getElementById("lote${lote.id}");
+                                                    lote.className = "panel-danger";
+                                                    console.log(finalLote < new Date());
+                                                }else{
+                                                    var lote = document.getElementById("lote${lote.id}");
+                                                    lote.className = "panel-success";
+                                                //console.log(dataAtualFormatada());
+                                                console.log(finalLote);
+                                                
+                                                }
+                                                console.log("lote"+${lote.id});
+                                            </script>
                                         </c:forEach>
                                     </div>
                                 </div>
