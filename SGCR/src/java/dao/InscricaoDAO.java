@@ -74,7 +74,7 @@ public class InscricaoDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE kit_corrida_id = " + corridaId);
+            ResultSet rs = comando.executeQuery("SELECT * FROM inscricao WHERE corrida_id = " + corridaId);
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(
@@ -351,6 +351,12 @@ public class InscricaoDAO {
             inscricao.setCorridaId(rs.getInt("corrida_id"));
             inscricao.setLoteId(rs.getInt("lote_id"));
 
+            inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+            inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+            inscricao.setKit(Kit.obterKit(rs.getInt("kit_id")));
+            inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
+            inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -476,7 +482,7 @@ public class InscricaoDAO {
             throw e;
         }
     }
-    
+
     public static List<Inscricao> obterInscricoesCorrida(int corridaId, int percursoId) throws ClassNotFoundException {
         Connection conexao = null;
         Statement comando = null;
@@ -487,8 +493,8 @@ public class InscricaoDAO {
             comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("select  *, (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time ))"
                     + " tempo from inscricao WHERE (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) > 0 "
-                    + "and inscricao.percurso_id = "+percursoId+" and inscricao.corrida_id = "+corridaId+"  ORDER BY tempo ASC");
-            
+                    + "and inscricao.percurso_id = " + percursoId + " and inscricao.corrida_id = " + corridaId + "  ORDER BY tempo ASC");
+
             while (rs.next()) {
 
                 Inscricao inscricao = new Inscricao(

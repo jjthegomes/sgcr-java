@@ -51,9 +51,9 @@
                 </tbody>
             </table>
 
-<!--            <form action="ManterRetirarKitController?acao=escolherCorrida" method="post">
-                <button type="submit" name="btnIncluir" class="btn btn-success">Manter Retirar Kit</button>
-            </form>-->
+            <!--            <form action="ManterRetirarKitController?acao=escolherCorrida" method="post">
+                            <button type="submit" name="btnIncluir" class="btn btn-success">Manter Retirar Kit</button>
+                        </form>-->
         </div>
 
         <%@ include file = "layout/rodape.jsp" %>

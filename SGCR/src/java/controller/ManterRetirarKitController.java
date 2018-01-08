@@ -65,12 +65,15 @@ public class ManterRetirarKitController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Inscricao inscricao = Inscricao.obterInscricao(id);
         inscricao.setKitRetirado(true);
-        HttpSession session = request.getSession(true);
-        Atleta atleta = (Atleta) session.getAttribute("atleta");
-
+        
         try {
+            int corridaId = inscricao.getCorridaId();
+            request.setAttribute("inscricoes", Inscricao.obterInscricoesPagas(corridaId));
+            request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
+            
             inscricao.retirarKit();
-            RequestDispatcher view = request.getRequestDispatcher("ManterRetirarKitController?acao=escolherCorrida");
+            
+            RequestDispatcher view = request.getRequestDispatcher("/manterRetirarKit.jsp");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (ServletException ex) {

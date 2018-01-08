@@ -10,7 +10,8 @@
 
 <c:choose>
     <c:when test="${atleta == null && organizador == null && administrador == null && usuario != null}">
-        <% response.sendRedirect("/SGCR/LoginController?acao=logout");%>
+        <% response.sendRedirect("/SGCR/LoginController?acao=logout");
+        %>
     </c:when>    
 </c:choose>
 
