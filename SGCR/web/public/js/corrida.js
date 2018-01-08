@@ -1,15 +1,14 @@
 //CRIAÇÃO DE CORRIDA
 
 class Kit {
-    constructor(nome, preco, tipoChip, descricao, dataInicioRetirada, dataFinalRetirada) {
+    constructor(imagem, nome, preco, tipoChip, descricao) {
         this.id = new Date().getTime();
+        this.imagem = imagem;
         this.nome = nome;
         this.preco = preco;
         this.tipoChip = tipoChip;
         this.descricao = descricao;
-        this.dataInicioRetirada = dataInicioRetirada;
-        this.dataFinalRetirada = dataFinalRetirada;
-        Kit.inputs = ['nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit', 'dataInicioRetiradaKit', 'dataFinalRetiradaKit'];
+        Kit.inputs = ['imagemKit', 'nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit'];
     }
 
     static adiciona() {
@@ -17,34 +16,38 @@ class Kit {
         var preco = parseFloat(document.getElementById('precoKit').value);
         var tipoChip = document.getElementById('tipoChipKit').value;
         var descricao = document.getElementById('descricaoKit').value;
-        var dataInicioRetirada = document.getElementById('dataInicioRetiradaKit').value;
-        var dataFinalRetirada = document.getElementById('dataFinalRetiradaKit').value;
 
-        var kit = new Kit(nome, preco, tipoChip, descricao, dataInicioRetirada, dataFinalRetirada);
+        var imagem = document.getElementById("imagemKit");
+
+        var kit = new Kit(imagem, nome, preco, tipoChip, descricao);
+
+        var imagemInput = document.createElement("INPUT");
+        imagemInput.setAttribute("type", "file");
+        imagemInput.setAttribute("name", "txtImagemKit");
+        imagemInput.setAttribute("id", "txtImagemKit" + kit.id);
+        imagemInput.files = imagem.files;
+        kit.imagem = imagemInput;
+
         arrayKits[kit.id] = kit;
 
         var percursos = document.getElementById("area-kits");
         var kitTr = '';
 
-        if (kit.nome.length > 0 && kit.preco > 0 && kit.tipoChip.length > 0 && kit.descricao.length > 0
-                && kit.dataInicioRetirada.length > 0 && kit.dataFinalRetirada.length > 0) {
-            
+        if (kit.nome.length > 0 && kit.preco > 0 && kit.tipoChip.length > 0 && kit.descricao.length > 0) {
+
             document.getElementById("div-vazia-kits").style.display = 'none';
-            
+
             kitTr += '<tr id="kit' + kit.id + '">';
+            kitTr += '<div id="divImagemKit' + kit.id + '"></div>';
             kitTr += '<input type="hidden" name="txtNomeKit" id="txtNomeKit' + kit.id + '" value="' + kit.nome + '" />';
             kitTr += '<input type="hidden" name="txtPrecoKit" id="txtPrecoKit' + kit.id + '" value="' + kit.preco + '" />';
             kitTr += '<input type="hidden" name="txtTipoChipKit" id="txtTipoChipKit' + kit.id + '" value="' + kit.tipoChip + '" />';
             kitTr += '<input type="hidden" name="txtDescricaoKit" id="txtDescricaoKit' + kit.id + '" value="' + kit.descricao + '" />';
-            kitTr += '<input type="hidden" name="txtDataInicioRetiradaKit" id="txtDataInicioRetiradaKit' + kit.id + '" value="' + kit.dataInicioRetirada + '" />';
-            kitTr += '<input type="hidden" name="txtDataFinalRetiradaKit" id="txtDataFinalRetiradaKit' + kit.id + '" value="' + kit.dataFinalRetirada + '" />';
 
             kitTr += '   <td id="nomeKit' + kit.id + '">' + kit.nome + '</td>';
             kitTr += '   <td id="precoKit' + kit.id + '">' + kit.preco + '</td>';
             kitTr += '   <td id="tipoChipKit' + kit.id + '">' + kit.tipoChip + '</td>';
 //            kitTr += '   <td id="descricaoKit' + kit.id + '">' + kit.descricao + '</td>';
-//            kitTr += '   <td id="dataInicioRetiradaKit' + kit.id + '">' + kit.dataInicioRetirada + '</td>';
-//            kitTr += '   <td id="dataFinalRetiradaKit' + kit.id + '">' + kit.dataFinalRetirada + '</td>';
             kitTr += '   <td style="width: 20px;"><a class="btn btn-success btn-xs" onclick="Kit.prepararEditar(' + kit.id + ')" ><i class="fa fa-pencil"></i></a></td>';
             kitTr += '   <td style="width: 20px;"><a class="btn btn-danger btn-xs" onclick="Kit.removeItem(\'kit' + kit.id + '\')" ><i class="fa fa-trash"></i></a></td>';
             kitTr += '</tr>';
@@ -52,19 +55,23 @@ class Kit {
             percursos.insertAdjacentHTML('afterbegin', kitTr);
 
             limpaInputs(Kit.inputs);
+
+            var divImagemKit = document.getElementById("divImagemKit" + kit.id);
+            divImagemKit.style.display = "none";
+            divImagemKit.innerHTML = "";
+            divImagemKit.appendChild(imagemInput);
         }
+
 
     }
 
     static prepararEditar(id) {
         if (typeof arrayKits[id] === "undefined") {
-            var kit = new Kit(
+            var kit = new Kit(document.getElementById('txtImagemKit' + id),
                     document.getElementById('txtNomeKit' + id).value,
                     parseFloat(document.getElementById('txtPrecoKit' + id).value),
                     document.getElementById('txtTipoChipKit' + id).value,
-                    document.getElementById('txtDescricaoKit' + id).value,
-                    document.getElementById('txtDataInicioRetiradaKit' + id).value,
-                    document.getElementById('txtDataFinalRetiradaKit' + id).value);
+                    document.getElementById('txtDescricaoKit' + id).value);
 
             kit.id = id;
             arrayKits[kit.id] = kit;
@@ -72,26 +79,37 @@ class Kit {
         }
 
         var kit = arrayKits[id];
+        escolherImagem(kit.imagem);
         document.getElementById("nomeKit").value = kit.nome;
         document.getElementById("precoKit").value = kit.preco;
         document.getElementById("tipoChipKit").value = kit.tipoChip;
         document.getElementById("descricaoKit").value = kit.descricao;
-        document.getElementById("dataInicioRetiradaKit").value = kit.dataInicioRetirada;
-        document.getElementById("dataFinalRetiradaKit").value = kit.dataFinalRetirada;
 
         var editaKit = '<a class="btn btn-warning btn-block" id="adicionaKit" onclick="Kit.edita(' + id + ')">Editar</a>';
         document.getElementById("divAdicionaKit").innerHTML = editaKit;
     }
 
     static edita(id) {
+        arrayKits[id].imagem = document.getElementById('imagemKit');
+
+        var imagemInput = document.createElement("INPUT");
+        imagemInput.setAttribute("type", "file");
+        imagemInput.setAttribute("name", "txtImagemKit");
+        imagemInput.setAttribute("id", "txtImagemKit" + arrayKits[id].id);
+        imagemInput.files = arrayKits[id].imagem.files;
+
         arrayKits[id].nome = document.getElementById('nomeKit').value;
         arrayKits[id].preco = parseFloat(document.getElementById('precoKit').value);
         arrayKits[id].tipoChip = document.getElementById('tipoChipKit').value;
         arrayKits[id].descricao = document.getElementById('descricaoKit').value;
-        arrayKits[id].dataInicioRetirada = document.getElementById('dataInicioRetiradaKit').value;
-        arrayKits[id].dataFinalRetirada = document.getElementById('dataFinalRetiradaKit').value;
 
         var kit = arrayKits[id];
+
+        var divImagemKit = document.getElementById("divImagemKit" + kit.id);
+        divImagemKit.style.display = "block";
+        divImagemKit.innerHTML = "";
+        divImagemKit.appendChild(kit.imagem);
+
         document.getElementById("txtNomeKit" + id).value = kit.nome;
         document.getElementById("nomeKit" + id).innerHTML = kit.nome;
         document.getElementById("txtPrecoKit" + id).value = kit.preco;
@@ -100,11 +118,6 @@ class Kit {
         document.getElementById("tipoChipKit" + id).innerHTML = kit.tipoChip;
         document.getElementById("txtDescricaoKit" + id).value = kit.descricao;
 //        document.getElementById("descricaoKit" + id).innerHTML = kit.descricao;
-        document.getElementById("txtDataInicioRetiradaKit" + id).value = kit.dataInicioRetirada;
-//        document.getElementById("dataInicioRetiradaKit" + id).innerHTML = kit.dataInicioRetirada;
-        document.getElementById("txtDataFinalRetiradaKit" + id).value = kit.dataFinalRetirada;
-//        document.getElementById("dataFinalRetiradaKit" + id).innerHTML = kit.dataFinalRetirada;
-
 
         limpaInputs(Kit.inputs);
 
@@ -120,7 +133,7 @@ class Kit {
     }
 }
 
-var kitInputs = ['nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit', 'dataInicioRetiradaKit', 'dataFinalRetiradaKit'];
+var kitInputs = ['imagemKit', 'nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit'];
 var arrayKits = [];
 
 
@@ -253,10 +266,10 @@ class Lote {
         if (typeof arrayLotes[id] === "undefined") {
             var lote = new Lote(
                     document.getElementById('txtTipoLote' + id).value,
-            parseFloat(document.getElementById('txtPrecoLote' + id).value), 
-            document.getElementById('txtDataInicioLote' + id).value,
-            document.getElementById('txtDataTerminoLote' + id).value);
-            
+                    parseFloat(document.getElementById('txtPrecoLote' + id).value),
+                    document.getElementById('txtDataInicioLote' + id).value,
+                    document.getElementById('txtDataTerminoLote' + id).value);
+
             lote.id = id;
             arrayLotes[lote.id] = lote;
         }
@@ -281,7 +294,7 @@ class Lote {
         document.getElementById("txtTipoLote" + id).value = lote.tipo;
         document.getElementById("tipoLote" + id).innerHTML = lote.tipo;
         document.getElementById("txtPrecoLote" + id).value = lote.preco;
-        document.getElementById("precoLote" + id).innerHTML = lote.preco;
+        document.getElementById("precoLote" + id).innerHTML = "R$ " + lote.preco;
         document.getElementById("txtDataInicioLote" + id).value = lote.dataInicio;
 //        document.getElementById("dataInicioLote" + id).innerHTML = lote.dataInicio;
         document.getElementById("txtDataTerminoLote" + id).value = lote.dataTermino;
@@ -308,7 +321,55 @@ var arrayLotes = [];
 
 function limpaInputs(arrayInputs) {
     for (var i = 0; i < arrayInputs.length; i++) {
-        document.getElementById(arrayInputs[i]).value = "";
+        if (arrayInputs[i] === "imagemKit") {
+            document.getElementById("preview-kit").style.display = "none";
+        } else {
+            document.getElementById(arrayInputs[i]).value = "";
+        }
+    }
+}
+
+function escolherImagem(input) {
+    
+    if (typeof (FileReader) !== "undefined") {
+
+        var image_holder = $("#image-holder");
+        image_holder.empty();
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("<img />", {
+                "src": e.target.result,
+                "class": "thumb-image"
+            }).appendTo(image_holder);
+        };
+        image_holder.show();
+        reader.readAsDataURL($(input)[0].files[0]);
+    } else {
+        alert("Este navegador nao suporta FileReader.");
+    }
+
+    console.log("Input Imagem:");
+    console.log(input.files);
+    document.getElementById("preview-kit").style.display = "inline-block";
+//    console.log(input.files);
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "file");
+    x.setAttribute("id", "imagemKit");
+    x.files = input.files;
+    var divImagemKit = document.getElementById("divImagemKit");
+    divImagemKit.innerHTML = "";
+    divImagemKit.appendChild(x);
+    x.style.display = "none";
+}
+
+function escreveNome(input) {
+    var nome = input.value;
+    if (input.value.length > 0) {
+        document.getElementById("mostraNomeCorrida").style.display = "inline";
+        document.getElementById("mostraNomeCorrida").innerHTML = nome;
+    } else {
+        document.getElementById("mostraNomeCorrida").style.display = "none";
     }
 }
 

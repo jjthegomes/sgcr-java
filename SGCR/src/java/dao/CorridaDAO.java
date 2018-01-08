@@ -109,7 +109,7 @@ public class CorridaDAO {
             conexao = BD.getConexao();
             String sql = "INSERT INTO corrida (nome, max_pessoa, horario, data, banner, "
                     + "logradouro, cep, numero, cidade, estado, bairro, descricao, edicao, ativo, data_inicio_retirada_kit, data_final_retirada_kit, organizador_id) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
             comando.setString(1, corrida.getNome());
             comando.setInt(2, corrida.getMaxPessoa());
@@ -123,11 +123,11 @@ public class CorridaDAO {
             comando.setString(10, corrida.getEstado());
             comando.setString(11, corrida.getBairro());
             comando.setString(12, corrida.getDescricao());
-            comando.setString(14, corrida.getEdicao());
-            comando.setBoolean(15, corrida.isAtivo());
-            comando.setString(16, corrida.getDataInicioRetiradaKit());
-            comando.setString(17, corrida.getDataFinalRetiradaKit());
-            comando.setInt(18, corrida.getOrganizador().getId());
+            comando.setString(13, corrida.getEdicao());
+            comando.setBoolean(14, corrida.isAtivo());
+            comando.setString(15, corrida.getDataInicioRetiradaKit());
+            comando.setString(16, corrida.getDataFinalRetiradaKit());
+            comando.setInt(17, corrida.getOrganizador().getId());
             comando.execute();
             comando.close();
             conexao.close();
@@ -174,12 +174,12 @@ public class CorridaDAO {
             comando.setString(10, corrida.getEstado());
             comando.setString(11, corrida.getBairro());
             comando.setString(12, corrida.getDescricao());
-            comando.setString(14, corrida.getEdicao());
-            comando.setBoolean(15, corrida.isAtivo());
-            comando.setString(13, corrida.getDataInicioRetiradaKit());
-            comando.setString(13, corrida.getDataFinalRetiradaKit());
-            comando.setInt(16, corrida.getOrganizador().getId());
-            comando.setInt(17, corrida.getId());
+            comando.setString(13, corrida.getEdicao());
+            comando.setBoolean(14, corrida.isAtivo());
+            comando.setString(15, corrida.getDataInicioRetiradaKit());
+            comando.setString(16, corrida.getDataFinalRetiradaKit());
+            comando.setInt(17, corrida.getOrganizador().getId());
+            comando.setInt(18, corrida.getId());
             comando.execute();
             comando.close();
             conexao.close();

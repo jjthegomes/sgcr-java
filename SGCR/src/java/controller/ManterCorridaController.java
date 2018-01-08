@@ -5,24 +5,38 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import modelo.Corrida;
 import modelo.Kit;
 import modelo.Lote;
 import modelo.Organizador;
 import modelo.Percurso;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
  * @author RAJ
  */
+@MultipartConfig
 public class ManterCorridaController extends HttpServlet {
 
     /**
@@ -94,7 +108,6 @@ public class ManterCorridaController extends HttpServlet {
         String dataFinalRetiradaKit = request.getParameter("txtDataFinalRetiradaKit");
 
 //        String banner = request.getParameter("txtBannerCorrida");
-
         String edicao = "1";
         boolean ativo = true;
 
@@ -108,19 +121,26 @@ public class ManterCorridaController extends HttpServlet {
 
             corrida = Corrida.obterUltimaCorridaOrganizador(organizador.getId());
 
+//    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+//    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+//    InputStream fileContent = filePart.getInputStream();
             //kit
             String[] arrayNomeKit = request.getParameterValues("txtNomeKit");
             String[] arrayPrecoKit = request.getParameterValues("txtPrecoKit");
             String[] arrayTipoChipKit = request.getParameterValues("txtTipoChipKit");
             String[] arrayDescricaoKit = request.getParameterValues("txtDescricaoKit");
 
+            String[] arrayImagemKit = uploadFiles(request, response);
+
             for (int i = 0; i < arrayNomeKit.length; i++) {
+                String imagemKit = arrayImagemKit[i];
                 String nomeKit = arrayNomeKit[i];
                 Double precoKit = Double.parseDouble(arrayPrecoKit[i]);
                 String tipoChipKit = arrayTipoChipKit[i];
                 String descricaoKit = arrayDescricaoKit[i];
 
-                Kit kit = new Kit(nomeKit, descricaoKit, "", tipoChipKit, precoKit, organizador);
+                Kit kit = new Kit(nomeKit, descricaoKit, imagemKit, tipoChipKit, precoKit, organizador);
+
                 kit.gravar();
                 Kit kitTemp = Kit.obterUltimoKitOrganizador(organizador.getId());
                 kitTemp.setPreco(kit.getPreco());
@@ -166,6 +186,54 @@ public class ManterCorridaController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         } catch (ServletException ex) {
         }
+    }
+
+    public String[] uploadFiles(HttpServletRequest request, HttpServletResponse response) {
+        /*Identifica se o formulario é do tipo multipart/form-data*/
+        String[] files = null;
+        if (ServletFileUpload.isMultipartContent(request)) {
+            try {
+                /*Faz o parse do request*/
+                List<Part> fileParts = request.getParts().stream().filter(part -> "txtImagemKit".equals(part.getName())).collect(Collectors.toList());
+
+                
+                int i = 0;
+                for (Part filePart : fileParts) {
+//                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+//                    InputStream fileContent = filePart.getInputStream();
+
+                    Calendar hoje = Calendar.getInstance();
+                    String fileName = "IMG-" + hoje.get(Calendar.YEAR) + "-" + (hoje.get(Calendar.MONTH) + 1) + "-" + hoje.get(Calendar.DAY_OF_MONTH) + "_" + hoje.get(Calendar.HOUR_OF_DAY) + "-" + hoje.get(Calendar.MINUTE) + "-" + hoje.get(Calendar.SECOND) + "_" + hoje.get(Calendar.MILLISECOND);
+                    String path = "imagesUpload/kit";
+                    File uploadPath = new File(request.getServletContext().getRealPath(path));
+                    File file = new File(uploadPath, fileName);
+                    try (InputStream input = filePart.getInputStream()) {
+                        Files.copy(input, file.toPath());
+                    }
+                       
+                    files[i] = path + fileName;
+                    i++;
+                    
+//                    filePart.write(request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName);
+                }
+//                /*Escreve o arquivo na pasta */
+//                for (FileItem item : multiparts) {
+//                    if (!item.isFormField()) {
+//                        Calendar hoje = Calendar.getInstance();
+//                        String fileName = "IMG-" + hoje.get(Calendar.YEAR) + "-" + (hoje.get(Calendar.MONTH) + 1) + "-" + hoje.get(Calendar.DAY_OF_MONTH) + "_" + hoje.get(Calendar.HOUR_OF_DAY) + "-" + hoje.get(Calendar.MINUTE) + "-" + hoje.get(Calendar.SECOND) + "_" + hoje.get(Calendar.MILLISECOND);
+//                        request.setAttribute("caminhoRelativo", request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName);
+//                        item.write(new File(request.getServletContext().getRealPath("imagesUpload/kit") + File.separator + fileName));
+//                    }
+//                }
+                request.setAttribute("message", "Arquivo carregado com sucesso");
+            } catch (Exception ex) {
+                request.setAttribute("message", "Upload de arquivo falhou devido a " + ex);
+            }
+
+        } else {
+            request.setAttribute("message", "Desculpe este Servlet lida apenas com pedido de upload de arquivos");
+        }
+        return files;
     }
 
     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {

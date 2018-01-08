@@ -86,7 +86,7 @@ public class KitDAO {
             comando.setString(2, kit.getDescricao());
             comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
-            comando.setInt(7, kit.getOrganizador().getId());
+            comando.setInt(5, kit.getOrganizador().getId());
 
             comando.execute();
             comando.close();
@@ -124,8 +124,8 @@ public class KitDAO {
             comando.setString(2, kit.getDescricao());
             comando.setString(3, kit.getImagem());
             comando.setString(4, kit.getTipoChip());
-            comando.setInt(7, kit.getOrganizador().getId());
-            comando.setInt(8, kit.getId());
+            comando.setInt(5, kit.getOrganizador().getId());
+            comando.setInt(6, kit.getId());
             comando.execute();
             comando.close();
             conexao.close();

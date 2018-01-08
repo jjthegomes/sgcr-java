@@ -67,7 +67,7 @@
                                         <div class="form-group col-md-6">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading"><i class="fa fa-shopping-bag"></i> Kit</div>
-                                                <!--<div class="panel-body">-->
+                                                <!--<div class="panel-body"> -->
                                                 <c:forEach items="${kits}" var="kit">  
                                                     <div class="panel panel-default radio col-md-12 panel-config">
                                                         <label class="label-kit-inscricao">

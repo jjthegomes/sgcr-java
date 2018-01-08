@@ -78,11 +78,11 @@ public class PercursoDAO {
         Connection conexao = null;
         try {
             conexao = BD.getConexao();
-            String sql = "INSERT INTO percurso ( quilometragem, descricao, organizador_id) VALUES (?,?,?)";
+            String sql = "INSERT INTO percurso (quilometragem, descricao, organizador_id) VALUES (?,?,?)";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setDouble(2, percurso.getQuilometragem());
-            comando.setString(3, percurso.getDescricao());
-            comando.setInt(4, percurso.getOrganizador().getId());
+            comando.setDouble(1, percurso.getQuilometragem());
+            comando.setString(2, percurso.getDescricao());
+            comando.setInt(3, percurso.getOrganizador().getId());
 
             comando.execute();
             comando.close();
@@ -115,9 +115,9 @@ public class PercursoDAO {
             conexao = BD.getConexao();
             String sql = "UPDATE percurso SET quilometragem = ?, descricao = ? WHERE id = ?";
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setDouble(2, percurso.getQuilometragem());
-            comando.setString(3, percurso.getDescricao());
-            comando.setInt(4, percurso.getId());
+            comando.setDouble(1, percurso.getQuilometragem());
+            comando.setString(2, percurso.getDescricao());
+            comando.setInt(3, percurso.getId());
 
             comando.execute();
             comando.close();

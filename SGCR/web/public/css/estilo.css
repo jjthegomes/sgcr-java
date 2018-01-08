@@ -373,3 +373,28 @@ textarea {
 .option-input.radio::after {
     border-radius: 50%;
 }
+
+#image-holder img {
+    max-width: 100%;
+}
+
+#mostraNomeCorrida {
+    float: right;
+    font-size: 18px;
+    text-shadow: 2px 2px 20px black;
+    border-radius: 5px;
+    display: none;
+}
+
+.panel-item p {
+    font-weight: 100;
+}
+
+.descricao-item {
+    height: 60px;
+    overflow: hidden;
+}
+
+.card-item  {
+    padding-bottom: 0px !important;
+}
