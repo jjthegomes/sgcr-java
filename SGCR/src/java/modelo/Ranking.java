@@ -21,7 +21,6 @@ public class Ranking {
     private String tempoChegada;
     private String tempo;
     private int quilometragem;
-    private double mediaPace;
     private double pace;
 
     private int administradorId;
@@ -42,14 +41,13 @@ public class Ranking {
         this.idadeInicial = idadeInicial;
     }
 
-    public Ranking(int id, Atleta atleta, String tempoLargada, String tempoChegada, String tempo, int quilometragem, double mediaPace, double pace) {
+    public Ranking(int id, Atleta atleta, String tempoLargada, String tempoChegada, String tempo, int quilometragem, double pace) {
         this.id = id;
         this.atleta = atleta;
         this.tempoLargada = tempoLargada;
         this.tempoChegada = tempoChegada;
         this.tempo = tempo;
         this.quilometragem = quilometragem;
-        this.mediaPace = mediaPace;
         this.pace = pace;
     }
 
@@ -139,14 +137,6 @@ public class Ranking {
 
     public void setQuilometragem(int quilometragem) {
         this.quilometragem = quilometragem;
-    }
-
-    public double getMediaPace() {
-        return mediaPace;
-    }
-
-    public void setMediaPace(double mediaPace) {
-        this.mediaPace = mediaPace;
     }
 
     public double getPace() {

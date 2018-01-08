@@ -111,12 +111,11 @@ public class RankingDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("select inscricao.id,inscricao.atleta_id, tempo_largada, tempo_chegada, \n"
-                    + "(CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) tempo, \n"
-                    + "SUM(( CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )/p.quilometragem)/100) media_pace, p.quilometragem, \n"
-                    + "(CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )/p.quilometragem)/100 pace \n"
-                    + "from inscricao join percurso p on p.id = inscricao.percurso_id WHERE (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) IS NOT null \n"
-                    + "GROUP by inscricao.atleta_id ORDER BY media_pace ASC");
+            ResultSet rs = comando.executeQuery("select inscricao.id,inscricao.atleta_id, tempo_largada, tempo_chegada,\n"
+                    + "(CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) tempo, p.quilometragem,\n"
+                    + "ROUND((CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )/p.quilometragem)/100 , 1) pace\n"
+                    + "from inscricao join percurso p on p.id = inscricao.percurso_id WHERE (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) IS NOT null\n"
+                    + "GROUP by inscricao.atleta_id ORDER BY pace ASC");
 
             while (rs.next()) {
                 Ranking ranking = new Ranking(rs.getInt("id"),
@@ -125,7 +124,6 @@ public class RankingDAO {
                         rs.getString("tempo_chegada"),
                         rs.getString("tempo"),
                         rs.getInt("quilometragem"),
-                        rs.getDouble("media_pace"),
                         rs.getDouble("pace"));
 
                 ranking.setAtletaId(rs.getInt("atleta_id"));
