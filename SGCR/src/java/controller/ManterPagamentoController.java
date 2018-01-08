@@ -31,6 +31,7 @@ public class ManterPagamentoController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
@@ -52,27 +53,21 @@ public class ManterPagamentoController extends HttpServlet {
             request.setAttribute("corrida", Corrida.obterCorrida(corridaId));
             RequestDispatcher view = request.getRequestDispatcher("/manterPagamento.jsp");
             view.forward(request, response);
-        } catch (ServletException ex) {
-        } catch (ClassNotFoundException ex) {
-        } catch (IOException ex) {
-
+        } catch (ServletException | ClassNotFoundException | IOException ex) {
         }
     }
 
     private void confirmarPagamento(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
-
         Inscricao inscricao = Inscricao.obterInscricao(id);
 
         inscricao.setPago(true);
 
         try {
             inscricao.pagarInscricao();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPagamentoController");
+            RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaPagamento.jsp");
             view.forward(request, response);
-        } catch (IOException ex) {
-        } catch (ServletException ex) {
-        } catch (SQLException ex) {
+        } catch (IOException | ServletException | SQLException ex) {
         }
     }
 
@@ -81,9 +76,7 @@ public class ManterPagamentoController extends HttpServlet {
             request.setAttribute("corridas", Corrida.obterCorridas());
             RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaPagamento.jsp");
             view.forward(request, response);
-        } catch (IOException ex) {
-        } catch (ClassNotFoundException ex) {
-        } catch (ServletException ex) {
+        } catch (IOException | ClassNotFoundException | ServletException ex) {
         }
     }
 

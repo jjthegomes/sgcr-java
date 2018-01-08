@@ -178,7 +178,7 @@ public class Inscricao {
         return corridaId;
     }
 
-    public void setCorridaId(int kitCorridaId) {
+    public void setCorridaId(int corridaId) {
         this.corridaId = corridaId;
     }
 
