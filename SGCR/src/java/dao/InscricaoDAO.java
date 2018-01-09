@@ -532,6 +532,145 @@ public class InscricaoDAO {
         return inscricoes;
     }
 
+    public static List<Inscricao> buscaInscrisoesCorridas(String nome) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Inscricao> inscricoes = new ArrayList<>();
+
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT i.* from inscricao i JOIN corrida on corrida.id = i.corrida_id "
+                    + "where LOWER(corrida.nome) LIKE '%" + nome + "%'");
+            while (rs.next()) {
+
+                Inscricao inscricao = new Inscricao(
+                        rs.getInt("id"),
+                        null,
+                        rs.getString("data_compra"),
+                        rs.getString("numero_peito"),
+                        rs.getBoolean("pago"),
+                        rs.getBoolean("kit_retirado"),
+                        rs.getString("tempo_largada"),
+                        rs.getString("tempo_chegada"),
+                        null,
+                        null,
+                        null,
+                        null);
+                inscricao.setPercursoId(rs.getInt("percurso_id"));
+                inscricao.setCorridaId(rs.getInt("corrida_id"));
+                inscricao.setAtletaId(rs.getInt("atleta_id"));
+                inscricao.setKitId(rs.getInt("kit_id"));
+                inscricao.setLoteId(rs.getInt("lote_id"));
+
+                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
+                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+                inscricao.setKit(Kit.obterKit((rs.getInt("kit_id"))));
+                inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
+                inscricoes.add(inscricao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return inscricoes;
+    }
+
+    public static List<Inscricao> buscaInscrisoesAtletas(String nome) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Inscricao> inscricoes = new ArrayList<>();
+
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT i.* from inscricao i JOIN atleta on atleta.id = i.atleta_id "
+                    + "where LOWER(atleta.nome) LIKE '%" + nome + "%'");
+            while (rs.next()) {
+
+                Inscricao inscricao = new Inscricao(
+                        rs.getInt("id"),
+                        null,
+                        rs.getString("data_compra"),
+                        rs.getString("numero_peito"),
+                        rs.getBoolean("pago"),
+                        rs.getBoolean("kit_retirado"),
+                        rs.getString("tempo_largada"),
+                        rs.getString("tempo_chegada"),
+                        null,
+                        null,
+                        null,
+                        null);
+                inscricao.setPercursoId(rs.getInt("percurso_id"));
+                inscricao.setCorridaId(rs.getInt("corrida_id"));
+                inscricao.setAtletaId(rs.getInt("atleta_id"));
+                inscricao.setKitId(rs.getInt("kit_id"));
+                inscricao.setLoteId(rs.getInt("lote_id"));
+
+                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt("corrida_id"))));
+                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+                inscricao.setKit(Kit.obterKit((rs.getInt("kit_id"))));
+                inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
+                inscricoes.add(inscricao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return inscricoes;
+    }
+
+    
+    public static List<Inscricao> buscaInscricoesNaoPagas(int corridaId, String nome) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Inscricao> inscricoes = new ArrayList<>();
+
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT inscricao.* FROM inscricao JOIN atleta on inscricao.atleta_id = atleta.id"
+                    + "WHERE corrida_id = " + corridaId + " and pago = 0 and atleta.nome like '%" + nome + "%' and inscricao.pago = 0 ");
+            while (rs.next()) {
+
+                Inscricao inscricao = new Inscricao(
+                        rs.getInt("id"),
+                        null,
+                        rs.getString("data_compra"),
+                        rs.getString("numero_peito"),
+                        rs.getBoolean("pago"),
+                        rs.getBoolean("kit_retirado"),
+                        rs.getString("tempo_largada"),
+                        rs.getString("tempo_chegada"),
+                        null,
+                        null,
+                        null,
+                        null);
+                inscricao.setPercursoId(rs.getInt("percurso_id"));
+                inscricao.setCorridaId(corridaId);
+                inscricao.setAtletaId(rs.getInt("atleta_id"));
+                inscricao.setKitId(rs.getInt("kit_id"));
+                inscricao.setLoteId(rs.getInt("lote_id"));
+
+                inscricao.setCorrida(Corrida.obterCorrida(corridaId));
+                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt("percurso_id"))));
+                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt("atleta_id"))));
+                inscricao.setKit(Kit.obterKit((rs.getInt("kit_id"))));
+                inscricao.setLote(Lote.obterLote((rs.getInt("lote_id"))));
+                inscricoes.add(inscricao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return inscricoes;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

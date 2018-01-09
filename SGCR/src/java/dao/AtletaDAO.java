@@ -218,6 +218,46 @@ public class AtletaDAO {
         return atleta;
     }
 
+    public static List<Atleta> buscaAtletas(String nome) throws ClassNotFoundException {
+        Connection conexao = null;
+        Statement comando = null;
+        List<Atleta> atletas = new ArrayList<>();
+        try {
+            conexao = BD.getConexao();
+            comando = conexao.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM atleta WHERE LOWER(nome) LIKE '%" + nome + "%'");
+
+            while (rs.next()) {
+                Atleta atleta = new Atleta(rs.getString("apelido"),
+                        rs.getString("tamanho_camisa"),
+                        rs.getString("nome"),
+                        rs.getString("data_nascimento"),
+                        rs.getString("sexo"),
+                        rs.getString("cpf"),
+                        rs.getString("cep"),
+                        rs.getString("logradouro"),
+                        rs.getString("bairro"),
+                        rs.getString("complemento"),
+                        rs.getString("numero"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("senha"));
+
+                atletas.add(atleta);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            fecharConexao(conexao, comando);
+        }
+        return atletas;
+    }
+
     public static void fecharConexao(Connection conexao, Statement comando) {
         try {
             if (comando != null) {

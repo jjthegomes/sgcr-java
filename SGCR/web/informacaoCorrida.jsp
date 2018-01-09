@@ -135,7 +135,7 @@
                                                
 
                                                 if( finalLote < new Date()){
-                                                    alert(finalLote);
+                                                    //alert(finalLote);
                                                     var lote = document.getElementById("lote${lote.id}");
                                                     lote.className = "panel-danger";
                                                     console.log(finalLote < new Date());

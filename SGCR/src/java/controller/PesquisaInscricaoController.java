@@ -6,6 +6,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Atleta;
+import modelo.Corrida;
 import modelo.Inscricao;
 
 /**
@@ -30,9 +35,11 @@ public class PesquisaInscricaoController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        if (request.getParameter("busca") != null) {
+            buscarCorridaAtleta(request, response);
+        }
 
         if (session.getAttribute("administrador") != null && session.getAttribute("usuario") == "administrador") {
             obterInscricoes(request, response);
@@ -63,8 +70,28 @@ public class PesquisaInscricaoController extends HttpServlet {
         }
     }
 
-    public void obterInscricoesOrganizador(HttpServletRequest request, HttpServletResponse response) {
-        
+    public void buscarCorridaAtleta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String nome = request.getParameter("busca");
+            String opt = request.getParameter("optBusca");
+
+            if (opt.equals("") || nome.equals("")) {
+                request.setAttribute("inscricoes", Inscricao.obterInscricoes());
+                RequestDispatcher view = request.getRequestDispatcher("/pesquisaInscricao.jsp");
+                view.forward(request, response);
+            } else {
+                if (opt.equals("corridas")) {
+                    List<Inscricao> inscricao = Inscricao.buscaInscrisoesCorridas(nome.toLowerCase());
+                    request.setAttribute("inscricoes", inscricao);
+                } else {
+                    List<Inscricao> inscricao = Inscricao.buscaInscrisoesAtletas(nome);
+                    request.setAttribute("inscricoes", inscricao);
+                }
+            }
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaInscricao.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException | ClassNotFoundException ex) {
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

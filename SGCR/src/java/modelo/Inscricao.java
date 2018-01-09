@@ -213,7 +213,7 @@ public class Inscricao {
     public static List<Inscricao> obterInscricoes(int corridaId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoes(corridaId);
     }
-    
+
     public static List<Inscricao> obterInscricoesCorrida(int corridaId, int percursoId) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricoesCorrida(corridaId, percursoId);
     }
@@ -245,7 +245,7 @@ public class Inscricao {
     public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
         return InscricaoDAO.obterInscricao(id);
     }
-    
+
     public static Inscricao obterUltimaInscricaoAtleta(int atletaId) throws ClassNotFoundException {
         return InscricaoDAO.obterUltimaInscricaoAtleta(atletaId);
     }
@@ -257,12 +257,20 @@ public class Inscricao {
     public static void atualizarResultadoCorrida(List<Inscricao> inscricoes) throws SQLException, ClassNotFoundException {
         InscricaoDAO.atualizarResultadoCorrida(inscricoes);
     }
-    
-    public static boolean atletaEstaInscrito(Atleta atleta,Corrida corrida) throws SQLException, ClassNotFoundException {
-        return InscricaoDAO.atletaEstaInscrito(atleta,corrida);
+
+    public static boolean atletaEstaInscrito(Atleta atleta, Corrida corrida) throws SQLException, ClassNotFoundException {
+        return InscricaoDAO.atletaEstaInscrito(atleta, corrida);
     }
 
     public void pagarInscricao() throws SQLException, ClassNotFoundException {
         InscricaoDAO.pagarInscricao(this);
+    }
+
+    public static List<Inscricao> buscaInscrisoesCorridas(String nome) throws ClassNotFoundException {
+        return InscricaoDAO.buscaInscrisoesCorridas(nome);
+    }
+
+    public static List<Inscricao> buscaInscrisoesAtletas(String nome) throws ClassNotFoundException {
+        return InscricaoDAO.buscaInscrisoesAtletas(nome);
     }
 }

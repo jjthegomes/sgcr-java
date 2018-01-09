@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("administrador", administrador);
                         session.setAttribute("usuario", "administrador");
-                        RequestDispatcher view = request.getRequestDispatcher("/dashboard.jsp");
+                        RequestDispatcher view = request.getRequestDispatcher("/PesquisaAdministradorController");
                         view.forward(request, response);
                     } else {
                         request.setAttribute("mensagemErro", "Usuário não encontrado");
@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("organizador", organizador);
                         session.setAttribute("usuario", "organizador");
-                        RequestDispatcher view = request.getRequestDispatcher("/dashboard.jsp");
+                        RequestDispatcher view = request.getRequestDispatcher("/PesquisaCorridaController");
                         view.forward(request, response);
                     } else {
                         request.setAttribute("mensagemErro", "Usuário não encontrado");

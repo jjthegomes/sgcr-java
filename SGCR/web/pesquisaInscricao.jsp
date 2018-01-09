@@ -17,8 +17,29 @@
         <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
-
-            <h2>Pesquisa Inscrição</h2>
+            <div id="navbar" class="navbar-collapse collapse">
+                <h2>Pesquisa Inscrição</h2>
+                <form action="PesquisaInscricaoController" method="get" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="radio-inline">
+                                <label><input type="radio" name="optBusca" required value="corridas">Corridas</label>
+                            </div>
+                            <div class="radio-inline">
+                                <label><input type="radio" name="optBusca" required value="atletas" >Atletas</label>
+                            </div>                                   
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" required name="busca" placeholder=" Busca" size="22">
+                        </div>
+                    </div>
+                </form>
+            </div>  
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>

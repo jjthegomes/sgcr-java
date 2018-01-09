@@ -64,4 +64,8 @@ public class Atleta extends UsuarioComum {
     public static Atleta logar(String email, String senha) throws ClassNotFoundException, SQLException{
         return  AtletaDAO.logar(email, senha);
     }
+        
+    public static List<Atleta> buscaAtletas(String nome) throws ClassNotFoundException {
+        return AtletaDAO.buscaAtletas(nome);
+    }
 }
