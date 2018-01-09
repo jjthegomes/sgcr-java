@@ -38,7 +38,7 @@
                 <input type="hidden" class="form-control" name="hiddenIdInscricao" value="${inscricao.id}" readonly>
 
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Inscrição</div>
+                    <div class="panel-heading">Informação</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-8">
