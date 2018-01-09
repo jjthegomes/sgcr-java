@@ -73,9 +73,8 @@
                                                         <label class="label-kit-inscricao">
                                                             <div class="panel-body">
                                                                 <div class="div-img-inscricao">
-                                                                    <img src="imagesUpload/kit/kit-3.png" class="img-kit-inscricao">
-                                                                </div>
-                                                                <input type="radio" class="option-input radio" onchange="atualizaPrecoKit(${kit.preco}, '${kit.nome}')" name="optKit" required value="${kit.id}" <c:if test="${inscricao.kitId == kit.id}"> checked</c:if>/>
+                                                                    <img src="${kit.imagem}" class="img-kit-inscricao">
+                                                                </div>                                     
                                                                 <p><b>${kit.nome} - R$ ${kit.precoFormatado}</b></p>
                                                                 ${kit.descricao}
                                                             </div>
@@ -94,7 +93,6 @@
                                                     <div class="panel panel-default radio col-md-12 panel-config">
                                                         <label>
                                                             <div class="panel-body">
-                                                                <input type="radio" class="option-input radio" name="optPercurso" required value="${percurso.id}" <c:if test="${inscricao.percursoId == percurso.id}"> checked</c:if>/>
                                                                 <p><b>${percurso.quilometragemFormatada}km</b></p>
                                                                 ${percurso.descricao}
                                                             </div>
@@ -115,79 +113,17 @@
                                         
                                         <c:forEach items="${lotes}" var="lote"> 
                                             
-                                            <div class="panel panel-success radio " id="lote${lote.id}">
-                                                <div class="panel-heading">Disponível</div>
+                                            <div class="panel panel-success radio" id="lote${lote.id}">
+                                                <div class="panel-heading ">Disponível</div>
                                                 <label>
-                                                    <div class="panel-body">
-                                                        <input type="radio" onchange="atualizaPrecoLote(${lote.preco}, '${lote.tipo}')" name="optLote" required value="${lote.id}" <c:if test="${inscricao.loteId == lote.id}"> checked</c:if>/>
+                                                    <div class="panel">
+                                                        <br>
                                                         Lote ${lote.tipo}: R$ ${lote.precoFormatado} até dia ${lote.dataFinal}
-                                                        <input type="hidden" id="dtFinal${lote.id}" value="${lote.dataFinal}"/>
+                                                       
                                                     </div>
                                                 </label>
                                             </div>
-                                                        
-                                                    <script>
-                                              
-                                               
-                                               var datalote =  document.getElementById("dtFinal${lote.id}").value;
-                                               var partesData= datalote.split("/");
-                                               var finalLote =  new Date(partesData[2], partesData[1]-1, partesData[0]);
-                                               
-
-                                                if( finalLote < new Date()){
-                                                    //alert(finalLote);
-                                                    var lote = document.getElementById("lote${lote.id}");
-                                                    lote.className = "panel-danger";
-                                                    console.log(finalLote < new Date());
-                                                }else{
-                                                    var lote = document.getElementById("lote${lote.id}");
-                                                    lote.className = "panel-success";
-                                                //console.log(dataAtualFormatada());
-                                                console.log(finalLote);
-                                                
-                                                }
-                                                console.log("lote"+${lote.id});
-                                            </script>
                                         </c:forEach>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-success">
-                                    <div class="panel-heading"><i class="fa fa-money"></i> Total</div>
-                                    <div class="panel-body preco-total">
-                                        <div id="divPrecoTotal">
-                                            <div id="tabelaPreco" style="display: none">
-                                                <table class="table table-hover table-striped table-responsive table-condensed">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Item</th>
-                                                            <th>Preço</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody style="text-align: left">
-                                                        <tr id="infoLote" style="display: none">
-                                                            <td id="nomeLote"></td>
-                                                            <td id="precoLote"></td>
-                                                        <tr>
-                                                        <tr id="infoKit" style="display: none">
-                                                            <td id="nomeKit"></td>
-                                                            <td id="precoKit"></td>
-                                                        <tr>
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr id="infoTotal">
-                                                            <th>Total</th>
-                                                            <th id="precoTotal"></th>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-
-                                            <p id="infoVazio">
-                                                Nenhum item selecionado!
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

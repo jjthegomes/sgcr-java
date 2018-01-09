@@ -52,7 +52,10 @@ public class LoteDAO {
         try {
             conexao = BD.getConexao();
             comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM lote WHERE corrida_id = " + corridaId);
+            ResultSet rs = comando.executeQuery("SELECT * from lote "
+                    + "where CURRENT_DATE BETWEEN  DATE_FORMAT(STR_TO_DATE(data_inicio, '%d/%m/%Y' ), '%Y-%m-%d') "
+                    + "AND DATE_FORMAT(STR_TO_DATE(data_final, '%d/%m/%Y' ), '%Y-%m-%d')"
+                    + "AND corrida_id = " + corridaId);
             while (rs.next()) {
                 Lote lote = new Lote(
                         rs.getInt("id"),
