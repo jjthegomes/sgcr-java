@@ -40,7 +40,7 @@
                             <td><c:out value="${inscricao.atleta.email}" /></td>
                             <td><c:out value="${inscricao.atleta.cpf}" /></td>
                             <td class="table-action">
-                                <a class="btn btn-success btn-xs" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>">
+                                <a class="btn btn-success btn-xs" href="ManterPagamentoController?acao=confirmarPagamento&id=<c:out value="${inscricao.id}"/>&idCorrida=<c:out value="${inscricao.corrida.id}"/>">
                                     Pagar 
                                 </a>
                             </td>                      
@@ -55,5 +55,13 @@
         </div>
 
         <%@ include file = "layout/rodape.jsp" %>
+        <script>
+            window.onload = function() {
+                if(!window.location.hash) {
+                    window.location = window.location + '#loaded';
+                    window.location.reload();
+                }
+            }
+        </script>
     </body>
 </html>

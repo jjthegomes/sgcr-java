@@ -59,13 +59,15 @@ public class ManterPagamentoController extends HttpServlet {
 
     private void confirmarPagamento(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
+        int idCorrida = Integer.parseInt(request.getParameter("idCorrida"));
         Inscricao inscricao = Inscricao.obterInscricao(id);
-
+        request.setAttribute("corrida", Corrida.obterCorrida(idCorrida));
+        request.setAttribute("inscricoes", Inscricao.obterInscricoesNaoPagas(idCorrida));
         inscricao.setPago(true);
 
         try {
             inscricao.pagarInscricao();
-            RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaPagamento.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterPagamento.jsp");
             view.forward(request, response);
         } catch (IOException | ServletException | SQLException ex) {
         }
