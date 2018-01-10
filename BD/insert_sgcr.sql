@@ -41,23 +41,23 @@ INSERT INTO `organizador` (`id`, `nome`, `email`, `senha`, `sexo`, `data_nascime
 --
 
 INSERT INTO `corrida` (`id`, `nome`, `horario`, `data`, `max_pessoa`, `banner`, `descricao`, `cep`, `estado`, `cidade`, `bairro`, `logradouro`, `numero`, `edicao`, `ativo`, `data_inicio_retirada_kit`, `data_final_retirada_kit`, `organizador_id`) VALUES
-(1, 'Corrida da Paz', '08:00:00', '21/03/2018', 2000, NULL, 'A Corrida da Paz tem como abjetivo além de promover a saúde dos participantes, conscientizar sobre o valor da paz mundial. Venha se divertir em Paz.', '28016200', 'RJ', 'Campos dos Goytacazes', 'Vila da Rainha', 'Alameda Demerval Crespo', '145', NULL, 1, '20/01/2018', '20/02/2018', 1),
-(2, 'Corrida Outubro Rosa', '08:00:00', '22/04/2018', 3000, NULL, 'A corrida Outubro Rosa tem como objetivo promover a conscientização da importância do exame e diagnostico assim como a prevenção contra a doença.   ', '29155070', 'ES', 'Cariacica', 'Bela Vista ', 'Rua Juiz de Fora ', '150', 1, 1, '20/02/2018', '20/03/2018', 2),
-(3, 'Corrida Contra Violência Infantil', '07:00:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, '20/12/2017', '20/01/2018', 3),
-(4, 'Corrida da Independencia', '09:00:00', '20/03/2018', 5000, '', 'A Corrida da Independencia tem como objetivo promover a cofraternização entre os patriótas. Venha ser Independente também !!', '25809210', 'RJ', 'Três Rios', 'Cidade Nova', 'Rua Artur Bernardes', '145', 1, 0, '20/01/2018', '20/01/2018', 1);
+(1, 'Corrida da Paz', '08:00', '21/03/2018', 2000, NULL, 'A Corrida da Paz tem como abjetivo além de promover a saúde dos participantes, conscientizar sobre o valor da paz mundial. Venha se divertir em Paz.', '28016200', 'RJ', 'Campos dos Goytacazes', 'Vila da Rainha', 'Alameda Demerval Crespo', '145', NULL, 1, '20/01/2018', '20/02/2018', 1),
+(2, 'Corrida Outubro Rosa', '08:00', '22/04/2018', 3000, NULL, 'A corrida Outubro Rosa tem como objetivo promover a conscientização da importância do exame e diagnostico assim como a prevenção contra a doença.   ', '29155070', 'ES', 'Cariacica', 'Bela Vista ', 'Rua Juiz de Fora ', '150', 1, 1, '20/02/2018', '20/03/2018', 2),
+(3, 'Corrida Contra Violência Infantil', '07:00', '21/02/2018', 2000, NULL, 'A Corrida Contra Violência Infantil tem como objetivo promover a conscientização sobre os problemas sociais causados pela violência infantil. Venha combater a violência !!!  ', '22011010', 'RJ', 'Rio de Janeiro', 'Copacabana ', 'Avenida Princesa Isabel', '123', 1, 1, '20/12/2017', '20/01/2018', 3),
+(4, 'Corrida da Independencia', '09:00', '20/03/2018', 5000, '', 'A Corrida da Independencia tem como objetivo promover a cofraternização entre os patriótas. Venha ser Independente também !!', '25809210', 'RJ', 'Três Rios', 'Cidade Nova', 'Rua Artur Bernardes', '145', 1, 0, '20/01/2018', '20/01/2018', 1);
 
 --
 -- Extraindo dados da tabela `kit`
 --
 
 INSERT INTO `kit` (`id`, `nome`, `descricao`, `imagem`, `tipo_chip`, `organizador_id`) VALUES
-(1, 'VIP', 'Camiseta regata, sacola, boné e medalha (pós evento) + pochete maratona', 'imagesUpload/kit\\kit-1.png', 'Retornável', 1),
-(2, 'Premio', 'Camiseta regata, sacola, boné e medalha (pós evento) + porta número de peito.', 'imagesUpload/kit\\kit-2.jpg', 'Descartável', 2),
-(3, 'Básico', 'Camiseta regata, sacola, boné e medalha (pós evento)', 'imagesUpload/kit\\kit-3.png', 'Descartável', 3),
-(4, 'Básico', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento) + jaqueta', 'imagesUpload/kit\\kit-4.jpg', 'Descartável', 1),
-(5, 'Intermediário', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento)', 'imagesUpload/kit\\kit-5.jpg', 'Descartável', 1),
-(6, 'Ouro', 'Bonenjckd', 'imagesUpload/kit\\kit-6.jpg', 'Descartável', 1),
-(7, 'Básico', 'Boné, Camisa e Toalha ', 'imagesUpload/kit\\kit-7.jpg', 'Descartável', 2);
+(1, 'VIP', 'Camiseta regata, sacola, boné e medalha (pós evento) + pochete maratona', 'imagesUpload/kit\\kit-1.png', 'Retornavel', 1),
+(2, 'Premio', 'Camiseta regata, sacola, boné e medalha (pós evento) + porta número de peito.', 'imagesUpload/kit\\kit-2.jpg', 'Descartavel', 2),
+(3, 'Básico', 'Camiseta regata, sacola, boné e medalha (pós evento)', 'imagesUpload/kit\\kit-3.png', 'Descartavel', 3),
+(4, 'Básico', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento) + jaqueta', 'imagesUpload/kit\\kit-4.jpg', 'Descartavel', 1),
+(5, 'Intermediário', 'Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento)', 'imagesUpload/kit\\kit-5.jpg', 'Descartavel', 1),
+(6, 'Ouro', 'Bonenjckd', 'imagesUpload/kit\\kit-6.jpg', 'Descartavel', 1),
+(7, 'Básico', 'Boné, Camisa e Toalha ', 'imagesUpload/kit\\kit-7.jpg', 'Descartavel', 2);
 
 --
 -- Extraindo dados da tabela `kit_corrida`
