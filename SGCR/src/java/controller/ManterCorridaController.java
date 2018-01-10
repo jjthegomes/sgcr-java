@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -115,6 +117,20 @@ public class ManterCorridaController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
+        if (nome.length() < 0 || maxPessoa < 1 || horario.length() < 5 || data.length() < 10 || rua.length() < 1 || cep.length() < 8 || numero.length() < 1
+                || cidade.length() < 1 || estado.length() < 1 || bairro.length() < 1 || descricao.length() < 1 || dataInicioRetiradaKit.length() < 10 || dataFinalRetiradaKit.length() < 10) {
+            request.setAttribute("mensagemErro", "Dados inválidos para cadastro da corrida");
+            request.setAttribute("operacao", "Incluir");
+            RequestDispatcher view = request.getRequestDispatcher("/manterCorrida.jsp");
+            try {
+                view.forward(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         try {
             Corrida corrida = new Corrida(nome, maxPessoa, horario, data,
                     "", rua, cep, numero, cidade, estado, bairro, descricao, edicao, ativo, dataInicioRetiradaKit, dataFinalRetiradaKit, organizador);
@@ -127,6 +143,19 @@ public class ManterCorridaController extends HttpServlet {
             String[] arrayPrecoKit = request.getParameterValues("txtPrecoKit");
             String[] arrayTipoChipKit = request.getParameterValues("txtTipoChipKit");
             String[] arrayDescricaoKit = request.getParameterValues("txtDescricaoKit");
+
+            if (arrayNomeKit == null || arrayPrecoKit == null || arrayTipoChipKit == null || arrayDescricaoKit == null) {
+                request.setAttribute("mensagemErro", "Dados inválidos para cadastro de kits na corrida");
+                request.setAttribute("operacao", "Incluir");
+                RequestDispatcher view = request.getRequestDispatcher("/manterCorrida.jsp");
+                try {
+                    view.forward(request, response);
+                } catch (ServletException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
             ArrayList<String> arrayImagemKit = uploadFiles(request, response);
 
@@ -149,7 +178,20 @@ public class ManterCorridaController extends HttpServlet {
             //percurso
             String[] arrayQuilometragemPercurso = request.getParameterValues("txtQuilometragemPercurso");
             String[] arrayDescricaoPercurso = request.getParameterValues("txtDescricaoPercurso");
-
+            
+            if (arrayQuilometragemPercurso == null || arrayDescricaoPercurso == null) {
+                request.setAttribute("mensagemErro", "Dados inválidos para cadastro de percursos na corrida");
+                request.setAttribute("operacao", "Incluir");
+                RequestDispatcher view = request.getRequestDispatcher("/manterCorrida.jsp");
+                try {
+                    view.forward(request, response);
+                } catch (ServletException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
             for (int i = 0; i < arrayQuilometragemPercurso.length; i++) {
                 Double quilometragemPercurso = Double.parseDouble(arrayQuilometragemPercurso[i]);
                 String descricaoPercurso = arrayDescricaoPercurso[i];
@@ -165,7 +207,20 @@ public class ManterCorridaController extends HttpServlet {
             String[] arrayPrecoLote = request.getParameterValues("txtPrecoLote");
             String[] arrayDataInicioLote = request.getParameterValues("txtDataInicioLote");
             String[] arrayDataTerminoLote = request.getParameterValues("txtDataTerminoLote");
-
+            
+            if (arrayTipoLote == null || arrayPrecoLote == null || arrayDataInicioLote == null || arrayDataTerminoLote == null) {
+                request.setAttribute("mensagemErro", "Dados inválidos para cadastro de lotes na corrida");
+                request.setAttribute("operacao", "Incluir");
+                RequestDispatcher view = request.getRequestDispatcher("/manterCorrida.jsp");
+                try {
+                    view.forward(request, response);
+                } catch (ServletException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ManterCorridaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
             for (int i = 0; i < arrayTipoLote.length; i++) {
                 String tipoLote = arrayTipoLote[i];
                 Double precoLote = Double.parseDouble(arrayPrecoLote[i]);
@@ -188,14 +243,14 @@ public class ManterCorridaController extends HttpServlet {
 
     public ArrayList uploadFiles(HttpServletRequest request, HttpServletResponse response) {
         /*Identifica se o formulario é do tipo multipart/form-data*/
-        
+
         ArrayList files = new ArrayList();
-        
+
         if (ServletFileUpload.isMultipartContent(request)) {
             try {
                 /*Faz o parse do request*/
                 List<Part> fileParts = request.getParts().stream().filter(part -> "txtImagemKit".equals(part.getName())).collect(Collectors.toList());
-                
+
                 for (Part filePart : fileParts) {
                     Calendar hoje = Calendar.getInstance();
                     String fileName = "IMG-" + hoje.get(Calendar.YEAR) + "-" + (hoje.get(Calendar.MONTH) + 1) + "-" + hoje.get(Calendar.DAY_OF_MONTH) + "_" + hoje.get(Calendar.HOUR_OF_DAY) + "-" + hoje.get(Calendar.MINUTE) + "-" + hoje.get(Calendar.SECOND) + "_" + hoje.get(Calendar.MILLISECOND);
@@ -205,7 +260,7 @@ public class ManterCorridaController extends HttpServlet {
                     try (InputStream input = filePart.getInputStream()) {
                         Files.copy(input, file.toPath());
                     }
-                       
+
                     files.add(path + File.separator + fileName);
                 }
                 request.setAttribute("message", "Arquivo carregado com sucesso");

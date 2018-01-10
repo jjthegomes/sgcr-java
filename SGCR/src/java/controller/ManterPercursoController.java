@@ -118,15 +118,21 @@ public class ManterPercursoController extends HttpServlet {
     private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
         double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         String descricao = request.getParameter("descricaoPercurso");
-
+        int corridaId = Integer.parseInt(request.getParameter("hiddenIdCorrida"));
+        
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
 
         try {
-            Percurso percurso = new Percurso( numQuilometragem, descricao, organizador);
+            Percurso percurso = new Percurso(numQuilometragem, descricao, organizador);
             percurso.gravar();
-
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
+            
+            Corrida corrida = Corrida.obterCorrida(corridaId);
+            percurso.gravar();
+            percurso = Percurso.obterUltimoPercursoOrganizador(organizador.getId());
+            percurso.gravarPercursoCorrida(corrida);
+            
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {
@@ -156,16 +162,16 @@ public class ManterPercursoController extends HttpServlet {
 
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("hiddenIdPercurso"));
-        String descricao = request.getParameter("descricaoPercurso");
-        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
+//        String descricao = request.getParameter("descricaoPercurso");
+//        double numQuilometragem = Double.parseDouble(request.getParameter("numQuilometragemPercurso"));
         
         HttpSession session = request.getSession(true);
         Organizador organizador = (Organizador) session.getAttribute("organizador");
         
-        Percurso percurso = new Percurso(id, numQuilometragem, descricao, organizador);
+        Percurso percurso = new Percurso(id, 0.0, "", organizador);
         try {
             percurso.excluir();
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {
@@ -205,7 +211,7 @@ public class ManterPercursoController extends HttpServlet {
             Percurso percurso = new Percurso(id, numQuilometragem, descricao, organizador);
             percurso.alterar();
 
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPercursoController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaCorridaController");
             view.forward(request, response);
         } catch (IOException ex) {
         } catch (SQLException ex) {

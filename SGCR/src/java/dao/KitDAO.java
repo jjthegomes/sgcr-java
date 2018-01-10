@@ -133,6 +133,36 @@ public class KitDAO {
             throw e;
         }
     }
+    
+    public static void alterarKitCorrida(Kit kit, int corridaId) throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        try {
+            conexao = BD.getConexao();
+            String sql = "UPDATE kit SET nome = ?, descricao = ?, imagem = ?, tipo_chip = ?, organizador_id = ?  WHERE id = ?";
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, kit.getNome());
+            comando.setString(2, kit.getDescricao());
+            comando.setString(3, kit.getImagem());
+            comando.setString(4, kit.getTipoChip());
+            comando.setInt(5, kit.getOrganizador().getId());
+            comando.setInt(6, kit.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+            
+            conexao = BD.getConexao();
+            sql = "UPDATE kit_corrida SET preco = ? WHERE corrida_id = ? AND kit_id = ?";
+            comando = conexao.prepareStatement(sql);
+            comando.setDouble(1, kit.getPreco());
+            comando.setInt(2, corridaId);
+            comando.setInt(3, kit.getId());
+            comando.execute();
+            comando.close();
+            conexao.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public static void excluir(Kit kit) throws SQLException, ClassNotFoundException {
         Connection conexao = null;

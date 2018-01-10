@@ -3,11 +3,13 @@
 class Kit {
     constructor(imagem, nome, preco, tipoChip, descricao) {
         this.id = new Date().getTime();
-        this.imagem = imagem;
+        if (imagem.length > 0)
+            this.imagem = imagem;
         this.nome = nome;
         this.preco = preco;
         this.tipoChip = tipoChip;
         this.descricao = descricao;
+        this.imagemServidor;
         Kit.inputs = ['imagemKit', 'nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit'];
     }
 
@@ -27,15 +29,16 @@ class Kit {
         imagemInput.setAttribute("id", "txtImagemKit" + kit.id);
         imagemInput.files = imagem.files;
         kit.imagem = imagemInput;
-
         arrayKits[kit.id] = kit;
 
-        var percursos = document.getElementById("area-kits");
+        var kits = document.getElementById("area-kits");
         var kitTr = '';
 
         if (kit.nome.length > 0 && kit.preco > 0 && kit.tipoChip.length > 0 && kit.descricao.length > 0) {
 
-            document.getElementById("div-vazia-kits").style.display = 'none';
+            if (!document.getElementById("div-vazia-kits") === null) {
+                document.getElementById("div-vazia-kits").style.display = 'none';
+            }
 
             kitTr += '<tr id="kit' + kit.id + '">';
             kitTr += '<div id="divImagemKit' + kit.id + '"></div>';
@@ -52,7 +55,7 @@ class Kit {
             kitTr += '   <td style="width: 20px;"><a class="btn btn-danger btn-xs" onclick="Kit.removeItem(\'kit' + kit.id + '\')" ><i class="fa fa-trash"></i></a></td>';
             kitTr += '</tr>';
 
-            percursos.insertAdjacentHTML('afterbegin', kitTr);
+            kits.insertAdjacentHTML('afterbegin', kitTr);
 
             limpaInputs(Kit.inputs);
 
@@ -61,42 +64,90 @@ class Kit {
             divImagemKit.innerHTML = "";
             divImagemKit.appendChild(imagemInput);
         }
-
-
     }
 
     static prepararEditar(id) {
         if (typeof arrayKits[id] === "undefined") {
-            var kit = new Kit(document.getElementById('txtImagemKit' + id),
+            var kit = new Kit("",
                     document.getElementById('txtNomeKit' + id).value,
                     parseFloat(document.getElementById('txtPrecoKit' + id).value),
                     document.getElementById('txtTipoChipKit' + id).value,
                     document.getElementById('txtDescricaoKit' + id).value);
 
+            kit.imagemServidor = document.getElementById('txtImagemKitServidor' + id).value;
             kit.id = id;
             arrayKits[kit.id] = kit;
-            console.log("chegou");
+
+            kit = arrayKits[id];
+        } else {
+            var kit = arrayKits[id];
+            if (typeof kit.imagem !== "undefined") {
+//                arrayKits[id].imagemServidor = "";
+//                arrayKits[id].imagem = document.getElementById("fileUpload");
+                kit = arrayKits[id];
+            }
         }
 
-        var kit = arrayKits[id];
-        escolherImagem(kit.imagem);
+        document.getElementById("preview-kit").style.display = "block";
+
         document.getElementById("nomeKit").value = kit.nome;
         document.getElementById("precoKit").value = kit.preco;
         document.getElementById("tipoChipKit").value = kit.tipoChip;
         document.getElementById("descricaoKit").value = kit.descricao;
 
+        if (typeof kit.imagem === "undefined") {
+            var div = document.getElementById("image-holder");
+            div.innerHTML = '<img src="' + kit.imagemServidor + '"/>';
+        }
+
         var editaKit = '<a class="btn btn-warning btn-block" id="adicionaKit" onclick="Kit.edita(' + id + ')">Editar</a>';
         document.getElementById("divAdicionaKit").innerHTML = editaKit;
     }
 
-    static edita(id) {
-        arrayKits[id].imagem = document.getElementById('imagemKit');
+    static prepararEditarBD(id) {
+        document.frmManterKit.action = "ManterKitController?acao=confirmarEditar";
 
-        var imagemInput = document.createElement("INPUT");
-        imagemInput.setAttribute("type", "file");
-        imagemInput.setAttribute("name", "txtImagemKit");
-        imagemInput.setAttribute("id", "txtImagemKit" + arrayKits[id].id);
-        imagemInput.files = arrayKits[id].imagem.files;
+        var kit = new Kit("",
+                document.getElementById('txtNomeKit' + id).value,
+                parseFloat(document.getElementById('txtPrecoKit' + id).value),
+                document.getElementById('txtTipoChipKit' + id).value,
+                document.getElementById('txtDescricaoKit' + id).value);
+
+        kit.imagemServidor = document.getElementById('txtImagemKitServidor' + id).value;
+        kit.id = id;
+        arrayKits[kit.id] = kit;
+
+        kit = arrayKits[id];
+
+        document.getElementById("preview-kit").style.display = "block";
+
+        document.getElementById("idKit").value = kit.id;
+        document.getElementById("nomeKit").value = kit.nome;
+        document.getElementById("precoKit").value = kit.preco;
+        document.getElementById("tipoChipKit").value = kit.tipoChip;
+        document.getElementById("descricaoKit").value = kit.descricao;
+
+        var div = document.getElementById("image-holder");
+        div.innerHTML = '<img src="' + kit.imagemServidor + '"/>';
+
+        var editaKit = '<button type="submit" class="btn btn-warning btn-block">Editar</button>';
+        document.getElementById("divAdicionaKit").innerHTML = editaKit;
+    }
+
+    static edita(id) {
+        if (document.getElementById("fileUpload").value !== "") {
+            arrayKits[id].imagem = document.getElementById('imagemKit');
+            var imagemInput = document.createElement("INPUT");
+            imagemInput.setAttribute("type", "file");
+            imagemInput.setAttribute("name", "txtImagemKit");
+            imagemInput.setAttribute("id", "txtImagemKit" + arrayKits[id].id);
+            imagemInput.files = arrayKits[id].imagem.files;
+            arrayKits[id].imagem = imagemInput;
+            arrayKits[id].imagemServidor = null;
+        } else if (typeof arrayKits[id].imagemServidor !== "undefined") {
+            var div = document.getElementById("image-holder");
+            div.innerHTML = '<img src="' + arrayKits[id].imagemServidor + '"/>';
+        }
 
         arrayKits[id].nome = document.getElementById('nomeKit').value;
         arrayKits[id].preco = parseFloat(document.getElementById('precoKit').value);
@@ -106,9 +157,12 @@ class Kit {
         var kit = arrayKits[id];
 
         var divImagemKit = document.getElementById("divImagemKit" + kit.id);
-        divImagemKit.style.display = "block";
+        divImagemKit.style.display = "none";
         divImagemKit.innerHTML = "";
-        divImagemKit.appendChild(kit.imagem);
+
+        if (typeof arrayKits[id].imagem !== "undefined") {
+            divImagemKit.appendChild(kit.imagem);
+        }
 
         document.getElementById("txtNomeKit" + id).value = kit.nome;
         document.getElementById("nomeKit" + id).innerHTML = kit.nome;
@@ -131,6 +185,40 @@ class Kit {
         var adicionaKit = '<a class="btn btn-info btn-block" id="adicionaKit" onclick="Kit.adiciona()">Adicionar</a>';
         document.getElementById("divAdicionaKit").innerHTML = adicionaKit;
     }
+
+    static removeItemBD(id) {
+        document.frmManterKit.action = "ManterKitController?acao=confirmarExcluir";
+        var kit = new Kit("",
+                document.getElementById('txtNomeKit' + id).value,
+                parseFloat(document.getElementById('txtPrecoKit' + id).value),
+                document.getElementById('txtTipoChipKit' + id).value,
+                document.getElementById('txtDescricaoKit' + id).value);
+
+        kit.imagemServidor = document.getElementById('txtImagemKitServidor' + id).value;
+        kit.id = id;
+        arrayKits[kit.id] = kit;
+
+        kit = arrayKits[id];
+
+        document.getElementById("preview-kit").style.display = "block";
+
+        document.getElementById("idKit").value = kit.id;
+        document.getElementById("nomeKit").value = kit.nome;
+        document.getElementById("precoKit").value = kit.preco;
+        document.getElementById("tipoChipKit").value = kit.tipoChip;
+        document.getElementById("descricaoKit").value = kit.descricao;
+        document.getElementById("nomeKit").disabled = true;
+        document.getElementById("precoKit").disabled = true;
+        document.getElementById("tipoChipKit").disabled = true;
+        document.getElementById("descricaoKit").disabled = true;
+        document.getElementById("fileUpload").disabled = true;
+
+        var div = document.getElementById("image-holder");
+        div.innerHTML = '<img src="' + kit.imagemServidor + '"/>';
+
+        var editaKit = '<button type="submit" class="btn btn-danger btn-block">Excluir</button>';
+        document.getElementById("divAdicionaKit").innerHTML = editaKit;
+    }
 }
 
 var kitInputs = ['imagemKit', 'nomeKit', 'precoKit', 'tipoChipKit', 'descricaoKit'];
@@ -152,6 +240,26 @@ class Percurso {
         document.getElementById(id).remove();
         limpaInputs(Percurso.inputs);
         var criaPercurso = '<a class="btn btn-info btn-block" id="criaPercurso" onclick="criaPercurso()">Adicionar</a>';
+        document.getElementById("divCriaPercurso").innerHTML = criaPercurso;
+    }
+    
+    static removeItemBD(id) {
+        document.frmManterPercurso.action = "ManterPercursoController?acao=confirmarExcluir";
+        var percurso = new Percurso(parseFloat(document.getElementById('txtQuilometragemPercurso'+id).value), document.getElementById('txtDescricaoPercurso'+id).value);
+
+        percurso.id = id;
+        arrayPercursos[percurso.id] = percurso;
+
+        percurso = arrayPercursos[id];
+
+        document.getElementById("idPercurso").value = percurso.id;
+        document.getElementById("quilometragemPercurso").value = parseFloat(percurso.quilometragem);
+        document.getElementById("descricaoPercurso").value = percurso.descricao;
+
+        document.getElementById("quilometragemPercurso").disabled = true;
+        document.getElementById("descricaoPercurso").disabled = true;
+        
+        var criaPercurso = '<button type="submit" class="btn btn-danger btn-block">Excluir</button>';
         document.getElementById("divCriaPercurso").innerHTML = criaPercurso;
     }
 }
@@ -196,6 +304,23 @@ function prepararEditarPercurso(percursoId) {
     document.getElementById("descricaoPercurso").value = percurso.descricao;
 
     var editaPercurso = '<a class="btn btn-warning btn-block" id="criaPercurso" onclick="editaPercurso(' + percursoId + ')">Editar</a>';
+    document.getElementById("divCriaPercurso").innerHTML = editaPercurso;
+}
+
+function prepararEditarPercursoBD(percursoId) {
+    document.frmManterPercurso.action = "ManterPercursoController?acao=confirmarEditar";
+
+    var percurso = new Percurso(parseFloat(document.getElementById('txtQuilometragemPercurso' + percursoId).value), document.getElementById('txtDescricaoPercurso' + percursoId).value);
+    percurso.id = percursoId;
+    arrayPercursos[percurso.id] = percurso;
+
+    percurso = arrayPercursos[percursoId];
+
+    document.getElementById("idPercurso").value = percurso.id;
+    document.getElementById("quilometragemPercurso").value = percurso.quilometragem;
+    document.getElementById("descricaoPercurso").value = percurso.descricao;
+
+    var editaPercurso = '<button type="submit" class="btn btn-warning btn-block">Editar</button>';
     document.getElementById("divCriaPercurso").innerHTML = editaPercurso;
 }
 
@@ -284,6 +409,30 @@ class Lote {
         document.getElementById("divAdicionaLote").innerHTML = editaLote;
     }
 
+    static prepararEditarBD(id) {
+        document.frmManterLote.action = "ManterKitController?acao=confirmarEditar";
+
+        var lote = new Lote(
+                document.getElementById('txtTipoLote' + id).value,
+                parseFloat(document.getElementById('txtPrecoLote' + id).value),
+                document.getElementById('txtDataInicioLote' + id).value,
+                document.getElementById('txtDataTerminoLote' + id).value);
+
+        lote.id = id;
+        arrayLotes[lote.id] = lote;
+
+        lote = arrayLotes[id];
+
+        document.getElementById("idLote").value = lote.id;
+        document.getElementById("tipoLote").value = lote.tipo;
+        document.getElementById("precoLote").value = lote.preco;
+        document.getElementById("dataInicioLote").value = lote.dataInicio;
+        document.getElementById("dataTerminoLote").value = lote.dataTermino;
+
+        var editaKit = '<button type="submit" class="btn btn-warning btn-block">Editar</button>';
+        document.getElementById("divAdicionaKit").innerHTML = editaKit;
+    }
+
     static edita(id) {
         arrayLotes[id].tipo = document.getElementById('tipoLote').value;
         arrayLotes[id].preco = parseFloat(document.getElementById('precoLote').value);
@@ -330,7 +479,7 @@ function limpaInputs(arrayInputs) {
 }
 
 function escolherImagem(input) {
-    
+    document.getElementById("image-holder").innerHTML = "";
     if (typeof (FileReader) !== "undefined") {
 
         var image_holder = $("#image-holder");
@@ -349,13 +498,11 @@ function escolherImagem(input) {
         alert("Este navegador nao suporta FileReader.");
     }
 
-    console.log("Input Imagem:");
-    console.log(input.files);
     document.getElementById("preview-kit").style.display = "inline-block";
-//    console.log(input.files);
     var x = document.createElement("INPUT");
     x.setAttribute("type", "file");
     x.setAttribute("id", "imagemKit");
+    x.setAttribute("name", "imagemKitBD");
     x.files = input.files;
     var divImagemKit = document.getElementById("divImagemKit");
     divImagemKit.innerHTML = "";

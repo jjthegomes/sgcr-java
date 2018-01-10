@@ -151,6 +151,10 @@ public class Kit {
     public void alterar() throws SQLException, ClassNotFoundException {
         KitDAO.alterar(this);
     }
+    
+    public void alterarKitCorrida(int corridaId) throws SQLException, ClassNotFoundException {
+        KitDAO.alterarKitCorrida(this, corridaId);
+    }
 
     public void excluir() throws SQLException, ClassNotFoundException {
         KitDAO.excluir(this);
