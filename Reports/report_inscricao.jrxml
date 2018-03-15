@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4028d1f6-3bd2-4317-bdc6-dd7b5ecfc13e">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_inscricao" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4028d1f6-3bd2-4317-bdc6-dd7b5ecfc13e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -100,28 +100,28 @@ FROM
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="17fd9aa1-fbfc-4a72-93ea-c5e5c25d632f"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="60deca39-e307-464b-86e5-d5debdf42658"/>
+				<reportElement mode="Opaque" x="0" y="0" width="123" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="60deca39-e307-464b-86e5-d5debdf42658"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="100" y="0" width="58" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0aa96ce7-500b-4981-8f81-0a28c1cfd2cd"/>
+				<reportElement mode="Opaque" x="113" y="0" width="58" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0aa96ce7-500b-4981-8f81-0a28c1cfd2cd"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nº Peito]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="158" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83fd1f01-549b-432a-9297-dd1231825868"/>
+				<reportElement mode="Opaque" x="171" y="0" width="89" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83fd1f01-549b-432a-9297-dd1231825868"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data Compra]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="237" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="34b12f70-bc9f-4a09-936c-2562a99de845"/>
+				<reportElement mode="Opaque" x="260" y="0" width="56" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="34b12f70-bc9f-4a09-936c-2562a99de845"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -156,49 +156,49 @@ FROM
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="4a2bcf27-1815-4389-9e11-7ea0353f19a5"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="100" height="20" uuid="eb824405-5867-4c7f-889d-eb3bc28b38b3"/>
+				<reportElement x="0" y="0" width="123" height="20" uuid="eb824405-5867-4c7f-889d-eb3bc28b38b3"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{atleta_nome}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="100" y="0" width="58" height="20" uuid="2db0f590-3a8b-42e8-86a4-c1fbb177dc4e"/>
+				<reportElement x="123" y="0" width="48" height="20" uuid="2db0f590-3a8b-42e8-86a4-c1fbb177dc4e"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inscricao_numero_peito}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="158" y="0" width="79" height="20" uuid="d3442dfa-0e83-415c-aba6-3c99347229d0"/>
+				<reportElement x="181" y="0" width="78" height="20" uuid="d3442dfa-0e83-415c-aba6-3c99347229d0"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inscricao_data_compra}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="237" y="0" width="79" height="20" uuid="4ddea5d2-befc-4d7e-b684-dccf7c4e4f8e"/>
+				<reportElement x="270" y="0" width="46" height="20" uuid="4ddea5d2-befc-4d7e-b684-dccf7c4e4f8e"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inscricao_pago}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="316" y="0" width="79" height="20" uuid="9b97787e-0a3a-4972-9f6d-63d6ff25ff2c"/>
+				<reportElement x="320" y="0" width="75" height="20" uuid="9b97787e-0a3a-4972-9f6d-63d6ff25ff2c"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inscricao_kit_retirado}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="395" y="0" width="79" height="20" uuid="9acebbb1-3b3d-4be8-a5fa-8b6cce6ba41d"/>
+				<reportElement x="410" y="0" width="69" height="20" uuid="9acebbb1-3b3d-4be8-a5fa-8b6cce6ba41d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{inscricao_tempo_chegada}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="474" y="0" width="79" height="20" uuid="72857d2b-0464-4a4f-ada2-5c9000b6d8dd"/>
+				<reportElement x="490" y="0" width="63" height="20" uuid="72857d2b-0464-4a4f-ada2-5c9000b6d8dd"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
