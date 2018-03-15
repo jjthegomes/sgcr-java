@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report.corridaLote_2" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="de4353af-35d1-4ca1-b9d2-f45366ed1d22">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[c2djci5sb3RlIEFTICwyNSwzMiwxYjgyMzkzYi04YTZmLTQxMmYtYTlkZC02MGQyZmFiMGQ0ODc7
-c2djci5jb3JyaWRhIEFTICwxNTcsMjAsNzBmMTA1NWMtNjQwZC00YzQ4LWE0ZDYtOGE4ZjZiNzJm
-MTVmOw==]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGCR maria"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT sgcr.corrida.bairro,
