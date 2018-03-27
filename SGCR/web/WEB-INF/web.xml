@@ -132,6 +132,10 @@
         <servlet-name>UploaderController</servlet-name>
         <servlet-class>controller.UploaderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioControler</servlet-name>
+        <servlet-class>controller.RelatorioController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>UploaderController</servlet-name>
         <url-pattern>/UploaderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioControler</servlet-name>
+        <url-pattern>/RelatorioControler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
