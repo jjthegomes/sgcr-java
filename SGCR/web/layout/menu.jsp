@@ -1,7 +1,7 @@
 <%-- 
     Document   : menu
     Created on : 04/12/2017, 17:18:40
-    Author     : rafael
+    Author     : RAJ
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,6 +43,7 @@
                                 <li class="dropdown-header">Atleta</li>
                                 <li><a href="ManterAtletaController?acao=prepararEditar&id=${atleta.id}">Minha Conta</a></li>
                                 <li><a href="PesquisaInscricaoController">Minhas Corridas</a></li>
+                                <li><a href="RelatorioController">Relatório</a></li>
                                 <li class="divider"></li>
                                 <li><a href="LoginController?acao=logout">Sair</a></li>
                             </ul>
@@ -114,6 +115,7 @@
                     <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
                     <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
                     <li><a href="PesquisaRankingController?acao=visualizarRanking"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
+                    <li><a href="RelatorioController"><i class="fa fa-bar-chart-o    fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>
@@ -130,6 +132,7 @@
                     <li><a href="ManterRetirarKitController?acao=escolherCorrida"><i class="fa fa-shopping-bag fa-lg"></i> Retirada dos Kits</a></li>
                     <li><a href="ManterResultadoCorridaController?acao=escolherCorrida"><i class="fa  fa-list-ul fa-lg"></i> Resultado das Corridas </a></li>
                     <li><a href="ManterPagamentoController?acao=escolherCorrida"><i class="fa fa-credit-card fa-lg"></i> Pagamento</a></li>
+                    <li><a href="RelatorioController"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>
