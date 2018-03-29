@@ -132,7 +132,7 @@
                     <li><a href="ManterRetirarKitController?acao=escolherCorrida"><i class="fa fa-shopping-bag fa-lg"></i> Retirada dos Kits</a></li>
                     <li><a href="ManterResultadoCorridaController?acao=escolherCorrida"><i class="fa  fa-list-ul fa-lg"></i> Resultado das Corridas </a></li>
                     <li><a href="ManterPagamentoController?acao=escolherCorrida"><i class="fa fa-credit-card fa-lg"></i> Pagamento</a></li>
-                    <li><a href="RelatorioController"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
+                    <li><a href="RelatorioController?acao=relatorio"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>

@@ -133,7 +133,7 @@
         <servlet-class>controller.UploaderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RelatorioControler</servlet-name>
+        <servlet-name>RelatorioController</servlet-name>
         <servlet-class>controller.RelatorioController</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -269,8 +269,8 @@
         <url-pattern>/UploaderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RelatorioControler</servlet-name>
-        <url-pattern>/RelatorioControler</url-pattern>
+        <servlet-name>RelatorioController</servlet-name>
+        <url-pattern>/RelatorioController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

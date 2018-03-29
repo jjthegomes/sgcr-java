@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,26 +40,42 @@ public class RelatorioController extends HttpServlet {
      */
     
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws JRException {
- Connection conexao = null;
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)  
+           throws ServletException, IOException, ClassNotFoundException {
+        response.setContentType("text/html;charset=UTF-8");
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararRelatorio")) {
+            prepararRelatorio(request, response);
+        }else if (acao.equals("relatorio")){
+            relatorioAdministrador(request, response);
+        }
+    }
+    
+    public void relatorioAdministrador(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAdministrador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        }
+    }
+    
+    public void prepararRelatorio(HttpServletRequest request, HttpServletResponse response) {
+        Connection conexao = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/sca", "root", "123");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR?useUnicode=yes&characterEncoding=ISO-8859-1", "root", "");
             HashMap parametros = new HashMap();
-            parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/report8.jasper";
-            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
-            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+           // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
+            String relatorio = getServletContext().getRealPath("/WEB-INF")+"/report_organizador.jasper";
+            //JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            //byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
             response.setContentType("application/pdf");
-            response.getOutputStream().write(relat);
+            //response.getOutputStream().write(relat);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (JRException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
             try {
@@ -84,7 +101,7 @@ public class RelatorioController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (JRException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -102,7 +119,7 @@ public class RelatorioController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (JRException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
