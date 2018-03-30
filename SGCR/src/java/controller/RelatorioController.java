@@ -41,7 +41,7 @@ public class RelatorioController extends HttpServlet {
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)  
-           throws ServletException, IOException, ClassNotFoundException {
+           throws ServletException, IOException, ClassNotFoundException, JRException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
         if (acao.equals("prepararRelatorio")) {
@@ -60,19 +60,20 @@ public class RelatorioController extends HttpServlet {
         }
     }
     
-    public void prepararRelatorio(HttpServletRequest request, HttpServletResponse response) {
+    public void prepararRelatorio(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
         Connection conexao = null;
+        String relatorio = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR?useUnicode=yes&characterEncoding=ISO-8859-1", "root", "");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
             HashMap parametros = new HashMap();
            // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            String relatorio = getServletContext().getRealPath("/WEB-INF")+"/report_organizador.jasper";
-            //JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
-            //byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            relatorio = getServletContext().getRealPath("/WEB-INF")+"/report_atletaKit.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
             response.setContentType("application/pdf");
-            //response.getOutputStream().write(relat);
+            response.getOutputStream().write(relat);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
@@ -103,6 +104,8 @@ public class RelatorioController extends HttpServlet {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,6 +123,8 @@ public class RelatorioController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
             Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

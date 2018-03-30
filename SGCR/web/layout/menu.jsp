@@ -115,7 +115,7 @@
                     <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
                     <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
                     <li><a href="PesquisaRankingController?acao=visualizarRanking"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
-                    <li><a href="RelatorioController"><i class="fa fa-bar-chart-o    fa-lg"></i> Relatório</a></li>
+                    <li><a href="RelatorioController?acao=relatorio"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>

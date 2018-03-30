@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Relatório</h1>
-        <form action="RelatorioController" method="post">
+        <form action="RelatorioController?acao=prepararRelatorio" method="post">
           <input type="submit"/>
         </form>
     </body>
