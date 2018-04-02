@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_corredoresInadimplentes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3bb234f1-7a9d-428a-ab44-dbe3d5542768">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGCR maria"/>
+	<parameter name="P_corridaId" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT sgcr.corrida.nome,
+	sgcr.inscricao.data_compra,
+	sgcr.atleta.nome
+FROM sgcr.inscricao
+	INNER JOIN sgcr.atleta ON 
+	 sgcr.inscricao.atleta_id = sgcr.atleta.id 
+	INNER JOIN sgcr.corrida ON 
+	 sgcr.inscricao.corrida_id = sgcr.corrida.id
+	 where sgcr.inscricao.pago = 0  
+	 and sgcr.corrida.id =  $P{P_corridaId} 
+	  ]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="corrida"/>
+	</field>
+	<field name="data_compra" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="data_compra"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscricao"/>
+	</field>
+	<field name="COLUMN_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atleta"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="aec27440-1826-466f-bee3-4dbec4dac2bd"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="734c3c41-eab9-4425-8c35-b2a40f90dee2"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Inadimplentes]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="43" width="215" height="20" forecolor="#FFFFFF" uuid="7966af25-8cc2-4387-bc00-2ae7456cbfc3"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Lista de inadimplentes por corrida ]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="97ce5387-3091-477f-9650-a44f168dfd18"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2d4d21d0-3549-4a4b-8510-26affab79258">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="790bce87-bf70-4684-8256-6785aa8635a0"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="72febfb3-1c15-41a6-bf08-9c6f12e65ede">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fe7fecc-391c-4cf6-986b-540ebda6400e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Compra ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c50c65ae-99ba-4241-bfa2-6b3cf504d3fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bc9d4e17-434a-4c9a-9077-0b0a5ea8c3b2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atleta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="68270dee-a63d-4163-8110-2f7f232be3d1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="185" height="20" uuid="7cf03c02-aab5-4628-8f64-ff4c0690f08e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="790bce87-bf70-4684-8256-6785aa8635a0"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="185" y="0" width="185" height="20" uuid="8390e4a6-54a9-4813-9fce-4b543ccfa653">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fe7fecc-391c-4cf6-986b-540ebda6400e"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_compra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="370" y="0" width="185" height="20" uuid="bfd2d864-da7c-44d1-ac60-8828fb359c0a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bc9d4e17-434a-4c9a-9077-0b0a5ea8c3b2"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="b9018880-097f-4f60-928a-bb35ac29f4c5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="57aa3b48-8866-4831-9d3e-ebfba11ce889"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="726bd4c7-9af8-44d4-8072-b8cae656852d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
