@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_atletaCorrida" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62b86796-7acd-4983-862d-36f645b9594f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SGCR"/>
+	<parameter name="P_corridaid" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT sgcr.corrida.nome,
+	sgcr.atleta.nome,
+	sgcr.atleta.sexo,
+	sgcr.inscricao.data_compra
+FROM sgcr.inscricao
+	INNER JOIN sgcr.corrida ON 
+	 sgcr.inscricao.corrida_id = sgcr.corrida.id 
+	INNER JOIN sgcr.atleta ON 
+	 sgcr.inscricao.atleta_id = sgcr.atleta.id
+	 
+	 WHERE sgcr.inscricao.pago = 1 AND sgcr.corrida.id =  $P{P_corridaid} ]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="corrida"/>
+	</field>
+	<field name="COLUMN_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atleta"/>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atleta"/>
+	</field>
+	<field name="data_compra" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="data_compra"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscricao"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="e7f8968f-0576-4b1c-9506-ccc715a94d4c"/>
+				<staticText>
+					<reportElement x="20" y="20" width="370" height="43" forecolor="#FFFFFF" uuid="8e4a26aa-1e05-409f-bc8f-4b35a51eb4f9"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Corridas Participadas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="350" y="43" width="225" height="20" forecolor="#FFFFFF" uuid="78c316a4-5d06-4efb-b2ab-82bca72d7737"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Lista de corridas participadas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="663c341a-6aaa-4fee-82cf-8186f561d346"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6afa6a76-b5f6-43e4-9296-dc04735b794e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6e3d825b-a383-4a48-84b4-583f88817a6f"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Corrida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="181" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6fa82348-fd81-41c0-8a70-1b42d55d088c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcc6aea-68b3-4957-898b-20981e424d4c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atleta
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="319" y="0" width="95" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="78d6b60b-45c4-47d9-8ffb-91480bb19059">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f320cf96-3a9c-4d66-a337-c82bf002a820"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0be2c85f-aca0-4750-986b-328e144fbaf3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="55e77083-e599-4364-83a2-f5d4a4d07e0b"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Compra]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="9758b105-3f84-4459-9782-3aa382d59ded"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="138" height="20" uuid="b3059ac7-abc0-4801-93ea-da399569be92">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6e3d825b-a383-4a48-84b4-583f88817a6f"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="0" width="201" height="20" uuid="f5f3862c-0169-40f2-8299-1362a1e41e46">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcc6aea-68b3-4957-898b-20981e424d4c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="350" y="0" width="63" height="20" uuid="65e73b93-abfa-45d8-8af6-868f2755fbac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f320cf96-3a9c-4d66-a337-c82bf002a820"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="440" y="0" width="111" height="20" uuid="617e44f7-9a04-4fc3-8543-81f75828d334">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="55e77083-e599-4364-83a2-f5d4a4d07e0b"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_compra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="db2607cc-82e6-4dfa-b50e-de426bc8085c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="5284f05e-15b6-48be-aba6-908e8b720e32"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="b85dae53-83e0-4024-b9fe-41047b380ea5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
