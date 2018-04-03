@@ -32,13 +32,21 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Organizadores (todos)</td>
-                        <td class="table-action">
-                            <form action="RelatorioController?acao=prepararRelatorio" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">Gerar!</button>
+                        <td>Organizadores</td>
+                        <td colspan="2" style='text-align: right' >
+                            <form action="RelatorioController?acao=gerarRelatorioOrganizadores" method="post">
+                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">Gerar</button>
                             </form>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>Corridas por Organizadores</td>
+                        <td style='text-align: right'>
+                            <a class="btn btn-primary btn-xs" href="RelatorioController?acao=prepararRelatorioCorridasPorOrganizadores">Gerar</a>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>            
         </div>

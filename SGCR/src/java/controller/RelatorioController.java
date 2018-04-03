@@ -45,7 +45,7 @@ public class RelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
         if (acao.equals("prepararRelatorio")) {
-            prepararRelatorio(request, response);
+            gerarRelatorioOrganizadores(request, response);
         }else if (acao.equals("relatorio")){
             relatorioAdministrador(request, response);
         }
@@ -60,7 +60,35 @@ public class RelatorioController extends HttpServlet {
         }
     }
     
-    public void prepararRelatorio(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+    public void gerarRelatorioOrganizadores(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+        Connection conexao = null;
+        String relatorio = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
+            HashMap parametros = new HashMap();
+           // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
+            relatorio = getServletContext().getRealPath("/WEB-INF")+"/report_atletaKit.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
+    public void gerarRelatorioCorridasPorOrganizador(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
         Connection conexao = null;
         String relatorio = "";
         try {
