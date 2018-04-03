@@ -21,34 +21,18 @@
         <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
-            <h2>Relatório</h2>
+            <h2>Corridas Por Organizador</h2>
 
-            <table class="table table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Relatório</th>
-                        <th class="table-action">Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Organizadores</td>
-                        <td colspan="2" style='text-align: right' >
-                            <form action="RelatorioController?acao=gerarRelatorioOrganizadores" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">Gerar</button>
-                            </form>
-                        </td>
-                    </tr>
+            <form action="RelatorioController?acao=gerarRelatorioCorridasPorOrganizador" method="post">
+                <select class="form-control pagamentoCartaoCredito"  name="organizadorId" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                        <option hidden option="">Organizador</option>
+                    <c:forEach items="${organizadores}" var="organizador">  
+                        <option value="${organizador.id}">${organizador.nome}</option>
+                    </c:forEach>
+                </select>
 
-                    <tr>
-                        <td>Corridas por Organizadores</td>
-                        <td style='text-align: right'>
-                            <a class="btn btn-primary btn-xs" href="RelatorioController?acao=prepararRelatorioCorridasPorOrganizadores">Gerar</a>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>            
+                <button type="submit" class="btn btn-success">Gerar</button>
+            </form>
         </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>

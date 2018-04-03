@@ -44,19 +44,10 @@ public class RelatorioController extends HttpServlet {
            throws ServletException, IOException, ClassNotFoundException, JRException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
-        if (acao.equals("prepararRelatorio")) {
+        if (acao.equals("gerarRelatorioOrganizadores")) {
             gerarRelatorioOrganizadores(request, response);
-        }else if (acao.equals("relatorio")){
-            relatorioAdministrador(request, response);
-        }
-    }
-    
-    public void relatorioAdministrador(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAdministrador.jsp");
-            view.forward(request, response);
-        } catch (ServletException ex) {
-        } catch (IOException ex) {
+        }else if (acao.equals("gerarRelatorioCorridasPorOrganizador")){
+            gerarRelatorioCorridasPorOrganizador(request, response);
         }
     }
     
@@ -95,11 +86,12 @@ public class RelatorioController extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
             HashMap parametros = new HashMap();
-           // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            relatorio = getServletContext().getRealPath("/WEB-INF")+"/report_atletaKit.jasper";
+//            int id = Integer.parseInt(request.getParameter("id"));
+            parametros.put("P_idOrganizador", Integer.parseInt(request.getParameter("organizadorId")));
+            relatorio = getServletContext().getRealPath("/relatorio")+"/report_corridaOrganizador.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=relatorio.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=relatorioCorridasOrganizador.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {

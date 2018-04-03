@@ -136,6 +136,10 @@
         <servlet-name>RelatorioController</servlet-name>
         <servlet-class>controller.RelatorioController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PesquisaRelatorioController</servlet-name>
+        <servlet-class>controller.PesquisaRelatorioController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaAdministradorController</servlet-name>
         <url-pattern>/PesquisaAdministradorController</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>RelatorioController</servlet-name>
         <url-pattern>/RelatorioController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaRelatorioController</servlet-name>
+        <url-pattern>/PesquisaRelatorioController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
