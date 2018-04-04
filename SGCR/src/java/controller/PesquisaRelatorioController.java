@@ -81,7 +81,7 @@ public class PesquisaRelatorioController extends HttpServlet {
             Administrador administrador = (Administrador) session.getAttribute("administrador");
 
             request.setAttribute("corridas", Corrida.obterCorridas());
-            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAdministrador.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
         }

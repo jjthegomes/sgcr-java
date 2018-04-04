@@ -148,7 +148,7 @@ public class RelatorioController extends HttpServlet {
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
             HashMap parametros = new HashMap();
 //            int id = Integer.parseInt(request.getParameter("id"));
-            parametros.put("P_idCorrida", Integer.parseInt(request.getParameter("corridaId")));
+            parametros.put("P_corridaId", Integer.parseInt(request.getParameter("corridaId")));
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_atletaCorrida.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
