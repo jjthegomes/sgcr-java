@@ -43,7 +43,7 @@ public class PesquisaRelatorioController extends HttpServlet {
             relatorioAdministrador(request, response);
         } else if (acao.equals("relatorioOrganizador")) {
             relatorioOrganizador(request, response);
-        } else if (acao.equals("relatorioOrganizador")) {
+        } else if (acao.equals("relatorioAtleta")) {
             relatorioAtleta(request, response);
         } else if (acao.equals("prepararRelatorioCorridasPorOrganizador")) {
             prepararRelatorioCorridasPorOrganizador(request, response);
@@ -84,6 +84,24 @@ public class PesquisaRelatorioController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAdministrador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
+        }
+    }
+    
+      public void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        }
+    }
+      
+        public void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioAtleta.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
         }
     }
 
@@ -135,12 +153,5 @@ public class PesquisaRelatorioController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

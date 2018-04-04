@@ -115,7 +115,7 @@
                     <li><a href="PesquisaOrganizadorController"><i class="fa fa-male fa-lg"></i> Organizador</a></li>
                     <li><a href="PesquisaAtletaController"><i class="fa fa-male fa-lg"></i> Atleta</a></li>
                     <li><a href="PesquisaRankingController?acao=visualizarRanking"><i class="fa fa-trophy fa-lg"></i> Ranking</a></li>
-                    <li><a href="PesquisaRelatorioController?acao=relatorio"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
+                    <li><a href="PesquisaRelatorioController?acao=relatorioAdministrador"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>
@@ -132,7 +132,7 @@
                     <li><a href="ManterRetirarKitController?acao=escolherCorrida"><i class="fa fa-shopping-bag fa-lg"></i> Retirada dos Kits</a></li>
                     <li><a href="ManterResultadoCorridaController?acao=escolherCorrida"><i class="fa  fa-list-ul fa-lg"></i> Resultado das Corridas </a></li>
                     <li><a href="ManterPagamentoController?acao=escolherCorrida"><i class="fa fa-credit-card fa-lg"></i> Pagamento</a></li>
-                    <li><a href="PesquisaRelatorioController?acao=relatorioOrganizador"><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
+                    <li><a href="PesquisaRelatorioController?acao=relatorioOrganizador  "><i class="fa fa-bar-chart-o fa-lg"></i> Relatório</a></li>
                 </ul>
             </div>
         </div>
