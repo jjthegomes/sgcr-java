@@ -38,19 +38,23 @@ public class RelatorioController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)  
-           throws ServletException, IOException, ClassNotFoundException, JRException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, JRException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
         if (acao.equals("gerarRelatorioOrganizadores")) {
             gerarRelatorioOrganizadores(request, response);
-        }else if (acao.equals("gerarRelatorioCorridasPorOrganizador")){
+        } else if (acao.equals("gerarRelatorioCorridasPorOrganizador")) {
             gerarRelatorioCorridasPorOrganizador(request, response);
+        } else if (acao.equals("gerarRelatorioAtletas")) {
+            gerarRelatorioAtletas(request, response);
+        } else if (acao.equals("gerarRelatorioAtletasPorCorrida")) {
+            gerarRelatorioAtletasPorCorrida(request, response);
+        }  else if (acao.equals("gerarRelatorioAtletas")) {
+            gerarRelatorioAtletas(request, response);
         }
     }
-    
+
     public void gerarRelatorioOrganizadores(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
         Connection conexao = null;
         String relatorio = "";
@@ -58,8 +62,8 @@ public class RelatorioController extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
             HashMap parametros = new HashMap();
-           // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            relatorio = getServletContext().getRealPath("/relatorio")+"/report_organizador.jasper";
+            // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
+            relatorio = getServletContext().getRealPath("/relatorio") + "/report_organizador.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
@@ -78,7 +82,7 @@ public class RelatorioController extends HttpServlet {
             }
         }
     }
-    
+
     public void gerarRelatorioCorridasPorOrganizador(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
         Connection conexao = null;
         String relatorio = "";
@@ -88,10 +92,95 @@ public class RelatorioController extends HttpServlet {
             HashMap parametros = new HashMap();
 //            int id = Integer.parseInt(request.getParameter("id"));
             parametros.put("P_idOrganizador", Integer.parseInt(request.getParameter("organizadorId")));
-            relatorio = getServletContext().getRealPath("/relatorio")+"/report_corridaOrganizador.jasper";
+            relatorio = getServletContext().getRealPath("/relatorio") + "/report_corridaOrganizador.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorioCorridasOrganizador.pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
+    public void gerarRelatorioAtletas(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+        Connection conexao = null;
+        String relatorio = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
+            HashMap parametros = new HashMap();
+            // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
+            relatorio = getServletContext().getRealPath("/relatorio") + "/report_atleta.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=report_atleta.pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
+    public void gerarRelatorioAtletasPorCorrida(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+        Connection conexao = null;
+        String relatorio = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
+            HashMap parametros = new HashMap();
+//            int id = Integer.parseInt(request.getParameter("id"));
+            parametros.put("P_idCorrida", Integer.parseInt(request.getParameter("corridaId")));
+            relatorio = getServletContext().getRealPath("/relatorio") + "/report_atletaCorrida.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=relatorioAtletasCorrida.pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
+    public void gerarRelatorioAtletasKit(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+        Connection conexao = null;
+        String relatorio = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/SGCR", "root", "");
+            HashMap parametros = new HashMap();
+            // parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
+            relatorio = getServletContext().getRealPath("/relatorio") + "/report_atletaKit.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=report_atletaKit.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {

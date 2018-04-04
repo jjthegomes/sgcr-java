@@ -39,13 +39,16 @@ public class PesquisaRelatorioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
                String acao = request.getParameter("acao");
-
-        if (acao.equals("prepararRelatorioCorridasPorOrganizadores")) {
-            prepararRelatorioCorridasPorOrganizadores(request, response);
-        } else if (acao.equals("visualizarClassificacao")) {
-            visualizarClassificacaoCorrida(request, response);
-        } else if (acao.equals("relatorio")) {
+        if (acao.equals("relatorioAdministrador")) {
             relatorioAdministrador(request, response);
+        } else if (acao.equals("relatorioOrganizador")) {
+            relatorioOrganizador(request, response);
+        } else if (acao.equals("relatorioOrganizador")) {
+            relatorioAtleta(request, response);
+        } else if (acao.equals("prepararRelatorioCorridasPorOrganizador")) {
+            prepararRelatorioCorridasPorOrganizador(request, response);
+        } else if(acao.equals("prepararRelatorioAtletasPorCorrida")) {
+            prepararRelatorioAtletasPorCorrida(request, response);
         }
     }
     
@@ -58,7 +61,7 @@ public class PesquisaRelatorioController extends HttpServlet {
         }
     }
 
-    public void prepararRelatorioCorridasPorOrganizadores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void prepararRelatorioCorridasPorOrganizador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
@@ -70,45 +73,17 @@ public class PesquisaRelatorioController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-
-
-    public void visualizarClassificacao(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+    
+    public void prepararRelatorioAtletasPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
 
             request.setAttribute("corridas", Corrida.obterCorridas());
-            RequestDispatcher view = request.getRequestDispatcher("/escolherCorridaClassificacao.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAdministrador.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-        }
-    }
-
-    public void visualizarClassificacaoCorrida(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-        try {
-
-            int id = Integer.parseInt(request.getParameter("corridaId"));
-            request.setAttribute("corrida", Corrida.obterCorrida(id));
-            
-
-            request.setAttribute("percursos", Percurso.obterPercursosCorrida(id));
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-        }
-    }
-
-    
-    public void visualizarClassificacaoPercurso(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
-        try {
-
-            int id = Integer.parseInt(request.getParameter("corridaId"));
-            request.setAttribute("corrida", Corrida.obterCorrida(id));
-            int percursoId = Integer.parseInt(request.getParameter("percursoId"));
-            request.setAttribute("inscricoes", Inscricao.obterInscricoesCorrida(id, percursoId));
-
-            request.setAttribute("percursos", Percurso.obterPercursosCorrida(id));
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaCorridaClassificacao.jsp");
-            view.forward(request, response);
-        } catch (ServletException | IOException ex) {
+        } catch (ClassNotFoundException ex) {
         }
     }
 
@@ -159,5 +134,13 @@ public class PesquisaRelatorioController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
