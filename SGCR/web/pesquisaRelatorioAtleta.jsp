@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+<!--                    <tr>
                         <td>Organizadores</td>
                         <td colspan="2" style='text-align: right' >
                             <form action="RelatorioController?acao=gerarRelatorioOrganizadores" method="post">
@@ -37,34 +37,14 @@
                             </form>
                         </td>
                     </tr>
-                    
-                      <tr>
-                        <td>Atletas</td>
-                        <td colspan="2" style='text-align: right' >
-                            <form action="RelatorioController?acao=gerarRelatorioAtletas" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">
-                                    <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</button>
-                            </form>
-                        </td>
-                    </tr>   
-                    
-                     <tr>
-                        <td>Atletas Kit</td>
-                        <td colspan="2" style='text-align: right' >
-                            <form action="RelatorioController?acao=gerarRelatorioAtletasKit" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">
-                                    <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</button>
-                            </form>
-                        </td>
-                    </tr>
 
                     <tr>
-                        <td>Corridas por Organizadores</td>
+                        <td>Atleta Corrida</td>
                         <td style='text-align: right'>
-                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioCorridasPorOrganizador" style="width: 100px;">
+                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioAtletaCorrida" style="width: 100px;">
                                 <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</a>
                         </td>
-                    </tr>
+                    </tr>-->
 
                 </tbody>
             </table>            

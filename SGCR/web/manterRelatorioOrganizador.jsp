@@ -21,15 +21,15 @@
         <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
-            <h2>Corridas Por Organizador</h2>
+            <h2>Corridas</h2>
 
             <form action="RelatorioController?acao=gerarRelatorioCorridasPorOrganizador" method="post">
-                <select class="form-control pagamentoCartaoCredito"  name="organizadorId" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
-                        <option hidden option="">Organizador</option>
-                    <c:forEach items="${organizadores}" var="organizador">  
-                        <option value="${organizador.id}">${organizador.nome}</option>
-                    </c:forEach>
-                </select>
+                    <select class="form-control corridasOrganizador"  name="corridaId" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
+                            <option hidden option="">Corrida</option>
+                        <c:forEach items="${corridas}" var="corrida">  
+                            <option value="${corrida.id}">${corrida.nome}</option>
+                        </c:forEach>
+                    </select>
 
                 <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o fa-lg"></i> 
                     Gerar</button>
