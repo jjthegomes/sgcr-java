@@ -21,9 +21,9 @@
         <%@ include file = "layout/menu.jsp" %>
 
         <div class="container-fluid corpo corpo-adm">
-            <h2>Corridas</h2>
+            <h2>Corridas </h2>
 
-            <form action="RelatorioController?acao=gerarRelatorioCorridasPorOrganizador" method="post">
+            <form action="RelatorioController?acao=gerarRelatorioAtletasPorCorrida" method="post">
                     <select class="form-control corridasOrganizador"  name="corridaId" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option hidden option="">Corrida</option>
                         <c:forEach items="${corridas}" var="corrida">  

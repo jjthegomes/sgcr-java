@@ -23,7 +23,7 @@
         <div class="container-fluid corpo corpo-adm">
             <h2>Corridas</h2>
 
-<!--            <form action="RelatorioController?acao=gerarRelatorioCorridasPorOrganizador" method="post">
+            <form action="RelatorioController?acao=gerarRelatorioCorridasPorAtleta" method="post">
                     <select class="form-control corridasOrganizador"  name="corridaId" required <c:if test="${operacao == 'Excluir'}"> disabled</c:if>>
                             <option hidden option="">Corrida</option>
                         <c:forEach items="${corridas}" var="corrida">  
@@ -33,7 +33,7 @@
 
                 <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o fa-lg"></i> 
                     Gerar</button>
-            </form>-->
+            </form>
         </div>
         <%@ include file = "layout/rodape.jsp" %>
     </body>

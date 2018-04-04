@@ -28,8 +28,8 @@
                     </tr>
                 </thead>
                 <tbody>
-<!--                    <tr>
-                        <td>Organizadores</td>
+                  <tr>
+                        <td> -- </td>
                         <td colspan="2" style='text-align: right' >
                             <form action="RelatorioController?acao=gerarRelatorioOrganizadores" method="post">
                                 <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">
@@ -39,12 +39,12 @@
                     </tr>
 
                     <tr>
-                        <td>Atleta Corrida</td>
+                        <td>Atleta Pagamentos</td>
                         <td style='text-align: right'>
-                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioAtletaCorrida" style="width: 100px;">
+                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioCorridasPagamentoAtleta" style="width: 100px;">
                                 <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</a>
                         </td>
-                    </tr>-->
+                    </tr>                    
 
                 </tbody>
             </table>            
