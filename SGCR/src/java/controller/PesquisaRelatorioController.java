@@ -108,9 +108,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
+            Organizador organizador = (Organizador) session.getAttribute("organizador");
 
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -122,9 +122,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
+          Organizador organizador = (Organizador) session.getAttribute("organizador");
 
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -135,9 +135,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
+              Organizador organizador = (Organizador) session.getAttribute("organizador");
 
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -148,9 +148,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
+             Organizador organizador = (Organizador) session.getAttribute("organizador");
 
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -161,9 +161,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
+             Organizador organizador = (Organizador) session.getAttribute("organizador");
 
-            request.setAttribute("corridas", Corrida.obterCorridas());
+            request.setAttribute("corridas", Corrida.obterCorridas(organizador.getId()));
             RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -172,7 +172,7 @@ public class PesquisaRelatorioController extends HttpServlet {
 
     public void prepararRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);
         //Administrador administrador = (Administrador) session.getAttribute("administrador");
 
         //request.setAttribute("corridas", Corrida.obterCorridas());
