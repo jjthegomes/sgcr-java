@@ -49,6 +49,18 @@ public class PesquisaRelatorioController extends HttpServlet {
             prepararRelatorioCorridasPorOrganizador(request, response);
         } else if(acao.equals("prepararRelatorioAtletasPorCorrida")) {
             prepararRelatorioAtletasPorCorrida(request, response);
+        }else if(acao.equals("prepararRelatorioAtletasInadimplentes")) {
+            prepararRelatorioAtletasInadimplentes(request, response);
+        }else if(acao.equals("prepararRelatorioBoleto")) {
+            prepararRelatorioBoleto(request, response);
+        }else if(acao.equals("prepararRelatorioCartao")) {
+            prepararRelatorioCartao(request, response);
+        }else if(acao.equals("prepararRelatorioTodosPagamentos")) {
+            prepararRelatorioTodosPagamentos(request, response);
+        }else if(acao.equals("prepararRelatorioCorridasParticipadas")) {
+            prepararRelatorioCorridasParticipadas(request, response);
+        }else if(acao.equals("prepararRelatorioTodosPagamentosAtleta")) {
+            prepararRelatorioTodosPagamentosAtleta(request, response);
         }
     }
     
@@ -104,7 +116,77 @@ public class PesquisaRelatorioController extends HttpServlet {
         } catch (IOException ex) {
         }
     }
+        
+        
+   //início   
+ public void prepararRelatorioAtletasInadimplentes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
 
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+public void prepararRelatorioBoleto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+public void prepararRelatorioCartao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+public void prepararRelatorioTodosPagamentos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+public void prepararRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        //HttpSession session = request.getSession(true);
+        //Administrador administrador = (Administrador) session.getAttribute("administrador");
+        
+        //request.setAttribute("corridas", Corrida.obterCorridas());
+        RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAtleta.jsp");
+        view.forward(request, response);
+    }
+public void prepararRelatorioTodosPagamentosAtleta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        //HttpSession session = request.getSession(true);
+        //Administrador administrador = (Administrador) session.getAttribute("administrador");
+        
+        //request.setAttribute("corridas", Corrida.obterCorridas());
+        RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAtleta.jsp");
+        view.forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
