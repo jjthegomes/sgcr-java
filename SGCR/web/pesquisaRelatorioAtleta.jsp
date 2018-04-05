@@ -41,7 +41,7 @@
                     <tr>
                         <td>Atleta Pagamentos</td>
                         <td style='text-align: right'>
-                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioCorridasPagamentoAtleta" style="width: 100px;">
+                            <a class="btn btn-primary btn-xs" href="PesquisaRelatorioController?acao=prepararRelatorioCorridaPagamentosAtleta" style="width: 100px;">
                                 <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</a>
                         </td>
                     </tr>                    

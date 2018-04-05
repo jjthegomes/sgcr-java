@@ -27,28 +27,7 @@
                         <th class="table-action">Ação</th>
                     </tr>
                 </thead>
-                <tbody>
-                   <tr>
-                        <td>Lotes</td>
-                        <td colspan="2" style='text-align: right' >
-                            <form action="RelatorioController?acao=gerarRelatorioCorridasLote" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">
-                                    <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</button>
-                            </form>
-                        </td>
-                    </tr>
-                    
-                     <tr>
-                        <td>Pagamentos</td>
-                        <td colspan="2" style='text-align: right' >
-                            <form action="RelatorioController?acao=gerarRelatorioCorridaPagamentos" method="post">
-                                <button type="submit" class="btn btn-primary btn-xs" style="width: 100px;">
-                                    <i class="fa fa-file-pdf-o fa-lg"></i> Gerar</button>
-                            </form>
-                        </td>
-                    </tr>
-
-
+                <tbody>                 
                     <tr>
                         <td>Atleta Corrida</td>
                         <td style='text-align: right'>

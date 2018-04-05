@@ -38,7 +38,7 @@ public class PesquisaRelatorioController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
-               String acao = request.getParameter("acao");
+        String acao = request.getParameter("acao");
         if (acao.equals("relatorioAdministrador")) {
             relatorioAdministrador(request, response);
         } else if (acao.equals("relatorioOrganizador")) {
@@ -47,26 +47,44 @@ public class PesquisaRelatorioController extends HttpServlet {
             relatorioAtleta(request, response);
         } else if (acao.equals("prepararRelatorioCorridasPorOrganizador")) {
             prepararRelatorioCorridasPorOrganizador(request, response);
-        } else if(acao.equals("prepararRelatorioAtletasPorCorrida")) {
+        } else if (acao.equals("prepararRelatorioAtletasPorCorrida")) {
             prepararRelatorioAtletasPorCorrida(request, response);
-        }else if(acao.equals("prepararRelatorioAtletasInadimplentes")) {
-            prepararRelatorioAtletasInadimplentes(request, response);
-        }else if(acao.equals("prepararRelatorioBoleto")) {
-            prepararRelatorioBoleto(request, response);
-        }else if(acao.equals("prepararRelatorioCartao")) {
-            prepararRelatorioCartao(request, response);
-        }else if(acao.equals("prepararRelatorioTodosPagamentos")) {
-            prepararRelatorioTodosPagamentos(request, response);
-        }else if(acao.equals("prepararRelatorioCorridasParticipadas")) {
+        } else if (acao.equals("prepararRelatorioAtletasInadimplentesPorCorrida")) {
+            prepararRelatorioAtletasInadimplentesPorCorrida(request, response);
+        } else if (acao.equals("prepararRelatorioAtletasPagosPorCorridaBoleto")) {
+            prepararRelatorioAtletasPagosPorCorridaBoleto(request, response);
+        } else if (acao.equals("prepararRelatorioAtletasPagosPorCorridaCartao")) {
+            prepararRelatorioAtletasPagosPorCorridaCartao(request, response);
+        } else if (acao.equals("prepararRelatorioAtletasPagosPorCorrida")) {
+            prepararRelatorioAtletasPagosPorCorrida(request, response);
+        } else if (acao.equals("prepararRelatorioCorridasParticipadas")) {
             prepararRelatorioCorridasParticipadas(request, response);
-        }else if(acao.equals("prepararRelatorioTodosPagamentosAtleta")) {
-            prepararRelatorioTodosPagamentosAtleta(request, response);
+        } else if (acao.equals("prepararRelatorioCorridaPagamentosAtleta")) {
+            prepararRelatorioCorridaPagamentosAtleta(request, response);
         }
     }
-    
+
     public void relatorioAdministrador(HttpServletRequest request, HttpServletResponse response) {
         try {
             RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioAdministrador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        }
+    }
+
+    public void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ServletException ex) {
+        } catch (IOException ex) {
+        }
+    }
+
+    public void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioAtleta.jsp");
             view.forward(request, response);
         } catch (ServletException ex) {
         } catch (IOException ex) {
@@ -85,7 +103,7 @@ public class PesquisaRelatorioController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-    
+
     public void prepararRelatorioAtletasPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -98,28 +116,9 @@ public class PesquisaRelatorioController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
         }
     }
-    
-      public void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioOrganizador.jsp");
-            view.forward(request, response);
-        } catch (ServletException ex) {
-        } catch (IOException ex) {
-        }
-    }
-      
-        public void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            RequestDispatcher view = request.getRequestDispatcher("/pesquisaRelatorioAtleta.jsp");
-            view.forward(request, response);
-        } catch (ServletException ex) {
-        } catch (IOException ex) {
-        }
-    }
-        
-        
-   //início   
- public void prepararRelatorioAtletasInadimplentes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    //início   
+    public void prepararRelatorioAtletasInadimplentesPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
@@ -132,31 +131,7 @@ public class PesquisaRelatorioController extends HttpServlet {
         }
     }
 
-public void prepararRelatorioBoleto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
-
-            request.setAttribute("corridas", Corrida.obterCorridas());
-            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-        }
-    }
-public void prepararRelatorioCartao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession(true);
-            Administrador administrador = (Administrador) session.getAttribute("administrador");
-
-            request.setAttribute("corridas", Corrida.obterCorridas());
-            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException ex) {
-        }
-    }
-public void prepararRelatorioTodosPagamentos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void prepararRelatorioAtletasPagosPorCorridaBoleto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true);
@@ -169,20 +144,47 @@ public void prepararRelatorioTodosPagamentos(HttpServletRequest request, HttpSer
         }
     }
 
-public void prepararRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void prepararRelatorioAtletasPagosPorCorridaCartao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void prepararRelatorioAtletasPagosPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession(true);
+            Administrador administrador = (Administrador) session.getAttribute("administrador");
+
+            request.setAttribute("corridas", Corrida.obterCorridas());
+            RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioOrganizador.jsp");
+            view.forward(request, response);
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
+    public void prepararRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //HttpSession session = request.getSession(true);
         //Administrador administrador = (Administrador) session.getAttribute("administrador");
-        
+
         //request.setAttribute("corridas", Corrida.obterCorridas());
         RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAtleta.jsp");
         view.forward(request, response);
     }
-public void prepararRelatorioTodosPagamentosAtleta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    public void prepararRelatorioCorridaPagamentosAtleta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //HttpSession session = request.getSession(true);
         //Administrador administrador = (Administrador) session.getAttribute("administrador");
-        
+
         //request.setAttribute("corridas", Corrida.obterCorridas());
         RequestDispatcher view = request.getRequestDispatcher("/manterRelatorioAtleta.jsp");
         view.forward(request, response);
@@ -234,6 +236,5 @@ public void prepararRelatorioTodosPagamentosAtleta(HttpServletRequest request, H
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

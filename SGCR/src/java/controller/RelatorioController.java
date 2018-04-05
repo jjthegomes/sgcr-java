@@ -223,7 +223,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_corredoresInadimplentes.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_corredoresInadimplentes.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -250,7 +250,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_pagamentoBoleto.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_pagamentoBoleto.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -277,7 +277,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_pagamentoCartao.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_pagamentoCartao.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -304,7 +304,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_organizadorPagamento.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_organizadorPagamento.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -331,7 +331,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_atletaCorrida.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_atletaCorrida.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -358,7 +358,7 @@ public class RelatorioController extends HttpServlet {
             relatorio = getServletContext().getRealPath("/relatorio") + "/report_pagamentoAtleta.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=report_organizador.pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=report_pagamentoAtleta.pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
