@@ -43,7 +43,7 @@
                                 <li class="dropdown-header">Atleta</li>
                                 <li><a href="ManterAtletaController?acao=prepararEditar&id=${atleta.id}">Minha Conta</a></li>
                                 <li><a href="PesquisaInscricaoController">Minhas Corridas</a></li>
-                                <li><a href="RelatorioController">Relatório</a></li>
+                                <li><a href="PesquisaRelatorioController?acao=relatorioAtleta">Relatório</a></li>
                                 <li class="divider"></li>
                                 <li><a href="LoginController?acao=logout">Sair</a></li>
                             </ul>
