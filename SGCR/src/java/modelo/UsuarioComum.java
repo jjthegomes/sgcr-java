@@ -51,7 +51,9 @@ public abstract class UsuarioComum extends Usuario{
         this.telefone = telefone;
         this.celular = celular;
     }
-
+    public UsuarioComum(){
+        
+    }
     public String getDataNascimento() {
         return dataNascimento;
     }

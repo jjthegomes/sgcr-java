@@ -8,29 +8,38 @@ package modelo;
 import dao.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author RAJ
  */
-public class Produto {
+public class Produto{
     private int id;
     private String nome;
     private Administrador administrador;
-    
     private int administradorId;
+    
+    
+    public Produto(){
+    }
+    
 
     public Produto(int id, String nome, Administrador administrador) {
         this.id = id;
         this.nome = nome;
         this.administrador = administrador;
     }
-
+    
+    public void setAdministradorId(int administradorId) {
+        this.administradorId = administradorId;
+    }
+    
     public Produto(String nome, Administrador administrador) {
         this.nome = nome;
         this.administrador = administrador;
-    }        
-
+    }  
+    
     public int getId() {
         return id;
     }
@@ -58,11 +67,6 @@ public class Produto {
     public int getAdministradorId() {
         return administradorId;
     }
-
-    public void setAdministradorId(int administradorId) {
-        this.administradorId = administradorId;
-    }
-    
     public void gravar() throws SQLException,
         ClassNotFoundException{
          ProdutoDAO.gravar(this);
@@ -86,5 +90,5 @@ public class Produto {
     public static Produto obterProduto(int id) throws ClassNotFoundException{
         return ProdutoDAO.obterProduto(id);
     }
-    
+
 }

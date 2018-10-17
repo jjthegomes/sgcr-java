@@ -1,4 +1,7 @@
 package modelo;
+import java.util.regex.Pattern;
+
+
 
 /**
  *
@@ -23,7 +26,9 @@ public abstract class Usuario {
         this.email = email;
         this.senha = senha;
     }
-
+    public Usuario(){
+        
+    }
     public int getId() {
         return id;
     }
