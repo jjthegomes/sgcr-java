@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InscricaoDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">InscricaoDAO.java</span></div><h1>InscricaoDAO.java</h1><pre class="source lang-java linenums">package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Atleta;
+import modelo.Corrida;
+import modelo.Inscricao;
+import modelo.Kit;
+import modelo.Lote;
+import modelo.Organizador;
+import modelo.Percurso;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L22">public class InscricaoDAO {</span>
+
+    public static List&lt;Inscricao&gt; obterInscricoes() throws ClassNotFoundException {
+<span class="nc" id="L25">        Connection conexao = null;</span>
+<span class="nc" id="L26">        Statement comando = null;</span>
+<span class="nc" id="L27">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L30">            conexao = BD.getConexao();</span>
+<span class="nc" id="L31">            comando = conexao.createStatement();</span>
+<span class="nc" id="L32">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao&quot;);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L35">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L36">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L38">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L39">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L40">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L41">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L42">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L43">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L48">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L49">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L50">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L51">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L52">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L54">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L55">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L56">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L57">                inscricao.setKit(Kit.obterKit((rs.getInt(&quot;kit_id&quot;))));</span>
+<span class="nc" id="L58">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L59">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L60">            }</span>
+<span class="nc" id="L61">        } catch (SQLException e) {</span>
+<span class="nc" id="L62">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L64">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoes(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L70">        Connection conexao = null;</span>
+<span class="nc" id="L71">        Statement comando = null;</span>
+<span class="nc" id="L72">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L75">            conexao = BD.getConexao();</span>
+<span class="nc" id="L76">            comando = conexao.createStatement();</span>
+<span class="nc" id="L77">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE corrida_id = &quot; + corridaId);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L80">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L81">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L83">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L84">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L85">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L86">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L87">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L88">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L93">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L94">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L95">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L96">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L97">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L99">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L100">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L101">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L102">                inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L103">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L104">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L105">            }</span>
+<span class="nc" id="L106">        } catch (SQLException e) {</span>
+<span class="nc" id="L107">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L109">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L110">        }</span>
+<span class="nc" id="L111">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesAtleta(int id) throws ClassNotFoundException {
+<span class="nc" id="L115">        Connection conexao = null;</span>
+<span class="nc" id="L116">        Statement comando = null;</span>
+<span class="nc" id="L117">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L120">            conexao = BD.getConexao();</span>
+<span class="nc" id="L121">            comando = conexao.createStatement();</span>
+<span class="nc" id="L122">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE atleta_id = &quot; + id);</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L125">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L126">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L128">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L129">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L130">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L131">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L132">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L133">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L138">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L139">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L140">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L141">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L142">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L144">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L145">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L146">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L147">                inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L148">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L149">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L150">            }</span>
+<span class="nc" id="L151">        } catch (SQLException e) {</span>
+<span class="nc" id="L152">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L154">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L155">        }</span>
+<span class="nc" id="L156">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L160">        Connection conexao = null;</span>
+<span class="nc" id="L161">        Statement comando = null;</span>
+<span class="nc" id="L162">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L165">            conexao = BD.getConexao();</span>
+<span class="nc" id="L166">            comando = conexao.createStatement();</span>
+<span class="nc" id="L167">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE corrida_id = &quot; + corridaId</span>
+                    + &quot; and pago =&quot; + true + &quot; and kit_retirado = 0&quot;);
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L171">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L172">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L174">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L175">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L176">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L177">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L178">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L179">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L184">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L185">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L186">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L187">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L188">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L190">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L191">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L192">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L193">                inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L194">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L195">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L196">            }</span>
+<span class="nc" id="L197">        } catch (SQLException e) {</span>
+<span class="nc" id="L198">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L200">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L201">        }</span>
+<span class="nc" id="L202">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesNaoPagas(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L206">        Connection conexao = null;</span>
+<span class="nc" id="L207">        Statement comando = null;</span>
+<span class="nc" id="L208">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L211">            conexao = BD.getConexao();</span>
+<span class="nc" id="L212">            comando = conexao.createStatement();</span>
+<span class="nc" id="L213">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE corrida_id = &quot; + corridaId</span>
+                    + &quot; and pago =&quot; + false);
+<span class="nc bnc" id="L215" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L217">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L218">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L220">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L221">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L222">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L223">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L224">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L225">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L230">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L231">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L232">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L233">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L234">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L236">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L237">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L238">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L239">                inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L240">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L241">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L242">            }</span>
+<span class="nc" id="L243">        } catch (SQLException e) {</span>
+<span class="nc" id="L244">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L246">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L247">        }</span>
+<span class="nc" id="L248">        return inscricoes;</span>
+    }
+
+    public static void gravar(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L252">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L254">            conexao = BD.getConexao();</span>
+<span class="nc" id="L255">            String sql = &quot;INSERT INTO inscricao (corrida_id, data_compra, numero_peito, pago, kit_retirado, tempo_largada, &quot;</span>
+                    + &quot;tempo_chegada, percurso_id, atleta_id, kit_id, lote_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)&quot;;
+<span class="nc" id="L257">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L258">            comando.setInt(1, inscricao.getCorrida().getId());</span>
+<span class="nc" id="L259">            comando.setString(2, inscricao.getDataCompra());</span>
+<span class="nc" id="L260">            comando.setString(3, inscricao.getNumeroPeito());</span>
+<span class="nc" id="L261">            comando.setBoolean(4, inscricao.isPago());</span>
+<span class="nc" id="L262">            comando.setBoolean(5, inscricao.isKitRetirado());</span>
+<span class="nc" id="L263">            comando.setString(6, inscricao.getTempoLargada());</span>
+<span class="nc" id="L264">            comando.setString(7, inscricao.getTempoChegada());</span>
+<span class="nc" id="L265">            comando.setInt(8, inscricao.getPercurso().getId());</span>
+<span class="nc" id="L266">            comando.setInt(9, inscricao.getAtleta().getId());</span>
+<span class="nc" id="L267">            comando.setInt(10, inscricao.getKit().getId());</span>
+<span class="nc" id="L268">            comando.setInt(11, inscricao.getLote().getId());</span>
+
+<span class="nc" id="L270">            comando.execute();</span>
+<span class="nc" id="L271">            comando.close();</span>
+<span class="nc" id="L272">            conexao.close();</span>
+<span class="nc" id="L273">        } catch (SQLException e) {</span>
+<span class="nc" id="L274">            throw e;</span>
+<span class="nc" id="L275">        }</span>
+<span class="nc" id="L276">    }</span>
+
+    public static void alterar(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L279">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L281">            conexao = BD.getConexao();</span>
+<span class="nc" id="L282">            String sql = &quot;UPDATE inscricao SET data_compra = ?, numero_peito = ?, pago = ?, kit_retirado = ?, &quot;</span>
+                    + &quot; tempo_largada = ?,  tempo_chegada = ?, percurso_id = ?, atleta_id = ?, kit_id = ?, &quot;
+                    + &quot; lote_id = ? WHERE id = ? AND corrida_id = ?&quot;;
+
+<span class="nc" id="L286">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+
+<span class="nc" id="L288">            comando.setString(1, inscricao.getDataCompra());</span>
+<span class="nc" id="L289">            comando.setString(2, inscricao.getNumeroPeito());</span>
+<span class="nc" id="L290">            comando.setBoolean(3, inscricao.isPago());</span>
+<span class="nc" id="L291">            comando.setBoolean(4, inscricao.isKitRetirado());</span>
+<span class="nc" id="L292">            comando.setString(5, inscricao.getTempoLargada());</span>
+<span class="nc" id="L293">            comando.setString(6, inscricao.getTempoChegada());</span>
+<span class="nc" id="L294">            comando.setInt(7, inscricao.getPercurso().getId());</span>
+<span class="nc" id="L295">            comando.setInt(8, inscricao.getAtleta().getId());</span>
+<span class="nc" id="L296">            comando.setInt(9, inscricao.getKit().getId());</span>
+<span class="nc" id="L297">            comando.setInt(10, inscricao.getLote().getId());</span>
+<span class="nc" id="L298">            comando.setInt(11, inscricao.getId());</span>
+<span class="nc" id="L299">            comando.setInt(12, inscricao.getCorrida().getId());</span>
+
+<span class="nc" id="L301">            comando.execute();</span>
+<span class="nc" id="L302">            comando.close();</span>
+<span class="nc" id="L303">            conexao.close();</span>
+<span class="nc" id="L304">        } catch (SQLException e) {</span>
+<span class="nc" id="L305">            throw e;</span>
+<span class="nc" id="L306">        }</span>
+<span class="nc" id="L307">    }</span>
+
+    public static void excluir(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L310">        Connection conexao = null;</span>
+<span class="nc" id="L311">        Statement comando = null;</span>
+        String stringSQL;
+
+        try {
+<span class="nc" id="L315">            conexao = BD.getConexao();</span>
+<span class="nc" id="L316">            comando = conexao.createStatement();</span>
+<span class="nc" id="L317">            stringSQL = &quot;DELETE FROM inscricao WHERE id = &quot; + inscricao.getId() + &quot; AND corrida_id = &quot; + inscricao.getCorrida().getId();</span>
+<span class="nc" id="L318">            comando.execute(stringSQL);</span>
+<span class="nc" id="L319">        } catch (Exception e) {</span>
+<span class="nc" id="L320">            throw e;</span>
+        } finally {
+<span class="nc" id="L322">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L323">        }</span>
+<span class="nc" id="L324">    }</span>
+
+    public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
+<span class="nc" id="L327">        Connection conexao = null;</span>
+<span class="nc" id="L328">        Statement comando = null;</span>
+<span class="nc" id="L329">        Inscricao inscricao = null;</span>
+        try {
+<span class="nc" id="L331">            conexao = BD.getConexao();</span>
+<span class="nc" id="L332">            comando = conexao.createStatement();</span>
+<span class="nc" id="L333">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE id = &quot; + id);</span>
+<span class="nc" id="L334">            rs.first();</span>
+<span class="nc" id="L335">            inscricao = new Inscricao(</span>
+<span class="nc" id="L336">                    rs.getInt(&quot;id&quot;),</span>
+                    null,
+<span class="nc" id="L338">                    rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L339">                    rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L340">                    rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L341">                    rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L342">                    rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L343">                    rs.getString(&quot;tempo_chegada&quot;),</span>
+                    null,
+                    null,
+                    null,
+                    null);
+<span class="nc" id="L348">            inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L349">            inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L350">            inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L351">            inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L352">            inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L354">            inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L355">            inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L356">            inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L357">            inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L358">            inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+
+<span class="nc" id="L360">        } catch (SQLException e) {</span>
+<span class="nc" id="L361">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L363">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L364">        }</span>
+<span class="nc" id="L365">        return inscricao;</span>
+    }
+
+    public static Inscricao obterUltimaInscricaoAtleta(int atletaId) throws ClassNotFoundException {
+<span class="nc" id="L369">        Connection conexao = null;</span>
+<span class="nc" id="L370">        Statement comando = null;</span>
+<span class="nc" id="L371">        Inscricao inscricao = null;</span>
+        try {
+<span class="nc" id="L373">            conexao = BD.getConexao();</span>
+<span class="nc" id="L374">            comando = conexao.createStatement();</span>
+<span class="nc" id="L375">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM inscricao WHERE atleta_id = &quot; + atletaId);</span>
+<span class="nc" id="L376">            rs.last();</span>
+<span class="nc" id="L377">            inscricao = new Inscricao(</span>
+<span class="nc" id="L378">                    rs.getInt(&quot;id&quot;),</span>
+                    null,
+<span class="nc" id="L380">                    rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L381">                    rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L382">                    rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L383">                    rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L384">                    rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L385">                    rs.getString(&quot;tempo_chegada&quot;),</span>
+                    null,
+                    null,
+                    null,
+                    null);
+<span class="nc" id="L390">            inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L391">            inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L392">            inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L393">            inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L394">            inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L396">        } catch (SQLException e) {</span>
+<span class="nc" id="L397">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L399">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L400">        }</span>
+<span class="nc" id="L401">        return inscricao;</span>
+    }
+
+    public static boolean atletaEstaInscrito(Atleta atleta, Corrida corrida) throws ClassNotFoundException {
+<span class="nc" id="L405">        Connection conexao = null;</span>
+<span class="nc" id="L406">        Statement comando = null;</span>
+<span class="nc" id="L407">        boolean estaInscrito = false;</span>
+<span class="nc" id="L408">        int inscrito = 0;</span>
+        try {
+<span class="nc" id="L410">            conexao = BD.getConexao();</span>
+<span class="nc" id="L411">            comando = conexao.createStatement();</span>
+<span class="nc" id="L412">            ResultSet rs = comando.executeQuery(&quot;SELECT COUNT(*) as inscrito FROM inscricao WHERE atleta_id = &quot; + atleta.getId() + &quot; AND corrida_id = &quot; + corrida.getId());</span>
+<span class="nc" id="L413">            rs.first();</span>
+<span class="nc" id="L414">            inscrito = rs.getInt(&quot;inscrito&quot;);</span>
+<span class="nc bnc" id="L415" title="All 2 branches missed.">            if (inscrito &gt;= 1) {</span>
+<span class="nc" id="L416">                estaInscrito = true;</span>
+            } else {
+<span class="nc" id="L418">                estaInscrito = false;</span>
+            }
+<span class="nc" id="L420">        } catch (SQLException e) {</span>
+<span class="nc" id="L421">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L423">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L424">        }</span>
+<span class="nc" id="L425">        return estaInscrito;</span>
+    }
+
+    public static void atualizarResultadoCorrida(List&lt;Inscricao&gt; inscricoes) throws ClassNotFoundException, SQLException {
+<span class="nc bnc" id="L429" title="All 2 branches missed.">        for (Inscricao inscricao : inscricoes) {</span>
+<span class="nc" id="L430">            Connection conexao = null;</span>
+            try {
+<span class="nc" id="L432">                conexao = BD.getConexao();</span>
+<span class="nc" id="L433">                String sql = &quot;UPDATE inscricao SET tempo_largada = ?, tempo_chegada = ? WHERE id = ?&quot;;</span>
+
+<span class="nc" id="L435">                PreparedStatement comando = conexao.prepareStatement(sql);</span>
+
+<span class="nc" id="L437">                comando.setString(1, inscricao.getTempoLargada());</span>
+<span class="nc" id="L438">                comando.setString(2, inscricao.getTempoChegada());</span>
+<span class="nc" id="L439">                comando.setInt(3, inscricao.getId());</span>
+
+<span class="nc" id="L441">                comando.execute();</span>
+<span class="nc" id="L442">                comando.close();</span>
+<span class="nc" id="L443">                conexao.close();</span>
+<span class="nc" id="L444">            } catch (SQLException e) {</span>
+<span class="nc" id="L445">                throw e;</span>
+<span class="nc" id="L446">            }</span>
+<span class="nc" id="L447">        }</span>
+<span class="nc" id="L448">    }</span>
+
+    public static void retirarKit(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L451">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L453">            conexao = BD.getConexao();</span>
+<span class="nc" id="L454">            String sql = &quot;UPDATE inscricao SET kit_retirado = ? WHERE id = ?&quot;;</span>
+
+<span class="nc" id="L456">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L457">            comando.setBoolean(1, inscricao.isKitRetirado());</span>
+<span class="nc" id="L458">            comando.setInt(2, inscricao.getId());</span>
+
+<span class="nc" id="L460">            comando.execute();</span>
+<span class="nc" id="L461">            comando.close();</span>
+<span class="nc" id="L462">            conexao.close();</span>
+<span class="nc" id="L463">        } catch (SQLException e) {</span>
+<span class="nc" id="L464">            throw e;</span>
+<span class="nc" id="L465">        }</span>
+<span class="nc" id="L466">    }</span>
+
+    public static void pagarInscricao(Inscricao inscricao) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L469">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L471">            conexao = BD.getConexao();</span>
+<span class="nc" id="L472">            String sql = &quot;UPDATE inscricao SET pago = ? WHERE id = ?&quot;;</span>
+
+<span class="nc" id="L474">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L475">            comando.setBoolean(1, inscricao.isPago());</span>
+<span class="nc" id="L476">            comando.setInt(2, inscricao.getId());</span>
+
+<span class="nc" id="L478">            comando.execute();</span>
+<span class="nc" id="L479">            comando.close();</span>
+<span class="nc" id="L480">            conexao.close();</span>
+<span class="nc" id="L481">        } catch (SQLException e) {</span>
+<span class="nc" id="L482">            throw e;</span>
+<span class="nc" id="L483">        }</span>
+<span class="nc" id="L484">    }</span>
+
+    public static List&lt;Inscricao&gt; obterInscricoesCorrida(int corridaId, int percursoId) throws ClassNotFoundException {
+<span class="nc" id="L487">        Connection conexao = null;</span>
+<span class="nc" id="L488">        Statement comando = null;</span>
+<span class="nc" id="L489">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L492">            conexao = BD.getConexao();</span>
+<span class="nc" id="L493">            comando = conexao.createStatement();</span>
+<span class="nc" id="L494">            ResultSet rs = comando.executeQuery(&quot;select  *, (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time ))&quot;</span>
+                    + &quot; tempo from inscricao WHERE (CAST(-TIMEDIFF(tempo_largada,tempo_chegada)as time )) &gt; 0 &quot;
+                    + &quot;and inscricao.percurso_id = &quot; + percursoId + &quot; and inscricao.corrida_id = &quot; + corridaId + &quot;  ORDER BY tempo ASC&quot;);
+
+<span class="nc bnc" id="L498" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L500">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L501">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L503">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L504">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L505">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L506">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L507">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L508">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L513">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L514">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L515">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L516">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L517">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+<span class="nc" id="L518">                inscricao.setTempoFinal(rs.getString(&quot;tempo&quot;));</span>
+
+<span class="nc" id="L520">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L521">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L522">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L523">                inscricao.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;)));</span>
+<span class="nc" id="L524">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L525">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L526">            }</span>
+<span class="nc" id="L527">        } catch (SQLException e) {</span>
+<span class="nc" id="L528">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L530">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L531">        }</span>
+<span class="nc" id="L532">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; buscaInscrisoesCorridas(String nome) throws ClassNotFoundException {
+<span class="nc" id="L536">        Connection conexao = null;</span>
+<span class="nc" id="L537">        Statement comando = null;</span>
+<span class="nc" id="L538">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L541">            conexao = BD.getConexao();</span>
+<span class="nc" id="L542">            comando = conexao.createStatement();</span>
+<span class="nc" id="L543">            ResultSet rs = comando.executeQuery(&quot;SELECT i.* from inscricao i JOIN corrida on corrida.id = i.corrida_id &quot;</span>
+                    + &quot;where LOWER(corrida.nome) LIKE '%&quot; + nome + &quot;%'&quot;);
+<span class="nc bnc" id="L545" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L547">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L548">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L550">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L551">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L552">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L553">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L554">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L555">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L560">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L561">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L562">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L563">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L564">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L566">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L567">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L568">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L569">                inscricao.setKit(Kit.obterKit((rs.getInt(&quot;kit_id&quot;))));</span>
+<span class="nc" id="L570">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L571">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L572">            }</span>
+<span class="nc" id="L573">        } catch (SQLException e) {</span>
+<span class="nc" id="L574">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L576">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L577">        }</span>
+<span class="nc" id="L578">        return inscricoes;</span>
+    }
+
+    public static List&lt;Inscricao&gt; buscaInscrisoesAtletas(String nome) throws ClassNotFoundException {
+<span class="nc" id="L582">        Connection conexao = null;</span>
+<span class="nc" id="L583">        Statement comando = null;</span>
+<span class="nc" id="L584">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L587">            conexao = BD.getConexao();</span>
+<span class="nc" id="L588">            comando = conexao.createStatement();</span>
+<span class="nc" id="L589">            ResultSet rs = comando.executeQuery(&quot;SELECT i.* from inscricao i JOIN atleta on atleta.id = i.atleta_id &quot;</span>
+                    + &quot;where LOWER(atleta.nome) LIKE '%&quot; + nome + &quot;%'&quot;);
+<span class="nc bnc" id="L591" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L593">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L594">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L596">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L597">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L598">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L599">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L600">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L601">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L606">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L607">                inscricao.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L608">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L609">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L610">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L612">                inscricao.setCorrida(Corrida.obterCorrida((rs.getInt(&quot;corrida_id&quot;))));</span>
+<span class="nc" id="L613">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L614">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L615">                inscricao.setKit(Kit.obterKit((rs.getInt(&quot;kit_id&quot;))));</span>
+<span class="nc" id="L616">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L617">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L618">            }</span>
+<span class="nc" id="L619">        } catch (SQLException e) {</span>
+<span class="nc" id="L620">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L622">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L623">        }</span>
+<span class="nc" id="L624">        return inscricoes;</span>
+    }
+
+    
+    public static List&lt;Inscricao&gt; buscaInscricoesNaoPagas(int corridaId, String nome) throws ClassNotFoundException {
+<span class="nc" id="L629">        Connection conexao = null;</span>
+<span class="nc" id="L630">        Statement comando = null;</span>
+<span class="nc" id="L631">        List&lt;Inscricao&gt; inscricoes = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L634">            conexao = BD.getConexao();</span>
+<span class="nc" id="L635">            comando = conexao.createStatement();</span>
+<span class="nc" id="L636">            ResultSet rs = comando.executeQuery(&quot;SELECT inscricao.* FROM inscricao JOIN atleta on inscricao.atleta_id = atleta.id&quot;</span>
+                    + &quot;WHERE corrida_id = &quot; + corridaId + &quot; and pago = 0 and atleta.nome like '%&quot; + nome + &quot;%' and inscricao.pago = 0 &quot;);
+<span class="nc bnc" id="L638" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+<span class="nc" id="L640">                Inscricao inscricao = new Inscricao(</span>
+<span class="nc" id="L641">                        rs.getInt(&quot;id&quot;),</span>
+                        null,
+<span class="nc" id="L643">                        rs.getString(&quot;data_compra&quot;),</span>
+<span class="nc" id="L644">                        rs.getString(&quot;numero_peito&quot;),</span>
+<span class="nc" id="L645">                        rs.getBoolean(&quot;pago&quot;),</span>
+<span class="nc" id="L646">                        rs.getBoolean(&quot;kit_retirado&quot;),</span>
+<span class="nc" id="L647">                        rs.getString(&quot;tempo_largada&quot;),</span>
+<span class="nc" id="L648">                        rs.getString(&quot;tempo_chegada&quot;),</span>
+                        null,
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L653">                inscricao.setPercursoId(rs.getInt(&quot;percurso_id&quot;));</span>
+<span class="nc" id="L654">                inscricao.setCorridaId(corridaId);</span>
+<span class="nc" id="L655">                inscricao.setAtletaId(rs.getInt(&quot;atleta_id&quot;));</span>
+<span class="nc" id="L656">                inscricao.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L657">                inscricao.setLoteId(rs.getInt(&quot;lote_id&quot;));</span>
+
+<span class="nc" id="L659">                inscricao.setCorrida(Corrida.obterCorrida(corridaId));</span>
+<span class="nc" id="L660">                inscricao.setPercurso(Percurso.obterPercurso((rs.getInt(&quot;percurso_id&quot;))));</span>
+<span class="nc" id="L661">                inscricao.setAtleta(Atleta.obterAtleta((rs.getInt(&quot;atleta_id&quot;))));</span>
+<span class="nc" id="L662">                inscricao.setKit(Kit.obterKit((rs.getInt(&quot;kit_id&quot;))));</span>
+<span class="nc" id="L663">                inscricao.setLote(Lote.obterLote((rs.getInt(&quot;lote_id&quot;))));</span>
+<span class="nc" id="L664">                inscricoes.add(inscricao);</span>
+<span class="nc" id="L665">            }</span>
+<span class="nc" id="L666">        } catch (SQLException e) {</span>
+<span class="nc" id="L667">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L669">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L670">        }</span>
+<span class="nc" id="L671">        return inscricoes;</span>
+    }
+
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L676" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L677">                comando.close();</span>
+            }
+
+<span class="nc bnc" id="L680" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L681">                conexao.close();</span>
+            }
+
+<span class="nc" id="L684">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L686">        }</span>
+<span class="nc" id="L687">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

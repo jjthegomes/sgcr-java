@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Corrida.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Corrida.java</span></div><h1>Corrida.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modelo;
+
+import dao.CorridaDAO;
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ *
+ * @author RAJ
+ */
+public class Corrida {
+
+    private int id;
+    private String nome;
+    private int maxPessoa;
+    private String horario;
+    private String data;
+    private String banner;
+    private String logradouro;
+    private String cep;
+    private String numero;
+    private String cidade;
+    private String estado;
+    private String bairro;
+    private String descricao;
+    private String edicao;
+    private boolean ativo;
+    private String dataInicioRetiradaKit;
+    private String dataFinalRetiradaKit;
+    private Organizador organizador;
+
+    private int organizadorId;
+
+<span class="nc" id="L39">    public Corrida() {</span>
+
+<span class="nc" id="L41">    }</span>
+
+    public Corrida(int id, String nome, int maxPessoa, String horario, String data, String banner, String logradouro,
+            String cep, String numero, String cidade, String estado, String bairro, String descricao, String edicao, 
+<span class="nc" id="L45">            boolean ativo, String dataInicioRetiradaKit, String dataFinalRetiradaKit, Organizador organizador) {</span>
+<span class="nc" id="L46">        this.id = id;</span>
+<span class="nc" id="L47">        this.nome = nome;</span>
+<span class="nc" id="L48">        this.maxPessoa = maxPessoa;</span>
+<span class="nc" id="L49">        this.horario = horario;</span>
+<span class="nc" id="L50">        this.data = data;</span>
+<span class="nc" id="L51">        this.banner = banner;</span>
+<span class="nc" id="L52">        this.logradouro = logradouro;</span>
+<span class="nc" id="L53">        this.cep = cep;</span>
+<span class="nc" id="L54">        this.numero = numero;</span>
+<span class="nc" id="L55">        this.cidade = cidade;</span>
+<span class="nc" id="L56">        this.estado = estado;</span>
+<span class="nc" id="L57">        this.bairro = bairro;</span>
+<span class="nc" id="L58">        this.descricao = descricao;</span>
+<span class="nc" id="L59">        this.organizador = organizador;</span>
+<span class="nc" id="L60">        this.edicao = edicao;</span>
+<span class="nc" id="L61">        this.ativo = ativo;</span>
+<span class="nc" id="L62">        this.dataInicioRetiradaKit = dataInicioRetiradaKit;</span>
+<span class="nc" id="L63">        this.dataFinalRetiradaKit = dataFinalRetiradaKit;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Corrida(String nome, int maxPessoa, String horario, String data, String banner, String logradouro,
+            String cep, String numero, String cidade, String estado, String bairro, String descricao,
+<span class="nc" id="L68">            String edicao, boolean ativo, String dataInicioRetiradaKit, String dataFinalRetiradaKit, Organizador organizador) {</span>
+<span class="nc" id="L69">        this.nome = nome;</span>
+<span class="nc" id="L70">        this.maxPessoa = maxPessoa;</span>
+<span class="nc" id="L71">        this.horario = horario;</span>
+<span class="nc" id="L72">        this.data = data;</span>
+<span class="nc" id="L73">        this.banner = banner;</span>
+<span class="nc" id="L74">        this.logradouro = logradouro;</span>
+<span class="nc" id="L75">        this.cep = cep;</span>
+<span class="nc" id="L76">        this.numero = numero;</span>
+<span class="nc" id="L77">        this.cidade = cidade;</span>
+<span class="nc" id="L78">        this.estado = estado;</span>
+<span class="nc" id="L79">        this.bairro = bairro;</span>
+<span class="nc" id="L80">        this.descricao = descricao;</span>
+<span class="nc" id="L81">        this.organizador = organizador;</span>
+<span class="nc" id="L82">        this.edicao = edicao;</span>
+<span class="nc" id="L83">        this.ativo = ativo;</span>
+<span class="nc" id="L84">        this.dataInicioRetiradaKit = dataInicioRetiradaKit;</span>
+<span class="nc" id="L85">        this.dataFinalRetiradaKit = dataFinalRetiradaKit;</span>
+<span class="nc" id="L86">    }</span>
+
+    public int getId() {
+<span class="nc" id="L89">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L93">        this.id = id;</span>
+<span class="nc" id="L94">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L97">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L101">        this.nome = nome;</span>
+<span class="nc" id="L102">    }</span>
+
+    public int getMaxPessoa() {
+<span class="nc" id="L105">        return maxPessoa;</span>
+    }
+
+    public void setMaxPessoa(int maxPessoa) {
+<span class="nc" id="L109">        this.maxPessoa = maxPessoa;</span>
+<span class="nc" id="L110">    }</span>
+
+    public String getHorario() {
+<span class="nc" id="L113">        return horario;</span>
+    }
+
+    public void setHorario(String horario) {
+<span class="nc" id="L117">        this.horario = horario;</span>
+<span class="nc" id="L118">    }</span>
+
+    public String getData() {
+<span class="nc" id="L121">        return data;</span>
+    }
+
+    public void setData(String data) {
+<span class="nc" id="L125">        this.data = data;</span>
+<span class="nc" id="L126">    }</span>
+
+    public String getBanner() {
+<span class="nc" id="L129">        return banner;</span>
+    }
+
+    public void setBanner(String banner) {
+<span class="nc" id="L133">        this.banner = banner;</span>
+<span class="nc" id="L134">    }</span>
+
+    public String getLogradouro() {
+<span class="nc" id="L137">        return logradouro;</span>
+    }
+
+    public void setLogradouro(String logradouro) {
+<span class="nc" id="L141">        this.logradouro = logradouro;</span>
+<span class="nc" id="L142">    }</span>
+
+    public String getCep() {
+<span class="nc" id="L145">        return cep;</span>
+    }
+
+    public void setCep(String cep) {
+<span class="nc" id="L149">        this.cep = cep;</span>
+<span class="nc" id="L150">    }</span>
+
+    public String getNumero() {
+<span class="nc" id="L153">        return numero;</span>
+    }
+
+    public void setNumero(String numero) {
+<span class="nc" id="L157">        this.numero = numero;</span>
+<span class="nc" id="L158">    }</span>
+
+    public String getCidade() {
+<span class="nc" id="L161">        return cidade;</span>
+    }
+
+    public void setCidade(String cidade) {
+<span class="nc" id="L165">        this.cidade = cidade;</span>
+<span class="nc" id="L166">    }</span>
+
+    public String getEstado() {
+<span class="nc" id="L169">        return estado;</span>
+    }
+
+    public void setEstado(String estado) {
+<span class="nc" id="L173">        this.estado = estado;</span>
+<span class="nc" id="L174">    }</span>
+
+    public String getBairro() {
+<span class="nc" id="L177">        return bairro;</span>
+    }
+
+    public void setBairro(String bairro) {
+<span class="nc" id="L181">        this.bairro = bairro;</span>
+<span class="nc" id="L182">    }</span>
+
+    public String getDescricao() {
+<span class="nc" id="L185">        return descricao;</span>
+    }
+
+    public void setDescricao(String descricao) {
+<span class="nc" id="L189">        this.descricao = descricao;</span>
+<span class="nc" id="L190">    }</span>
+
+    public String getEdicao() {
+<span class="nc" id="L193">        return edicao;</span>
+    }
+
+    public void setEdicao(String edicao) {
+<span class="nc" id="L197">        this.edicao = edicao;</span>
+<span class="nc" id="L198">    }</span>
+
+    public boolean isAtivo() {
+<span class="nc" id="L201">        return ativo;</span>
+    }
+
+    public void setAtivo(boolean ativo) {
+<span class="nc" id="L205">        this.ativo = ativo;</span>
+<span class="nc" id="L206">    }</span>
+
+    public String getDataInicioRetiradaKit() {
+<span class="nc" id="L209">        return dataInicioRetiradaKit;</span>
+    }
+
+    public void setDataInicioRetiradaKit(String dataInicioRetiradaKit) {
+<span class="nc" id="L213">        this.dataInicioRetiradaKit = dataInicioRetiradaKit;</span>
+<span class="nc" id="L214">    }</span>
+
+    public String getDataFinalRetiradaKit() {
+<span class="nc" id="L217">        return dataFinalRetiradaKit;</span>
+    }
+
+    public void setDataFinalRetiradaKit(String dataFinalRetiradaKit) {
+<span class="nc" id="L221">        this.dataFinalRetiradaKit = dataFinalRetiradaKit;</span>
+<span class="nc" id="L222">    }</span>
+
+    public Organizador getOrganizador() {
+<span class="nc" id="L225">        return organizador;</span>
+    }
+
+    public void setOrganizador(Organizador organizador) {
+<span class="nc" id="L229">        this.organizador = organizador;</span>
+<span class="nc" id="L230">    }</span>
+
+    public int getOrganizadorId() {
+<span class="nc" id="L233">        return organizadorId;</span>
+    }
+
+    public void setOrganizadorId(int organizadorId) {
+<span class="nc" id="L237">        this.organizadorId = organizadorId;</span>
+<span class="nc" id="L238">    }</span>
+
+    public static List&lt;Corrida&gt; obterCorridas() throws ClassNotFoundException {
+<span class="nc" id="L241">        return CorridaDAO.obterCorridas();</span>
+    }
+
+    public static List&lt;Corrida&gt; obterCorridas(int organizadorId) throws ClassNotFoundException {
+<span class="nc" id="L245">        return CorridaDAO.obterCorridas(organizadorId);</span>
+    }
+
+    public void gravar() throws ClassNotFoundException, SQLException {
+<span class="nc" id="L249">        CorridaDAO.gravar(this);</span>
+<span class="nc" id="L250">    }</span>
+
+    public void alterar() throws ClassNotFoundException, SQLException {
+<span class="nc" id="L253">        CorridaDAO.alterar(this);</span>
+<span class="nc" id="L254">    }</span>
+
+    public void excluir() throws ClassNotFoundException, SQLException {
+<span class="nc" id="L257">        CorridaDAO.excluir(this);</span>
+<span class="nc" id="L258">    }</span>
+
+    public static Corrida obterCorrida(int id) throws ClassNotFoundException {
+<span class="nc" id="L261">        return CorridaDAO.obterCorrida(id);</span>
+    }
+
+    public static List&lt;Corrida&gt; buscaCorridas(String nome) throws ClassNotFoundException {
+<span class="nc" id="L265">        return CorridaDAO.buscaCorridas(nome);</span>
+    }
+
+    public static Corrida obterUltimaCorrida(int id) throws ClassNotFoundException {
+<span class="nc" id="L269">        return CorridaDAO.obterUltimaCorrida(id);</span>
+    }
+
+    public static Corrida obterUltimaCorridaOrganizador(int organizadorId) throws ClassNotFoundException {
+<span class="nc" id="L273">        return CorridaDAO.obterUltimaCorridaOrganizador(organizadorId);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

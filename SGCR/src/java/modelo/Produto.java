@@ -14,16 +14,14 @@ import java.util.regex.Pattern;
  *
  * @author RAJ
  */
-public class Produto{
+public class Produto implements InterfaceProduto {
     private int id;
     private String nome;
     private Administrador administrador;
     private int administradorId;
     
-    
     public Produto(){
     }
-    
 
     public Produto(int id, String nome, Administrador administrador) {
         this.id = id;
@@ -48,6 +46,7 @@ public class Produto{
         this.id = id;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }

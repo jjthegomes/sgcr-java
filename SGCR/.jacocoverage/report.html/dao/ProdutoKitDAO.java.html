@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProdutoKitDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">ProdutoKitDAO.java</span></div><h1>ProdutoKitDAO.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Kit;
+import modelo.Produto;
+import modelo.ProdutoKit;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L23">public class ProdutoKitDAO {</span>
+
+    public static void gravar(ProdutoKit produtoKit) throws SQLException,
+            ClassNotFoundException {
+<span class="nc" id="L27">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L29">            conexao = BD.getConexao();</span>
+<span class="nc" id="L30">            String sql = &quot;INSERT INTO produto_kit (descricao, valor, produto_id, kit_id,kit_corrida_id) VALUES (?,?,?,?,?)&quot;;</span>
+<span class="nc" id="L31">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L32">            comando.setString(1, produtoKit.getDescricao());</span>
+<span class="nc" id="L33">            comando.setDouble(2, produtoKit.getValor());</span>
+<span class="nc" id="L34">            comando.setInt(3, produtoKit.getProduto().getId());</span>
+<span class="nc" id="L35">            comando.setInt(4, produtoKit.getKit().getId());</span>
+<span class="nc" id="L36">            comando.setInt(5, produtoKit.getCorrida().getId());</span>
+
+<span class="nc" id="L38">            comando.execute();</span>
+<span class="nc" id="L39">            comando.close();</span>
+<span class="nc" id="L40">            conexao.close();</span>
+
+<span class="nc" id="L42">        } catch (SQLException e) {</span>
+<span class="nc" id="L43">            throw e;</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">    }</span>
+
+    public static void alterar(ProdutoKit produtoKit) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L48">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L50">            conexao = BD.getConexao();</span>
+<span class="nc" id="L51">            String sql = &quot;UPDATE produto_kit SET descricao = ?, valor = ?, kit_id = ?, produto_id = ?, kit_corrida_id = ? WHERE id = ?&quot;;</span>
+<span class="nc" id="L52">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L53">            comando.setString(1, produtoKit.getDescricao());</span>
+<span class="nc" id="L54">            comando.setDouble(2, produtoKit.getValor());</span>
+<span class="nc" id="L55">            comando.setInt(3, produtoKit.getKit().getId());</span>
+<span class="nc" id="L56">            comando.setInt(4, produtoKit.getProduto().getId());</span>
+<span class="nc" id="L57">            comando.setInt(5, produtoKit.getCorrida().getId());</span>
+<span class="nc" id="L58">            comando.setInt(6, produtoKit.getId());</span>
+<span class="nc" id="L59">            comando.execute();</span>
+<span class="nc" id="L60">            comando.close();</span>
+<span class="nc" id="L61">            conexao.close();</span>
+
+<span class="nc" id="L63">        } catch (SQLException e) {</span>
+<span class="nc" id="L64">            throw e;</span>
+<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">    }</span>
+
+    public static void excluir(ProdutoKit produtoKit) throws SQLException,
+            ClassNotFoundException {
+<span class="nc" id="L70">        Connection conexao = null;</span>
+<span class="nc" id="L71">        Statement comando = null;</span>
+        String stringSQL;
+        try {
+<span class="nc" id="L74">            conexao = BD.getConexao();</span>
+<span class="nc" id="L75">            comando = conexao.createStatement();</span>
+<span class="nc" id="L76">            stringSQL = &quot;DELETE FROM produto_kit WHERE id =&quot; + produtoKit.getId();</span>
+<span class="nc" id="L77">            comando.execute(stringSQL);</span>
+<span class="nc" id="L78">        } catch (SQLException e) {</span>
+<span class="nc" id="L79">            throw e;</span>
+        } finally {
+<span class="nc" id="L81">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L82">        }</span>
+<span class="nc" id="L83">    }</span>
+
+    public static ProdutoKit obterProdutoKit(int id) throws ClassNotFoundException {
+<span class="nc" id="L86">        Connection conexao = null;</span>
+<span class="nc" id="L87">        Statement comando = null;</span>
+<span class="nc" id="L88">        ProdutoKit produtoKit = null;</span>
+        try {
+<span class="nc" id="L90">            conexao = BD.getConexao();</span>
+<span class="nc" id="L91">            comando = conexao.createStatement();</span>
+<span class="nc" id="L92">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM produto_kit WHERE id = &quot; + id);</span>
+<span class="nc" id="L93">            rs.first();</span>
+<span class="nc" id="L94">            produtoKit = new ProdutoKit(rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L95">                    rs.getString(&quot;descricao&quot;),</span>
+<span class="nc" id="L96">                    rs.getDouble(&quot;valor&quot;),</span>
+                    null,
+                    null,
+                    null);
+<span class="nc" id="L100">            produtoKit.setProdutoId(rs.getInt(&quot;produto_id&quot;));</span>
+<span class="nc" id="L101">            produtoKit.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L102">            produtoKit.setCorridaId(rs.getInt(&quot;kit_corrida_id&quot;));</span>
+<span class="nc" id="L103">        } catch (SQLException e) {</span>
+<span class="nc" id="L104">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L106">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L107">        }</span>
+<span class="nc" id="L108">        return produtoKit;</span>
+    }
+
+    public static List&lt;ProdutoKit&gt; obterProdutos_Kit() throws ClassNotFoundException {
+<span class="nc" id="L112">        Connection conexao = null;</span>
+<span class="nc" id="L113">        Statement comando = null;</span>
+<span class="nc" id="L114">        List&lt;ProdutoKit&gt; produtosKit = new ArrayList&lt;ProdutoKit&gt;();</span>
+        try {
+<span class="nc" id="L116">            conexao = BD.getConexao();</span>
+<span class="nc" id="L117">            comando = conexao.createStatement();</span>
+<span class="nc" id="L118">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM produto_kit&quot;);</span>
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L121">                ProdutoKit produtoKit = new ProdutoKit(</span>
+<span class="nc" id="L122">                        rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L123">                        rs.getString(&quot;descricao&quot;),</span>
+<span class="nc" id="L124">                        rs.getDouble(&quot;valor&quot;),</span>
+                        null,
+                        null,
+                        null);
+<span class="nc" id="L128">                produtoKit.setProduto(Produto.obterProduto(rs.getInt(&quot;produto_id&quot;)));</span>
+<span class="nc" id="L129">                produtoKit.setProdutoId(rs.getInt(&quot;produto_id&quot;));</span>
+<span class="nc" id="L130">                produtoKit.setKitId(rs.getInt(&quot;kit_id&quot;));</span>
+<span class="nc" id="L131">                produtoKit.setCorridaId(rs.getInt(&quot;kit_corrida_id&quot;));</span>
+<span class="nc" id="L132">                produtoKit.setKit(Kit.obterKit(rs.getInt(&quot;kit_id&quot;), rs.getInt(&quot;kit_corrida_id&quot;)));</span>
+<span class="nc" id="L133">                produtosKit.add(produtoKit);</span>
+<span class="nc" id="L134">            }</span>
+<span class="nc" id="L135">        } catch (SQLException e) {</span>
+<span class="nc" id="L136">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L138">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return produtosKit;</span>
+    }
+
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L146">                comando.close();</span>
+            }
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            if (conexao != null) {</span>
+<span class="nc" id="L149">                conexao.close();</span>
+            }
+<span class="nc" id="L151">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

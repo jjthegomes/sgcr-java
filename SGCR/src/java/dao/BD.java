@@ -12,7 +12,7 @@ public class BD {
     public static Connection getConexao() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Class.forName("com.mysql.jdbc.Driver");
-        conexao  = DriverManager.getConnection("jdbc:mysql://localhost/SGCR?useUnicode=yes&characterEncoding=ISO-8859-1", "root", "");
+        conexao  = DriverManager.getConnection("jdbc:mysql://localhost/SGCR?useUnicode=yes&characterEncoding=ISO-8859-1", "root", "root");
         
         return conexao;
     }

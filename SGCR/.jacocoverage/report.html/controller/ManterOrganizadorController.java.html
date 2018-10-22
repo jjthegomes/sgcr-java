@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterOrganizadorController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterOrganizadorController.java</span></div><h1>ManterOrganizadorController.java</h1><pre class="source lang-java linenums">package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import modelo.Organizador;
+
+/**
+ *
+ * @author rafael
+ */
+<span class="nc" id="L16">public class ManterOrganizadorController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L29">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L30">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L32">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L35">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L38">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L41">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L44">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L46" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L47">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L54">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L58">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L59">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterOrganizador.jsp&quot;);</span>
+<span class="nc" id="L60">            view.forward(request, response);</span>
+<span class="nc" id="L61">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L63">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L80">        processRequest(request, response);</span>
+<span class="nc" id="L81">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L94">        processRequest(request, response);</span>
+<span class="nc" id="L95">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L104">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L108">        String nome = request.getParameter(&quot;txtNomeOrganizador&quot;);</span>
+<span class="nc" id="L109">        String email = request.getParameter(&quot;txtEmailOrganizador&quot;);</span>
+<span class="nc" id="L110">        String senha = request.getParameter(&quot;txtSenhaOrganizador&quot;);</span>
+<span class="nc" id="L111">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoOrganizador&quot;);</span>
+<span class="nc" id="L112">        String sexo = request.getParameter(&quot;radioSexoOrganizador&quot;);</span>
+<span class="nc" id="L113">        String cpf = request.getParameter(&quot;txtCpfOrganizador&quot;);</span>
+<span class="nc" id="L114">        String cep = request.getParameter(&quot;txtCepOrganizador&quot;);</span>
+<span class="nc" id="L115">        String logradouro = request.getParameter(&quot;txtLogradouroOrganizador&quot;);</span>
+<span class="nc" id="L116">        String bairro = request.getParameter(&quot;txtBairroOrganizador&quot;);</span>
+<span class="nc" id="L117">        String complemento = request.getParameter(&quot;txtComplementoOrganizador&quot;);</span>
+<span class="nc" id="L118">        String numero = request.getParameter(&quot;txtNumeroOrganizador&quot;);</span>
+<span class="nc" id="L119">        String cidade = request.getParameter(&quot;txtCidadeOrganizador&quot;);</span>
+<span class="nc" id="L120">        String estado = request.getParameter(&quot;txtEstadoOrganizador&quot;);</span>
+<span class="nc" id="L121">        String telefone = request.getParameter(&quot;txtTelefoneOrganizador&quot;);</span>
+<span class="nc" id="L122">        String celular = request.getParameter(&quot;txtCelularOrganizador&quot;);</span>
+
+        try {
+<span class="nc" id="L125">            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, email, senha);</span>
+<span class="nc" id="L126">            organizador.gravar();</span>
+<span class="nc" id="L127">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaOrganizadorController&quot;);</span>
+<span class="nc" id="L128">            view.forward(request, response);</span>
+<span class="nc" id="L129">        } catch (IOException ex) {</span>
+<span class="nc" id="L130">        } catch (SQLException ex) {</span>
+<span class="nc" id="L131">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L132">        } catch (ServletException ex) {</span>
+<span class="nc" id="L133">        }</span>
+
+<span class="nc" id="L135">    }</span>
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L139">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L140">            int idOrganizador = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L141">            Organizador organizador = Organizador.obterOrganizador(idOrganizador);</span>
+<span class="nc" id="L142">            request.setAttribute(&quot;organizador&quot;, organizador);</span>
+<span class="nc" id="L143">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterOrganizador.jsp&quot;);</span>
+<span class="nc" id="L144">            view.forward(request, response);</span>
+<span class="nc" id="L145">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L147">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L149">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L151">        }</span>
+<span class="nc" id="L152">    }</span>
+    
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L155">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdOrganizador&quot;));</span>
+<span class="nc" id="L156">        String nome = request.getParameter(&quot;txtNomeOrganizador&quot;);</span>
+<span class="nc" id="L157">        String email = request.getParameter(&quot;txtEmailOrganizador&quot;);</span>
+<span class="nc" id="L158">        String senha = request.getParameter(&quot;txtSenhaOrganizador&quot;);</span>
+<span class="nc" id="L159">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoOrganizador&quot;);</span>
+<span class="nc" id="L160">        String sexo = request.getParameter(&quot;radioSexoOrganizador&quot;);</span>
+<span class="nc" id="L161">        String cpf = request.getParameter(&quot;txtCpfOrganizador&quot;);</span>
+<span class="nc" id="L162">        String cep = request.getParameter(&quot;txtCepOrganizador&quot;);</span>
+<span class="nc" id="L163">        String logradouro = request.getParameter(&quot;txtLogradouroOrganizador&quot;);</span>
+<span class="nc" id="L164">        String bairro = request.getParameter(&quot;txtBairroOrganizador&quot;);</span>
+<span class="nc" id="L165">        String complemento = request.getParameter(&quot;txtComplementoOrganizador&quot;);</span>
+<span class="nc" id="L166">        String numero = request.getParameter(&quot;txtNumeroOrganizador&quot;);</span>
+<span class="nc" id="L167">        String cidade = request.getParameter(&quot;txtCidadeOrganizador&quot;);</span>
+<span class="nc" id="L168">        String estado = request.getParameter(&quot;txtEstadoOrganizador&quot;);</span>
+<span class="nc" id="L169">        String telefone = request.getParameter(&quot;txtTelefoneOrganizador&quot;);</span>
+<span class="nc" id="L170">        String celular = request.getParameter(&quot;txtCelularOrganizador&quot;);</span>
+<span class="nc" id="L171">        Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);</span>
+        
+        try {
+<span class="nc" id="L174">            organizador.excluir();</span>
+<span class="nc" id="L175">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaOrganizadorController&quot;);</span>
+<span class="nc" id="L176">            view.forward(request, response);</span>
+<span class="nc" id="L177">        } catch (IOException ex) {</span>
+<span class="nc" id="L178">        } catch (SQLException ex) {</span>
+<span class="nc" id="L179">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L180">        } catch (ServletException ex) {</span>
+<span class="nc" id="L181">        }</span>
+<span class="nc" id="L182">    }</span>
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L186">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L187">            int idOrganizador = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L188">            Organizador organizador = Organizador.obterOrganizador(idOrganizador);</span>
+<span class="nc" id="L189">            request.setAttribute(&quot;organizador&quot;, organizador);</span>
+<span class="nc" id="L190">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterOrganizador.jsp&quot;);</span>
+<span class="nc" id="L191">            view.forward(request, response);</span>
+<span class="nc" id="L192">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L194">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L196">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L198">        }</span>
+<span class="nc" id="L199">    }</span>
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L202">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdOrganizador&quot;));</span>
+<span class="nc" id="L203">        String nome = request.getParameter(&quot;txtNomeOrganizador&quot;);</span>
+<span class="nc" id="L204">        String email = request.getParameter(&quot;txtEmailOrganizador&quot;);</span>
+<span class="nc" id="L205">        String senha = request.getParameter(&quot;txtSenhaOrganizador&quot;);</span>
+<span class="nc" id="L206">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoOrganizador&quot;);</span>
+<span class="nc" id="L207">        String sexo = request.getParameter(&quot;radioSexoOrganizador&quot;);</span>
+<span class="nc" id="L208">        String cpf = request.getParameter(&quot;txtCpfOrganizador&quot;);</span>
+<span class="nc" id="L209">        String cep = request.getParameter(&quot;txtCepOrganizador&quot;);</span>
+<span class="nc" id="L210">        String logradouro = request.getParameter(&quot;txtLogradouroOrganizador&quot;);</span>
+<span class="nc" id="L211">        String bairro = request.getParameter(&quot;txtBairroOrganizador&quot;);</span>
+<span class="nc" id="L212">        String complemento = request.getParameter(&quot;txtComplementoOrganizador&quot;);</span>
+<span class="nc" id="L213">        String numero = request.getParameter(&quot;txtNumeroOrganizador&quot;);</span>
+<span class="nc" id="L214">        String cidade = request.getParameter(&quot;txtCidadeOrganizador&quot;);</span>
+<span class="nc" id="L215">        String estado = request.getParameter(&quot;txtEstadoOrganizador&quot;);</span>
+<span class="nc" id="L216">        String telefone = request.getParameter(&quot;txtTelefoneOrganizador&quot;);</span>
+<span class="nc" id="L217">        String celular = request.getParameter(&quot;txtCelularOrganizador&quot;);</span>
+        
+        try {
+<span class="nc" id="L220">            Organizador organizador = new Organizador(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);</span>
+<span class="nc" id="L221">            organizador.alterar();</span>
+<span class="nc" id="L222">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaOrganizadorController&quot;);</span>
+<span class="nc" id="L223">            view.forward(request, response);</span>
+<span class="nc" id="L224">        } catch (IOException ex) {</span>
+<span class="nc" id="L225">        } catch (SQLException ex) {</span>
+<span class="nc" id="L226">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L227">        } catch (ServletException ex) {</span>
+<span class="nc" id="L228">        }</span>
+<span class="nc" id="L229">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

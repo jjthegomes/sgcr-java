@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Inscricao.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Inscricao.java</span></div><h1>Inscricao.java</h1><pre class="source lang-java linenums">package modelo;
+
+import dao.InscricaoDAO;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.List;
+
+/**
+ *
+ * @author RAJ
+ */
+public class Inscricao {
+
+    private int id;
+    private int corridaId;
+    private Corrida corrida;
+    private String dataCompra;
+    private String numeroPeito;
+    private boolean pago;
+    private boolean kitRetirado;
+    private String tempoLargada;
+    private String tempoChegada;
+    private String tempoFinal;
+    private Atleta atleta;
+    private Percurso percurso;
+    private Kit kit;
+    private Lote lote;
+
+    private int atletaId;
+    private int percursoId;
+    private int kitId;
+    private int loteId;
+
+<span class="nc" id="L34">    public Inscricao(int id, Corrida corrida, String dataCompra, String numeroPeito, boolean pago, boolean kitRetirado, String tempoLargada, String tempoChegada, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {</span>
+<span class="nc" id="L35">        this.id = id;</span>
+<span class="nc" id="L36">        this.corrida = corrida;</span>
+<span class="nc" id="L37">        this.dataCompra = dataCompra;</span>
+<span class="nc" id="L38">        this.numeroPeito = numeroPeito;</span>
+<span class="nc" id="L39">        this.pago = pago;</span>
+<span class="nc" id="L40">        this.kitRetirado = kitRetirado;</span>
+<span class="nc" id="L41">        this.tempoLargada = tempoLargada;</span>
+<span class="nc" id="L42">        this.tempoChegada = tempoChegada;</span>
+<span class="nc" id="L43">        this.atleta = atleta;</span>
+<span class="nc" id="L44">        this.percurso = percurso;</span>
+<span class="nc" id="L45">        this.kit = kit;</span>
+<span class="nc" id="L46">        this.lote = lote;</span>
+<span class="nc" id="L47">    }</span>
+
+<span class="nc" id="L49">    public Inscricao(Corrida corrida, Atleta atleta, Percurso percurso, Kit kit, Lote lote) {</span>
+<span class="nc" id="L50">        this.corrida = corrida;</span>
+<span class="nc" id="L51">        this.atleta = atleta;</span>
+<span class="nc" id="L52">        this.percurso = percurso;</span>
+<span class="nc" id="L53">        this.kit = kit;</span>
+<span class="nc" id="L54">        this.lote = lote;</span>
+
+<span class="nc" id="L56">        Calendar hoje = Calendar.getInstance();</span>
+<span class="nc" id="L57">        this.dataCompra = hoje.get(Calendar.DAY_OF_MONTH) + &quot;/&quot; + (hoje.get(Calendar.MONTH) + 1) + &quot;/&quot; + hoje.get(Calendar.YEAR);</span>
+<span class="nc" id="L58">        this.numeroPeito = &quot;0&quot;;</span>
+<span class="nc" id="L59">        this.pago = false;</span>
+<span class="nc" id="L60">        this.kitRetirado = false;</span>
+<span class="nc" id="L61">        this.tempoLargada = &quot;&quot;;</span>
+<span class="nc" id="L62">        this.tempoChegada = &quot;&quot;;</span>
+<span class="nc" id="L63">    }</span>
+
+    public int getId() {
+<span class="nc" id="L66">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L70">        this.id = id;</span>
+<span class="nc" id="L71">    }</span>
+
+    public String getDataCompra() {
+<span class="nc" id="L74">        return dataCompra;</span>
+    }
+
+    public void setDataCompra(String dataCompra) {
+<span class="nc" id="L78">        this.dataCompra = dataCompra;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getNumeroPeito() {
+<span class="nc" id="L82">        return numeroPeito;</span>
+    }
+
+    public void setNumeroPeito(String numeroPeito) {
+<span class="nc" id="L86">        this.numeroPeito = numeroPeito;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getTempoFinal() {
+<span class="nc" id="L90">        return tempoFinal;</span>
+    }
+
+    public void setTempoFinal(String tempoFinal) {
+<span class="nc" id="L94">        this.tempoFinal = tempoFinal;</span>
+<span class="nc" id="L95">    }</span>
+
+    public boolean isPago() {
+<span class="nc" id="L98">        return pago;</span>
+    }
+
+    public void setPago(boolean pago) {
+<span class="nc" id="L102">        this.pago = pago;</span>
+<span class="nc" id="L103">    }</span>
+
+    public boolean isKitRetirado() {
+<span class="nc" id="L106">        return kitRetirado;</span>
+    }
+
+    public void setKitRetirado(boolean kitRetirado) {
+<span class="nc" id="L110">        this.kitRetirado = kitRetirado;</span>
+<span class="nc" id="L111">    }</span>
+
+    public String getTempoLargada() {
+<span class="nc" id="L114">        return tempoLargada;</span>
+    }
+
+    public void setTempoLargada(String tempoLargada) {
+<span class="nc" id="L118">        this.tempoLargada = tempoLargada;</span>
+<span class="nc" id="L119">    }</span>
+
+    public String getTempoChegada() {
+<span class="nc" id="L122">        return tempoChegada;</span>
+    }
+
+    public void setTempoChegada(String tempoChegada) {
+<span class="nc" id="L126">        this.tempoChegada = tempoChegada;</span>
+<span class="nc" id="L127">    }</span>
+
+    public Atleta getAtleta() {
+<span class="nc" id="L130">        return atleta;</span>
+    }
+
+    public void setAtleta(Atleta atleta) {
+<span class="nc" id="L134">        this.atleta = atleta;</span>
+<span class="nc" id="L135">    }</span>
+
+    public Percurso getPercurso() {
+<span class="nc" id="L138">        return percurso;</span>
+    }
+
+    public void setPercurso(Percurso percurso) {
+<span class="nc" id="L142">        this.percurso = percurso;</span>
+<span class="nc" id="L143">    }</span>
+
+    public int getAtletaId() {
+<span class="nc" id="L146">        return atletaId;</span>
+    }
+
+    public void setAtletaId(int atletaId) {
+<span class="nc" id="L150">        this.atletaId = atletaId;</span>
+<span class="nc" id="L151">    }</span>
+
+    public int getPercursoId() {
+<span class="nc" id="L154">        return percursoId;</span>
+    }
+
+    public void setPercursoId(int percursoId) {
+<span class="nc" id="L158">        this.percursoId = percursoId;</span>
+<span class="nc" id="L159">    }</span>
+
+    public Kit getKit() {
+<span class="nc" id="L162">        return kit;</span>
+    }
+
+    public void setKit(Kit kit) {
+<span class="nc" id="L166">        this.kit = kit;</span>
+<span class="nc" id="L167">    }</span>
+
+    public int getKitId() {
+<span class="nc" id="L170">        return kitId;</span>
+    }
+
+    public void setKitId(int kitId) {
+<span class="nc" id="L174">        this.kitId = kitId;</span>
+<span class="nc" id="L175">    }</span>
+
+    public int getCorridaId() {
+<span class="nc" id="L178">        return corridaId;</span>
+    }
+
+    public void setCorridaId(int corridaId) {
+<span class="nc" id="L182">        this.corridaId = corridaId;</span>
+<span class="nc" id="L183">    }</span>
+
+    public Corrida getCorrida() {
+<span class="nc" id="L186">        return corrida;</span>
+    }
+
+    public void setCorrida(Corrida corrida) {
+<span class="nc" id="L190">        this.corrida = corrida;</span>
+<span class="nc" id="L191">    }</span>
+
+    public Lote getLote() {
+<span class="nc" id="L194">        return lote;</span>
+    }
+
+    public void setLote(Lote lote) {
+<span class="nc" id="L198">        this.lote = lote;</span>
+<span class="nc" id="L199">    }</span>
+
+    public int getLoteId() {
+<span class="nc" id="L202">        return loteId;</span>
+    }
+
+    public void setLoteId(int loteId) {
+<span class="nc" id="L206">        this.loteId = loteId;</span>
+<span class="nc" id="L207">    }</span>
+
+    public static List&lt;Inscricao&gt; obterInscricoes() throws ClassNotFoundException {
+<span class="nc" id="L210">        return InscricaoDAO.obterInscricoes();</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoes(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L214">        return InscricaoDAO.obterInscricoes(corridaId);</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesCorrida(int corridaId, int percursoId) throws ClassNotFoundException {
+<span class="nc" id="L218">        return InscricaoDAO.obterInscricoesCorrida(corridaId, percursoId);</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesAtleta(int atletaId) throws ClassNotFoundException {
+<span class="nc" id="L222">        return InscricaoDAO.obterInscricoesAtleta(atletaId);</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesPagas(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L226">        return InscricaoDAO.obterInscricoesPagas(corridaId);</span>
+    }
+
+    public static List&lt;Inscricao&gt; obterInscricoesNaoPagas(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L230">        return InscricaoDAO.obterInscricoesNaoPagas(corridaId);</span>
+    }
+
+    public void gravar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L234">        InscricaoDAO.gravar(this);</span>
+<span class="nc" id="L235">    }</span>
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L238">        InscricaoDAO.alterar(this);</span>
+<span class="nc" id="L239">    }</span>
+
+    public void excluir() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L242">        InscricaoDAO.excluir(this);</span>
+<span class="nc" id="L243">    }</span>
+
+    public static Inscricao obterInscricao(int id) throws ClassNotFoundException {
+<span class="nc" id="L246">        return InscricaoDAO.obterInscricao(id);</span>
+    }
+
+    public static Inscricao obterUltimaInscricaoAtleta(int atletaId) throws ClassNotFoundException {
+<span class="nc" id="L250">        return InscricaoDAO.obterUltimaInscricaoAtleta(atletaId);</span>
+    }
+
+    public void retirarKit() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L254">        InscricaoDAO.retirarKit(this);</span>
+<span class="nc" id="L255">    }</span>
+
+    public static void atualizarResultadoCorrida(List&lt;Inscricao&gt; inscricoes) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L258">        InscricaoDAO.atualizarResultadoCorrida(inscricoes);</span>
+<span class="nc" id="L259">    }</span>
+
+    public static boolean atletaEstaInscrito(Atleta atleta, Corrida corrida) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L262">        return InscricaoDAO.atletaEstaInscrito(atleta, corrida);</span>
+    }
+
+    public void pagarInscricao() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L266">        InscricaoDAO.pagarInscricao(this);</span>
+<span class="nc" id="L267">    }</span>
+
+    public static List&lt;Inscricao&gt; buscaInscrisoesCorridas(String nome) throws ClassNotFoundException {
+<span class="nc" id="L270">        return InscricaoDAO.buscaInscrisoesCorridas(nome);</span>
+    }
+
+    public static List&lt;Inscricao&gt; buscaInscrisoesAtletas(String nome) throws ClassNotFoundException {
+<span class="nc" id="L274">        return InscricaoDAO.buscaInscrisoesAtletas(nome);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PontuacaoDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">PontuacaoDAO.java</span></div><h1>PontuacaoDAO.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Pontuacao;
+import modelo.Ranking;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L22">public class PontuacaoDAO {</span>
+    
+    public static void gravar (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+<span class="nc" id="L26">        Connection conexao = null;</span>
+        try{
+<span class="nc" id="L28">            conexao = BD.getConexao();</span>
+<span class="nc" id="L29">            String sql= &quot;INSERT INTO pontuacao (pontuacao, ranking_id) VALUES (?,?)&quot;;</span>
+<span class="nc" id="L30">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L31">            comando.setInt(1,pontuacao.getPontuacao());</span>
+<span class="nc" id="L32">            comando.setInt(2,pontuacao.getRanking().getId());</span>
+<span class="nc" id="L33">            comando.execute();</span>
+<span class="nc" id="L34">            comando.close();</span>
+<span class="nc" id="L35">            conexao.close();</span>
+            
+<span class="nc" id="L37">        }catch(SQLException e){</span>
+<span class="nc" id="L38">            throw e;</span>
+<span class="nc" id="L39">        }</span>
+<span class="nc" id="L40">    }</span>
+    
+    public static void alterar (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+<span class="nc" id="L44">        Connection conexao = null;</span>
+        try{
+<span class="nc" id="L46">            conexao = BD.getConexao();</span>
+<span class="nc" id="L47">            String sql= &quot;UPDATE pontuacao SET pontuacao = ?, ranking_id = ? WHERE id = ?&quot;;</span>
+<span class="nc" id="L48">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L49">            comando.setInt(1,pontuacao.getPontuacao());</span>
+<span class="nc" id="L50">            comando.setInt(2,pontuacao.getRanking().getId());</span>
+<span class="nc" id="L51">            comando.setInt(3,pontuacao.getId());</span>
+<span class="nc" id="L52">            comando.execute();</span>
+<span class="nc" id="L53">            comando.close();</span>
+<span class="nc" id="L54">            conexao.close();</span>
+            
+<span class="nc" id="L56">        }catch(SQLException e){</span>
+<span class="nc" id="L57">            throw e;</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }</span>
+    
+    public static void excluir (Pontuacao pontuacao)throws SQLException,
+            ClassNotFoundException{
+<span class="nc" id="L63">        Connection conexao = null;</span>
+<span class="nc" id="L64">        Statement comando = null;</span>
+        String stringSQL;
+        try{
+<span class="nc" id="L67">          conexao =BD.getConexao();</span>
+<span class="nc" id="L68">          comando= conexao.createStatement();</span>
+<span class="nc" id="L69">          stringSQL = &quot;DELETE FROM pontuacao WHERE id = &quot; + pontuacao.getId()+&quot; and &quot;</span>
+<span class="nc" id="L70">                  + &quot;ranking_id = &quot; + pontuacao.getRanking().getId();</span>
+<span class="nc" id="L71">                  comando.execute(stringSQL);</span>
+<span class="nc" id="L72">        }catch(SQLException e){</span>
+<span class="nc" id="L73">            throw e;</span>
+        }finally{
+<span class="nc" id="L75">            fecharConexao(conexao,comando);</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">    }</span>
+    
+    public static Pontuacao obterPontuacao (int id)throws ClassNotFoundException{
+<span class="nc" id="L80">        Connection conexao = null;</span>
+<span class="nc" id="L81">        Statement comando = null;</span>
+<span class="nc" id="L82">        Pontuacao pontuacao = null;</span>
+        try{
+<span class="nc" id="L84">          conexao = BD.getConexao();</span>
+<span class="nc" id="L85">          comando= conexao.createStatement();</span>
+<span class="nc" id="L86">          ResultSet rs =  comando.executeQuery(&quot;SELECT * FROM pontuacao WHERE id = &quot; + id);</span>
+<span class="nc" id="L87">          rs.first();</span>
+<span class="nc" id="L88">            pontuacao = new Pontuacao(rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L89">            rs.getInt(&quot;pontuacao&quot;),</span>
+            null);
+<span class="nc" id="L91">            pontuacao.setRankingId(rs.getInt(&quot;ranking_id&quot;));</span>
+<span class="nc" id="L92">        }catch(SQLException e){</span>
+<span class="nc" id="L93">             e.printStackTrace();</span>
+        }finally{
+<span class="nc" id="L95">            fecharConexao(conexao,comando);</span>
+<span class="nc" id="L96">        }</span>
+<span class="nc" id="L97">        return pontuacao;</span>
+    }
+    
+    public static List&lt;Pontuacao&gt; obterPontuacoes() throws ClassNotFoundException {
+<span class="nc" id="L101">        Connection conexao = null;</span>
+<span class="nc" id="L102">        Statement comando = null;</span>
+<span class="nc" id="L103">        List&lt;Pontuacao&gt; pontuacoes = new ArrayList&lt;Pontuacao&gt;();</span>
+        try {
+<span class="nc" id="L105">            conexao = BD.getConexao();</span>
+<span class="nc" id="L106">            comando = conexao.createStatement();</span>
+<span class="nc" id="L107">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM pontuacao&quot;);</span>
+            
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L110">                Pontuacao pontuacao = new Pontuacao(</span>
+<span class="nc" id="L111">                        rs.getInt(&quot;id&quot;), </span>
+<span class="nc" id="L112">                        rs.getInt(&quot;pontuacao&quot;), </span>
+                        null);
+<span class="nc" id="L114">                pontuacao.setRanking(Ranking.obterRanking(rs.getInt(&quot;ranking_id&quot;)));</span>
+<span class="nc" id="L115">                pontuacao.setRankingId(rs.getInt(&quot;ranking_id&quot;));</span>
+<span class="nc" id="L116">                pontuacoes.add(pontuacao);</span>
+<span class="nc" id="L117">            }</span>
+<span class="nc" id="L118">        } catch (SQLException e) {</span>
+<span class="nc" id="L119">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L121">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L122">        }</span>
+<span class="nc" id="L123">        return pontuacoes;</span>
+    }
+    
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if(comando != null) {</span>
+<span class="nc" id="L129">                comando.close();</span>
+            }
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if(conexao != null) {</span>
+<span class="nc" id="L132">                conexao.close();</span>
+            }
+<span class="nc" id="L134">        } catch (SQLException e) {</span>
+            
+<span class="nc" id="L136">        }</span>
+<span class="nc" id="L137">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

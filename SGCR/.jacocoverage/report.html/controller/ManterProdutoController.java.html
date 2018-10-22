@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterProdutoController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterProdutoController.java</span></div><h1>ManterProdutoController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
+import modelo.Organizador;
+import modelo.Produto;
+
+/**
+ *
+ * @author ariel
+ */
+<span class="nc" id="L27">public class ManterProdutoController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+<span class="nc" id="L40">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L42">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L45">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L48">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L51">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L54">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L57">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L64">    }</span>
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L68">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L69">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L70">            int codProduto = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L72">            Produto produto = Produto.obterProduto(codProduto);</span>
+<span class="nc" id="L73">            request.setAttribute(&quot;produto&quot;, produto);</span>
+
+<span class="nc" id="L75">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterProduto.jsp&quot;);</span>
+<span class="nc" id="L76">            view.forward(request, response);</span>
+
+<span class="nc" id="L78">        } catch (ServletException ex) {</span>
+<span class="nc" id="L79">        } catch (IOException ex) {</span>
+<span class="nc" id="L80">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L81">        }</span>
+<span class="nc" id="L82">    }</span>
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L86">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L87">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L88">            int codProduto = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L90">            Produto produto = Produto.obterProduto(codProduto);</span>
+<span class="nc" id="L91">            request.setAttribute(&quot;produto&quot;, produto);</span>
+
+<span class="nc" id="L93">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterProduto.jsp&quot;);</span>
+<span class="nc" id="L94">            view.forward(request, response);</span>
+
+<span class="nc" id="L96">        } catch (ServletException ex) {</span>
+<span class="nc" id="L97">        } catch (IOException ex) {</span>
+<span class="nc" id="L98">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L99">        }</span>
+<span class="nc" id="L100">    }</span>
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L103">        int id = Integer.parseInt(request.getParameter(&quot;txtIdProduto&quot;));</span>
+<span class="nc" id="L104">        String nomeProduto = request.getParameter(&quot;txtNome&quot;);</span>
+
+<span class="nc" id="L106">        Produto produto = new Produto(id, nomeProduto, null);</span>
+        try {
+<span class="nc" id="L108">            produto.excluir();</span>
+
+<span class="nc" id="L110">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaProdutoController&quot;);</span>
+<span class="nc" id="L111">            view.forward(request, response);</span>
+
+<span class="nc" id="L113">        } catch (IOException ex) {</span>
+<span class="nc" id="L114">        } catch (SQLException ex) {</span>
+<span class="nc" id="L115">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L116">        } catch (ServletException ex) {</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L121">        int id = Integer.parseInt(request.getParameter(&quot;txtIdProduto&quot;));</span>
+<span class="nc" id="L122">        String nomeProduto = request.getParameter(&quot;txtNome&quot;);</span>
+<span class="nc" id="L123">        int idAdministradorProduto = Integer.parseInt(request.getParameter(&quot;optAdministrador&quot;));</span>
+
+<span class="nc" id="L125">        Administrador administrador = Administrador.obterAdministrador(idAdministradorProduto);</span>
+<span class="nc" id="L126">        Produto produto = new Produto(id, nomeProduto, administrador);</span>
+        try {
+<span class="nc" id="L128">            produto.alterar();</span>
+
+<span class="nc" id="L130">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaProdutoController&quot;);</span>
+<span class="nc" id="L131">            view.forward(request, response);</span>
+
+<span class="nc" id="L133">        } catch (IOException ex) {</span>
+<span class="nc" id="L134">        } catch (SQLException ex) {</span>
+<span class="nc" id="L135">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L136">        } catch (ServletException ex) {</span>
+<span class="nc" id="L137">        }</span>
+<span class="nc" id="L138">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L142">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L143">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L144">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterProduto.jsp&quot;);</span>
+<span class="nc" id="L145">            view.forward(request, response);</span>
+
+<span class="nc" id="L147">        } catch (ServletException ex) {</span>
+<span class="nc" id="L148">        } catch (IOException ex) {</span>
+<span class="nc" id="L149">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L150">        }</span>
+<span class="nc" id="L151">    }</span>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L154">        String nomeProduto = request.getParameter(&quot;txtNome&quot;);</span>
+<span class="nc" id="L155">        int idAdministrador = Integer.parseInt(request.getParameter(&quot;optAdministrador&quot;));</span>
+<span class="nc" id="L156">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L157">        Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+        try {
+<span class="nc" id="L160">            Administrador administrador = null;</span>
+
+<span class="nc" id="L162">            administrador = Administrador.obterAdministrador(idAdministrador);</span>
+
+<span class="nc" id="L164">            Produto produto = new Produto(nomeProduto, administrador);</span>
+<span class="nc" id="L165">            produto.gravar();</span>
+<span class="nc" id="L166">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaProdutoController&quot;);</span>
+<span class="nc" id="L167">            view.forward(request, response);</span>
+<span class="nc" id="L168">        } catch (IOException ex) {</span>
+<span class="nc" id="L169">        } catch (SQLException ex) {</span>
+<span class="nc" id="L170">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L171">        } catch (ServletException ex) {</span>
+<span class="nc" id="L172">        }</span>
+<span class="nc" id="L173">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L188">            processRequest(request, response);</span>
+<span class="nc" id="L189">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L190">            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L191">        } catch (SQLException ex) {</span>
+<span class="nc" id="L192">            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L193">        }</span>
+<span class="nc" id="L194">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L208">            processRequest(request, response);</span>
+<span class="nc" id="L209">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L210">            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L211">        } catch (SQLException ex) {</span>
+<span class="nc" id="L212">            Logger.getLogger(ManterProdutoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L213">        }</span>
+<span class="nc" id="L214">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L223">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

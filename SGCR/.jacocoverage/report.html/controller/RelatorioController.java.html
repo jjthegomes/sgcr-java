@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RelatorioController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">RelatorioController.java</span></div><h1>RelatorioController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
+/**
+ *
+ * @author ariel
+ */
+<span class="nc" id="L30">public class RelatorioController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, JRException {
+<span class="nc" id="L43">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L44">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (acao.equals(&quot;gerarRelatorioOrganizadores&quot;)) {</span>
+<span class="nc" id="L46">            gerarRelatorioOrganizadores(request, response);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        } else if (acao.equals(&quot;gerarRelatorioCorridasPorOrganizador&quot;)) {</span>
+<span class="nc" id="L48">            gerarRelatorioCorridasPorOrganizador(request, response);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        } else if (acao.equals(&quot;gerarRelatorioAtletas&quot;)) {</span>
+<span class="nc" id="L50">            gerarRelatorioAtletas(request, response);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        } else if (acao.equals(&quot;gerarRelatorioAtletasPorCorrida&quot;)) {</span>
+<span class="nc" id="L52">            gerarRelatorioAtletasPorCorrida(request, response);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        }  else if (acao.equals(&quot;gerarRelatorioAtletas&quot;)) {</span>
+<span class="nc" id="L54">            gerarRelatorioAtletas(request, response);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioAtletasInadimplentes&quot;)) {</span>
+<span class="nc" id="L56">            gerarRelatorioAtletasInadimplentes(request, response);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioBoleto&quot;)) {</span>
+<span class="nc" id="L58">            gerarRelatorioBoleto(request, response);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioCartao&quot;)) {</span>
+<span class="nc" id="L60">            gerarRelatorioCartao(request, response);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioTodosPagamentos&quot;)) {</span>
+<span class="nc" id="L62">            gerarRelatorioTodosPagamentos(request, response);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioCorridasParticipadas&quot;)) {</span>
+<span class="nc" id="L64">            gerarRelatorioCorridasParticipadas(request, response);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        }else if (acao.equals(&quot;gerarRelatorioRelatorioTodosPagamentosAtleta&quot;)) {</span>
+<span class="nc" id="L66">            gerarRelatorioRelatorioTodosPagamentosAtleta(request, response);</span>
+        }
+<span class="nc" id="L68">    }</span>
+
+    public void gerarRelatorioOrganizadores(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L71">        Connection conexao = null;</span>
+<span class="nc" id="L72">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L74">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L75">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L76">            HashMap parametros = new HashMap();</span>
+            // parametros.put(&quot;PAR_codCurso&quot;, Integer.parseInt(request.getParameter(&quot;txtCodCurso&quot;)));
+<span class="nc" id="L78">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_organizador.jasper&quot;;</span>
+<span class="nc" id="L79">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L80">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L81">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_organizador.pdf&quot;);</span>
+<span class="nc" id="L82">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L83">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L84">        } catch (SQLException ex) {</span>
+<span class="nc" id="L85">            ex.printStackTrace();</span>
+<span class="nc" id="L86">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L87">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L89">            try {</span>
+<span class="nc bnc" id="L90" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L91">                    conexao.close();</span>
+                }
+<span class="nc" id="L93">            } catch (SQLException ex) {</span>
+<span class="nc" id="L94">            }</span>
+<span class="nc" id="L95">        }</span>
+<span class="nc" id="L96">    }</span>
+
+    public void gerarRelatorioCorridasPorOrganizador(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L99">        Connection conexao = null;</span>
+<span class="nc" id="L100">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L102">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L103">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L104">            HashMap parametros = new HashMap();</span>
+//            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));
+<span class="nc" id="L106">            parametros.put(&quot;P_idOrganizador&quot;, Integer.parseInt(request.getParameter(&quot;organizadorId&quot;)));</span>
+<span class="nc" id="L107">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_corridaOrganizador.jasper&quot;;</span>
+<span class="nc" id="L108">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L109">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L110">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=relatorioCorridasOrganizador.pdf&quot;);</span>
+<span class="nc" id="L111">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L112">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L113">        } catch (SQLException ex) {</span>
+<span class="nc" id="L114">            ex.printStackTrace();</span>
+<span class="nc" id="L115">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L116">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L118">            try {</span>
+<span class="nc bnc" id="L119" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L120">                    conexao.close();</span>
+                }
+<span class="nc" id="L122">            } catch (SQLException ex) {</span>
+<span class="nc" id="L123">            }</span>
+<span class="nc" id="L124">        }</span>
+<span class="nc" id="L125">    }</span>
+    
+    public void gerarRelatorioAtletas(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L128">        Connection conexao = null;</span>
+<span class="nc" id="L129">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L131">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L132">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L133">            HashMap parametros = new HashMap();</span>
+            // parametros.put(&quot;PAR_codCurso&quot;, Integer.parseInt(request.getParameter(&quot;txtCodCurso&quot;)));
+<span class="nc" id="L135">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_atleta.jasper&quot;;</span>
+<span class="nc" id="L136">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L137">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L138">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_atleta.pdf&quot;);</span>
+<span class="nc" id="L139">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L140">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L141">        } catch (SQLException ex) {</span>
+<span class="nc" id="L142">            ex.printStackTrace();</span>
+<span class="nc" id="L143">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L144">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L146">            try {</span>
+<span class="nc bnc" id="L147" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L148">                    conexao.close();</span>
+                }
+<span class="nc" id="L150">            } catch (SQLException ex) {</span>
+<span class="nc" id="L151">            }</span>
+<span class="nc" id="L152">        }</span>
+<span class="nc" id="L153">    }</span>
+    
+    public void gerarRelatorioAtletasPorCorrida(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L156">        Connection conexao = null;</span>
+<span class="nc" id="L157">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L159">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L160">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L161">            HashMap parametros = new HashMap();</span>
+//            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));
+<span class="nc" id="L163">            parametros.put(&quot;P_corridaid&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L164">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_atletaCorrida.jasper&quot;;</span>
+<span class="nc" id="L165">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L166">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L167">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=relatorioAtletasCorrida.pdf&quot;);</span>
+<span class="nc" id="L168">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L169">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L170">        } catch (SQLException ex) {</span>
+<span class="nc" id="L171">            ex.printStackTrace();</span>
+<span class="nc" id="L172">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L173">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L175">            try {</span>
+<span class="nc bnc" id="L176" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L177">                    conexao.close();</span>
+                }
+<span class="nc" id="L179">            } catch (SQLException ex) {</span>
+<span class="nc" id="L180">            }</span>
+<span class="nc" id="L181">        }</span>
+<span class="nc" id="L182">    }</span>
+    
+    public void gerarRelatorioAtletasKit(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L185">        Connection conexao = null;</span>
+<span class="nc" id="L186">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L188">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L189">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L190">            HashMap parametros = new HashMap();</span>
+            // parametros.put(&quot;PAR_codCurso&quot;, Integer.parseInt(request.getParameter(&quot;txtCodCurso&quot;)));
+<span class="nc" id="L192">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_atletaKit.jasper&quot;;</span>
+<span class="nc" id="L193">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L194">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L195">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_atletaKit.pdf&quot;);</span>
+<span class="nc" id="L196">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L197">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L198">        } catch (SQLException ex) {</span>
+<span class="nc" id="L199">            ex.printStackTrace();</span>
+<span class="nc" id="L200">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L201">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L203">            try {</span>
+<span class="nc bnc" id="L204" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L205">                    conexao.close();</span>
+                }
+<span class="nc" id="L207">            } catch (SQLException ex) {</span>
+<span class="nc" id="L208">            }</span>
+<span class="nc" id="L209">        }</span>
+<span class="nc" id="L210">    }</span>
+    
+    //***inicio****
+    
+    
+    public void gerarRelatorioAtletasInadimplentes(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L216">        Connection conexao = null;</span>
+<span class="nc" id="L217">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L219">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L220">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L221">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L222">            parametros.put(&quot;P_corridaid&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L223">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_corredoresInadimplentes.jasper&quot;;</span>
+<span class="nc" id="L224">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L225">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L226">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_corredoresInadimplentes.pdf&quot;);</span>
+<span class="nc" id="L227">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L228">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L229">        } catch (SQLException ex) {</span>
+<span class="nc" id="L230">            ex.printStackTrace();</span>
+<span class="nc" id="L231">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L232">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L234">            try {</span>
+<span class="nc bnc" id="L235" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L236">                    conexao.close();</span>
+                }
+<span class="nc" id="L238">            } catch (SQLException ex) {</span>
+<span class="nc" id="L239">            }</span>
+<span class="nc" id="L240">        }</span>
+<span class="nc" id="L241">    }</span>
+    public void gerarRelatorioBoleto(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L243">        Connection conexao = null;</span>
+<span class="nc" id="L244">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L246">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L247">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L248">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L249">            parametros.put(&quot;P_corridaId&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L250">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_pagamentoBoleto.jasper&quot;;</span>
+<span class="nc" id="L251">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L252">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L253">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_pagamentoBoleto.pdf&quot;);</span>
+<span class="nc" id="L254">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L255">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L256">        } catch (SQLException ex) {</span>
+<span class="nc" id="L257">            ex.printStackTrace();</span>
+<span class="nc" id="L258">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L259">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L261">            try {</span>
+<span class="nc bnc" id="L262" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L263">                    conexao.close();</span>
+                }
+<span class="nc" id="L265">            } catch (SQLException ex) {</span>
+<span class="nc" id="L266">            }</span>
+<span class="nc" id="L267">        }</span>
+<span class="nc" id="L268">    }</span>
+    public void gerarRelatorioCartao(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L270">        Connection conexao = null;</span>
+<span class="nc" id="L271">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L273">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L274">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L275">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L276">            parametros.put(&quot;P_corridaId&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L277">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_pagamentoCartao.jasper&quot;;</span>
+<span class="nc" id="L278">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L279">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L280">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_pagamentoCartao.pdf&quot;);</span>
+<span class="nc" id="L281">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L282">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L283">        } catch (SQLException ex) {</span>
+<span class="nc" id="L284">            ex.printStackTrace();</span>
+<span class="nc" id="L285">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L286">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L288">            try {</span>
+<span class="nc bnc" id="L289" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L290">                    conexao.close();</span>
+                }
+<span class="nc" id="L292">            } catch (SQLException ex) {</span>
+<span class="nc" id="L293">            }</span>
+<span class="nc" id="L294">        }</span>
+<span class="nc" id="L295">    }</span>
+    public void gerarRelatorioTodosPagamentos(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L297">        Connection conexao = null;</span>
+<span class="nc" id="L298">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L300">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L301">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L302">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L303">            parametros.put(&quot;P_corridaId&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L304">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_organizadorPagamento.jasper&quot;;</span>
+<span class="nc" id="L305">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L306">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L307">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_organizadorPagamento.pdf&quot;);</span>
+<span class="nc" id="L308">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L309">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L310">        } catch (SQLException ex) {</span>
+<span class="nc" id="L311">            ex.printStackTrace();</span>
+<span class="nc" id="L312">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L313">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L315">            try {</span>
+<span class="nc bnc" id="L316" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L317">                    conexao.close();</span>
+                }
+<span class="nc" id="L319">            } catch (SQLException ex) {</span>
+<span class="nc" id="L320">            }</span>
+<span class="nc" id="L321">        }</span>
+<span class="nc" id="L322">    }</span>
+    public void gerarRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L324">        Connection conexao = null;</span>
+<span class="nc" id="L325">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L327">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L328">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L329">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L330">            parametros.put(&quot;P_corridaId&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L331">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_atletaCorrida.jasper&quot;;</span>
+<span class="nc" id="L332">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L333">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L334">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_atletaCorrida.pdf&quot;);</span>
+<span class="nc" id="L335">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L336">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L337">        } catch (SQLException ex) {</span>
+<span class="nc" id="L338">            ex.printStackTrace();</span>
+<span class="nc" id="L339">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L340">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L342">            try {</span>
+<span class="nc bnc" id="L343" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L344">                    conexao.close();</span>
+                }
+<span class="nc" id="L346">            } catch (SQLException ex) {</span>
+<span class="nc" id="L347">            }</span>
+<span class="nc" id="L348">        }</span>
+<span class="nc" id="L349">    }</span>
+    public void gerarRelatorioRelatorioTodosPagamentosAtleta(HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
+<span class="nc" id="L351">        Connection conexao = null;</span>
+<span class="nc" id="L352">        String relatorio = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L354">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="nc" id="L355">            conexao = DriverManager.getConnection(&quot;jdbc:mysql://localhost/SGCR&quot;, &quot;root&quot;, &quot;&quot;);</span>
+<span class="nc" id="L356">            HashMap parametros = new HashMap();</span>
+<span class="nc" id="L357">            parametros.put(&quot;P_corridaId&quot;, Integer.parseInt(request.getParameter(&quot;corridaId&quot;)));</span>
+<span class="nc" id="L358">            relatorio = getServletContext().getRealPath(&quot;/relatorio&quot;) + &quot;/report_pagamentoAtleta.jasper&quot;;</span>
+<span class="nc" id="L359">            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);</span>
+<span class="nc" id="L360">            byte[] relat = JasperExportManager.exportReportToPdf(jp);</span>
+<span class="nc" id="L361">            response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=report_pagamentoAtleta.pdf&quot;);</span>
+<span class="nc" id="L362">            response.setContentType(&quot;application/pdf&quot;);</span>
+<span class="nc" id="L363">            response.getOutputStream().write(relat);</span>
+<span class="nc" id="L364">        } catch (SQLException ex) {</span>
+<span class="nc" id="L365">            ex.printStackTrace();</span>
+<span class="nc" id="L366">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L367">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L369">            try {</span>
+<span class="nc bnc" id="L370" title="All 8 branches missed.">                if (!conexao.isClosed()) {</span>
+<span class="nc" id="L371">                    conexao.close();</span>
+                }
+<span class="nc" id="L373">            } catch (SQLException ex) {</span>
+<span class="nc" id="L374">            }</span>
+<span class="nc" id="L375">        }</span>
+<span class="nc" id="L376">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L391">            processRequest(request, response);</span>
+<span class="nc" id="L392">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L393">            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L394">        } catch (JRException ex) {</span>
+<span class="nc" id="L395">            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L396">        }</span>
+<span class="nc" id="L397">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L411">            processRequest(request, response);</span>
+<span class="nc" id="L412">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L413">            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L414">        } catch (JRException ex) {</span>
+<span class="nc" id="L415">            Logger.getLogger(RelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L416">        }</span>
+<span class="nc" id="L417">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L426">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

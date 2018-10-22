@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PesquisaRelatorioController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PesquisaRelatorioController.java</span></div><h1>PesquisaRelatorioController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
+import modelo.Corrida;
+import modelo.Inscricao;
+import modelo.Percurso;
+import modelo.Organizador;
+
+/**
+ *
+ * @author rafael
+ */
+<span class="nc" id="L28">public class PesquisaRelatorioController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+<span class="nc" id="L41">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (acao.equals(&quot;relatorioAdministrador&quot;)) {</span>
+<span class="nc" id="L43">            relatorioAdministrador(request, response);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        } else if (acao.equals(&quot;relatorioOrganizador&quot;)) {</span>
+<span class="nc" id="L45">            relatorioOrganizador(request, response);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        } else if (acao.equals(&quot;relatorioAtleta&quot;)) {</span>
+<span class="nc" id="L47">            relatorioAtleta(request, response);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioCorridasPorOrganizador&quot;)) {</span>
+<span class="nc" id="L49">            prepararRelatorioCorridasPorOrganizador(request, response);</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioAtletasPorCorrida&quot;)) {</span>
+<span class="nc" id="L51">            prepararRelatorioAtletasPorCorrida(request, response);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioAtletasInadimplentesPorCorrida&quot;)) {</span>
+<span class="nc" id="L53">            prepararRelatorioAtletasInadimplentesPorCorrida(request, response);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioAtletasPagosPorCorridaBoleto&quot;)) {</span>
+<span class="nc" id="L55">            prepararRelatorioAtletasPagosPorCorridaBoleto(request, response);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioAtletasPagosPorCorridaCartao&quot;)) {</span>
+<span class="nc" id="L57">            prepararRelatorioAtletasPagosPorCorridaCartao(request, response);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioAtletasPagosPorCorrida&quot;)) {</span>
+<span class="nc" id="L59">            prepararRelatorioAtletasPagosPorCorrida(request, response);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioCorridasParticipadas&quot;)) {</span>
+<span class="nc" id="L61">            prepararRelatorioCorridasParticipadas(request, response);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararRelatorioCorridaPagamentosAtleta&quot;)) {</span>
+<span class="nc" id="L63">            prepararRelatorioCorridaPagamentosAtleta(request, response);</span>
+        }
+<span class="nc" id="L65">    }</span>
+
+    public void relatorioAdministrador(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L69">            RequestDispatcher view = request.getRequestDispatcher(&quot;/pesquisaRelatorioAdministrador.jsp&quot;);</span>
+<span class="nc" id="L70">            view.forward(request, response);</span>
+<span class="nc" id="L71">        } catch (ServletException ex) {</span>
+<span class="nc" id="L72">        } catch (IOException ex) {</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+
+    public void relatorioOrganizador(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L78">            RequestDispatcher view = request.getRequestDispatcher(&quot;/pesquisaRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L79">            view.forward(request, response);</span>
+<span class="nc" id="L80">        } catch (ServletException ex) {</span>
+<span class="nc" id="L81">        } catch (IOException ex) {</span>
+<span class="nc" id="L82">        }</span>
+<span class="nc" id="L83">    }</span>
+
+    public void relatorioAtleta(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L87">            RequestDispatcher view = request.getRequestDispatcher(&quot;/pesquisaRelatorioAtleta.jsp&quot;);</span>
+<span class="nc" id="L88">            view.forward(request, response);</span>
+<span class="nc" id="L89">        } catch (ServletException ex) {</span>
+<span class="nc" id="L90">        } catch (IOException ex) {</span>
+<span class="nc" id="L91">        }</span>
+<span class="nc" id="L92">    }</span>
+
+    public void prepararRelatorioCorridasPorOrganizador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L95">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L97">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L98">            Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);</span>
+
+<span class="nc" id="L100">            request.setAttribute(&quot;organizadores&quot;, Organizador.obterOrganizadores());</span>
+<span class="nc" id="L101">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioAdministrador.jsp&quot;);</span>
+<span class="nc" id="L102">            view.forward(request, response);</span>
+<span class="nc" id="L103">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L104">        }</span>
+<span class="nc" id="L105">    }</span>
+
+    public void prepararRelatorioAtletasPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L108">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L110">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L111">            Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L113">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas(organizador.getId()));</span>
+<span class="nc" id="L114">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L115">            view.forward(request, response);</span>
+<span class="nc" id="L116">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
+
+    //início   
+    public void prepararRelatorioAtletasInadimplentesPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L122">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L124">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L125">          Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L127">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas(organizador.getId()));</span>
+<span class="nc" id="L128">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L129">            view.forward(request, response);</span>
+<span class="nc" id="L130">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L131">        }</span>
+<span class="nc" id="L132">    }</span>
+
+    public void prepararRelatorioAtletasPagosPorCorridaBoleto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L135">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L137">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L138">              Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L140">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas(organizador.getId()));</span>
+<span class="nc" id="L141">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L142">            view.forward(request, response);</span>
+<span class="nc" id="L143">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L144">        }</span>
+<span class="nc" id="L145">    }</span>
+
+    public void prepararRelatorioAtletasPagosPorCorridaCartao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L148">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L150">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L151">             Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L153">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas(organizador.getId()));</span>
+<span class="nc" id="L154">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L155">            view.forward(request, response);</span>
+<span class="nc" id="L156">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L157">        }</span>
+<span class="nc" id="L158">    }</span>
+
+    public void prepararRelatorioAtletasPagosPorCorrida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L161">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        try {
+<span class="nc" id="L163">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L164">             Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L166">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas(organizador.getId()));</span>
+<span class="nc" id="L167">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioOrganizador.jsp&quot;);</span>
+<span class="nc" id="L168">            view.forward(request, response);</span>
+<span class="nc" id="L169">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L170">        }</span>
+<span class="nc" id="L171">    }</span>
+
+    public void prepararRelatorioCorridasParticipadas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L174">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L175">        HttpSession session = request.getSession(true);</span>
+        //Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);
+
+        //request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());
+<span class="nc" id="L179">        RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioAtleta.jsp&quot;);</span>
+<span class="nc" id="L180">        view.forward(request, response);</span>
+<span class="nc" id="L181">    }</span>
+
+    public void prepararRelatorioCorridaPagamentosAtleta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc" id="L184">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+        //HttpSession session = request.getSession(true);
+        //Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);
+
+        //request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());
+<span class="nc" id="L189">        RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRelatorioAtleta.jsp&quot;);</span>
+<span class="nc" id="L190">        view.forward(request, response);</span>
+<span class="nc" id="L191">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L206">            processRequest(request, response);</span>
+<span class="nc" id="L207">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L208">            Logger.getLogger(PesquisaRelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L209">        }</span>
+<span class="nc" id="L210">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L224">            processRequest(request, response);</span>
+<span class="nc" id="L225">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L226">            Logger.getLogger(PesquisaRelatorioController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L227">        }</span>
+<span class="nc" id="L228">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L237">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OrganizadorDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">OrganizadorDAO.java</span></div><h1>OrganizadorDAO.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Organizador;
+
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L23">public class OrganizadorDAO {</span>
+
+    public static List&lt;Organizador&gt; obterOrganizadores() throws ClassNotFoundException {
+<span class="nc" id="L26">        Connection conexao = null;</span>
+<span class="nc" id="L27">        Statement comando = null;</span>
+<span class="nc" id="L28">        List&lt;Organizador&gt; organizadores = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L31">            conexao = BD.getConexao();</span>
+<span class="nc" id="L32">            comando = conexao.createStatement();</span>
+<span class="nc" id="L33">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM organizador&quot;);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L35">                Organizador organizador = new Organizador(</span>
+<span class="nc" id="L36">                        rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L37">                        rs.getString(&quot;data_nascimento&quot;),</span>
+<span class="nc" id="L38">                        rs.getString(&quot;sexo&quot;),</span>
+<span class="nc" id="L39">                        rs.getString(&quot;cpf&quot;),</span>
+<span class="nc" id="L40">                        rs.getString(&quot;cep&quot;),</span>
+<span class="nc" id="L41">                        rs.getString(&quot;logradouro&quot;),</span>
+<span class="nc" id="L42">                        rs.getString(&quot;bairro&quot;),</span>
+<span class="nc" id="L43">                        rs.getString(&quot;complemento&quot;),</span>
+<span class="nc" id="L44">                        rs.getString(&quot;numero&quot;),</span>
+<span class="nc" id="L45">                        rs.getString(&quot;cidade&quot;),</span>
+<span class="nc" id="L46">                        rs.getString(&quot;estado&quot;),</span>
+<span class="nc" id="L47">                        rs.getString(&quot;telefone&quot;),</span>
+<span class="nc" id="L48">                        rs.getString(&quot;celular&quot;),</span>
+<span class="nc" id="L49">                        rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L50">                        rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L51">                        rs.getString(&quot;senha&quot;));</span>
+<span class="nc" id="L52">                organizadores.add(organizador);</span>
+<span class="nc" id="L53">            }</span>
+<span class="nc" id="L54">        } catch (SQLException e) {</span>
+<span class="nc" id="L55">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L57">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">        return organizadores;</span>
+    }
+
+    public static void gravar(Organizador organizador) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L63">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L65">            conexao = BD.getConexao();</span>
+<span class="nc" id="L66">            String sql = &quot;INSERT INTO organizador (nome,email,senha,sexo,data_nascimento,&quot;</span>
+                    + &quot;cpf,cep,cidade,estado,logradouro,bairro,numero,complemento, telefone,celular) &quot;
+                    + &quot;VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)&quot;;
+<span class="nc" id="L69">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L70">            comando.setString(1, organizador.getNome());</span>
+<span class="nc" id="L71">            comando.setString(2, organizador.getEmail());</span>
+<span class="nc" id="L72">            comando.setString(3, organizador.getSenha());</span>
+<span class="nc" id="L73">            comando.setString(4, organizador.getSexo());</span>
+<span class="nc" id="L74">            comando.setString(5, organizador.getDataNascimento());</span>
+<span class="nc" id="L75">            comando.setString(6, organizador.getCpf());</span>
+<span class="nc" id="L76">            comando.setString(7, organizador.getCep());</span>
+<span class="nc" id="L77">            comando.setString(8, organizador.getCidade());</span>
+<span class="nc" id="L78">            comando.setString(9, organizador.getEstado());</span>
+<span class="nc" id="L79">            comando.setString(10, organizador.getLogradouro());</span>
+<span class="nc" id="L80">            comando.setString(11, organizador.getBairro());</span>
+<span class="nc" id="L81">            comando.setString(12, organizador.getNumero());</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if (organizador.getComplemento() == null) {</span>
+<span class="nc" id="L83">                comando.setNull(13, Types.NULL);</span>
+            } else {
+<span class="nc" id="L85">                comando.setString(13, organizador.getComplemento());</span>
+            }
+<span class="nc" id="L87">            comando.setString(14, organizador.getTelefone());</span>
+<span class="nc" id="L88">            comando.setString(15, organizador.getCelular());</span>
+
+<span class="nc" id="L90">            comando.execute();</span>
+<span class="nc" id="L91">            comando.close();</span>
+<span class="nc" id="L92">            conexao.close();</span>
+<span class="nc" id="L93">        } catch (SQLException e) {</span>
+<span class="nc" id="L94">            throw e;</span>
+<span class="nc" id="L95">        }</span>
+<span class="nc" id="L96">    }</span>
+
+    public static void alterar(Organizador organizador) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L99">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L101">            conexao = BD.getConexao();</span>
+<span class="nc" id="L102">            String sql = &quot;UPDATE organizador SET nome = ?,email = ?, senha = ?, sexo = ?, data_nascimento = ?, cpf = ?, &quot;</span>
+                    + &quot;cep = ?, cidade = ?, estado = ?, logradouro = ?, bairro = ?, numero = ?, complemento = ?, telefone = ?, &quot;
+                    + &quot;celular = ? WHERE id = ?&quot;;
+<span class="nc" id="L105">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L106">            comando.setString(1, organizador.getNome());</span>
+<span class="nc" id="L107">            comando.setString(2, organizador.getEmail());</span>
+<span class="nc" id="L108">            comando.setString(3, organizador.getSenha());</span>
+<span class="nc" id="L109">            comando.setString(4, organizador.getSexo());</span>
+<span class="nc" id="L110">            comando.setString(5, organizador.getDataNascimento());</span>
+<span class="nc" id="L111">            comando.setString(6, organizador.getCpf());</span>
+<span class="nc" id="L112">            comando.setString(7, organizador.getCep());</span>
+<span class="nc" id="L113">            comando.setString(8, organizador.getCidade());</span>
+<span class="nc" id="L114">            comando.setString(9, organizador.getEstado());</span>
+<span class="nc" id="L115">            comando.setString(10, organizador.getLogradouro());</span>
+<span class="nc" id="L116">            comando.setString(11, organizador.getBairro());</span>
+<span class="nc" id="L117">            comando.setString(12, organizador.getNumero());</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (organizador.getComplemento() == null) {</span>
+<span class="nc" id="L119">                comando.setNull(13, Types.NULL);</span>
+            } else {
+<span class="nc" id="L121">                comando.setString(13, organizador.getComplemento());</span>
+            }
+<span class="nc" id="L123">            comando.setString(14, organizador.getTelefone());</span>
+<span class="nc" id="L124">            comando.setString(15, organizador.getCelular());</span>
+<span class="nc" id="L125">            comando.setInt(16, organizador.getId());</span>
+<span class="nc" id="L126">            comando.execute();</span>
+<span class="nc" id="L127">            comando.close();</span>
+<span class="nc" id="L128">            conexao.close();</span>
+<span class="nc" id="L129">        } catch (SQLException e) {</span>
+<span class="nc" id="L130">            throw e;</span>
+<span class="nc" id="L131">        }</span>
+<span class="nc" id="L132">    }</span>
+
+    public static void excluir(Organizador organizador) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L135">        Connection conexao = null;</span>
+<span class="nc" id="L136">        Statement comando = null;</span>
+        String stringSQL;
+
+        try {
+<span class="nc" id="L140">            conexao = BD.getConexao();</span>
+<span class="nc" id="L141">            comando = conexao.createStatement();</span>
+<span class="nc" id="L142">            stringSQL = &quot;DELETE FROM organizador WHERE id = &quot; + organizador.getId();</span>
+<span class="nc" id="L143">            comando.execute(stringSQL);</span>
+<span class="nc" id="L144">        } catch (Exception e) {</span>
+<span class="nc" id="L145">            throw e;</span>
+        } finally {
+<span class="nc" id="L147">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L148">        }</span>
+<span class="nc" id="L149">    }</span>
+
+    public static Organizador obterOrganizador(int id) throws ClassNotFoundException {
+<span class="nc" id="L152">        Connection conexao = null;</span>
+<span class="nc" id="L153">        Statement comando = null;</span>
+<span class="nc" id="L154">        Organizador organizador = null;</span>
+        try {
+<span class="nc" id="L156">            conexao = BD.getConexao();</span>
+<span class="nc" id="L157">            comando = conexao.createStatement();</span>
+<span class="nc" id="L158">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM organizador WHERE id = &quot; + id);</span>
+<span class="nc" id="L159">            rs.first();</span>
+<span class="nc" id="L160">            organizador = new Organizador(</span>
+<span class="nc" id="L161">                    rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L162">                    rs.getString(&quot;data_nascimento&quot;),</span>
+<span class="nc" id="L163">                    rs.getString(&quot;sexo&quot;),</span>
+<span class="nc" id="L164">                    rs.getString(&quot;cpf&quot;),</span>
+<span class="nc" id="L165">                    rs.getString(&quot;cep&quot;),</span>
+<span class="nc" id="L166">                    rs.getString(&quot;logradouro&quot;),</span>
+<span class="nc" id="L167">                    rs.getString(&quot;bairro&quot;),</span>
+<span class="nc" id="L168">                    rs.getString(&quot;complemento&quot;),</span>
+<span class="nc" id="L169">                    rs.getString(&quot;numero&quot;),</span>
+<span class="nc" id="L170">                    rs.getString(&quot;cidade&quot;),</span>
+<span class="nc" id="L171">                    rs.getString(&quot;estado&quot;),</span>
+<span class="nc" id="L172">                    rs.getString(&quot;telefone&quot;),</span>
+<span class="nc" id="L173">                    rs.getString(&quot;celular&quot;),</span>
+<span class="nc" id="L174">                    rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L175">                    rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L176">                    rs.getString(&quot;senha&quot;));</span>
+<span class="nc" id="L177">        } catch (SQLException e) {</span>
+<span class="nc" id="L178">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L180">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L181">        }</span>
+<span class="nc" id="L182">        return organizador;</span>
+    }
+    
+    public static Organizador logar(String email, String senha) throws ClassNotFoundException {
+<span class="nc" id="L186">        Connection conexao = null;</span>
+<span class="nc" id="L187">        Organizador organizador = null;</span>
+<span class="nc" id="L188">        PreparedStatement comando = null;</span>
+        try {
+<span class="nc" id="L190">            conexao = BD.getConexao();</span>
+<span class="nc" id="L191">            String sql = &quot;SELECT * FROM organizador WHERE email = ? AND senha = ?&quot;;</span>
+<span class="nc" id="L192">            comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L193">            comando.setString(1, email);</span>
+<span class="nc" id="L194">            comando.setString(2, senha);</span>
+<span class="nc" id="L195">            ResultSet rs = comando.executeQuery();</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">            if (rs.first()) {</span>
+<span class="nc" id="L197">                organizador = new Organizador(</span>
+<span class="nc" id="L198">                    rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L199">                    rs.getString(&quot;data_nascimento&quot;),</span>
+<span class="nc" id="L200">                    rs.getString(&quot;sexo&quot;),</span>
+<span class="nc" id="L201">                    rs.getString(&quot;cpf&quot;),</span>
+<span class="nc" id="L202">                    rs.getString(&quot;cep&quot;),</span>
+<span class="nc" id="L203">                    rs.getString(&quot;logradouro&quot;),</span>
+<span class="nc" id="L204">                    rs.getString(&quot;bairro&quot;),</span>
+<span class="nc" id="L205">                    rs.getString(&quot;complemento&quot;),</span>
+<span class="nc" id="L206">                    rs.getString(&quot;numero&quot;),</span>
+<span class="nc" id="L207">                    rs.getString(&quot;cidade&quot;),</span>
+<span class="nc" id="L208">                    rs.getString(&quot;estado&quot;),</span>
+<span class="nc" id="L209">                    rs.getString(&quot;telefone&quot;),</span>
+<span class="nc" id="L210">                    rs.getString(&quot;celular&quot;),</span>
+<span class="nc" id="L211">                    rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L212">                    rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L213">                    rs.getString(&quot;senha&quot;));</span>
+            }
+
+<span class="nc" id="L216">            comando.close();</span>
+<span class="nc" id="L217">            conexao.close();</span>
+<span class="nc" id="L218">        } catch (SQLException e) {</span>
+<span class="nc" id="L219">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L221">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L222">        }</span>
+<span class="nc" id="L223">        return organizador;</span>
+    }
+
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L229">                comando.close();</span>
+            }
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            if (conexao != null) {</span>
+<span class="nc" id="L232">                conexao.close();</span>
+            }
+<span class="nc" id="L234">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L236">        }</span>
+<span class="nc" id="L237">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

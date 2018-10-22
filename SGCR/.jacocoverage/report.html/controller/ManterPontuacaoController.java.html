@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterPontuacaoController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterPontuacaoController.java</span></div><h1>ManterPontuacaoController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
+import modelo.Pontuacao;
+import modelo.Ranking;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L26">public class ManterPontuacaoController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+<span class="nc" id="L39">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L41">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L44">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L46" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L47">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L50">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L53">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L56">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L63">    }</span>
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L67">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L68">            request.setAttribute(&quot;rankings&quot;, Ranking.obterRankings());</span>
+<span class="nc" id="L69">            int codPontuacao = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L71">            Pontuacao pontuacao = Pontuacao.obterPontuacao(codPontuacao);</span>
+<span class="nc" id="L72">            request.setAttribute(&quot;pontuacao&quot;, pontuacao);</span>
+
+<span class="nc" id="L74">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterPontuacao.jsp&quot;);</span>
+<span class="nc" id="L75">            view.forward(request, response);</span>
+
+<span class="nc" id="L77">        } catch (ServletException ex) {</span>
+<span class="nc" id="L78">        } catch (IOException ex) {</span>
+<span class="nc" id="L79">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L80">        }</span>
+<span class="nc" id="L81">    }</span>
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L85">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L86">            request.setAttribute(&quot;rankings&quot;, Ranking.obterRankings());</span>
+<span class="nc" id="L87">            int codPontuacao = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L89">            Pontuacao pontuacao = Pontuacao.obterPontuacao(codPontuacao);</span>
+<span class="nc" id="L90">            request.setAttribute(&quot;pontuacao&quot;, pontuacao);</span>
+
+<span class="nc" id="L92">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterPontuacao.jsp&quot;);</span>
+<span class="nc" id="L93">            view.forward(request, response);</span>
+
+<span class="nc" id="L95">        } catch (ServletException ex) {</span>
+<span class="nc" id="L96">        } catch (IOException ex) {</span>
+<span class="nc" id="L97">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">    }</span>
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L102">        int id = Integer.parseInt(request.getParameter(&quot;txtIdPontuacao&quot;));</span>
+<span class="nc" id="L103">        int valorPontuacao = Integer.parseInt(request.getParameter(&quot;txtPontuacao&quot;));</span>
+
+<span class="nc" id="L105">        int idRanking = Integer.parseInt(request.getParameter(&quot;optRanking&quot;));</span>
+<span class="nc" id="L106">        Ranking ranking = Ranking.obterRanking(idRanking);</span>
+
+<span class="nc" id="L108">        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao, ranking);</span>
+        try {
+<span class="nc" id="L110">            pontuacao.excluir();</span>
+
+<span class="nc" id="L112">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaPontuacaoController&quot;);</span>
+<span class="nc" id="L113">            view.forward(request, response);</span>
+
+<span class="nc" id="L115">        } catch (IOException ex) {</span>
+<span class="nc" id="L116">        } catch (SQLException ex) {</span>
+<span class="nc" id="L117">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L118">        } catch (ServletException ex) {</span>
+<span class="nc" id="L119">        }</span>
+<span class="nc" id="L120">    }</span>
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L123">        int id = Integer.parseInt(request.getParameter(&quot;txtIdPontuacao&quot;));</span>
+<span class="nc" id="L124">        int valorPontuacao = Integer.parseInt(request.getParameter(&quot;txtPontuacao&quot;));</span>
+
+<span class="nc" id="L126">        int idRanking = Integer.parseInt(request.getParameter(&quot;optRanking&quot;));</span>
+<span class="nc" id="L127">        Ranking ranking = Ranking.obterRanking(idRanking);</span>
+
+<span class="nc" id="L129">        Pontuacao pontuacao = new Pontuacao(id, valorPontuacao, ranking);</span>
+        try {
+<span class="nc" id="L131">            pontuacao.alterar();</span>
+
+<span class="nc" id="L133">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaPontuacaoController&quot;);</span>
+<span class="nc" id="L134">            view.forward(request, response);</span>
+
+<span class="nc" id="L136">        } catch (IOException ex) {</span>
+<span class="nc" id="L137">        } catch (SQLException ex) {</span>
+<span class="nc" id="L138">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L139">        } catch (ServletException ex) {</span>
+<span class="nc" id="L140">        }</span>
+<span class="nc" id="L141">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L145">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L146">            request.setAttribute(&quot;rankings&quot;, Ranking.obterRankings());</span>
+<span class="nc" id="L147">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterPontuacao.jsp&quot;);</span>
+<span class="nc" id="L148">            view.forward(request, response);</span>
+
+<span class="nc" id="L150">        } catch (ServletException ex) {</span>
+<span class="nc" id="L151">        } catch (IOException ex) {</span>
+<span class="nc" id="L152">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L157">        int valorPontuacao = Integer.parseInt(request.getParameter(&quot;txtPontuacao&quot;));</span>
+<span class="nc" id="L158">        int rankingId = Integer.parseInt(request.getParameter(&quot;optRanking&quot;));</span>
+<span class="nc" id="L159">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L160">        Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);</span>
+
+        try {
+<span class="nc" id="L163">            Ranking ranking = null;</span>
+
+<span class="nc" id="L165">            ranking = Ranking.obterRanking(rankingId);</span>
+
+<span class="nc" id="L167">            Pontuacao pontuacao = new Pontuacao(valorPontuacao, ranking);</span>
+<span class="nc" id="L168">            pontuacao.gravar();</span>
+<span class="nc" id="L169">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaPontuacaoController&quot;);</span>
+<span class="nc" id="L170">            view.forward(request, response);</span>
+<span class="nc" id="L171">        } catch (IOException ex) {</span>
+<span class="nc" id="L172">        } catch (SQLException ex) {</span>
+<span class="nc" id="L173">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L174">        } catch (ServletException ex) {</span>
+<span class="nc" id="L175">        }</span>
+<span class="nc" id="L176">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L191">            processRequest(request, response);</span>
+<span class="nc" id="L192">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L193">            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L194">        } catch (SQLException ex) {</span>
+<span class="nc" id="L195">            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L196">        }</span>
+<span class="nc" id="L197">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L211">            processRequest(request, response);</span>
+<span class="nc" id="L212">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L213">            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L214">        } catch (SQLException ex) {</span>
+<span class="nc" id="L215">            Logger.getLogger(ManterPontuacaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L216">        }</span>
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L226">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

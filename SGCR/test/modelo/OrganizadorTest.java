@@ -6,6 +6,7 @@
 package modelo;
 
 import java.util.List;
+import modelo.Organizador;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -61,7 +62,7 @@ public class OrganizadorTest {
     }
     @Test
     public void testSenhaNumero() {
-        org.setSenha("ABCAEIII");
+        org.setSenha("ABcAEIII");
         assertEquals(false,org.validarCadastro());
     }
     @Test
@@ -98,6 +99,5 @@ public class OrganizadorTest {
         org.setSenha("Aa2+DIII");
         org.setEmail("ianp@.com");
         assertEquals(true,org.validarCadastro());
-    }
-    
+    }    
 }

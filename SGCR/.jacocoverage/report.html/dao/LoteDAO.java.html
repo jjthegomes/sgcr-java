@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoteDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">LoteDAO.java</span></div><h1>LoteDAO.java</h1><pre class="source lang-java linenums">package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Corrida;
+import modelo.Lote;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L17">public class LoteDAO {</span>
+
+    public static List&lt;Lote&gt; obterLotes() throws ClassNotFoundException {
+<span class="nc" id="L20">        Connection conexao = null;</span>
+<span class="nc" id="L21">        Statement comando = null;</span>
+<span class="nc" id="L22">        List&lt;Lote&gt; lotes = new ArrayList&lt;Lote&gt;();</span>
+
+        try {
+<span class="nc" id="L25">            conexao = BD.getConexao();</span>
+<span class="nc" id="L26">            comando = conexao.createStatement();</span>
+<span class="nc" id="L27">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM lote&quot;);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L29">                Lote lote = new Lote(</span>
+<span class="nc" id="L30">                        rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L31">                        rs.getString(&quot;tipo&quot;),</span>
+<span class="nc" id="L32">                        rs.getFloat(&quot;preco&quot;),</span>
+<span class="nc" id="L33">                        rs.getString(&quot;data_inicio&quot;),</span>
+<span class="nc" id="L34">                        rs.getString(&quot;data_final&quot;),</span>
+                        null);
+<span class="nc" id="L36">                lote.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L37">                lote.setCorrida(Corrida.obterCorrida(rs.getInt(&quot;corrida_id&quot;)));</span>
+<span class="nc" id="L38">                lotes.add(lote);</span>
+<span class="nc" id="L39">            }</span>
+<span class="nc" id="L40">        } catch (SQLException e) {</span>
+<span class="nc" id="L41">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L43">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">        return lotes;</span>
+    }
+    public static List&lt;Lote&gt; obterLotes(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L48">        Connection conexao = null;</span>
+<span class="nc" id="L49">        Statement comando = null;</span>
+<span class="nc" id="L50">        List&lt;Lote&gt; lotes = new ArrayList&lt;Lote&gt;();</span>
+
+        try {
+<span class="nc" id="L53">            conexao = BD.getConexao();</span>
+<span class="nc" id="L54">            comando = conexao.createStatement();</span>
+<span class="nc" id="L55">            ResultSet rs = comando.executeQuery(&quot;SELECT * from lote &quot;</span>
+                    + &quot;where CURRENT_DATE BETWEEN  DATE_FORMAT(STR_TO_DATE(data_inicio, '%d/%m/%Y' ), '%Y-%m-%d') &quot;
+                    + &quot;AND DATE_FORMAT(STR_TO_DATE(data_final, '%d/%m/%Y' ), '%Y-%m-%d')&quot;
+                    + &quot;AND corrida_id = &quot; + corridaId);
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L60">                Lote lote = new Lote(</span>
+<span class="nc" id="L61">                        rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L62">                        rs.getString(&quot;tipo&quot;),</span>
+<span class="nc" id="L63">                        rs.getFloat(&quot;preco&quot;),</span>
+<span class="nc" id="L64">                        rs.getString(&quot;data_inicio&quot;),</span>
+<span class="nc" id="L65">                        rs.getString(&quot;data_final&quot;),</span>
+                        null);
+<span class="nc" id="L67">                lote.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L68">                lotes.add(lote);</span>
+<span class="nc" id="L69">            }</span>
+<span class="nc" id="L70">        } catch (SQLException e) {</span>
+<span class="nc" id="L71">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L73">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">        return lotes;</span>
+    }
+    
+    public static void gravar(Lote lote) throws ClassNotFoundException, SQLException {
+<span class="nc" id="L79">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L81">            conexao = BD.getConexao();</span>
+<span class="nc" id="L82">            String sql = &quot;INSERT INTO lote (tipo, preco, data_inicio, data_final, &quot;</span>
+                    + &quot;corrida_id) VALUES (?,?,?,?,?)&quot;;
+<span class="nc" id="L84">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L85">            comando.setString(1, lote.getTipo());</span>
+<span class="nc" id="L86">            comando.setDouble(2, lote.getPreco());</span>
+<span class="nc" id="L87">            comando.setString(3, lote.getDataInicio());</span>
+<span class="nc" id="L88">            comando.setString(4, lote.getDataFinal());</span>
+<span class="nc" id="L89">            comando.setInt(5, lote.getCorrida().getId());</span>
+<span class="nc" id="L90">            comando.execute();</span>
+<span class="nc" id="L91">            comando.close();</span>
+<span class="nc" id="L92">            conexao.close();</span>
+
+<span class="nc" id="L94">        } catch (SQLException e) {</span>
+<span class="nc" id="L95">            throw e;</span>
+<span class="nc" id="L96">        }</span>
+<span class="nc" id="L97">    }</span>
+
+    public static void excluir(Lote lote) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L100">        Connection conexao = null;</span>
+<span class="nc" id="L101">        Statement comando = null;</span>
+        String stringSQL;
+        try {
+<span class="nc" id="L104">            conexao = BD.getConexao();</span>
+<span class="nc" id="L105">            comando = conexao.createStatement();</span>
+<span class="nc" id="L106">            stringSQL = &quot;delete from lote where id = &quot; + lote.getId();</span>
+<span class="nc" id="L107">            comando.execute(stringSQL);</span>
+
+<span class="nc" id="L109">        } catch (SQLException e) {</span>
+<span class="nc" id="L110">            throw e;</span>
+        } finally {
+<span class="nc" id="L112">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L113">        }</span>
+<span class="nc" id="L114">    }</span>
+
+    public static void alterar(Lote lote) throws ClassNotFoundException, SQLException {
+<span class="nc" id="L117">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L119">            conexao = BD.getConexao();</span>
+<span class="nc" id="L120">            String sql = &quot;UPDATE lote SET tipo = ?, preco = ?, data_inicio = ?, &quot;</span>
+                    + &quot;data_final = ?, corrida_id = ? WHERE id = ?&quot;;            
+<span class="nc" id="L122">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L123">            comando.setString(1, lote.getTipo());</span>
+<span class="nc" id="L124">            comando.setDouble(2, lote.getPreco());</span>
+<span class="nc" id="L125">            comando.setString(3, lote.getDataInicio());</span>
+<span class="nc" id="L126">            comando.setString(4, lote.getDataFinal());</span>
+<span class="nc" id="L127">            comando.setInt(5, lote.getCorrida().getId());</span>
+<span class="nc" id="L128">            comando.setInt(6, lote.getId());</span>
+
+<span class="nc" id="L130">            comando.execute();</span>
+<span class="nc" id="L131">            comando.close();</span>
+<span class="nc" id="L132">            conexao.close();</span>
+
+<span class="nc" id="L134">        } catch (SQLException e) {</span>
+<span class="nc" id="L135">            throw e;</span>
+<span class="nc" id="L136">        }</span>
+<span class="nc" id="L137">    }</span>
+
+    public static Lote obterLote(int id) throws ClassNotFoundException {
+<span class="nc" id="L140">        Connection conexao = null;</span>
+<span class="nc" id="L141">        Statement comando = null;</span>
+<span class="nc" id="L142">        Lote lote = null;</span>
+        try {
+<span class="nc" id="L144">            conexao = BD.getConexao();</span>
+<span class="nc" id="L145">            comando = conexao.createStatement();</span>
+<span class="nc" id="L146">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM lote WHERE id = &quot; + id);</span>
+<span class="nc" id="L147">            rs.first();</span>
+<span class="nc" id="L148">            lote = new Lote(</span>
+<span class="nc" id="L149">                    rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L150">                    rs.getString(&quot;tipo&quot;),</span>
+<span class="nc" id="L151">                    rs.getDouble(&quot;preco&quot;),</span>
+<span class="nc" id="L152">                    rs.getString(&quot;data_inicio&quot;),</span>
+<span class="nc" id="L153">                    rs.getString(&quot;data_final&quot;),</span>
+                    null);
+<span class="nc" id="L155">            lote.setCorridaId(rs.getInt(&quot;corrida_id&quot;));</span>
+<span class="nc" id="L156">        } catch (SQLException e) {</span>
+<span class="nc" id="L157">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L159">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L160">        }</span>
+<span class="nc" id="L161">        return lote;</span>
+    }
+
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L167">                comando.close();</span>
+            }
+
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L171">                conexao.close();</span>
+            }
+
+<span class="nc" id="L174">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L176">        }</span>
+<span class="nc" id="L177">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

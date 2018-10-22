@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterLoteController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterLoteController.java</span></div><h1>ManterLoteController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import modelo.Corrida;
+import modelo.Lote;
+
+/**
+ *
+ * @author straby
+ */
+<span class="nc" id="L22">public class ManterLoteController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L35">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L37">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L40">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L43">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L46">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)){</span>
+<span class="nc" id="L49">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)){</span>
+<span class="nc" id="L52">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+<span class="nc" id="L60">    }</span>
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L63">        String tipo = request.getParameter(&quot;txtTipoLote&quot;);</span>
+<span class="nc" id="L64">        double preco = Double.parseDouble(request.getParameter(&quot;txtPrecoLote&quot;));</span>
+<span class="nc" id="L65">        String dataInicio = request.getParameter(&quot;txtDataInicioLote&quot;);</span>
+<span class="nc" id="L66">        String dataFinal = request.getParameter(&quot;txtDataFinalLote&quot;);</span>
+<span class="nc" id="L67">        int corridasId = Integer.parseInt(request.getParameter(&quot;optCorrida&quot;));</span>
+
+        try {
+<span class="nc" id="L70">            Corrida corrida = Corrida.obterCorrida(corridasId);</span>
+<span class="nc" id="L71">            Lote ingresso = new Lote(tipo, preco, dataInicio, dataFinal,  corrida);</span>
+<span class="nc" id="L72">            ingresso.gravar();</span>
+
+<span class="nc" id="L74">            RequestDispatcher view</span>
+<span class="nc" id="L75">                    = request.getRequestDispatcher(&quot;PesquisaLoteController&quot;);</span>
+<span class="nc" id="L76">            view.forward(request, response);</span>
+<span class="nc" id="L77">        } catch (IOException ex) {</span>
+<span class="nc" id="L78">        } catch (SQLException ex) {</span>
+<span class="nc" id="L79">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L80">        } catch (ServletException ex) {</span>
+<span class="nc" id="L81">        }</span>
+<span class="nc" id="L82">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L86">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L87">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());</span>
+<span class="nc" id="L88">            RequestDispatcher view</span>
+<span class="nc" id="L89">                    = request.getRequestDispatcher(&quot;/manterLote.jsp&quot;);</span>
+<span class="nc" id="L90">            view.forward(request, response);</span>
+<span class="nc" id="L91">        } catch (ServletException ex) {</span>
+<span class="nc" id="L92">        } catch (IOException ex) {</span>
+<span class="nc" id="L93">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
+    
+      public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L99">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L100">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());</span>
+
+<span class="nc" id="L102">            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L103">            Lote lote = Lote.obterLote(id);</span>
+
+<span class="nc" id="L105">            request.setAttribute(&quot;lote&quot;, lote);</span>
+<span class="nc" id="L106">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterLote.jsp&quot;);</span>
+<span class="nc" id="L107">            view.forward(request, response);</span>
+
+<span class="nc" id="L109">        } catch (ServletException ex) {</span>
+<span class="nc" id="L110">        } catch (IOException ex) {</span>
+<span class="nc" id="L111">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L112">        }</span>
+<span class="nc" id="L113">    }</span>
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L116">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdLote&quot;));</span>
+<span class="nc" id="L117">        String tipo = request.getParameter(&quot;txtTipoLote&quot;);</span>
+<span class="nc" id="L118">        double preco = Double.parseDouble(request.getParameter(&quot;txtPrecoLote&quot;));</span>
+<span class="nc" id="L119">        String dataInicio = request.getParameter(&quot;txtDataInicioLote&quot;);</span>
+<span class="nc" id="L120">        String dataFinal = request.getParameter(&quot;txtDataFinalLote&quot;);</span>
+<span class="nc" id="L121">        int corridasId = Integer.parseInt(request.getParameter(&quot;optCorrida&quot;));</span>
+
+        try {
+<span class="nc" id="L124">            Corrida corrida = Corrida.obterCorrida(corridasId);</span>
+<span class="nc" id="L125">            Lote ingresso = new Lote(id, tipo, preco, dataInicio, dataFinal, corrida);</span>
+
+<span class="nc" id="L127">            ingresso.alterar();</span>
+<span class="nc" id="L128">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaLoteController&quot;);</span>
+<span class="nc" id="L129">            view.forward(request, response);</span>
+<span class="nc" id="L130">        } catch (IOException ex) {</span>
+<span class="nc" id="L131">        } catch (SQLException ex) {</span>
+<span class="nc" id="L132">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L133">        } catch (ServletException ex) {</span>
+<span class="nc" id="L134">        }</span>
+
+<span class="nc" id="L136">    }</span>
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L140">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L141">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());</span>
+
+<span class="nc" id="L143">            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L144">            Lote lote = Lote.obterLote(id);</span>
+
+<span class="nc" id="L146">            request.setAttribute(&quot;lote&quot;, lote);</span>
+<span class="nc" id="L147">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterLote.jsp&quot;);</span>
+<span class="nc" id="L148">            view.forward(request, response);</span>
+
+<span class="nc" id="L150">        } catch (ServletException ex) {</span>
+<span class="nc" id="L151">        } catch (IOException ex) {</span>
+<span class="nc" id="L152">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L157">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdLote&quot;));</span>
+<span class="nc" id="L158">        String tipo = request.getParameter(&quot;txtTipoLote&quot;);</span>
+<span class="nc" id="L159">        double preco = Double.parseDouble(request.getParameter(&quot;txtPrecoLote&quot;));</span>
+<span class="nc" id="L160">        String dataInicio = request.getParameter(&quot;txtDataInicioLote&quot;);</span>
+<span class="nc" id="L161">        String dataFinal = request.getParameter(&quot;txtDataFinalLote&quot;);</span>
+
+        try {
+<span class="nc" id="L164">            Lote lote = new Lote(id, tipo, preco, dataInicio, dataFinal, null);</span>
+
+<span class="nc" id="L166">            lote.excluir();</span>
+<span class="nc" id="L167">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaLoteController&quot;);</span>
+<span class="nc" id="L168">            view.forward(request, response);</span>
+<span class="nc" id="L169">        } catch (IOException ex) {</span>
+<span class="nc" id="L170">        } catch (SQLException ex) {</span>
+<span class="nc" id="L171">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L172">        } catch (ServletException ex) {</span>
+<span class="nc" id="L173">        }</span>
+
+<span class="nc" id="L175">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L189">        processRequest(request, response);</span>
+<span class="nc" id="L190">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L203">        processRequest(request, response);</span>
+<span class="nc" id="L204">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L213">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

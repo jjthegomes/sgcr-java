@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">LoginController.java</span></div><h1>LoginController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
+import modelo.Atleta;
+import modelo.Organizador;
+
+/**
+ *
+ * @author jjti
+ */
+<span class="nc" id="L24">public class LoginController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L37">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (acao.equals(&quot;logar&quot;)) {</span>
+<span class="nc" id="L39">            logar(request, response);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        } else if(acao.equals(&quot;logout&quot;)) {</span>
+<span class="nc" id="L41">            logout(request, response);</span>
+        }
+<span class="nc" id="L43">    }</span>
+
+    public void logar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L46">        String email = request.getParameter(&quot;email&quot;);</span>
+<span class="nc" id="L47">        String senha = request.getParameter(&quot;senha&quot;);</span>
+<span class="nc" id="L48">        String optUsuario = request.getParameter(&quot;optUsuario&quot;);</span>
+
+        try {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (optUsuario.equals(&quot;administrador&quot;)) {</span>
+                try {
+<span class="nc" id="L53">                    Administrador administrador = Administrador.logar(email, senha);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                    if (administrador != null) {</span>
+<span class="nc" id="L55">                        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L56">                        session.setAttribute(&quot;administrador&quot;, administrador);</span>
+<span class="nc" id="L57">                        session.setAttribute(&quot;usuario&quot;, &quot;administrador&quot;);</span>
+<span class="nc" id="L58">                        RequestDispatcher view = request.getRequestDispatcher(&quot;/PesquisaAdministradorController&quot;);</span>
+<span class="nc" id="L59">                        view.forward(request, response);</span>
+<span class="nc" id="L60">                    } else {</span>
+<span class="nc" id="L61">                        request.setAttribute(&quot;mensagemErro&quot;, &quot;Usuário não encontrado&quot;);</span>
+<span class="nc" id="L62">                        RequestDispatcher view = request.getRequestDispatcher(&quot;/login.jsp&quot;);</span>
+<span class="nc" id="L63">                        view.forward(request, response);</span>
+                    }
+
+<span class="nc" id="L66">                } catch (IOException | ClassNotFoundException | ServletException ex) {</span>
+<span class="nc" id="L67">                }</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            } else if (optUsuario.equals(&quot;organizador&quot;)) {</span>
+                try {
+<span class="nc" id="L70">                    Organizador organizador = Organizador.logar(email, senha);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    if (organizador != null) {</span>
+<span class="nc" id="L72">                        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L73">                        session.setAttribute(&quot;organizador&quot;, organizador);</span>
+<span class="nc" id="L74">                        session.setAttribute(&quot;usuario&quot;, &quot;organizador&quot;);</span>
+<span class="nc" id="L75">                        RequestDispatcher view = request.getRequestDispatcher(&quot;/PesquisaCorridaController&quot;);</span>
+<span class="nc" id="L76">                        view.forward(request, response);</span>
+<span class="nc" id="L77">                    } else {</span>
+<span class="nc" id="L78">                        request.setAttribute(&quot;mensagemErro&quot;, &quot;Usuário não encontrado&quot;);</span>
+<span class="nc" id="L79">                        RequestDispatcher view = request.getRequestDispatcher(&quot;/login.jsp&quot;);</span>
+<span class="nc" id="L80">                        view.forward(request, response);</span>
+                    }
+
+<span class="nc" id="L83">                } catch (IOException | ClassNotFoundException | ServletException ex) {</span>
+<span class="nc" id="L84">                }</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            } else if (optUsuario.equals(&quot;atleta&quot;)) {</span>
+                try {
+<span class="nc" id="L87">                    Atleta atleta = Atleta.logar(email, senha);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                    if (atleta != null) {</span>
+<span class="nc" id="L89">                        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L90">                        session.setAttribute(&quot;atleta&quot;, atleta);</span>
+<span class="nc" id="L91">                        session.setAttribute(&quot;usuario&quot;, &quot;atleta&quot;);</span>
+<span class="nc" id="L92">                        RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaHomeController&quot;);</span>
+<span class="nc" id="L93">                        view.forward(request, response);</span>
+<span class="nc" id="L94">                    } else {</span>
+<span class="nc" id="L95">                        request.setAttribute(&quot;mensagemErro&quot;, &quot;Usuário não encontrado&quot;);</span>
+<span class="nc" id="L96">                        RequestDispatcher view = request.getRequestDispatcher(&quot;/login.jsp&quot;);</span>
+<span class="nc" id="L97">                        view.forward(request, response);</span>
+                    }
+
+<span class="nc" id="L100">                } catch (SQLException | IOException | ClassNotFoundException | ServletException ex) {</span>
+<span class="nc" id="L101">                }</span>
+            }
+<span class="nc" id="L103">        } catch (NullPointerException ex) {</span>
+            try {
+<span class="nc" id="L105">                response.sendRedirect(&quot;login.jsp&quot;);</span>
+<span class="nc" id="L106">            } catch (IOException ex1) {</span>
+<span class="nc" id="L107">            }</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">    }</span>
+    
+    public void logout(HttpServletRequest request, HttpServletResponse response) {;
+        try {
+<span class="nc" id="L113">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L114">            session.invalidate();</span>
+<span class="nc" id="L115">            response.sendRedirect(&quot;/SGCR/&quot;);</span>
+
+<span class="nc" id="L117">        } catch (IOException ex) {</span>
+<span class="nc" id="L118">        }</span>
+<span class="nc" id="L119">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L133">        processRequest(request, response);</span>
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L147">        processRequest(request, response);</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L157">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

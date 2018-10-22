@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdministradorDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">AdministradorDAO.java</span></div><h1>AdministradorDAO.java</h1><pre class="source lang-java linenums">package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Administrador;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L16">public class AdministradorDAO {</span>
+
+    public static List&lt;Administrador&gt; obterAdministradores() throws ClassNotFoundException {
+<span class="nc" id="L19">        Connection conexao = null;</span>
+<span class="nc" id="L20">        Statement comando = null;</span>
+<span class="nc" id="L21">        List&lt;Administrador&gt; administradores = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L24">            conexao = BD.getConexao();</span>
+<span class="nc" id="L25">            comando = conexao.createStatement();</span>
+<span class="nc" id="L26">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM administrador&quot;);</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L28">                Administrador administrador = new Administrador(</span>
+<span class="nc" id="L29">                        rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L30">                        rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L31">                        rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L32">                        rs.getString(&quot;senha&quot;));</span>
+<span class="nc" id="L33">                administradores.add(administrador);</span>
+<span class="nc" id="L34">            }</span>
+<span class="nc" id="L35">        } catch (SQLException e) {</span>
+<span class="nc" id="L36">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L38">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L39">        }</span>
+<span class="nc" id="L40">        return administradores;</span>
+    }
+
+    public static void gravar(Administrador administrador) throws ClassNotFoundException, SQLException {
+<span class="nc" id="L44">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L46">            conexao = BD.getConexao();</span>
+<span class="nc" id="L47">            String sql = &quot;INSERT INTO administrador (nome, email, senha) VALUES (?,?,?)&quot;;</span>
+<span class="nc" id="L48">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L49">            comando.setString(1, administrador.getNome());</span>
+<span class="nc" id="L50">            comando.setString(2, administrador.getEmail());</span>
+<span class="nc" id="L51">            comando.setString(3, administrador.getSenha());</span>
+     
+<span class="nc" id="L53">            comando.execute();</span>
+<span class="nc" id="L54">            comando.close();</span>
+<span class="nc" id="L55">            conexao.close();</span>
+
+<span class="nc" id="L57">        } catch (SQLException e) {</span>
+<span class="nc" id="L58">            throw e;</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">    }</span>
+
+    public static void alterar(Administrador administrador) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L63">        Connection conexao = null;</span>
+        try {
+<span class="nc" id="L65">            conexao = BD.getConexao();</span>
+<span class="nc" id="L66">            String sql = &quot;UPDATE administrador SET nome = ?, email = ?, senha = ? WHERE id = ?&quot;;</span>
+<span class="nc" id="L67">            PreparedStatement comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L68">            comando.setString(1, administrador.getNome());</span>
+<span class="nc" id="L69">            comando.setString(2, administrador.getEmail());</span>
+<span class="nc" id="L70">            comando.setString(3, administrador.getSenha());</span>
+<span class="nc" id="L71">            comando.setInt(4, administrador.getId());</span>
+<span class="nc" id="L72">            comando.execute();</span>
+<span class="nc" id="L73">            comando.close();</span>
+<span class="nc" id="L74">            conexao.close();</span>
+<span class="nc" id="L75">        } catch (SQLException e) {</span>
+<span class="nc" id="L76">            throw e;</span>
+<span class="nc" id="L77">        }</span>
+<span class="nc" id="L78">    }</span>
+
+    public static void excluir(Administrador administrador) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L81">        Connection conexao = null;</span>
+<span class="nc" id="L82">        Statement comando = null;</span>
+        String stringSQL;
+        try {
+<span class="nc" id="L85">            conexao = BD.getConexao();</span>
+<span class="nc" id="L86">            comando = conexao.createStatement();</span>
+<span class="nc" id="L87">            stringSQL = &quot;DELETE FROM administrador WHERE id = &quot; + administrador.getId();</span>
+<span class="nc" id="L88">            comando.execute(stringSQL);</span>
+
+<span class="nc" id="L90">        } catch (SQLException e) {</span>
+<span class="nc" id="L91">            throw e;</span>
+        } finally {
+<span class="nc" id="L93">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
+
+    public static Administrador obterAdministrador(int id) throws ClassNotFoundException {
+<span class="nc" id="L98">        Connection conexao = null;</span>
+<span class="nc" id="L99">        Statement comando = null;</span>
+<span class="nc" id="L100">        Administrador administrador = null;</span>
+
+        try {
+<span class="nc" id="L103">            conexao = BD.getConexao();</span>
+<span class="nc" id="L104">            comando = conexao.createStatement();</span>
+<span class="nc" id="L105">            ResultSet rs = comando.executeQuery(&quot;SELECT * FROM administrador WHERE id = &quot; + id);</span>
+<span class="nc" id="L106">            rs.first();</span>
+<span class="nc" id="L107">            administrador = new Administrador(</span>
+<span class="nc" id="L108">                    rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L109">                    rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L110">                    rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L111">                    rs.getString(&quot;senha&quot;)</span>
+            );
+<span class="nc" id="L113">        } catch (SQLException e) {</span>
+<span class="nc" id="L114">            e.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L116">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">        return administrador;</span>
+    }
+
+    public static Administrador logar(String email, String senha) throws ClassNotFoundException {
+<span class="nc" id="L122">        Connection conexao = null;</span>
+<span class="nc" id="L123">        Administrador administrador = null;</span>
+<span class="nc" id="L124">        PreparedStatement comando = null;</span>
+        try {
+<span class="nc" id="L126">            conexao = BD.getConexao();</span>
+<span class="nc" id="L127">            String sql = &quot;SELECT * FROM administrador WHERE email = ? AND senha = ?&quot;;</span>
+<span class="nc" id="L128">            comando = conexao.prepareStatement(sql);</span>
+<span class="nc" id="L129">            comando.setString(1, email);</span>
+<span class="nc" id="L130">            comando.setString(2, senha);</span>
+<span class="nc" id="L131">            ResultSet rs = comando.executeQuery();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (rs.first()) {</span>
+<span class="nc" id="L133">                administrador = new Administrador(</span>
+<span class="nc" id="L134">                    rs.getInt(&quot;id&quot;),</span>
+<span class="nc" id="L135">                    rs.getString(&quot;nome&quot;),</span>
+<span class="nc" id="L136">                    rs.getString(&quot;email&quot;),</span>
+<span class="nc" id="L137">                    rs.getString(&quot;senha&quot;));</span>
+            }
+
+<span class="nc" id="L140">            comando.close();</span>
+<span class="nc" id="L141">            conexao.close();</span>
+<span class="nc" id="L142">        } catch (SQLException e) {</span>
+        } finally {
+<span class="nc" id="L144">            fecharConexao(conexao, comando);</span>
+<span class="nc" id="L145">        }</span>
+<span class="nc" id="L146">        return administrador;</span>
+    }
+    
+    public static void fecharConexao(Connection conexao, Statement comando) {
+        try {
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L152">                comando.close();</span>
+            }
+
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            if (comando != null) {</span>
+<span class="nc" id="L156">                conexao.close();</span>
+            }
+
+<span class="nc" id="L159">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

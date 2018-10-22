@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterAtletaController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterAtletaController.java</span></div><h1>ManterAtletaController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import modelo.Atleta;
+
+/**
+ *
+ * @author straby
+ */
+<span class="nc" id="L21">public class ManterAtletaController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L34">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L36">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L39">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L42">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L45">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)){</span>
+<span class="nc" id="L48">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)){</span>
+<span class="nc" id="L51">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L58">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L62">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L63">            RequestDispatcher view</span>
+<span class="nc" id="L64">                    = request.getRequestDispatcher(&quot;/manterAtleta.jsp&quot;);</span>
+<span class="nc" id="L65">            view.forward(request, response);</span>
+<span class="nc" id="L66">        } catch (ServletException ex) {</span>
+<span class="nc" id="L67">        } catch (IOException ex) {</span>
+<span class="nc" id="L68">        }</span>
+<span class="nc" id="L69">    }</span>
+
+    public void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L72">        String apelido = request.getParameter(&quot;txtApelidoAtleta&quot;);</span>
+<span class="nc" id="L73">        String tamanhoCamisa = request.getParameter(&quot;optTamanhoCamisa&quot;);</span>
+<span class="nc" id="L74">        String nome = request.getParameter(&quot;txtNomeAtleta&quot;);</span>
+<span class="nc" id="L75">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoAtleta&quot;);</span>
+<span class="nc" id="L76">        String sexo = request.getParameter(&quot;txtSexoAtleta&quot;);</span>
+<span class="nc" id="L77">        String cpf = request.getParameter(&quot;txtCpfAtleta&quot;);</span>
+<span class="nc" id="L78">        String cep = request.getParameter(&quot;txtCepAtleta&quot;);</span>
+<span class="nc" id="L79">        String logradouro = request.getParameter(&quot;txtLogradouroAtleta&quot;);</span>
+<span class="nc" id="L80">        String bairro = request.getParameter(&quot;txtBairroAtleta&quot;);</span>
+<span class="nc" id="L81">        String complemento = request.getParameter(&quot;txtComplementoAtleta&quot;);</span>
+<span class="nc" id="L82">        String numero = request.getParameter(&quot;txtNumeroAtleta&quot;);</span>
+<span class="nc" id="L83">        String cidade = request.getParameter(&quot;txtCidadeAtleta&quot;);</span>
+<span class="nc" id="L84">        String estado = request.getParameter(&quot;txtEstadoAtleta&quot;);</span>
+<span class="nc" id="L85">        String telefone = request.getParameter(&quot;txtTelefoneAtleta&quot;);</span>
+<span class="nc" id="L86">        String celular = request.getParameter(&quot;txtCelularAtleta&quot;);</span>
+<span class="nc" id="L87">        String email = request.getParameter(&quot;txtEmailAtleta&quot;);</span>
+<span class="nc" id="L88">        String senha = request.getParameter(&quot;txtSenhaAtleta&quot;);</span>
+
+        try {
+
+<span class="nc" id="L92">            Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,</span>
+                    sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
+                    telefone, celular, email, senha);
+<span class="nc" id="L95">                atleta.gravar();</span>
+<span class="nc" id="L96">            RequestDispatcher view</span>
+<span class="nc" id="L97">                    = request.getRequestDispatcher(&quot;PesquisaAtletaController&quot;);</span>
+<span class="nc" id="L98">            view.forward(request, response);</span>
+<span class="nc" id="L99">        } catch (IOException ex) {</span>
+<span class="nc" id="L100">        } catch (SQLException ex) {</span>
+<span class="nc" id="L101">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L102">        } catch (ServletException ex) {</span>
+<span class="nc" id="L103">        }</span>
+<span class="nc" id="L104">    }</span>
+    
+     public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L108">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L109">            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L111">            Atleta atleta = Atleta.obterAtleta(id);</span>
+<span class="nc" id="L112">            request.setAttribute(&quot;atleta&quot;, atleta);</span>
+
+<span class="nc" id="L114">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterAtleta.jsp&quot;);</span>
+<span class="nc" id="L115">            view.forward(request, response);</span>
+<span class="nc" id="L116">        } catch (ServletException ex) {</span>
+<span class="nc" id="L117">        } catch (IOException ex) {</span>
+<span class="nc" id="L118">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L119">        }</span>
+<span class="nc" id="L120">    }</span>
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L123">        String apelido = request.getParameter(&quot;txtApelidoAtleta&quot;);</span>
+<span class="nc" id="L124">        String tamanhoCamisa = request.getParameter(&quot;optTamanhoCamisa&quot;);</span>
+
+<span class="nc" id="L126">        String nome = request.getParameter(&quot;txtNomeAtleta&quot;);</span>
+<span class="nc" id="L127">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoAtleta&quot;);</span>
+<span class="nc" id="L128">        String sexo = request.getParameter(&quot;txtSexoAtleta&quot;);</span>
+<span class="nc" id="L129">        String cpf = request.getParameter(&quot;txtCpfAtleta&quot;);</span>
+<span class="nc" id="L130">        String cep = request.getParameter(&quot;txtCepAtleta&quot;);</span>
+<span class="nc" id="L131">        String logradouro = request.getParameter(&quot;txtLogradouroAtleta&quot;);</span>
+<span class="nc" id="L132">        String bairro = request.getParameter(&quot;txtBairroAtleta&quot;);</span>
+<span class="nc" id="L133">        String complemento = request.getParameter(&quot;txtComplementoAtleta&quot;);</span>
+<span class="nc" id="L134">        String numero = request.getParameter(&quot;txtNumeroAtleta&quot;);</span>
+<span class="nc" id="L135">        String cidade = request.getParameter(&quot;txtCidadeAtleta&quot;);</span>
+<span class="nc" id="L136">        String estado = request.getParameter(&quot;txtEstadoAtleta&quot;);</span>
+<span class="nc" id="L137">        String telefone = request.getParameter(&quot;txtTelefoneAtleta&quot;);</span>
+<span class="nc" id="L138">        String celular = request.getParameter(&quot;txtCelularAtleta&quot;);</span>
+
+<span class="nc" id="L140">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdAtleta&quot;));</span>
+<span class="nc" id="L141">        String email = request.getParameter(&quot;txtEmailAtleta&quot;);</span>
+<span class="nc" id="L142">        String senha = request.getParameter(&quot;txtSenhaAtleta&quot;);</span>
+
+<span class="nc" id="L144">        Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,</span>
+                sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
+                telefone, celular, id, email, senha);
+        try {
+<span class="nc" id="L148">            atleta.excluir();</span>
+<span class="nc" id="L149">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaAtletaController&quot;);</span>
+<span class="nc" id="L150">            view.forward(request, response);</span>
+<span class="nc" id="L151">        } catch (IOException ex) {</span>
+<span class="nc" id="L152">        } catch (SQLException ex) {</span>
+<span class="nc" id="L153">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L154">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L156">        }</span>
+<span class="nc" id="L157">    }</span>
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L161">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L162">            int id = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L164">            Atleta atleta = Atleta.obterAtleta(id);</span>
+<span class="nc" id="L165">            request.setAttribute(&quot;atleta&quot;, atleta);</span>
+
+<span class="nc" id="L167">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterAtleta.jsp&quot;);</span>
+<span class="nc" id="L168">            view.forward(request, response);</span>
+<span class="nc" id="L169">        } catch (ServletException ex) {</span>
+<span class="nc" id="L170">        } catch (IOException ex) {</span>
+<span class="nc" id="L171">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L172">        }</span>
+<span class="nc" id="L173">    }</span>
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L176">        String apelido = request.getParameter(&quot;txtApelidoAtleta&quot;);</span>
+<span class="nc" id="L177">        String tamanhoCamisa = request.getParameter(&quot;optTamanhoCamisa&quot;);</span>
+
+<span class="nc" id="L179">        String nome = request.getParameter(&quot;txtNomeAtleta&quot;);</span>
+<span class="nc" id="L180">        String dataNascimento = request.getParameter(&quot;txtDataNascimentoAtleta&quot;);</span>
+<span class="nc" id="L181">        String sexo = request.getParameter(&quot;txtSexoAtleta&quot;);</span>
+<span class="nc" id="L182">        String cpf = request.getParameter(&quot;txtCpfAtleta&quot;);</span>
+<span class="nc" id="L183">        String cep = request.getParameter(&quot;txtCepAtleta&quot;);</span>
+<span class="nc" id="L184">        String logradouro = request.getParameter(&quot;txtLogradouroAtleta&quot;);</span>
+<span class="nc" id="L185">        String bairro = request.getParameter(&quot;txtBairroAtleta&quot;);</span>
+<span class="nc" id="L186">        String complemento = request.getParameter(&quot;txtComplementoAtleta&quot;);</span>
+<span class="nc" id="L187">        String numero = request.getParameter(&quot;txtNumeroAtleta&quot;);</span>
+<span class="nc" id="L188">        String cidade = request.getParameter(&quot;txtCidadeAtleta&quot;);</span>
+<span class="nc" id="L189">        String estado = request.getParameter(&quot;txtEstadoAtleta&quot;);</span>
+<span class="nc" id="L190">        String telefone = request.getParameter(&quot;txtTelefoneAtleta&quot;);</span>
+<span class="nc" id="L191">        String celular = request.getParameter(&quot;txtCelularAtleta&quot;);</span>
+
+<span class="nc" id="L193">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdAtleta&quot;));</span>
+<span class="nc" id="L194">        String email = request.getParameter(&quot;txtEmailAtleta&quot;);</span>
+<span class="nc" id="L195">        String senha = request.getParameter(&quot;txtSenhaAtleta&quot;);</span>
+
+<span class="nc" id="L197">        Atleta atleta = new Atleta(apelido, tamanhoCamisa, nome, dataNascimento,</span>
+                sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado,
+                telefone, celular, id, email, senha);
+        try {
+<span class="nc" id="L201">            atleta.alterar();</span>
+<span class="nc" id="L202">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaAtletaController&quot;);</span>
+<span class="nc" id="L203">            view.forward(request, response);</span>
+<span class="nc" id="L204">        } catch (IOException ex) {</span>
+<span class="nc" id="L205">        } catch (SQLException ex) {</span>
+<span class="nc" id="L206">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L207">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L209">        }</span>
+<span class="nc" id="L210">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L224">        processRequest(request, response);</span>
+<span class="nc" id="L225">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L238">        processRequest(request, response);</span>
+<span class="nc" id="L239">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L248">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

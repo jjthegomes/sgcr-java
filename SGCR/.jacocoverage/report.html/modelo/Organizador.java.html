@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Organizador.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Organizador.java</span></div><h1>Organizador.java</h1><pre class="source lang-java linenums">
+package modelo;
+
+import dao.OrganizadorDAO;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author RAJ
+ */
+public class Organizador extends UsuarioComum{
+<span class="fc" id="L14">     public Organizador(){</span>
+         
+<span class="fc" id="L16">    }</span>
+    public Organizador(String nome, String dataNascimento, String sexo, String cpf, String cep, String logradouro, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, int id, String email, String senha) {
+<span class="nc" id="L18">        super(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, id, email, senha);</span>
+<span class="nc" id="L19">    }</span>
+    
+    public Organizador(String nome, String dataNascimento, String sexo, String cpf, String cep, String logradouro, String bairro, String complemento, String numero, String cidade, String estado, String telefone, String celular, String email, String senha) {
+<span class="nc" id="L22">        super(nome, dataNascimento, sexo, cpf, cep, logradouro, bairro, complemento, numero, cidade, estado, telefone, celular, email, senha);</span>
+<span class="nc" id="L23">    }</span>
+    
+    public static List&lt;Organizador&gt; obterOrganizadores() throws ClassNotFoundException{
+<span class="nc" id="L26">        return OrganizadorDAO.obterOrganizadores();</span>
+    }
+    
+    public void gravar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L30">        OrganizadorDAO.gravar(this);</span>
+<span class="nc" id="L31">    }</span>
+    
+    public void alterar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L34">        OrganizadorDAO.alterar(this);</span>
+<span class="nc" id="L35">    }</span>
+    
+    public void excluir() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L38">        OrganizadorDAO.excluir(this);</span>
+<span class="nc" id="L39">    }</span>
+    
+    public static Organizador obterOrganizador(int id) throws ClassNotFoundException {
+<span class="nc" id="L42">        return OrganizadorDAO.obterOrganizador(id);</span>
+    }
+    
+    public static Organizador logar(String email, String senha) throws ClassNotFoundException {
+<span class="nc" id="L46">        return OrganizadorDAO.logar(email, senha);</span>
+    }
+    public boolean validarCadastro(){
+<span class="fc" id="L49">        Pattern p2 = Pattern.compile (&quot;[A-Z]&quot;);// Criterio 2: Senha contém letras maiúsculas</span>
+<span class="fc" id="L50">        Pattern p3 = Pattern.compile (&quot;[a-z]&quot;);// Criterio 3: Senha contém letras minúsculas</span>
+<span class="fc" id="L51">        Pattern p4 = Pattern.compile (&quot;[0-9]&quot;);// Criterio 4: Senha contém dígitos</span>
+<span class="fc" id="L52">        Pattern p5 = Pattern.compile (&quot;[-+*/=%]&quot;);// Critério 5: Senha contém um dos seguintes caracteres especiais: + - * / = %</span>
+<span class="fc" id="L53">        Pattern p6 = Pattern.compile (&quot;[@]&quot;); //Criterio 6: Email contém os caracteres</span>
+<span class="fc" id="L54">        Pattern p7 = Pattern.compile (&quot;[.]&quot;); //Criterio 6: Email contém os caracteres</span>
+<span class="fc" id="L55">        Pattern p8 = Pattern.compile (&quot;[A-Z]&quot;); // Criterio 7: Email contém os letras maiúsculas </span>
+         
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (getSenha().length() &lt; 8) { // Criterio 1: Senha com 8 caracteres ou mais</span>
+<span class="fc" id="L58">            return false;</span>
+        }else 
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!p2.matcher (getSenha()).find()){  </span>
+<span class="fc" id="L61">            return false;</span>
+        }else
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (!p3.matcher (getSenha()).find()){  </span>
+<span class="fc" id="L64">            return false;</span>
+        }else
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (!p4.matcher (getSenha()).find()){  </span>
+<span class="fc" id="L67">            return false;</span>
+        }else 
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (!p5.matcher (getSenha()).find()){  </span>
+<span class="fc" id="L70">            return false;                   </span>
+        }else 
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (!p6.matcher (getEmail()).find()){  </span>
+<span class="fc" id="L73">            return false;                   </span>
+        }else 
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!p7.matcher (getEmail()).find()){  </span>
+<span class="fc" id="L76">            return false;                   </span>
+        }else 
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (p8.matcher (getEmail()).find()){  </span>
+<span class="fc" id="L79">            return false;                   </span>
+        }else 
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (getEmail().length() &lt; 9){  </span>
+<span class="fc" id="L82">            return false;                   </span>
+        }else{
+<span class="fc" id="L84">            return true;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

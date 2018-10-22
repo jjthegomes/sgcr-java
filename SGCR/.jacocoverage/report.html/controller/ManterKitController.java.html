@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterKitController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterKitController.java</span></div><h1>ManterKitController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import modelo.Corrida;
+import modelo.Kit;
+import modelo.Organizador;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+/**
+ *
+ * @author rafael
+ */
+
+@MultipartConfig
+<span class="nc" id="L36">public class ManterKitController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L49">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L50">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L52">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L55">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L58">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L61">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L64">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L67">                                confirmarEditar(request, response);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L74">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L78">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L79">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterKit.jsp&quot;);</span>
+<span class="nc" id="L80">            view.forward(request, response);</span>
+<span class="nc" id="L81">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L83">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L85">        }</span>
+<span class="nc" id="L86">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L100">        processRequest(request, response);</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L114">        processRequest(request, response);</span>
+<span class="nc" id="L115">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L124">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+//        String nome = request.getParameter(&quot;txtNomeKit&quot;);
+//        String descricao = request.getParameter(&quot;txtDescricaoKit&quot;);
+//        String imagem = request.getParameter(&quot;fileImagemKit&quot;);
+//        String tipoChip = request.getParameter(&quot;optTipoChip&quot;);
+        
+<span class="nc" id="L133">        int corridaId = Integer.parseInt(request.getParameter(&quot;hiddenIdCorrida&quot;));</span>
+<span class="nc" id="L134">        Double preco = Double.parseDouble(request.getParameter(&quot;precoKit&quot;));</span>
+<span class="nc" id="L135">        String nome = request.getParameter(&quot;nomeKit&quot;);</span>
+<span class="nc" id="L136">        String descricao = request.getParameter(&quot;descricaoKit&quot;);</span>
+<span class="nc" id="L137">        String tipoChip = request.getParameter(&quot;optTipoChip&quot;);</span>
+        
+        try {
+<span class="nc" id="L140">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L141">            Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L143">            ArrayList&lt;String&gt; arrayImagemKit = uploadFiles(request, response);</span>
+            
+<span class="nc" id="L145">            String imagem = null;</span>
+            
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            if(arrayImagemKit.isEmpty()) {</span>
+<span class="nc" id="L148">                imagem = &quot;imagesUpload/kit/sem-imagem.gif&quot;;</span>
+            } else {
+<span class="nc" id="L150">                imagem = arrayImagemKit.get(0);</span>
+            }
+
+<span class="nc" id="L153">            Kit kit = new Kit(nome, descricao, imagem, tipoChip, preco, organizador);</span>
+<span class="nc" id="L154">            Corrida corrida = Corrida.obterCorrida(corridaId);</span>
+<span class="nc" id="L155">            kit.gravar();</span>
+<span class="nc" id="L156">            kit = Kit.obterUltimoKitOrganizador(organizador.getId());</span>
+<span class="nc" id="L157">            kit.gravarKitCorrida(corrida);</span>
+<span class="nc" id="L158">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaCorridaController&quot;);</span>
+<span class="nc" id="L159">            view.forward(request, response);</span>
+<span class="nc" id="L160">        } catch (IOException ex) {</span>
+<span class="nc" id="L161">        } catch (SQLException ex) {</span>
+<span class="nc" id="L162">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L163">        } catch (ServletException ex) {</span>
+<span class="nc" id="L164">        }</span>
+<span class="nc" id="L165">    }</span>
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L169">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L170">            int idKit = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L171">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L172">            Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+<span class="nc" id="L173">            Kit kit = Kit.obterKit(idKit, organizador.getId());</span>
+<span class="nc" id="L174">            request.setAttribute(&quot;kit&quot;, kit);</span>
+<span class="nc" id="L175">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterKit.jsp&quot;);</span>
+<span class="nc" id="L176">            view.forward(request, response);</span>
+<span class="nc" id="L177">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L179">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L181">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L183">        }</span>
+<span class="nc" id="L184">    }</span>
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L187">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdKit&quot;));</span>
+<span class="nc" id="L188">        String nome = request.getParameter(&quot;txtNomeKit&quot;);</span>
+<span class="nc" id="L189">        String descricao = request.getParameter(&quot;txtDescricaoKit&quot;);</span>
+<span class="nc" id="L190">        String imagem = request.getParameter(&quot;fileImagemKit&quot;);</span>
+<span class="nc" id="L191">        String tipoChip = request.getParameter(&quot;optTipoChip&quot;);</span>
+
+<span class="nc" id="L193">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L194">        Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L196">        Kit kit = new Kit(id, descricao, nome, imagem, tipoChip, organizador);</span>
+        try {
+<span class="nc" id="L198">            kit.excluir();</span>
+<span class="nc" id="L199">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaCorridaController&quot;);</span>
+<span class="nc" id="L200">            view.forward(request, response);</span>
+<span class="nc" id="L201">        } catch (IOException ex) {</span>
+<span class="nc" id="L202">        } catch (SQLException ex) {</span>
+<span class="nc" id="L203">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L204">        } catch (ServletException ex) {</span>
+<span class="nc" id="L205">        }</span>
+<span class="nc" id="L206">    }</span>
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L210">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L211">            int idKit = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L212">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L213">            Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+<span class="nc" id="L214">            Kit kit = Kit.obterKit(idKit, organizador.getId());</span>
+<span class="nc" id="L215">            request.setAttribute(&quot;kit&quot;, kit);</span>
+<span class="nc" id="L216">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterKit.jsp&quot;);</span>
+<span class="nc" id="L217">            view.forward(request, response);</span>
+<span class="nc" id="L218">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L220">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L222">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L224">        }</span>
+<span class="nc" id="L225">    }</span>
+
+    public ArrayList uploadFiles(HttpServletRequest request, HttpServletResponse response) {
+        /*Identifica se o formulario é do tipo multipart/form-data*/
+
+<span class="nc" id="L230">        ArrayList files = new ArrayList();</span>
+
+<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (ServletFileUpload.isMultipartContent(request)) {</span>
+            try {
+                /*Faz o parse do request*/
+<span class="nc" id="L235">                List&lt;Part&gt; fileParts = request.getParts().stream().filter(part -&gt; &quot;imagemKitBD&quot;.equals(part.getName())).collect(Collectors.toList());</span>
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">                for (Part filePart : fileParts) {</span>
+<span class="nc" id="L238">                    Calendar hoje = Calendar.getInstance();</span>
+<span class="nc" id="L239">                    String fileName = &quot;IMG-&quot; + hoje.get(Calendar.YEAR) + &quot;-&quot; + (hoje.get(Calendar.MONTH) + 1) + &quot;-&quot; + hoje.get(Calendar.DAY_OF_MONTH) + &quot;_&quot; + hoje.get(Calendar.HOUR_OF_DAY) + &quot;-&quot; + hoje.get(Calendar.MINUTE) + &quot;-&quot; + hoje.get(Calendar.SECOND) + &quot;_&quot; + hoje.get(Calendar.MILLISECOND);</span>
+<span class="nc" id="L240">                    String path = &quot;imagesUpload/kit&quot;;</span>
+<span class="nc" id="L241">                    File uploadPath = new File(request.getServletContext().getRealPath(path));</span>
+<span class="nc" id="L242">                    File file = new File(uploadPath, fileName);</span>
+<span class="nc" id="L243">                    try (InputStream input = filePart.getInputStream()) {</span>
+<span class="nc" id="L244">                        Files.copy(input, file.toPath());</span>
+<span class="nc bnc" id="L245" title="All 8 branches missed.">                    }</span>
+
+<span class="nc" id="L247">                    files.add(path + File.separator + fileName);</span>
+<span class="nc" id="L248">                }</span>
+<span class="nc" id="L249">                request.setAttribute(&quot;message&quot;, &quot;Arquivo carregado com sucesso&quot;);</span>
+<span class="nc" id="L250">            } catch (Exception ex) {</span>
+<span class="nc" id="L251">                request.setAttribute(&quot;message&quot;, &quot;Upload de arquivo falhou devido a &quot; + ex);</span>
+<span class="nc" id="L252">            }</span>
+        } else {
+<span class="nc" id="L254">            request.setAttribute(&quot;message&quot;, &quot;Desculpe este Servlet lida apenas com pedido de upload de arquivos&quot;);</span>
+        }
+<span class="nc" id="L256">        return files;</span>
+    }
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L260">        int corridaId = Integer.parseInt(request.getParameter(&quot;hiddenIdCorrida&quot;));</span>
+<span class="nc" id="L261">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdKit&quot;));</span>
+<span class="nc" id="L262">        Double preco = Double.parseDouble(request.getParameter(&quot;precoKit&quot;));</span>
+<span class="nc" id="L263">        String nome = request.getParameter(&quot;nomeKit&quot;);</span>
+<span class="nc" id="L264">        String descricao = request.getParameter(&quot;descricaoKit&quot;);</span>
+<span class="nc" id="L265">        String tipoChip = request.getParameter(&quot;optTipoChip&quot;);</span>
+
+        try {
+<span class="nc" id="L268">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L269">            Organizador organizador = (Organizador) session.getAttribute(&quot;organizador&quot;);</span>
+
+<span class="nc" id="L271">            ArrayList&lt;String&gt; arrayImagemKit = uploadFiles(request, response);</span>
+            
+<span class="nc" id="L273">            String imagem = null;</span>
+            
+<span class="nc bnc" id="L275" title="All 2 branches missed.">            if(arrayImagemKit.isEmpty()) {</span>
+<span class="nc" id="L276">                Kit kitTemp = Kit.obterKit(id);</span>
+<span class="nc" id="L277">                imagem = kitTemp.getImagem();</span>
+<span class="nc" id="L278">            } else {</span>
+<span class="nc" id="L279">                imagem = arrayImagemKit.get(0);</span>
+            }
+
+<span class="nc" id="L282">            Kit kit = new Kit(id, nome, descricao, imagem, tipoChip, preco, organizador);</span>
+<span class="nc" id="L283">            kit.alterarKitCorrida(corridaId);</span>
+<span class="nc" id="L284">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaCorridaController&quot;);</span>
+<span class="nc" id="L285">            view.forward(request, response);</span>
+<span class="nc" id="L286">        } catch (IOException ex) {</span>
+<span class="nc" id="L287">        } catch (SQLException ex) {</span>
+<span class="nc" id="L288">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L289">        } catch (ServletException ex) {</span>
+<span class="nc" id="L290">        }</span>
+<span class="nc" id="L291">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

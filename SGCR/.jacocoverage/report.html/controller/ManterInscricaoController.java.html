@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterInscricaoController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterInscricaoController.java</span></div><h1>ManterInscricaoController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Usuario;
+import modelo.Atleta;
+import modelo.Boleto;
+import modelo.CartaoCredito;
+import modelo.Corrida;
+import modelo.Inscricao;
+import modelo.Kit;
+import modelo.Lote;
+import modelo.Percurso;
+
+/**
+ *
+ * @author rafael
+ */
+<span class="nc" id="L34">public class ManterInscricaoController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
+<span class="nc" id="L47">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L48">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L50">            prepararIncluir(request, response);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        } else if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L52">            confirmarIncluir(request, response);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L54">            prepararExcluir(request, response);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        } else if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L56">            confirmarExcluir(request, response);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        } else if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L58">            prepararEditar(request, response);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        } else if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L60">            confirmarEditar(request, response);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        } else if (acao.equals(&quot;escolherCorrida&quot;)) {</span>
+<span class="nc" id="L62">            escolherCorrida(request, response);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        } else if (acao.equals(&quot;informacao&quot;)) {</span>
+<span class="nc" id="L64">            informacao(request, response);</span>
+        }
+<span class="nc" id="L66">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L69">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L70">        Atleta atleta = (Atleta) session.getAttribute(&quot;atleta&quot;);</span>
+
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (!Usuario.isLogado(atleta)) {</span>
+            try {
+<span class="nc" id="L74">                request.setAttribute(&quot;mensagemAviso&quot;, &quot;Você precisa estar logado para se inscrever em uma corrida.&quot;);</span>
+<span class="nc" id="L75">                RequestDispatcher view = request.getRequestDispatcher(&quot;/PesquisaHomeController&quot;);</span>
+<span class="nc" id="L76">                view.forward(request, response);</span>
+<span class="nc" id="L77">            } catch (IOException ex) {</span>
+<span class="nc" id="L78">            } catch (ServletException ex) {</span>
+<span class="nc" id="L79">            }</span>
+
+        } else {
+
+            try {
+<span class="nc" id="L84">                int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+<span class="nc" id="L85">                Corrida corrida = Corrida.obterCorrida(corridaId);</span>
+
+<span class="nc bnc" id="L87" title="All 2 branches missed.">                if (Inscricao.atletaEstaInscrito(atleta, corrida)) {</span>
+<span class="nc" id="L88">                    request.setAttribute(&quot;mensagemAlerta&quot;, &quot;Você já está inscrito nessa corrida.&quot;);</span>
+                }
+
+<span class="nc" id="L91">                request.setAttribute(&quot;corridaId&quot;, corridaId);</span>
+<span class="nc" id="L92">                request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L93">                request.setAttribute(&quot;percursos&quot;, Percurso.obterPercursosCorrida(corridaId));</span>
+<span class="nc" id="L94">                request.setAttribute(&quot;kits&quot;, Kit.obterKitsCorrida(corridaId));</span>
+<span class="nc" id="L95">                request.setAttribute(&quot;lotes&quot;, Lote.obterLotes(corridaId));</span>
+<span class="nc" id="L96">                request.setAttribute(&quot;corrida&quot;, corrida);</span>
+
+<span class="nc" id="L98">                Calendar hoje = Calendar.getInstance();</span>
+<span class="nc" id="L99">                ArrayList&lt;Integer&gt; anos = new ArrayList();</span>
+<span class="nc" id="L100">                anos.add(hoje.get(Calendar.YEAR));</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">                for (int i = anos.get(0) + 1; i &lt; anos.get(0) + 15; i++) {</span>
+<span class="nc" id="L102">                    anos.add(i);</span>
+                }
+<span class="nc" id="L104">                request.setAttribute(&quot;anos&quot;, anos);</span>
+
+<span class="nc" id="L106">                RequestDispatcher view = request.getRequestDispatcher(&quot;/manterInscricao.jsp&quot;);</span>
+<span class="nc" id="L107">                view.forward(request, response);</span>
+<span class="nc" id="L108">            } catch (ServletException ex) {</span>
+
+<span class="nc" id="L110">            } catch (IOException ex) {</span>
+
+<span class="nc" id="L112">            } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L114">            } catch (SQLException ex) {</span>
+
+<span class="nc" id="L116">            } catch (NullPointerException ex) {</span>
+                try {
+<span class="nc" id="L118">                    response.sendRedirect(&quot;/SGCR/&quot;);</span>
+<span class="nc" id="L119">                } catch (IOException ex1) {</span>
+
+<span class="nc" id="L121">                }</span>
+<span class="nc" id="L122">            }</span>
+        }
+<span class="nc" id="L124">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L139">            processRequest(request, response);</span>
+<span class="nc" id="L140">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L141">            Logger.getLogger(ManterInscricaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L142">        }</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L157">            processRequest(request, response);</span>
+<span class="nc" id="L158">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L159">            Logger.getLogger(ManterInscricaoController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L160">        }</span>
+<span class="nc" id="L161">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L170">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L174">        int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+<span class="nc" id="L175">        int percursoId = Integer.parseInt(request.getParameter(&quot;optPercurso&quot;));</span>
+<span class="nc" id="L176">        int kitId = Integer.parseInt(request.getParameter(&quot;optKit&quot;));</span>
+<span class="nc" id="L177">        int loteId = Integer.parseInt(request.getParameter(&quot;optLote&quot;));</span>
+
+        try {
+<span class="nc" id="L180">            Corrida corrida = Corrida.obterCorrida(corridaId);</span>
+<span class="nc" id="L181">            HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L182">            Atleta atleta = (Atleta) session.getAttribute(&quot;atleta&quot;);</span>
+
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (!Inscricao.atletaEstaInscrito(atleta, corrida)) {</span>
+
+<span class="nc" id="L186">                Percurso percurso = Percurso.obterPercurso(percursoId);</span>
+
+<span class="nc" id="L188">                Kit kit = Kit.obterKit(kitId);</span>
+<span class="nc" id="L189">                Lote lote = Lote.obterLote(loteId);</span>
+
+<span class="nc" id="L191">                Inscricao inscricao = new Inscricao(corrida, atleta, percurso, kit, lote);</span>
+
+<span class="nc bnc" id="L193" title="All 2 branches missed.">                if (request.getParameter(&quot;formaPagamento&quot;).equals(&quot;cartaoCredito&quot;)) {</span>
+<span class="nc" id="L194">                    inscricao.setPago(true);</span>
+<span class="nc" id="L195">                    inscricao.gravar();</span>
+
+<span class="nc" id="L197">                    String numeroCartaoCredito = request.getParameter(&quot;numeroCartaoCredito&quot;);</span>
+<span class="nc" id="L198">                    String nomeTitularCartaoCredito = request.getParameter(&quot;nomeTitularCartaoCredito&quot;);</span>
+<span class="nc" id="L199">                    String codigoSegurancaCartaoCredito = request.getParameter(&quot;codigoSegurancaCartaoCredito&quot;);</span>
+<span class="nc" id="L200">                    String mesValidadeCartaoCredito = request.getParameter(&quot;mesValidadeCartaoCredito&quot;);</span>
+<span class="nc" id="L201">                    String anoValidadeCartaoCredito = request.getParameter(&quot;anoValidadeCartaoCredito&quot;);</span>
+<span class="nc" id="L202">                    String dataValidadeCartaoCredito = mesValidadeCartaoCredito + &quot;/&quot; + anoValidadeCartaoCredito;</span>
+
+                    try {
+<span class="nc" id="L205">                        inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());</span>
+<span class="nc" id="L206">                        CartaoCredito cartaoCredito = new CartaoCredito(numeroCartaoCredito, codigoSegurancaCartaoCredito, dataValidadeCartaoCredito, nomeTitularCartaoCredito, inscricao, corrida);</span>
+<span class="nc" id="L207">                        cartaoCredito.gravar();</span>
+<span class="nc" id="L208">                        request.setAttribute(&quot;cartaoCredito&quot;, cartaoCredito);</span>
+<span class="nc" id="L209">                    } catch (SQLException | ClassNotFoundException ex) {</span>
+<span class="nc" id="L210">                    }</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                } else if (request.getParameter(&quot;formaPagamento&quot;).equals(&quot;boleto&quot;)) {</span>
+<span class="nc" id="L212">                    inscricao.gravar();</span>
+
+                    try {
+<span class="nc" id="L215">                        inscricao = Inscricao.obterUltimaInscricaoAtleta(atleta.getId());</span>
+<span class="nc" id="L216">                        Boleto boleto = new Boleto(inscricao, corrida);</span>
+<span class="nc" id="L217">                        boleto.gravar();</span>
+<span class="nc" id="L218">                        request.setAttribute(&quot;boleto&quot;, boleto);</span>
+<span class="nc" id="L219">                    } catch (SQLException | ClassNotFoundException ex) {</span>
+<span class="nc" id="L220">                    }</span>
+                }
+
+<span class="nc" id="L223">                request.setAttribute(&quot;formaPagamento&quot;, request.getParameter(&quot;formaPagamento&quot;));</span>
+<span class="nc" id="L224">                request.setAttribute(&quot;atleta&quot;, atleta);</span>
+<span class="nc" id="L225">                request.setAttribute(&quot;percurso&quot;, percurso);</span>
+<span class="nc" id="L226">                request.setAttribute(&quot;kit&quot;, kit);</span>
+<span class="nc" id="L227">                request.setAttribute(&quot;lote&quot;, lote);</span>
+<span class="nc" id="L228">                request.setAttribute(&quot;corrida&quot;, corrida);</span>
+<span class="nc" id="L229">                request.setAttribute(&quot;inscricao&quot;, inscricao);</span>
+<span class="nc" id="L230">                request.setAttribute(&quot;precoTotal&quot;, lote.getPreco() + kit.getPreco());</span>
+
+<span class="nc" id="L232">                RequestDispatcher view = request.getRequestDispatcher(&quot;/finalizarInscricao.jsp&quot;);</span>
+
+<span class="nc" id="L234">                view.forward(request, response);</span>
+<span class="nc" id="L235">            } else {</span>
+<span class="nc" id="L236">                request.setAttribute(&quot;mensagemErro&quot;, &quot;Não foi possível concluir sua inscrição, você já está inscrito nessa corrida.&quot;);</span>
+<span class="nc" id="L237">                RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaHomeController&quot;);</span>
+<span class="nc" id="L238">                view.forward(request, response);</span>
+            }
+
+<span class="nc" id="L241">        } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {</span>
+<span class="nc" id="L242">        }</span>
+<span class="nc" id="L243">    }</span>
+
+    private void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L247">            int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+<span class="nc" id="L248">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L249">            request.setAttribute(&quot;atletas&quot;, Atleta.obterAtletas());</span>
+<span class="nc" id="L250">            request.setAttribute(&quot;percursos&quot;, Percurso.obterPercursos(corridaId));</span>
+<span class="nc" id="L251">            request.setAttribute(&quot;kits&quot;, Kit.obterKits(corridaId));</span>
+<span class="nc" id="L252">            request.setAttribute(&quot;lotes&quot;, Lote.obterLotes(corridaId));</span>
+<span class="nc" id="L253">            int idInscricao = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L255">            request.setAttribute(&quot;corridaId&quot;, corridaId);</span>
+<span class="nc" id="L256">            request.setAttribute(&quot;corrida&quot;, Corrida.obterCorrida(corridaId));</span>
+
+<span class="nc" id="L258">            Inscricao inscricao = Inscricao.obterInscricao(idInscricao);</span>
+<span class="nc" id="L259">            request.setAttribute(&quot;inscricao&quot;, inscricao);</span>
+<span class="nc" id="L260">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterInscricao.jsp&quot;);</span>
+<span class="nc" id="L261">            view.forward(request, response);</span>
+<span class="nc" id="L262">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L264">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L266">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L268">        }</span>
+<span class="nc" id="L269">    }</span>
+
+    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L272">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdInscricao&quot;));</span>
+<span class="nc" id="L273">        String dataCompra = request.getParameter(&quot;txtDataCompraInscricao&quot;);</span>
+<span class="nc" id="L274">        String numeroPeito = request.getParameter(&quot;txtNumeroPeitoInscricao&quot;);</span>
+<span class="nc" id="L275">        Boolean pago = Boolean.parseBoolean(request.getParameter(&quot;optPago&quot;));</span>
+<span class="nc" id="L276">        Boolean kitRetirado = Boolean.parseBoolean(request.getParameter(&quot;optKitRetirado&quot;));</span>
+<span class="nc" id="L277">        String tempoLargada = request.getParameter(&quot;txtTempoLargada&quot;);</span>
+<span class="nc" id="L278">        String tempoChegada = request.getParameter(&quot;txtTempoChegada&quot;);</span>
+
+<span class="nc" id="L280">        Inscricao inscricao = new Inscricao(id, null, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, null, null, null, null);</span>
+
+        try {
+<span class="nc" id="L283">            inscricao.excluir();</span>
+<span class="nc" id="L284">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaInscricaoController&quot;);</span>
+<span class="nc" id="L285">            view.forward(request, response);</span>
+<span class="nc" id="L286">        } catch (IOException ex) {</span>
+<span class="nc" id="L287">        } catch (SQLException ex) {</span>
+<span class="nc" id="L288">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L289">        } catch (ServletException ex) {</span>
+<span class="nc" id="L290">        }</span>
+<span class="nc" id="L291">    }</span>
+
+    private void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L295">            int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+<span class="nc" id="L296">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L297">            request.setAttribute(&quot;atletas&quot;, Atleta.obterAtletas());</span>
+<span class="nc" id="L298">            request.setAttribute(&quot;percursos&quot;, Percurso.obterPercursos(corridaId));</span>
+<span class="nc" id="L299">            request.setAttribute(&quot;kits&quot;, Kit.obterKits(corridaId));</span>
+<span class="nc" id="L300">            request.setAttribute(&quot;lotes&quot;, Lote.obterLotes(corridaId));</span>
+<span class="nc" id="L301">            request.setAttribute(&quot;corridaId&quot;, corridaId);</span>
+
+<span class="nc" id="L303">            request.setAttribute(&quot;corrida&quot;, Corrida.obterCorrida(corridaId));</span>
+
+<span class="nc" id="L305">            int idInscricao = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+<span class="nc" id="L306">            Inscricao inscricao = Inscricao.obterInscricao(idInscricao);</span>
+<span class="nc" id="L307">            request.setAttribute(&quot;inscricao&quot;, inscricao);</span>
+<span class="nc" id="L308">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterInscricao.jsp&quot;);</span>
+<span class="nc" id="L309">            view.forward(request, response);</span>
+<span class="nc" id="L310">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L312">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L314">        } catch (ClassNotFoundException ex) {</span>
+
+<span class="nc" id="L316">        }</span>
+<span class="nc" id="L317">    }</span>
+
+    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) {
+<span class="nc" id="L320">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdInscricao&quot;));</span>
+
+        try {
+<span class="nc" id="L323">            Inscricao thisInscricao = Inscricao.obterInscricao(id);</span>
+
+<span class="nc" id="L325">            String dataCompra = thisInscricao.getDataCompra();</span>
+<span class="nc" id="L326">            String numeroPeito = thisInscricao.getNumeroPeito();</span>
+<span class="nc" id="L327">            Boolean pago = thisInscricao.isPago();</span>
+<span class="nc" id="L328">            Boolean kitRetirado = thisInscricao.isKitRetirado();</span>
+<span class="nc" id="L329">            String tempoLargada = thisInscricao.getTempoLargada();</span>
+<span class="nc" id="L330">            String tempoChegada = thisInscricao.getTempoChegada();</span>
+
+<span class="nc" id="L332">            int atletaId = Integer.parseInt(request.getParameter(&quot;optAtleta&quot;));</span>
+<span class="nc" id="L333">            int percursoId = Integer.parseInt(request.getParameter(&quot;optPercurso&quot;));</span>
+<span class="nc" id="L334">            int kitId = Integer.parseInt(request.getParameter(&quot;optKit&quot;));</span>
+
+<span class="nc" id="L336">            int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+            try {
+<span class="nc" id="L338">                request.setAttribute(&quot;corridaId&quot;, corridaId);</span>
+<span class="nc" id="L339">                request.setAttribute(&quot;corrida&quot;, Corrida.obterCorrida(corridaId));</span>
+<span class="nc" id="L340">            } catch (NullPointerException | NumberFormatException ex) {</span>
+
+<span class="nc" id="L342">            }</span>
+
+<span class="nc" id="L344">            int loteId = Integer.parseInt(request.getParameter(&quot;optLote&quot;));</span>
+<span class="nc" id="L345">            Atleta atleta = Atleta.obterAtleta(atletaId);</span>
+<span class="nc" id="L346">            Percurso percurso = Percurso.obterPercurso(percursoId);</span>
+<span class="nc" id="L347">            Kit kit = Kit.obterKit(kitId, corridaId);</span>
+<span class="nc" id="L348">            Lote lote = Lote.obterLote(loteId);</span>
+
+<span class="nc" id="L350">            Inscricao inscricao = new Inscricao(id, null, dataCompra, numeroPeito, pago, kitRetirado, tempoLargada, tempoChegada, atleta, percurso, kit, lote);</span>
+<span class="nc" id="L351">            inscricao.alterar();</span>
+<span class="nc" id="L352">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaInscricaoController&quot;);</span>
+<span class="nc" id="L353">            view.forward(request, response);</span>
+<span class="nc" id="L354">        } catch (IOException ex) {</span>
+<span class="nc" id="L355">        } catch (SQLException ex) {</span>
+<span class="nc" id="L356">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L357">        } catch (ServletException ex) {</span>
+<span class="nc" id="L358">        }</span>
+<span class="nc" id="L359">    }</span>
+
+    private void escolherCorrida(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L363">            request.setAttribute(&quot;corridas&quot;, Corrida.obterCorridas());</span>
+<span class="nc" id="L364">            RequestDispatcher view = request.getRequestDispatcher(&quot;/escolherCorridaInscricao.jsp&quot;);</span>
+<span class="nc" id="L365">            view.forward(request, response);</span>
+<span class="nc" id="L366">        } catch (IOException ex) {</span>
+<span class="nc" id="L367">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L368">        } catch (ServletException ex) {</span>
+<span class="nc" id="L369">        }</span>
+<span class="nc" id="L370">    }</span>
+
+    public void informacao(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+        try {
+<span class="nc" id="L374">            int corridaId = Integer.parseInt(request.getParameter(&quot;corridaId&quot;));</span>
+<span class="nc" id="L375">            Corrida corrida = Corrida.obterCorrida(corridaId);</span>
+
+<span class="nc" id="L377">            request.setAttribute(&quot;corridaId&quot;, corridaId);</span>
+<span class="nc" id="L378">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L379">            request.setAttribute(&quot;percursos&quot;, Percurso.obterPercursosCorrida(corridaId));</span>
+<span class="nc" id="L380">            request.setAttribute(&quot;kits&quot;, Kit.obterKitsCorrida(corridaId));</span>
+<span class="nc" id="L381">            request.setAttribute(&quot;lotes&quot;, Lote.obterLotes(corridaId));</span>
+<span class="nc" id="L382">            request.setAttribute(&quot;corrida&quot;, corrida);</span>
+
+<span class="nc" id="L384">            Calendar hoje = Calendar.getInstance();</span>
+<span class="nc" id="L385">            ArrayList&lt;Integer&gt; anos = new ArrayList();</span>
+<span class="nc" id="L386">            anos.add(hoje.get(Calendar.YEAR));</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">            for (int i = anos.get(0) + 1; i &lt; anos.get(0) + 15; i++) {</span>
+<span class="nc" id="L388">                anos.add(i);</span>
+            }
+<span class="nc" id="L390">            request.setAttribute(&quot;anos&quot;, anos);</span>
+
+<span class="nc" id="L392">            RequestDispatcher view = request.getRequestDispatcher(&quot;/informacaoCorrida.jsp&quot;);</span>
+<span class="nc" id="L393">            view.forward(request, response);</span>
+<span class="nc" id="L394">        } catch (ServletException ex) {</span>
+
+<span class="nc" id="L396">        } catch (IOException ex) {</span>
+
+<span class="nc" id="L398">        }</span>
+
+<span class="nc" id="L400">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

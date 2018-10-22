@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManterRankingController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ManterRankingController.java</span></div><h1>ManterRankingController.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Administrador;
+import modelo.Ranking;
+
+/**
+ *
+ * @author RAJ
+ */
+<span class="nc" id="L25">public class ManterRankingController extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+<span class="nc" id="L38">        String acao = request.getParameter(&quot;acao&quot;);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (acao.equals(&quot;prepararIncluir&quot;)) {</span>
+<span class="nc" id="L40">            prepararIncluir(request, response);</span>
+        } else {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (acao.equals(&quot;confirmarIncluir&quot;)) {</span>
+<span class="nc" id="L43">                confirmarIncluir(request, response);</span>
+            } else {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                if (acao.equals(&quot;prepararExcluir&quot;)) {</span>
+<span class="nc" id="L46">                    prepararExcluir(request, response);</span>
+                } else {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                    if (acao.equals(&quot;confirmarExcluir&quot;)) {</span>
+<span class="nc" id="L49">                        confirmarExcluir(request, response);</span>
+                    } else {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                        if (acao.equals(&quot;prepararEditar&quot;)) {</span>
+<span class="nc" id="L52">                            prepararEditar(request, response);</span>
+                        } else {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                            if (acao.equals(&quot;confirmarEditar&quot;)) {</span>
+<span class="nc" id="L55">                                confirmarEditar(request, response);</span>
+                            } else {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                                if (acao.equals(&quot;visualizarRanking&quot;)) {</span>
+<span class="nc" id="L58">                                    visualizarRanking(request, response);</span>
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+<span class="nc" id="L67">    }</span>
+
+    public void prepararIncluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L71">            request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);</span>
+<span class="nc" id="L72">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L73">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRanking.jsp&quot;);</span>
+<span class="nc" id="L74">            view.forward(request, response);</span>
+
+<span class="nc" id="L76">        } catch (ServletException ex) {</span>
+<span class="nc" id="L77">        } catch (IOException ex) {</span>
+<span class="nc" id="L78">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L79">        }</span>
+<span class="nc" id="L80">    }</span>
+
+    public void prepararExcluir(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L84">            request.setAttribute(&quot;operacao&quot;, &quot;Excluir&quot;);</span>
+<span class="nc" id="L85">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L86">            int codRanking = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L88">            Ranking ranking = Ranking.obterRanking(codRanking);</span>
+<span class="nc" id="L89">            request.setAttribute(&quot;ranking&quot;, ranking);</span>
+
+<span class="nc" id="L91">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRanking.jsp&quot;);</span>
+<span class="nc" id="L92">            view.forward(request, response);</span>
+
+<span class="nc" id="L94">        } catch (ServletException ex) {</span>
+<span class="nc" id="L95">        } catch (IOException ex) {</span>
+<span class="nc" id="L96">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L97">        }</span>
+<span class="nc" id="L98">    }</span>
+
+    public void prepararEditar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+<span class="nc" id="L102">            request.setAttribute(&quot;operacao&quot;, &quot;Editar&quot;);</span>
+<span class="nc" id="L103">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L104">            int codRanking = Integer.parseInt(request.getParameter(&quot;id&quot;));</span>
+
+<span class="nc" id="L106">            Ranking ranking = Ranking.obterRanking(codRanking);</span>
+<span class="nc" id="L107">            request.setAttribute(&quot;ranking&quot;, ranking);</span>
+
+<span class="nc" id="L109">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRanking.jsp&quot;);</span>
+<span class="nc" id="L110">            view.forward(request, response);</span>
+
+<span class="nc" id="L112">        } catch (ServletException ex) {</span>
+<span class="nc" id="L113">        } catch (IOException ex) {</span>
+<span class="nc" id="L114">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">    }</span>
+
+    public void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L119">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdRanking&quot;));</span>
+<span class="nc" id="L120">        String nomeRanking = request.getParameter(&quot;txtNomeRanking&quot;);</span>
+<span class="nc" id="L121">        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter(&quot;txtIntervaloFaixaEtaria&quot;));</span>
+<span class="nc" id="L122">        int idadeInicial = Integer.parseInt(request.getParameter(&quot;txtIdadeInicial&quot;));</span>
+
+<span class="nc" id="L124">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L125">        Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);</span>
+
+<span class="nc" id="L127">        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);</span>
+        try {
+<span class="nc" id="L129">            ranking.excluir();</span>
+
+<span class="nc" id="L131">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaRankingController?acao=listaRanking&quot;);</span>
+<span class="nc" id="L132">            view.forward(request, response);</span>
+
+<span class="nc" id="L134">        } catch (IOException ex) {</span>
+<span class="nc" id="L135">        } catch (SQLException ex) {</span>
+<span class="nc" id="L136">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L137">        } catch (ServletException ex) {</span>
+<span class="nc" id="L138">        }</span>
+<span class="nc" id="L139">    }</span>
+
+    public void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException {
+<span class="nc" id="L142">        int id = Integer.parseInt(request.getParameter(&quot;hiddenIdRanking&quot;));</span>
+<span class="nc" id="L143">        String nomeRanking = request.getParameter(&quot;txtNomeRanking&quot;);</span>
+<span class="nc" id="L144">        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter(&quot;txtIntervaloFaixaEtaria&quot;));</span>
+<span class="nc" id="L145">        int idadeInicial = Integer.parseInt(request.getParameter(&quot;txtIdadeInicial&quot;));</span>
+
+<span class="nc" id="L147">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L148">        Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);</span>
+
+<span class="nc" id="L150">        Ranking ranking = new Ranking(id, nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);</span>
+        try {
+<span class="nc" id="L152">            ranking.alterar();</span>
+
+<span class="nc" id="L154">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaRankingController?acao=listaRanking&quot;);</span>
+<span class="nc" id="L155">            view.forward(request, response);</span>
+
+<span class="nc" id="L157">        } catch (IOException ex) {</span>
+<span class="nc" id="L158">        } catch (SQLException ex) {</span>
+<span class="nc" id="L159">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L160">        } catch (ServletException ex) {</span>
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">    }</span>
+
+    private void confirmarIncluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, ClassNotFoundException, SQLException, IOException {
+<span class="nc" id="L165">        String nomeRanking = request.getParameter(&quot;txtNomeRanking&quot;);</span>
+<span class="nc" id="L166">        int intervaloFaixaEtaria = Integer.parseInt(request.getParameter(&quot;txtIntervaloFaixaEtaria&quot;));</span>
+<span class="nc" id="L167">        int idadeInicial = Integer.parseInt(request.getParameter(&quot;txtIdadeInicial&quot;));</span>
+
+<span class="nc" id="L169">        HttpSession session = request.getSession(true);</span>
+<span class="nc" id="L170">        Administrador administrador = (Administrador) session.getAttribute(&quot;administrador&quot;);</span>
+
+        try {
+
+<span class="nc" id="L174">            Ranking ranking = new Ranking(nomeRanking, intervaloFaixaEtaria, idadeInicial, administrador);</span>
+<span class="nc" id="L175">            ranking.gravar();</span>
+<span class="nc" id="L176">            RequestDispatcher view = request.getRequestDispatcher(&quot;PesquisaRankingController&quot;);</span>
+<span class="nc" id="L177">            view.forward(request, response);</span>
+<span class="nc" id="L178">        } catch (IOException ex) {</span>
+<span class="nc" id="L179">        } catch (SQLException ex) {</span>
+<span class="nc" id="L180">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L181">        } catch (ServletException ex) {</span>
+<span class="nc" id="L182">        }</span>
+<span class="nc" id="L183">    }</span>
+
+    public void visualizarRanking(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            //request.setAttribute(&quot;operacao&quot;, &quot;Incluir&quot;);
+<span class="nc" id="L188">            request.setAttribute(&quot;administradores&quot;, Administrador.obterAdministradores());</span>
+<span class="nc" id="L189">            RequestDispatcher view = request.getRequestDispatcher(&quot;/manterRanking.jsp&quot;);</span>
+<span class="nc" id="L190">            view.forward(request, response);</span>
+
+<span class="nc" id="L192">        } catch (ServletException ex) {</span>
+<span class="nc" id="L193">        } catch (IOException ex) {</span>
+<span class="nc" id="L194">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L195">        }</span>
+<span class="nc" id="L196">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L211">            processRequest(request, response);</span>
+<span class="nc" id="L212">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L213">            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L214">        } catch (SQLException ex) {</span>
+<span class="nc" id="L215">            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L216">        }</span>
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L231">            processRequest(request, response);</span>
+<span class="nc" id="L232">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L233">            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L234">        } catch (SQLException ex) {</span>
+<span class="nc" id="L235">            Logger.getLogger(ManterRankingController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L236">        }</span>
+<span class="nc" id="L237">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L246">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

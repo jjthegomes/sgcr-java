@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Produto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Produto.java</span></div><h1>Produto.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modelo;
+
+import dao.ProdutoDAO;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author RAJ
+ */
+public class Produto{
+    private int id;
+    private String nome;
+    private Administrador administrador;
+    private int administradorId;
+    
+    
+<span class="nc" id="L24">    public Produto(){</span>
+<span class="nc" id="L25">    }</span>
+    
+
+<span class="nc" id="L28">    public Produto(int id, String nome, Administrador administrador) {</span>
+<span class="nc" id="L29">        this.id = id;</span>
+<span class="nc" id="L30">        this.nome = nome;</span>
+<span class="nc" id="L31">        this.administrador = administrador;</span>
+<span class="nc" id="L32">    }</span>
+    
+    public void setAdministradorId(int administradorId) {
+<span class="nc" id="L35">        this.administradorId = administradorId;</span>
+<span class="nc" id="L36">    }</span>
+    
+<span class="nc" id="L38">    public Produto(String nome, Administrador administrador) {</span>
+<span class="nc" id="L39">        this.nome = nome;</span>
+<span class="nc" id="L40">        this.administrador = administrador;</span>
+<span class="nc" id="L41">    }  </span>
+    
+    public int getId() {
+<span class="nc" id="L44">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L48">        this.id = id;</span>
+<span class="nc" id="L49">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L52">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L56">        this.nome = nome;</span>
+<span class="nc" id="L57">    }</span>
+
+    public Administrador getAdministrador() {
+<span class="nc" id="L60">        return administrador;</span>
+    }
+
+    public void setAdministrador(Administrador administrador) {
+<span class="nc" id="L64">        this.administrador = administrador;</span>
+<span class="nc" id="L65">    }</span>
+
+    public int getAdministradorId() {
+<span class="nc" id="L68">        return administradorId;</span>
+    }
+    public void gravar() throws SQLException,
+        ClassNotFoundException{
+<span class="nc" id="L72">         ProdutoDAO.gravar(this);</span>
+<span class="nc" id="L73">    }</span>
+    public void alterar() throws SQLException, ClassNotFoundException{
+<span class="nc" id="L75">        ProdutoDAO.alterar(this);</span>
+<span class="nc" id="L76">    }</span>
+    
+    public void excluir() throws SQLException, ClassNotFoundException{
+<span class="nc" id="L79">        ProdutoDAO.excluir(this);</span>
+<span class="nc" id="L80">    }</span>
+    
+    public static List&lt;Produto&gt; obterProdutos() throws ClassNotFoundException{
+<span class="nc" id="L83">        return ProdutoDAO.obterProdutos();</span>
+    }
+    
+     public static List&lt;Produto&gt; obterProdutos(int administradorId) throws ClassNotFoundException{
+<span class="nc" id="L87">        return ProdutoDAO.obterProdutos(administradorId);</span>
+    }
+     
+    public static Produto obterProduto(int id) throws ClassNotFoundException{
+<span class="nc" id="L91">        return ProdutoDAO.obterProduto(id);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -25,6 +25,7 @@ public class ProdutoMockTest {
     public ProdutoMockTest() {
     }
     ValidarProduto prod;
+    InterfaceProduto requestMock;
     @BeforeClass
     public static void setUpClass() {
     }
@@ -36,6 +37,7 @@ public class ProdutoMockTest {
     @Before
     public void setUp() {
         prod = new ValidarProduto();
+        requestMock = createMock(InterfaceProduto.class);
     }
     
     @After
@@ -44,7 +46,6 @@ public class ProdutoMockTest {
     
     @Test
     public void testNomeCaracter() {
-        InterfaceProduto requestMock = createMock(InterfaceProduto.class);
         expect(requestMock.getNome()).andReturn("aaa");
         replay(requestMock);
         assertEquals(false,prod.validarNome(requestMock));
@@ -53,7 +54,6 @@ public class ProdutoMockTest {
   
     @Test
     public void testNomeNumero() {
-        InterfaceProduto requestMock = createMock(InterfaceProduto.class);
         expect(requestMock.getNome()).andReturn("aaaaaaaaaaaaaaaaaaaaaaaaa");
         replay(requestMock);
         assertEquals(false,prod.validarNome(requestMock));
@@ -61,7 +61,6 @@ public class ProdutoMockTest {
     
     @Test
     public void testNomeValido() {
-        InterfaceProduto requestMock = createMock(InterfaceProduto.class);
         expect(requestMock.getNome()).andReturn("Camisa");
         replay(requestMock);
         assertEquals(true,prod.validarNome(requestMock));

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Kit.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SGCR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">Kit.java</span></div><h1>Kit.java</h1><pre class="source lang-java linenums">package modelo;
+
+import dao.KitDAO;
+import java.sql.SQLException;
+import java.util.List;
+import java.text.DecimalFormat;   
+
+/**
+ *
+ * @author RAJ
+ */
+public class Kit {
+
+    private int id;
+    private String nome;
+    private String descricao;
+    private String imagem;
+    private String tipoChip;
+    private double preco;
+    private Organizador organizador;
+
+    private int organizadorId;
+
+    public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
+<span class="nc" id="L25">             Double preco, Organizador organizador) {</span>
+<span class="nc" id="L26">        this.id = id;</span>
+<span class="nc" id="L27">        this.nome = nome;</span>
+<span class="nc" id="L28">        this.descricao = descricao;</span>
+<span class="nc" id="L29">        this.imagem = imagem;</span>
+<span class="nc" id="L30">        this.tipoChip = tipoChip;</span>
+<span class="nc" id="L31">        this.preco = preco;</span>
+<span class="nc" id="L32">        this.organizador = organizador;</span>
+<span class="nc" id="L33">    }</span>
+
+    public Kit(int id, String nome, String descricao, String imagem, String tipoChip,
+<span class="nc" id="L36">             Organizador organizador) {</span>
+<span class="nc" id="L37">        this.id = id;</span>
+<span class="nc" id="L38">        this.nome = nome;</span>
+<span class="nc" id="L39">        this.descricao = descricao;</span>
+<span class="nc" id="L40">        this.imagem = imagem;</span>
+<span class="nc" id="L41">        this.tipoChip = tipoChip;</span>
+<span class="nc" id="L42">        this.organizador = organizador;</span>
+<span class="nc" id="L43">    }</span>
+
+    public Kit(String nome, String descricao, String imagem, String tipoChip,
+<span class="nc" id="L46">             Double preco, Organizador organizador) {</span>
+<span class="nc" id="L47">        this.nome = nome;</span>
+<span class="nc" id="L48">        this.descricao = descricao;</span>
+<span class="nc" id="L49">        this.imagem = imagem;</span>
+<span class="nc" id="L50">        this.tipoChip = tipoChip;</span>
+<span class="nc" id="L51">        this.preco = preco;</span>
+<span class="nc" id="L52">        this.organizador = organizador;</span>
+
+<span class="nc" id="L54">    }</span>
+
+    public Kit(String nome, String descricao, String imagem, String tipoChip,
+<span class="nc" id="L57">             Organizador organizador) {</span>
+<span class="nc" id="L58">        this.nome = nome;</span>
+<span class="nc" id="L59">        this.descricao = descricao;</span>
+<span class="nc" id="L60">        this.imagem = imagem;</span>
+<span class="nc" id="L61">        this.tipoChip = tipoChip;</span>
+<span class="nc" id="L62">        this.organizador = organizador;</span>
+<span class="nc" id="L63">    }</span>
+
+    public int getId() {
+<span class="nc" id="L66">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L70">        this.id = id;</span>
+<span class="nc" id="L71">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L74">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L78">        this.nome = nome;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getDescricao() {
+<span class="nc" id="L82">        return descricao;</span>
+    }
+
+    public void setDescricao(String descricao) {
+<span class="nc" id="L86">        this.descricao = descricao;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getImagem() {
+<span class="nc" id="L90">        return imagem;</span>
+    }
+
+    public void setImagem(String imagemKit) {
+<span class="nc" id="L94">        this.imagem = imagemKit;</span>
+<span class="nc" id="L95">    }</span>
+
+    public String getTipoChip() {
+<span class="nc" id="L98">        return tipoChip;</span>
+    }
+
+    public void setTipoChip(String tipoChip) {
+<span class="nc" id="L102">        this.tipoChip = tipoChip;</span>
+<span class="nc" id="L103">    }</span>
+
+    public Organizador getOrganizador() {
+<span class="nc" id="L106">        return organizador;</span>
+    }
+
+    public void setOrganizador(Organizador organizador) {
+<span class="nc" id="L110">        this.organizador = organizador;</span>
+<span class="nc" id="L111">    }</span>
+
+    public int getOrganizadorId() {
+<span class="nc" id="L114">        return organizadorId;</span>
+    }
+
+    public void setOrganizadorId(int organizadorId) {
+<span class="nc" id="L118">        this.organizadorId = organizadorId;</span>
+<span class="nc" id="L119">    }</span>
+
+    public double getPreco() {
+<span class="nc" id="L122">        return preco;</span>
+    }
+    
+    public String getPrecoFormatado() {
+<span class="nc" id="L126">        DecimalFormat df = new DecimalFormat(&quot;#,###.00&quot;);</span>
+<span class="nc" id="L127">        String precoFormatado = df.format(this.preco);</span>
+<span class="nc" id="L128">        return precoFormatado;</span>
+    }
+
+    public void setPreco(double preco) {
+<span class="nc" id="L132">        this.preco = preco;</span>
+<span class="nc" id="L133">    }</span>
+
+    public static List&lt;Kit&gt; obterKits() throws ClassNotFoundException {
+<span class="nc" id="L136">        return KitDAO.obterKits();</span>
+    }
+
+    public static List&lt;Kit&gt; obterKits(int organizadorId) throws ClassNotFoundException {
+<span class="nc" id="L140">        return KitDAO.obterKits(organizadorId);</span>
+    }
+
+    public void gravar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L144">        KitDAO.gravar(this);</span>
+<span class="nc" id="L145">    }</span>
+
+    public void gravarKitCorrida(Corrida corrida) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L148">        KitDAO.gravarKitCorrida(this, corrida);</span>
+<span class="nc" id="L149">    }</span>
+
+    public void alterar() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L152">        KitDAO.alterar(this);</span>
+<span class="nc" id="L153">    }</span>
+    
+    public void alterarKitCorrida(int corridaId) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L156">        KitDAO.alterarKitCorrida(this, corridaId);</span>
+<span class="nc" id="L157">    }</span>
+
+    public void excluir() throws SQLException, ClassNotFoundException {
+<span class="nc" id="L160">        KitDAO.excluir(this);</span>
+<span class="nc" id="L161">    }</span>
+
+    public static Kit obterKit(int id) throws ClassNotFoundException {
+<span class="nc" id="L164">        return KitDAO.obterKit(id);</span>
+    }
+
+    public static Kit obterKit(int id, int organizadorId) throws ClassNotFoundException {
+<span class="nc" id="L168">        return KitDAO.obterKit(id, organizadorId);</span>
+    }
+
+    public static List&lt;Kit&gt; obterKitsCorrida(int corridaId) throws ClassNotFoundException {
+<span class="nc" id="L172">        return KitDAO.obterKitsCorrida(corridaId);</span>
+    }
+    
+    public static Kit obterUltimoKitOrganizador(int organizadorId) throws ClassNotFoundException {
+<span class="nc" id="L176">        return KitDAO.obterUltimoKitOrganizador(organizadorId);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
